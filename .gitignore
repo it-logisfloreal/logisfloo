@@ -1,0 +1,40 @@
+Obeesdoo/.gitignore
+3336949  on Dec 5, 2015
+@tfr-odoo tfr-odoo [INIT][SPEC1001] First module task modification
+1 contributor
+RawBlameHistory    
+35 lines (31 sloc)  441 Bytes
+# sphinx build directories
+_build/
+
+# dotfiles
+.*
+!.gitignore
+!.mailmap
+# compiled python files
+*.py[co]
+# setup.py egg_info
+*.egg-info
+# emacs backup files
+*~
+# hg stuff
+*.orig
+status
+# odoo filestore
+openerp/filestore
+# maintenance migration scripts
+openerp/addons/base/maintenance
+
+# generated for windows installer?
+install/win32/*.bat
+install/win32/meta.py
+
+# various virtualenv
+/bin/
+/build/
+/dist/
+/include/
+/lib/
+/man/
+/share/
+/src/
