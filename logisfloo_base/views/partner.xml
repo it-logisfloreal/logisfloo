@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.ui.view" id="logisfloo_partner_form_view">
+		<field name="name">logisfloo partner form view</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="beesdoo_base.beesdoo_partner_form_view" />
+		<field name="arch" type="xml">
+
+			<field name="last_name" position="after">
+				<field name="slate_number"/>
+			</field>
+
+			<xpath expr="/form/sheet/div/button[last()]" position="after">
+				<button class="oe_stat_button" type="action" name="%(account.action_move_line_select_by_partner)d" context="{'search_default_partner_id': active_id, 'default_partner_id': active_id}" icon="fa-credit-card">
+					<div class="o_form_field o_stat_info">
+						<span class="o_stat_value">
+							<field name="slate_balance" widget="monetary" options="{'currency_field': 'currency_id'}" modifiers="{'readonly': true}"/>
+						</span>
+						<span class="o_stat_text">
+							Slate Balance
+						</span>
+					</div>
+				</button>
+			</xpath>
+
+			<field name="eater" position="after">
+				<field name="subscription_date"/>
+				<field name="subscription_event"/>
+				<field name="add_to_mailing_list"/>
+				<field name="floreal_logis_membership"/>
+			</field>
+		</field>
+	</record>
+</odoo>
