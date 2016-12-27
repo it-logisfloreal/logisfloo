@@ -15,8 +15,9 @@
     'category': 'Project Management',
     'version': '0.1',
 
-    'depends': ['Obeesdoo', 'point_of_sale', 'purchase'],
+    'depends': ['beesdoo_base', 'point_of_sale', 'purchase'],
 
     'data': [
+    'views/partner.xml'
     ],
 }
