@@ -1,0 +1,71 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* logisfloo_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c-20161108\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-26 21:55+0000\n"
+"PO-Revision-Date: 2016-12-26 21:55+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
+msgid "<span class=\"o_stat_text\">\n"
+"							Slate Balance\n"
+"						</span>"
+msgstr "<span class=\"o_stat_text\">\n"
+"							Solde Ardoise\n"
+"						</span>"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_add_to_mailing_list
+msgid "Add to Mailing List"
+msgstr "Ajouter à la Mailing List"
+
+#. module: logisfloo_base
+#: selection:res.partner,floreal_logis_membership:0
+msgid "Floréal"
+msgstr "Floréal"
+
+#. module: logisfloo_base
+#: selection:res.partner,floreal_logis_membership:0
+msgid "Logis"
+msgstr "Logis"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_balance
+msgid "Slate Balance"
+msgstr "Solde ardoise"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_number
+msgid "Slate Number"
+msgstr "Numéro ardoise"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_subscription_date
+msgid "Subscription Date"
+msgstr "Date d'inscription"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_subscription_event
+msgid "Subscription Event"
+msgstr "Inscrit à "
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_floreal_logis_membership
+msgid "Tenant Logis/Floréal"
+msgstr "Locataire Logis/Floréal"
+
