@@ -5,10 +5,16 @@ from openerp.addons.beesdoo_base.tools import concat_names
 
 class Partner(models.Model):
 
-    _inherit = 'res.partner'
+	_inherit = 'res.partner'
 
-    ardoise_number = fields.Integer('Ardoise')
-    subscription_date = fields.Date('Subscription Date')
-    # TODO add subscription_event - pick up from configurable event list, updating subscription date automatically with date of event 
-    floreal_logis_membership = fields.Selection([('no', 'No'), ('logis', 'Logis'),('floréal','Floréal')], string="Logis/Floréal")
-    add_to_mailing_list = fields.Boolean('Add to Mailing List')                                                                            
+	slate_number = fields.Integer('Slate Number')
+	subscription_date = fields.Date('Subscription Date')
+	subscription_event = fields.Char('Subscription Event', size=40)
+	floreal_logis_membership = fields.Selection([('logis', 'Logis'),('floréal','Floréal')], string="Tenant Logis/Floréal")
+	add_to_mailing_list = fields.Boolean('Add to Mailing List')
+	slate_balance = fields.Monetary(string='Slate Balance', compute='_slate_balance_get')   
+
+	@api.one
+	@api.depends ('credit')
+	def _slate_balance_get(self):
+		 self.slate_balance = -self.credit
