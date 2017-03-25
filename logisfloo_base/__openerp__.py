@@ -18,6 +18,7 @@
     'depends': ['beesdoo_base', 'beesdoo_pos'],
 
     'data': [
+    'data/default_values.xml',
     'views/partner.xml'
     ],
 }
