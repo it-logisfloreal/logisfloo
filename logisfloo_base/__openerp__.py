@@ -19,6 +19,7 @@
 
     'data': [
     'data/default_values.xml',
-    'views/partner.xml'
+    'views/partner.xml',
+    'views/product.xml'
     ],
 }
