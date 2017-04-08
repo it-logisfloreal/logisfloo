@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+        # -*- coding: utf-8 -*-
 {
     'name': "Logis-Floréal Base Module",
 
@@ -15,7 +15,7 @@
     'category': 'Project Management',
     'version': '0.1',
 
-    'depends': ['beesdoo_base', 'point_of_sale', 'purchase'],
+    'depends': ['beesdoo_base', 'beesdoo_pos'],
 
     'data': [
     'views/partner.xml'
