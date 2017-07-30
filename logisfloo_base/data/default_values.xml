@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Ardoise account cannot be recreated when deinstall and then reinstall the module.
+
+Work around:
+	- comment out the creation of Ardoise 
+	- update definition of the slate account property: get the account id by checking the URL when viewing the account from the 'plan comptable' and use this id after the "account.account," 
+-->
+
 <odoo>
 	<data noupdate="1">
 		<record id="a446100" model="account.account">
@@ -11,6 +19,12 @@
 			<field name="name">property_account_slate_id</field> 
 			<field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_slate_id')]"/>
 			<field name="value" eval="'account.account,'+str(ref('logisfloo_base.a446100'))"/>
+			<!--
+			<field name="value">account.account,(account id in URL)</field>
+			-->
 		</record>
+		
+		<!-- add record for property to define the margin here -->
+		
 	</data>
 </odoo>
