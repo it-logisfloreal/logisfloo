@@ -10,7 +10,7 @@ class Partner(models.Model):
     slate_number = fields.Integer('Slate Number')
     subscription_date = fields.Date('Subscription Date')
     subscription_event = fields.Char('Subscription Event', size=40)
-    floreal_logis_membership = fields.Selection([('logis', 'Logis'),('floréal','Floréal')], string="Tenant Logis/Floréal")
+    floreal_logis_membership = fields.Selection([('logis', 'Logis'),('floreal','Floréal')], string="Tenant Logis/Floréal")
     add_to_mailing_list = fields.Boolean('Add to Mailing List')
     slate_balance = fields.Monetary(string='Slate Balance', compute='_slate_balance_get')   
     property_account_slate_id = fields.Many2one(
