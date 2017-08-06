@@ -20,6 +20,9 @@
     'data': [
     'data/default_values.xml',
     'views/partner.xml',
-    'views/product.xml'
+    'views/product.xml',
+    'views/report_receipt.xml',
     ],
+    'qweb': [
+        ],
 }
