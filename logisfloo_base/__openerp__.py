@@ -24,5 +24,6 @@
     'views/report_receipt.xml',
     ],
     'qweb': [
+    'static/src/xml/pos_extensions.xml',
         ],
 }
