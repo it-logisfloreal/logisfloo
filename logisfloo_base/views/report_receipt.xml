@@ -58,5 +58,28 @@ post their account.lines inreal time.
 				</tbody>
 	        </table>
 		</xpath>
+		
+		<xpath expr="//div[contains(@class, 'text-center')]" position="replace">
+	        <div class="col-xs-12 text-center">
+	            <h2 t-esc="o.user_id.company_id.name"/>
+	            <div t-field="o.partner_id"
+	                t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true, "phone_icons": true}'/>
+	            Date: <span t-field="o.date_order"/><br/>
+	        </div>		
+		</xpath>
+		
+		<xpath expr="//div[contains(@class, 'pull-right')]" position="replace">
+	        <div class="col-xs-12 pull-right">
+	            <table class="table table-condensed">
+	                <tr>
+	                    <td><strong>Total</strong></td>
+	                    <td class="text-right">
+	                        <strong t-esc="formatLang(o.amount_total, currency_obj=res_company.currency_id)"/>
+	                    </td>
+	                </tr>
+	            </table>
+	        </div>		
+		</xpath>
+		
 	</template>
 </odoo>
