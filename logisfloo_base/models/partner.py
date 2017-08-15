@@ -37,7 +37,7 @@ class Partner(models.Model):
         move_lines = self.env['account.move.line'].search([('account_id', '=', account_id), ('partner_id', '=', self.id)])
         credit = sum([m.credit for m in move_lines])
         debit = sum([m.debit for m in move_lines])
-        eater1, eater2 = self._get_eater()
-        return str(round(credit - debit, 2)), eater1, eater2
+        eater1, eater2, eater3 = self._get_eater()
+        return str(round(credit - debit, 2)), eater1, eater2, eater3    
  
         
