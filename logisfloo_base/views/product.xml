@@ -8,6 +8,26 @@
         	<field name="list_price" position="after">
     	    	<field name="total_with_margin" widget='monetary' options="{'currency_field': 'currency_id'}"/>
     	    </field>
-				</field>        	  	
+    	    
+			<!-- remove unused fields and buttons -->    	    
+    	    <xpath expr="//button[@name='generate_barcode']" position="replace"/>
+    	    <field name="barcode" position="replace"/>
+    	    <field name="suggested_price" position="replace"/>
+    	    <group name="stock_property" position="replace"/>
+    	    <group name="group_lots_and_weight" position="replace"/>
+ 
+    	    <!-- remove unused pages/tabs -->
+    	    <!-- Since Odoo 9.0 string cannot be used as a selector, so I'm using the xpath with page index -->
+    	    <!-- removing in reverse order so the index is easier to track -->
+    	    <xpath expr="//page[4]" position="replace"/> <!-- removes the unnamed "Scale labels" page, we don't have a scale with label printing --> 
+            <xpath expr="//page[3]" position="replace"/> <!-- removes the unnamed "Label", we don't print label to display in the shop --> 
+    	    
+    	    <!-- 
+    	    	TODO remove the actions to print labels and set label as printed 
+    	    	see wizard/view/remove_label_printing_utils ... but it does not work ??
+    	    	The system doesn't find the act_window ! but finds other elements ...grrr...
+    	    -->
+    	    
+		</field>        	  	
     </record>
 </odoo>
