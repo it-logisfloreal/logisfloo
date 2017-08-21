@@ -8,6 +8,9 @@
         	<field name="list_price" position="after">
     	    	<field name="total_with_margin" widget='monetary' options="{'currency_field': 'currency_id'}"/>
     	    </field>
+        	<field name="type" position="after">
+    	    	<field name="producer"/>
+    	    </field>
     	    
 			<!-- remove unused fields and buttons -->    	    
     	    <xpath expr="//button[@name='generate_barcode']" position="replace"/>

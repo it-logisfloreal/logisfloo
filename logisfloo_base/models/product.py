@@ -6,6 +6,7 @@ class Product(models.Model):
     _inherit = 'product.template'
     
     total_with_margin = fields.Float(compute='_get_total_with_margin', store=False, string="Total Sales Price with Margin")
+    producer = fields.Char(string="Producer")
     
     def _get_total_with_margin(self):
         margin_amount = self.standard_price * 0.05
