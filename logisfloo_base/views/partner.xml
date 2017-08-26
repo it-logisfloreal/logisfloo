@@ -38,4 +38,29 @@
 			
 		</field>
 	</record>
+	
+	<record id="logisfloo_partner_template_tree_view" model="ir.ui.view">
+        <field name="name">logisfloo.partner.template.tree.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+        	<field name="display_name" position="after">
+        		<field name="slate_number"/>
+        		<field name="slate_balance"/>
+        	</field>
+        </field>
+    </record>
+	
+	<record model="ir.ui.view" id="beesdoo_partner_search_view">
+        <field name="name">beesdoo.partner.search.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="beesdoo_base.beesdoo_partner_search_view" />
+        <field name="arch" type="xml">
+        	<field name="name" position="after">
+        		<field name="slate_number"/>
+        	</field>
+        </field>
+    </record>
+	
+	
 </odoo>
