@@ -22,6 +22,7 @@
     'views/partner.xml',
     'views/product.xml',
     'views/report_receipt.xml',
+    'views/logisfloo_pos.xml',
     ],
     'qweb': [
     'static/src/xml/pos_extensions.xml',
