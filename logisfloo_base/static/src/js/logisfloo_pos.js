@@ -4,6 +4,7 @@ odoo.define('logisfloo_pos.pos_extension', function (require) {
     
  // load extra data from 'res.partner' (slate_number)
 	models.load_fields('res.partner','slate_number');
+	models.load_fields('res.partner','slate_balance');
 
     var db = require('point_of_sale.DB');
 

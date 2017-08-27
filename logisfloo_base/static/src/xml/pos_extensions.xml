@@ -16,8 +16,13 @@
 	                    <t t-esc="widget.pos.get_client().name" />
 						<div class='customer-information-pay'>
 			                <br />
-			                Ardoise:
-			                <span class='customer-balance' />
+			                Balance:
+			                <t t-if="widget.pos.get_client().slate_balance &gt; 0">
+			                	<span class='customer-balance' style="color:black"/>
+			                </t>
+			                <t t-if="widget.pos.get_client().slate_balance &lt;= 0">
+			                	<span class='customer-balance' style="color:red"/>
+			                </t>
 			                €
 			                <br />
 			                <span class='customer-delegate1' />
@@ -68,6 +73,28 @@
 	<t t-extend="PaymentScreenWidget">
 		<t t-jquery=".payment-numpad" t-operation="replace"/>
 		<t t-jquery=".payment-buttons" t-operation="replace"/>
+		<t t-jquery=".customer-information" t-operation="replace">
+			<div class="customer-information">
+				<span class='customer-name' />
+				<br />
+				<br />
+				Balance:
+				<t t-if="widget.pos.get_client().slate_balance &gt; 0">
+					<span class='customer-balance' style="color:black"/>
+				</t>
+				<t t-if="widget.pos.get_client().slate_balance &lt;= 0">
+					<span class='customer-balance' style="color:red"/>
+				</t>
+				€
+				<br />
+				<span class='customer-delegate1' />
+				<br />
+				<span class='customer-delegate2' />
+				<br />
+				<span class='customer-delegate3' />
+				<br />
+			</div>
+		</t>
 	</t>
 
     <t t-extend="ClientLine">

@@ -4,7 +4,7 @@
 		    <xpath expr="." position="inside">
 		        <script type="text/javascript"
 		            src="/logisfloo_base/static/src/js/logisfloo_pos.js"></script>
-		 <!--        <link rel='stylesheet' href="/beesdoo_pos/static/src/css/beesdoo.css" /> -->
+		        <link rel='stylesheet' href="/logisfloo_base/static/src/css/logisfloo.css" />
 		    </xpath>
 		</template>
     </data>
