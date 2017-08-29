@@ -9,10 +9,10 @@
 
     <t t-extend="ActionpadWidget">
         <t t-jquery=".actionpad" t-operation="replace">
-        	<t t-if="widget.pos.get_client()">
-		        <div class="actionpad">
-		            <button t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >
-		                <i class='fa fa-user' /> 
+	        <div class="actionpad">
+	            <button t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >
+	                <i class='fa fa-user' /> 
+	                <t t-if="widget.pos.get_client()">
 	                    <t t-esc="widget.pos.get_client().name" />
 						<div class='customer-information-pay'>
 			                <br />
@@ -28,57 +28,91 @@
 			                <span class='customer-delegate1' />
 			                <br />
 			                <span class='customer-delegate2' />
+			                <br />
+			                <span class='customer-delegate3' />
 		                </div>
-		            </button>
-		            <!--
-		            	TODO: 
-		            		If (last balance - purchased amount) is less than threshold then disable payment and 
-		            		replace it with an error mesasge in box of the same size as the pay button.
-		            		Threshold should ideally be defined as a system parameter.  
-		            		
-		            		Use something like this:
-		            		<t t-set="slate_balance" t-value="widget.pos.get_client().balance"/> -> need to update get_client() to return the balance
-		            		<t t-esc="slate_balance - purchased amount"/>
-		            -->
+	                </t>
+	                <t t-if="!widget.pos.get_client()">
+	                    Select a customer
+	                </t>	                
+	            </button>
+	            <!--
+	            	TODO: 
+	            		If (last balance - purchased amount) is less than threshold then disable payment and 
+	            		replace it with an error mesasge in box of the same size as the pay button.
+	            		Threshold should ideally be defined as a system parameter.  
+	            		
+	            		Use something like this:
+	            		<t t-set="slate_balance" t-value="widget.pos.get_client().balance"/> -> need to update get_client() to return the balance
+	            		<t t-esc="slate_balance - purchased amount"/>
+	            -->
+<!-- 	            <button class='button pay'>
+	                <div class='pay-circle'>
+	                    <i class='fa fa-chevron-right' /> 
+	                </div>
+	                Payment
+	            </button>	       -->      
+	            <t t-if="widget.pos.get_client()">
 		            <button class='button pay'>
 		                <div class='pay-circle'>
 		                    <i class='fa fa-chevron-right' /> 
 		                </div>
 		                Payment
 		            </button>
-		        </div>
-        	</t>
-            <t t-if="!widget.pos.get_client()">
-            	<div class="actionpad">
+	            </t>
+	            <t t-if="!widget.pos.get_client()">
 		            <button t-attf-class='button set-customer decentered' >
 		                <i class='fa fa-user' /> 
 		                    Select a customer
 		            </button>
-		            <!--  
-		            	Add the same button a second time to 'close the box' and have nice looking layout.
-		            	Both buttons trigger the same action.
-		            	
-		            	TODO: 
-		            		update CSS to only use one button of the right size to align with the numpad and 'close the box' 
-		            -->
-		            <button t-attf-class='button set-customer decentered' >
-		                <i class='fa fa-user' /> 
-		                    Select a customer
-		            </button>
-            	</div>
-            </t>              
+				</t>
+	        </div>
+            <!--  
+            	Add the same button a second time to 'close the box' and have nice looking layout.
+            	Both buttons trigger the same action.
+            	
+            	TODO: 
+            		update CSS to only use one button of the right size to align with the numpad and 'close the box' 
+            -->
         </t>
     </t>
 
 	<t t-extend="PaymentScreenWidget">
 		<t t-jquery=".payment-numpad" t-operation="replace"/>
 		<t t-jquery=".payment-buttons" t-operation="replace"/>
+<!-- 		<t t-jquery=".customer-information" t-operation="replace">
+			<div class="customer-information">
+	            <button t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >
+	                <i class='fa fa-user' /> 
+	                   <t t-esc="widget.pos.get_client().name" />
+					<div class='customer-information-pay'>
+		                <br />
+		                Balancez:
+		                <t t-if="widget.pos.get_client().slate_balance &gt; 0">
+		                	<span class='customer-balance' style="color:black"/>
+		                </t>
+		                <t t-if="widget.pos.get_client().slate_balance &lt;= 0">
+		                	<span class='customer-balance' style="color:red"/>
+		                </t>
+		                €
+		                <br />
+		                <span class='customer-delegate1' />
+		                <br />
+		                <span class='customer-delegate2' />
+		                <br />
+			            <span class='customer-delegate3' />
+	                </div>
+	            </button>
+			</div>
+		</t> -->
+	            
 		<t t-jquery=".customer-information" t-operation="replace">
 			<div class="customer-information">
 				<span class='customer-name' />
 				<br />
 				<br />
 				Balance:
+				<t t-esc="widget.pos.get_client().slate_balance" />
 				<t t-if="widget.pos.get_client().slate_balance &gt; 0">
 					<span class='customer-balance' style="color:black"/>
 				</t>
