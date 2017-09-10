@@ -2,3 +2,7 @@
     font-weight: bold;
     font-size: 22px;
 }
+
+.pos .actionpad .button.button-high.set-customer {
+    height: 216px;
+}

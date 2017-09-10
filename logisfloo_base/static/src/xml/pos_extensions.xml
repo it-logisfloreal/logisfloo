@@ -10,32 +10,6 @@
     <t t-extend="ActionpadWidget">
         <t t-jquery=".actionpad" t-operation="replace">
 	        <div class="actionpad">
-	            <button t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >
-	                <i class='fa fa-user' /> 
-	                <t t-if="widget.pos.get_client()">
-	                    <t t-esc="widget.pos.get_client().name" />
-						<div class='customer-information-pay'>
-			                <br />
-			                Balance:
-			                <t t-if="widget.pos.get_client().slate_balance &gt; 0">
-			                	<span class='customer-balance' style="color:black"/>
-			                </t>
-			                <t t-if="widget.pos.get_client().slate_balance &lt;= 0">
-			                	<span class='customer-balance' style="color:red"/>
-			                </t>
-			                €
-			                <br />
-			                <span class='customer-delegate1' />
-			                <br />
-			                <span class='customer-delegate2' />
-			                <br />
-			                <span class='customer-delegate3' />
-		                </div>
-	                </t>
-	                <t t-if="!widget.pos.get_client()">
-	                    Select a customer
-	                </t>	                
-	            </button>
 	            <!--
 	            	TODO: 
 	            		If (last balance - purchased amount) is less than threshold then disable payment and 
@@ -46,13 +20,33 @@
 	            		<t t-set="slate_balance" t-value="widget.pos.get_client().balance"/> -> need to update get_client() to return the balance
 	            		<t t-esc="slate_balance - purchased amount"/>
 	            -->
-<!--	            <button class='button pay'>
-	                <div class='pay-circle'>
-	                    <i class='fa fa-chevron-right' /> 
-	                </div>
-	                Payment
-	            </button> -->     
 	            <t t-if="widget.pos.get_client()">
+		            <button t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >
+		                <i class='fa fa-user' /> 
+		                <t t-if="widget.pos.get_client()">
+		                    <t t-esc="widget.pos.get_client().name" />
+							<div class='customer-information-pay'>
+				                <br />
+				                Balance:
+				                <t t-if="widget.pos.get_client().slate_balance &gt; 0">
+				                	<span class='customer-balance' style="color:black"/>
+				                </t>
+				                <t t-if="widget.pos.get_client().slate_balance &lt;= 0">
+				                	<span class='customer-balance' style="color:red"/>
+				                </t>
+				                €
+				                <br />
+				                <span class='customer-delegate1' />
+				                <br />
+				                <span class='customer-delegate2' />
+				                <br />
+				                <span class='customer-delegate3' />
+			                </div>
+		                </t>
+		                <t t-if="!widget.pos.get_client()">
+		                    Select a customer
+		                </t>	                
+		            </button>
 		            <button class='button pay'>
 		                <div class='pay-circle'>
 		                    <i class='fa fa-chevron-right' /> 
@@ -61,19 +55,12 @@
 		            </button>
 	            </t>
 	            <t t-if="!widget.pos.get_client()">
-		            <button t-attf-class='button set-customer decentered' >
+		            <button t-attf-class='button button-high set-customer  decentered' >
 		                <i class='fa fa-user' /> 
 		                    Select a customer
 		            </button>
-							</t>
+				</t>
 	        </div>
-            <!--  
-            	Add the same button a second time to 'close the box' and have nice looking layout.
-            	Both buttons trigger the same action.
-            	
-            	TODO: 
-            		update CSS to only use one button of the right size to align with the numpad and 'close the box' 
-            -->
         </t>
     </t>
 
