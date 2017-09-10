@@ -6,3 +6,8 @@
 .pos .actionpad .button.button-high.set-customer {
     height: 216px;
 }
+
+.pos .actionpad .button.button-high .fa-user  {
+    left: 5px;
+    top: 92px;
+}
