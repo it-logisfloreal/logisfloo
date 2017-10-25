@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20161108\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-26 21:55+0000\n"
-"PO-Revision-Date: 2016-12-26 21:55+0000\n"
+"POT-Creation-Date: 2017-10-24 20:16+0000\n"
+"PO-Revision-Date: 2017-10-24 20:16+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,9 +25,53 @@ msgstr "<span class=\"o_stat_text\">\n"
 "						</span>"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "<strong>Closing Balance</strong>"
+msgstr "<strong>Solde final</strong>"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "<strong>Opening Balance</strong>"
+msgstr "<strong>Solde initial</strong>"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "<strong>Total</strong>"
+msgstr "<strong>Total</strong>"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_add_to_mailing_list
 msgid "Add to Mailing List"
 msgstr "Ajouter à la Mailing List"
+
+#. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:100
+#, python-format
+msgid "Address"
+msgstr "Adresse"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Amount"
+msgstr "Montant"
+
+#. module: logisfloo_base
+#: model:account.account,name:logisfloo_base.a446100
+msgid "Ardoise"
+msgstr "Ardoise"
+
+#. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:29
+#, python-format
+msgid "Balance:"
+msgstr "Solde:"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Date:"
+msgstr "Date:"
 
 #. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
@@ -35,9 +79,26 @@ msgid "Floréal"
 msgstr "Floréal"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_template_reference_price
+msgid "Invoice Price"
+msgstr "Prix de référence"
+
+#. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
 msgid "Logis"
 msgstr "Logis"
+
+#. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:99
+#, python-format
+msgid "Name"
+msgstr "Nom"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Paid"
+msgstr "Payé"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_res_partner
@@ -45,14 +106,59 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:51
+#, python-format
+msgid "Payment"
+msgstr "Paiement"
+
+#. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:101
+#, python-format
+msgid "Phone"
+msgstr "Téléphone"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_template_producer
+msgid "Producer"
+msgstr "Producteur"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:46
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:59
+#, python-format
+msgid "Select a customer"
+msgstr "Selectionner un membre"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_property_account_slate_id
+msgid "Slate Account"
+msgstr "Ardoise"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_balance
 msgid "Slate Balance"
 msgstr "Solde ardoise"
 
 #. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:98
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_number
+#, python-format
 msgid "Slate Number"
-msgstr "Numéro ardoise"
+msgstr "Numéro d'ardoise"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Slate Statement"
+msgstr "Décompte Ardoise"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_subscription_date
@@ -68,4 +174,14 @@ msgstr "Inscrit à "
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_floreal_logis_membership
 msgid "Tenant Logis/Floréal"
 msgstr "Locataire Logis/Floréal"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_res_partner_property_account_slate_id
+msgid "This account will be used as the pre-paid slate account for the current partner"
+msgstr "This account will be used as the pre-paid slate account for the current partner"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_template_total_with_margin
+msgid "Total Sales Price with Margin"
+msgstr "Prix suggéré (avec marge)"
 
