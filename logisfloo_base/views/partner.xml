@@ -24,7 +24,7 @@
 					</div>
 				</button>
 			</xpath>
-
+			
 			<field name="eater" position="after">
 				<field name="subscription_date"/>
 				<field name="subscription_event"/>
@@ -36,6 +36,16 @@
 				<field name="property_account_slate_id" can_create="true" can_write="true" modifiers="{'required': true}"/>
 			</field>
 			
+			<!-- remove unused fields and buttons -->
+			<field name="cooperator_type" position="replace"/>
+			<field name="function" position="replace"/>
+			<field name="fax" position="replace"/>
+            <xpath expr="//notebook/page[1]" position="attributes">
+                <attribute name="attrs"/>
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='work']" position="replace"/>
+
 		</field>
 	</record>
 	
@@ -51,16 +61,18 @@
         </field>
     </record>
 	
-	<record model="ir.ui.view" id="beesdoo_partner_search_view">
-        <field name="name">beesdoo.partner.search.view</field>
+	<record model="ir.ui.view" id="Logisfloo_partner_search_view">
+        <field name="name">logisfloo.partner.search.view</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="beesdoo_base.beesdoo_partner_search_view" />
         <field name="arch" type="xml">
         	<field name="name" position="after">
         		<field name="slate_number"/>
         	</field>
+			<!-- remove unused fields and buttons -->
+<!-- 	        <filter name="type_a" position="replace" />
+	        <filter name="type_b" position="replace" />
+	        <filter name="type_c" position="replace" /> -->
         </field>
     </record>
-	
-	
 </odoo>
