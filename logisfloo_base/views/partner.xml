@@ -69,10 +69,11 @@
         	<field name="name" position="after">
         		<field name="slate_number"/>
         	</field>
-			<!-- remove unused fields and buttons -->
-<!-- 	        <filter name="type_a" position="replace" />
+			<!-- remove unused filters and buttons -->
+	        <filter name="type_a" position="replace" />
 	        <filter name="type_b" position="replace" />
-	        <filter name="type_c" position="replace" /> -->
+	        <filter name="type_c" position="replace" />
         </field>
     </record>
+    
 </odoo>
