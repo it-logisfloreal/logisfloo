@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- slate report updates -->
 <odoo>
 	<record model="ir.ui.view" id="logisfloo_partner_form_view">
-		<field name="name">logisfloo partner form view</field>
+		<field name="name">logisfloo.partner.form.view</field>
 		<field name="model">res.partner</field>
-		<field name="inherit_id" ref="beesdoo_base.beesdoo_partner_form_view" />
+		<field name="inherit_id" ref="point_of_sale.view_partner_property_form" />
 		<field name="arch" type="xml">
-
-			<field name="last_name" position="after">
+            <field name="name" position="replace">
+                <field name="name" class="oe_read_only" />
+                <field name="first_name" placeholder="First Name"
+                    class="oe_edit_only"
+                    attrs="{'invisible' : [('company_type', '=', 'company')]}" />
+                <field name="last_name" placeholder="Last Name"
+                    class="oe_edit_only" default_focus="1" />
 				<field name="slate_number"/>
-			</field>
+            </field>
+
+            <button name="toggle_active" position="attributes">
+                <attribute name="groups" />
+            </button>
 
 			<xpath expr="/form/sheet/div/button[last()]" position="after">
 				<button class="oe_stat_button" type="action" icon="fa-credit-card" name="%(account.action_move_line_select_by_partner)d"  
@@ -25,7 +33,7 @@
 				</button>
 			</xpath>
 			
-			<field name="eater" position="after">
+			<field name="website" position="after">
 				<field name="subscription_date"/>
 				<field name="subscription_event"/>
 				<field name="add_to_mailing_list"/>
@@ -37,15 +45,8 @@
 			</field>
 			
 			<!-- remove unused fields and buttons -->
-			<field name="cooperator_type" position="replace"/>
 			<field name="function" position="replace"/>
 			<field name="fax" position="replace"/>
-            <xpath expr="//notebook/page[1]" position="attributes">
-                <attribute name="attrs"/>
-            </xpath>
-
-            <xpath expr="//notebook/page[@name='work']" position="replace"/>
-
 		</field>
 	</record>
 	
@@ -64,15 +65,11 @@
 	<record model="ir.ui.view" id="Logisfloo_partner_search_view">
         <field name="name">logisfloo.partner.search.view</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="beesdoo_base.beesdoo_partner_search_view" />
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
         <field name="arch" type="xml">
         	<field name="name" position="after">
         		<field name="slate_number"/>
         	</field>
-			<!-- remove unused filters and buttons -->
-	        <filter name="type_a" position="replace" />
-	        <filter name="type_b" position="replace" />
-	        <filter name="type_c" position="replace" />
         </field>
     </record>
     

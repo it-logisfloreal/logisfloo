@@ -7,6 +7,17 @@
 		</t>
 	</t>
 
+    <t t-extend="ReceiptScreenWidget">
+        <t t-jquery='.pos-receipt-container' t-operation='before'>
+            <div class="button send">
+                <i class='fa fa-envelope'></i>
+                Send Receipt By Mail
+            </div>
+            <div class="message-send">
+            </div>
+        </t>
+    </t>
+
     <t t-extend="ActionpadWidget">
         <t t-jquery=".actionpad" t-operation="replace">
 	        <div class="actionpad">
@@ -91,6 +102,7 @@
     </t>
 
     <t t-extend="ClientListScreenWidget">
+    	<t t-jquery='.new-customer' t-operation='replace'/>
 	    <t t-jquery=".client-list" t-operation="replace">
 	        <table class='client-list'>
 	            <thead>

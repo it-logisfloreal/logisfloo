@@ -3,7 +3,8 @@
     'name': "Logis-Floréal Base Module",
 
     'summary': """
-		Module that customize the Beesdoo base module and contains some python tools
+		Module that customize the base module and contains some python tools
+		Inspired from Beescoop - Cellule IT https://github.com/beescoop/Obeesdoo
      """,
 
     'description': """
@@ -15,10 +16,25 @@
     'category': 'Project Management',
     'version': '0.1',
 
-    'depends': ['beesdoo_base', 'beesdoo_pos'],
+    'depends': [
+        'stock',
+        'sale',
+        'point_of_sale',
+        'mail',
+        'account',
+        'account_accountant',
+        'website', 
+        'purchase', 
+        'product',
+        'board', 
+        'pos_price_to_weight', 
+        'report',
+        'beesdoo_coda',
+    ],
 
     'data': [
     'data/default_values.xml',
+    'data/email.xml',
     'views/partner.xml',
     'views/product.xml',
     'views/report_receipt.xml',

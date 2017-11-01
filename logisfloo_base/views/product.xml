@@ -3,7 +3,7 @@
     <record model="ir.ui.view" id="logisfloo_product_form_view">
         <field name="name">logisfloo.product.form.view</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="beesdoo_product.beesdoo_product_form" />
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
         <field name="arch" type="xml">
         	<field name="list_price" position="after">
     	    	<field name="total_with_margin" widget='monetary' options="{'currency_field': 'currency_id'}"/>
@@ -12,26 +12,22 @@
         	<field name="type" position="after">
     	    	<field name="producer"/>
     	    </field>
-    	    
-			<!-- remove unused fields and buttons -->    	    
-    	    <xpath expr="//button[@name='generate_barcode']" position="replace"/>
-    	    <field name="barcode" position="replace"/>
-    	    <field name="suggested_price" position="replace"/>
-    	    <group name="stock_property" position="replace"/>
-    	    <group name="group_lots_and_weight" position="replace"/>
- 
-    	    <!-- remove unused pages/tabs -->
-    	    <!-- Since Odoo 9.0 string cannot be used as a selector, so I'm using the xpath with page index -->
-    	    <!-- removing in reverse order so the index is easier to track -->
-    	    <xpath expr="//page[4]" position="replace"/> <!-- removes the unnamed "Scale labels" page, we don't have a scale with label printing --> 
-            <xpath expr="//page[3]" position="replace"/> <!-- removes the unnamed "Label", we don't print label to display in the shop --> 
-    	    
-    	    <!-- 
-    	    	TODO remove the actions to print labels and set label as printed 
-    	    	see wizard/view/remove_label_printing_utils ... but it does not work ??
-    	    	The system doesn't find the act_window ! but finds other elements ...grrr...
-    	    -->
-    	    
+            <field name="invoice_policy" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="purchase_method" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="route_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <group name="sale_condition" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </group>
+            <field name="property_account_creditor_price_difference"
+                position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
 		</field>        	  	
     </record>
     
@@ -47,6 +43,50 @@
             <field name="volume" position="replace"/>
             <field name="weight" position="replace"/>
             <field name="type" position="replace"/>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="logisfloo_product_category_list">
+        <field name="name">logisfloo.product.category.list</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_list_view" />
+        <field name="arch" type="xml">
+            <field name="complete_name" position="after">
+                <field name="profit_margin"></field>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="logisfloo_product_category_form">
+        <field name="name">logisfloo.product.category.form</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="profit_margin"></field>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="logisfloo_product_supplierinfo_tree_view">
+        <field name="name">logisfloo.product.supplierinfo.tree</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_tree_view" />
+        <field name="arch" type="xml">
+            <field name="price" position="replace">
+                <field name="price"></field>
+            </field>
+        </field>
+    </record>
+
+    <record id="logisfloo_product_uom_categ_form" model="ir.ui.view">
+        <field name="name">product.uom.categ.form</field>
+        <field name="model">product.uom.categ</field>
+        <field name="inherit_id" ref="product.product_uom_categ_form_view" />
+        <field name="arch" type="xml">
+        	<field name="name" position="after">
+        		<field name="type"/>
+        	</field>
         </field>
     </record>
     

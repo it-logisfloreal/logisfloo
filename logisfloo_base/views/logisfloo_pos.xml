@@ -1,6 +1,7 @@
 <openerp>
     <data>
-	    <template id="assets" inherit_id="beesdoo_pos.assets">
+<!-- 	    <template id="assets" inherit_id="beesdoo_pos.assets"> -->
+        <template id="assets" inherit_id="point_of_sale.assets">
 		    <xpath expr="." position="inside">
 		        <script type="text/javascript"
 		            src="/logisfloo_base/static/src/js/logisfloo_pos.js"></script>
