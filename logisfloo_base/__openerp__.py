@@ -35,6 +35,7 @@
     'data': [
     'data/default_values.xml',
     'data/email.xml',
+    'data/sequence_definition.xml',
     'views/partner.xml',
     'views/product.xml',
     'views/report_receipt.xml',

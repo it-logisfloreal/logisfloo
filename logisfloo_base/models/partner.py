@@ -26,6 +26,10 @@ class Partner(models.Model):
         domain="[('deprecated', '=', False)]",
         help="This account will be used as the pre-paid slate account for the current partner",
         required=True)
+
+    _defaults = {
+    'slate_number':lambda self, cr, uid, context:self.pool.get('ir.sequence').get(cr, uid, 'slate.id'),
+    }
     
     @api.onchange('first_name', 'last_name')
     def _on_change_name(self):
@@ -54,5 +58,3 @@ class Partner(models.Model):
         credit = sum([m.credit for m in move_lines])
         debit = sum([m.debit for m in move_lines])
         return str(round(credit - debit, 2))   
- 
-        
