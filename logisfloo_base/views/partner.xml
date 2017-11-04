@@ -70,6 +70,13 @@
         	<field name="name" position="after">
         		<field name="slate_number"/>
         	</field>
+        	
+        	<group name="group_by" position="replace">
+        		<group expand="0" name="group_by" string="Group By">
+					<filter name="slate_number" string="Slate Number" context="{'group_by': 'slate_number'}"/>
+				</group>
+			</group>
+        	
         </field>
     </record>
     
