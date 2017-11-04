@@ -7,8 +7,7 @@ Work around:
 	- update definition of the slate account property: get the account id by checking the URL when viewing the account from the 'plan comptable' and use this id after the "account.account," 
 -->
 
-<odoo>
-	<data noupdate="1">
+<odoo noupdate="1">
 		<record id="a446100" model="account.account">
 			<field name="name">Ardoise</field>
 			<field name="code">446100</field>
@@ -26,5 +25,4 @@ Work around:
 		
 		<!-- add record for property to define the margin here -->
 		
-	</data>
 </odoo>
