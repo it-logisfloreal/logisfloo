@@ -45,7 +45,7 @@ class Partner(models.Model):
         debit = sum([m.debit for m in move_lines])
         self.slate_balance = round(credit - debit, 2) 
                     
-    @api.multi
+    @api.one
     def get_balance_and_eater(self):
         self.ensure_one()
         self = self.sudo()
