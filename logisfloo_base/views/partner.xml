@@ -20,8 +20,7 @@
             </button>
 
 			<xpath expr="/form/sheet/div/button[last()]" position="after">
-				<button class="oe_stat_button" type="action" icon="fa-credit-card" name="%(account.action_move_line_select_by_partner)d"  
-						context="{'search_default_partner_id': active_id, 'search_default_account_id': property_account_slate_id}">
+				<button class="oe_stat_button" type="object" icon="fa-credit-card" name="show_slate_move_lines">  
 					<div class="o_form_field o_stat_info">
 						<span class="o_stat_value">
 							<field name="slate_balance" widget="monetary" options="{'currency_field': 'currency_id'}" modifiers="{'readonly': true}"/>
