@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20161108\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-24 20:16+0000\n"
-"PO-Revision-Date: 2017-10-24 20:16+0000\n"
+"POT-Creation-Date: 2017-11-18 20:19+0000\n"
+"PO-Revision-Date: 2017-11-18 20:19+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: logisfloo_base
+#: model:mail.template,body_html:logisfloo_base.email_send_ticket
+msgid "\n"
+"Votre Ticket ${object.pos_reference}\n"
+"            "
+msgstr "<span id=\"docs-internal-guid-63c1efaf-78f8-6337-0ae2-c31679b138ab\"><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour, </span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color:#212121;background-color:transparent\">Vous trouverez ci-joint votre ticket de caisse en version électronique.</span></p></span><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;\"><span style=\"color: rgb(33, 33, 33); line-height: 1.38;\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>"
+
+#. module: logisfloo_base
+#: model:mail.template,subject:logisfloo_base.email_send_ticket
+msgid "${object.pos_reference}"
+msgstr "${object.pos_reference}"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
 msgid "<span class=\"o_stat_text\">\n"
-"							Slate Balance\n"
+"							Slate Balance2\n"
 "						</span>"
 msgstr "<span class=\"o_stat_text\">\n"
 "							Solde Ardoise\n"
@@ -40,16 +52,26 @@ msgid "<strong>Total</strong>"
 msgstr "<strong>Total</strong>"
 
 #. module: logisfloo_base
+#: model:res.groups,name:logisfloo_base.group_logisfloo_accounting
+msgid "Accounting"
+msgstr "Comptabilité"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_add_to_mailing_list
 msgid "Add to Mailing List"
 msgstr "Ajouter à la Mailing List"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:100
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:112
 #, python-format
 msgid "Address"
 msgstr "Adresse"
+
+#. module: logisfloo_base
+#: model:res.groups,name:logisfloo_base.group_logisfloo_admin
+msgid "Administration"
+msgstr "Administration"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -63,10 +85,21 @@ msgstr "Ardoise"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:29
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:40
 #, python-format
 msgid "Balance:"
 msgstr "Solde:"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/logisfloo_pos.py:14
+#, python-format
+msgid "Cannot send the ticket, no email address found on the client"
+msgstr "Le ticket n'est pas envoyé, le client n'a pas d'adresse couriel configurée"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_uom_categ_type
+msgid "Category type"
+msgstr "Type de categorie"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -74,9 +107,36 @@ msgid "Date:"
 msgstr "Date:"
 
 #. module: logisfloo_base
+#: selection:product.uom.categ,type:0
+msgid "Distance"
+msgstr "Distance"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/logisfloo_pos.py:12
+#, python-format
+msgid "Error: no order found"
+msgstr "Error: no order found"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_first_name
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
+msgid "First Name"
+msgstr "Prénom"
+
+#. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
 msgid "Floréal"
 msgstr "Floréal"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.Logisfloo_partner_search_view
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_template_internal_ref
+msgid "Internal Reference"
+msgstr "Référence interne"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_template_reference_price
@@ -84,16 +144,37 @@ msgid "Invoice Price"
 msgstr "Prix de référence"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_last_name
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
+msgid "Last Name"
+msgstr "Nom"
+
+#. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
 msgid "Logis"
 msgstr "Logis"
 
 #. module: logisfloo_base
+#: model:res.groups,name:logisfloo_base.group_logisfloo_members
+msgid "Members"
+msgstr "Membres"
+
+#. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:99
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:111
 #, python-format
 msgid "Name"
 msgstr "Nom"
+
+#. module: logisfloo_base
+#: selection:product.uom.categ,type:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: logisfloo_base
+#: model:res.groups,name:logisfloo_base.group_logisfloo_pos
+msgid "POS"
+msgstr "PDV"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -103,21 +184,32 @@ msgstr "Payé"
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_res_partner
 msgid "Partner"
-msgstr "Partenaire"
+msgstr "Contact"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:51
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:62
 #, python-format
 msgid "Payment"
 msgstr "Paiement"
 
 #. module: logisfloo_base
+#: code:addons/logisfloo_base/models/product.py:34
+#, python-format
+msgid "Percentages for Profit Margin must > 0."
+msgstr "Le pourcentage de la marge doit être > 0."
+
+#. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:101
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:113
 #, python-format
 msgid "Phone"
 msgstr "Téléphone"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_pos_order
+msgid "Point of Sale"
+msgstr "Point de vente"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_template_producer
@@ -125,17 +217,44 @@ msgid "Producer"
 msgstr "Producteur"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_product_category
+msgid "Product Category"
+msgstr "Catégorie d'articles"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_category_profit_margin
+msgid "Product Margin [%]"
+msgstr "Marge [%]"
+
+#. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_product_template
 msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_product_uom_categ
+msgid "Product uom categ"
+msgstr "Catégorie d'UdM d'article"
+
+#. module: logisfloo_base
+#: model:res.groups,name:logisfloo_base.group_logisfloo_purchase
+msgid "Purchase"
+msgstr "Achat"
+
+#. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:46
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:59
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:57
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:70
 #, python-format
 msgid "Select a customer"
 msgstr "Selectionner un membre"
+
+#. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:13
+#, python-format
+msgid "Send Receipt By Mail"
+msgstr "Envoyer ticket par mail"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_property_account_slate_id
@@ -149,8 +268,9 @@ msgstr "Solde ardoise"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:98
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:110
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_number
+#: model:ir.ui.view,arch_db:logisfloo_base.Logisfloo_partner_search_view
 #, python-format
 msgid "Slate Number"
 msgstr "Numéro d'ardoise"
@@ -158,7 +278,17 @@ msgstr "Numéro d'ardoise"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Slate Statement"
-msgstr "Décompte Ardoise"
+msgstr "Décompte ardoise"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_partners
+msgid "Slate partners"
+msgstr "Membres de l'ardoise"
+
+#. module: logisfloo_base
+#: model:res.groups,name:logisfloo_base.group_logisfloo_stock
+msgid "Stock"
+msgstr "Inventaire"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_subscription_date
@@ -171,6 +301,11 @@ msgid "Subscription Event"
 msgstr "Inscrit à "
 
 #. module: logisfloo_base
+#: selection:product.uom.categ,type:0
+msgid "Surface"
+msgstr "Surface"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_floreal_logis_membership
 msgid "Tenant Logis/Floréal"
 msgstr "Locataire Logis/Floréal"
@@ -178,10 +313,41 @@ msgstr "Locataire Logis/Floréal"
 #. module: logisfloo_base
 #: model:ir.model.fields,help:logisfloo_base.field_res_partner_property_account_slate_id
 msgid "This account will be used as the pre-paid slate account for the current partner"
-msgstr "This account will be used as the pre-paid slate account for the current partner"
+msgstr "Ce compte sera utilisé pour l'ardoise de ce contact."
+
+#. module: logisfloo_base
+#: model:mail.template,report_name:logisfloo_base.email_send_ticket
+msgid "Ticket ${object.pos_reference}"
+msgstr "Ticket ${object.pos_reference}"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/logisfloo_pos.py:17
+#, python-format
+msgid "Ticket sent"
+msgstr "Ticket envoyé"
+
+#. module: logisfloo_base
+#: selection:product.uom.categ,type:0
+msgid "Time"
+msgstr "Temps"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_template_total_with_margin
 msgid "Total Sales Price with Margin"
 msgstr "Prix suggéré (avec marge)"
+
+#. module: logisfloo_base
+#: selection:product.uom.categ,type:0
+msgid "Unit"
+msgstr "Pièce"
+
+#. module: logisfloo_base
+#: selection:product.uom.categ,type:0
+msgid "Volume"
+msgstr "Volume"
+
+#. module: logisfloo_base
+#: selection:product.uom.categ,type:0
+msgid "Weight"
+msgstr "Poids"
 
