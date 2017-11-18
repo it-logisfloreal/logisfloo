@@ -32,8 +32,8 @@ class LogisflooUOMCateg(models.Model):
     
     type = fields.Selection([('unit','Unit'),
                               ('weight','Weight'),
+                              ('volume','Volume'),
                               ('time','Time'),
                               ('distance','Distance'),
                               ('surface','Surface'),
-                              ('volume','Volume'),
                               ('other','Other')],string='Category type',default='unit')
