@@ -11,7 +11,12 @@
     	    </field>
         	<field name="type" position="after">
     	    	<field name="producer"/>
+    	    	<field name="internal_ref"/>
     	    </field>
+
+            <field name="default_code" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
             <field name="invoice_policy" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
@@ -28,21 +33,52 @@
                 position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
+            <field name="to_weight" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="barcode" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <group name="group_lots_and_weight" position="attributes">
+            	<attribute name="invisible">1</attribute>
+            </group>
+            <group name="stock_property" position="attributes">
+            	<attribute name="invisible">1</attribute>
+            </group>
 		</field>        	  	
     </record>
     
     <record id="logisfloo_product_template_tree_view" model="ir.ui.view">
         <field name="name">logisfloo.product.template.tree.inherit</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
         <field name="arch" type="xml">
-        	<field name="standard_price" position="after">
+        	<field name="standard_price" position="replace">
+        		<field name="internal_ref"/>
         		<field name="list_price"/>
-        		<field name="default_code"/>
+        		<field name="total_with_margin"/>
+        		<field name="standard_price"/>
+        		<field name="reference_price"/>
         	</field>
-            <field name="volume" position="replace"/>
-            <field name="weight" position="replace"/>
-            <field name="type" position="replace"/>
+        	<field name="uom_id" position="attributes">
+        		<attribute name="invisible">0</attribute>
+        	</field>
+        	<field name="uom_id" position="before">
+        		<field name="uom_po_id"/>
+        	</field>
+
+            <field name="volume" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="weight" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="type" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="virtual_available" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
         </field>
     </record>
 
