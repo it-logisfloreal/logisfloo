@@ -13,7 +13,7 @@
     'author': "Logis-Floréal - Cellule IT",
     'website': "https://github.com/logisfloo",
 
-    'category': 'Project Management',
+    'category': 'Logisfloo',
     'version': '0.1',
 
     'depends': [
@@ -33,13 +33,14 @@
     ],
 
     'data': [
-    'data/default_values.xml',
-    'data/email.xml',
-    'data/sequence_definition.xml',
-    'views/partner.xml',
-    'views/product.xml',
-    'views/report_receipt.xml',
-    'views/logisfloo_pos.xml',
+        'security/logisfloo_security.xml',
+        'data/default_values.xml',
+        'data/email.xml',
+        'data/sequence_definition.xml',
+        'views/partner.xml',
+        'views/product.xml',
+        'views/report_receipt.xml',
+        'views/logisfloo_pos.xml',
     ],
     'qweb': [
     'static/src/xml/pos_extensions.xml',
