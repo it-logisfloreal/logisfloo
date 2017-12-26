@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="logisfloo_purchase_order_form_view">
+        <field name="name">logisfloo.purchase.order.form.view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+        	<field name="order_line" position="replace">
+                <field name="order_line">
+                     <tree string="Purchase Order Lines" editable="bottom">
+                         <field name="product_id" context="{'partner_id': parent.partner_id}"/>
+                         <field name="name"/>
+                         <field name="date_planned"/>
+                         <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                         <field name="account_analytic_id" context="{'default_partner_id':parent.partner_id}" groups="purchase.group_analytic_accounting"/>
+                         <field name="product_qty"/>
+                         <field name="qty_received" invisible="not context.get('show_purchase', False)"/>
+                         <field name="qty_invoiced" invisible="not context.get('show_purchase', False)"/>
+                         <field name="product_uom" groups="product.group_uom"/>
+                         <field name="price_unit"/>
+                         <field name="discount" string="Discount (%)"/>
+                         <field name="taxes_id" widget="many2many_tags" domain="[('type_tax_use','=','purchase')]" context="{'default_type_tax_use': 'purchase'}"/>
+                         <field name="price_subtotal" widget="monetary"/>
+                     </tree>
+                     <form string="Purchase Order Line">
+                         <sheet>
+                             <group>
+                                 <group>
+                                     <field name="product_id"
+                                            context="{'partner_id': parent.partner_id}"/>
+                                     <label for="product_qty"/>
+                                     <div>
+                                         <field name="product_qty" class="oe_inline"/>
+                                         <span class="oe_inline">&#160;</span>
+                                         <field name="product_uom" groups="product.group_uom" class="oe_inline"/>
+                                     </div>
+                                     <field name="price_unit"/>
+                                 </group>
+                                 <group>
+                                     <label for="discount"/>
+                                     <div>
+                                     	<field name="discount" class="oe_inline"/> %
+                                     </div>
+                                     <field name="taxes_id" widget="many2many_tags" domain="[('type_tax_use', '=', 'purchase')]"/>
+                                     <field name="date_planned" widget="date"/>
+                                     <field name="account_analytic_id" colspan="2" groups="purchase.group_analytic_accounting"/>
+                                     <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                 </group>
+                             </group>
+                             <notebook>
+                             <page string="Notes">
+                                 <field name="name"/>
+                             </page><page string="Invoices and Incoming Shipments">
+                                 <field name="invoice_lines"/>
+                                 <field name="move_ids"/>
+                             </page>
+                             </notebook>
+                         </sheet>
+                     </form>
+                 </field>
+			</field>        	
+
+        </field>
+    </record>
+
+
+
+</odoo>

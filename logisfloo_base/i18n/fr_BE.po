@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20161108\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-18 20:19+0000\n"
-"PO-Revision-Date: 2017-11-18 20:19+0000\n"
+"POT-Creation-Date: 2017-12-26 18:24+0000\n"
+"PO-Revision-Date: 2017-12-26 18:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "\n"
 "Votre Ticket ${object.pos_reference}\n"
 "            "
-msgstr "<span id=\"docs-internal-guid-63c1efaf-78f8-6337-0ae2-c31679b138ab\"><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour, </span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color:#212121;background-color:transparent\">Vous trouverez ci-joint votre ticket de caisse en version électronique.</span></p></span><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;\"><span style=\"color: rgb(33, 33, 33); line-height: 1.38;\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>"
+msgstr "<span id=\"docs-internal-guid-63c1efaf-78f8-6337-0ae2-c31679b138ab\"><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour, </span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color:#212121;background-color:transparent\">Vous trouverez ci-joint votre ticket de caisse en version électronique.</span><br>Voici le numéro de compte de l'épicerie à utiliser pour réapprovisionner votre ardoise: BE40523080761063<br></p></span><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;\"><span style=\"color: rgb(33, 33, 33); line-height: 1.38;\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>"
 
 #. module: logisfloo_base
 #: model:mail.template,subject:logisfloo_base.email_send_ticket
@@ -107,6 +107,17 @@ msgid "Date:"
 msgstr "Date:"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_supplierinfo_discount
+#: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_line_discount
+msgid "Discount"
+msgstr "Remise"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
+msgid "Discount (%)"
+msgstr "Remise (%)"
+
+#. module: logisfloo_base
 #: selection:product.uom.categ,type:0
 msgid "Distance"
 msgstr "Distance"
@@ -134,14 +145,34 @@ msgid "Group By"
 msgstr "Regrouper par"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_product_supplierinfo
+msgid "Information about a product vendor"
+msgstr "Information sur le vendeur de l'article"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_form_view
+msgid "Internal Category"
+msgstr "Catégorie interne"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_template_internal_ref
 msgid "Internal Reference"
 msgstr "Référence interne"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_template_reference_price
 msgid "Invoice Price"
 msgstr "Prix de référence"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
+msgid "Invoices and Incoming Shipments"
+msgstr "Factures et réceptions"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_last_name
@@ -167,6 +198,11 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
+msgid "Notes"
+msgstr "Notes"
+
+#. module: logisfloo_base
 #: selection:product.uom.categ,type:0
 msgid "Other"
 msgstr "Autre"
@@ -184,7 +220,7 @@ msgstr "Payé"
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_res_partner
 msgid "Partner"
-msgstr "Contact"
+msgstr "Partenaire"
 
 #. module: logisfloo_base
 #. openerp-web
@@ -194,7 +230,7 @@ msgid "Payment"
 msgstr "Paiement"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/product.py:34
+#: code:addons/logisfloo_base/models/product.py:48
 #, python-format
 msgid "Percentages for Profit Margin must > 0."
 msgstr "Le pourcentage de la marge doit être > 0."
@@ -208,6 +244,7 @@ msgstr "Téléphone"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_pos_order
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_form_view
 msgid "Point of Sale"
 msgstr "Point de vente"
 
@@ -240,6 +277,17 @@ msgstr "Catégorie d'UdM d'article"
 #: model:res.groups,name:logisfloo_base.group_logisfloo_purchase
 msgid "Purchase"
 msgstr "Achat"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_purchase_order_line
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
+msgid "Purchase Order Line"
+msgstr "Ligne de commande d'achat"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
+msgid "Purchase Order Lines"
+msgstr "Lignes d'ordre d'achat"
 
 #. module: logisfloo_base
 #. openerp-web
@@ -337,9 +385,15 @@ msgid "Total Sales Price with Margin"
 msgstr "Prix suggéré (avec marge)"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_supplierinfo_tree_view
 #: selection:product.uom.categ,type:0
 msgid "Unit"
 msgstr "Pièce"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_form_view
+msgid "Vendors"
+msgstr "Fournisseurs"
 
 #. module: logisfloo_base
 #: selection:product.uom.categ,type:0
