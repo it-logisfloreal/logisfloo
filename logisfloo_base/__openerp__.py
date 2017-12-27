@@ -43,6 +43,7 @@
         'views/report_receipt.xml',
         'views/logisfloo_pos.xml',
         'views/purchase.xml',
+        'views/stock.xml',
     ],
     'qweb': [
     'static/src/xml/pos_extensions.xml',
