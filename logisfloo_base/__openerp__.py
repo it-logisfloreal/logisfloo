@@ -34,6 +34,7 @@
 
     'data': [
         'security/logisfloo_security.xml',
+        'security/ir.model.access.csv',
         'data/default_values.xml',
         'data/email.xml',
         'data/sequence_definition.xml',
