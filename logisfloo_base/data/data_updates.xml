@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
 <!--
 Create a sequence to assign the slate_number automatically.
 -->
-
-<odoo>
 	<record forcecreate="true" id="slate_number_id" model="ir.sequence">
 		<field name="name">Slate Number</field>
 		<field name="code">slate.id</field>
         <field name="implementation">standard</field>
 		<field name="number_next_actual">145</field>
 	</record>
+<!-- 
+update pos receipt paper format to A4
+ -->
+    <record model="ir.actions.report.xml" id="point_of_sale.action_report_pos_receipt">
+        <field name="paperformat_id" ref="report.paperformat_euro"/>
+    </record>
 </odoo>

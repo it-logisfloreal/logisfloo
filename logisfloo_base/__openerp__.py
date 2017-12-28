@@ -37,7 +37,7 @@
         'security/ir.model.access.csv',
         'data/default_values.xml',
         'data/email.xml',
-        'data/sequence_definition.xml',
+        'data/data_updates.xml',
         'views/partner.xml',
         'views/product.xml',
         'views/report_receipt.xml',
