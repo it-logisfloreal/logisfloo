@@ -59,6 +59,9 @@ class Partner(models.Model):
             domain=[('slate_number', '=',self.slate_number)]
             self.slate_partners = partners.search(domain)
 
+    def get_slate_partner_ids(self):
+        return str([partner.id for partner in self.slate_partners if partner.email]).replace('[', '').replace(']', '') 
+
     @api.one
     def get_balance_and_eater(self):
         self.ensure_one()

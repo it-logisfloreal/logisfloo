@@ -22,4 +22,27 @@ update pos receipt paper format to A4
     <record model="ir.actions.report.xml" id="point_of_sale.action_report_pos_receipt">
         <field name="paperformat_id" ref="report.paperformat_euro"/>
     </record>
+ <!-- 
+update mail template to send to all slate partners
+But template was created with noupdate flag to 1
+ -->   
+ 	<!-- First we need to find the record and disable the noupdate flag -->
+ 	<function name="write" model="ir.model.data">
+ 		<function name="search" model="ir.model.data">
+     		<value eval="[('module', '=', 'logisfloo_base'), ('name', '=', 'email_send_ticket')]"/>
+ 		</function>
+     	<value eval="{'noupdate': False}" />
+ 	</function>
+	<!-- modify the record -->
+    <record id="email_send_ticket" model="mail.template">
+        <field name="partner_to">${object.partner_id.get_slate_partner_ids()}</field>
+    </record>
+	<!-- cleaup -->
+	<function name="write" model="ir.model.data">
+    	<function name="search" model="ir.model.data">
+        <value eval="[('module', '=', 'logisfloo_base'), ('name', '=', 'email_send_ticket')]"/>
+    	</function>
+    	<value eval="{'noupdate': True}" />
+	</function>   
+    
 </odoo>
