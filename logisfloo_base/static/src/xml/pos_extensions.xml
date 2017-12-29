@@ -8,6 +8,8 @@
 	</t>
 
     <t t-extend="ReceiptScreenWidget">
+    	<t t-jquery='h1' t-operation='replace'/>
+    	<t t-jquery='.print' t-operation='replace'/>
         <t t-jquery='.pos-receipt-container' t-operation='before'>
             <div class="button send">
                 <i class='fa fa-envelope'></i>
@@ -16,6 +18,7 @@
             <div class="message-send">
             </div>
         </t>
+        <t t-jquery='.pos-receipt-container' t-operation='replace'/>
     </t>
 
     <t t-extend="ActionpadWidget">
