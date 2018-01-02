@@ -76,8 +76,6 @@
         		<field name="internal_ref"/>
         		<field name="list_price"/>
         		<field name="total_with_margin"/>
-        		<field name="standard_price"/>
-        		<field name="reference_price"/>
         	</field>
         	<field name="uom_id" position="attributes">
         		<attribute name="invisible">0</attribute>
