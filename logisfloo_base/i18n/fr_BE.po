@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20161108\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-26 18:24+0000\n"
-"PO-Revision-Date: 2017-12-26 18:24+0000\n"
+"POT-Creation-Date: 2018-02-11 16:25+0000\n"
+"PO-Revision-Date: 2018-02-11 16:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "\n"
 "Votre Ticket ${object.pos_reference}\n"
 "            "
-msgstr "<span id=\"docs-internal-guid-63c1efaf-78f8-6337-0ae2-c31679b138ab\"><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour, </span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color:#212121;background-color:transparent\">Vous trouverez ci-joint votre ticket de caisse en version électronique.</span><br>Voici le numéro de compte de l'épicerie à utiliser pour réapprovisionner votre ardoise: BE40523080761063<br></p></span><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;\"><span style=\"color: rgb(33, 33, 33); line-height: 1.38;\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>"
+msgstr "<span id=\"docs-internal-guid-63c1efaf-78f8-6337-0ae2-c31679b138ab\"><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour, </span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color:#212121;background-color:transparent\">Vous trouverez ci-joint votre ticket de caisse en version électronique.</span><br></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><b style=\"font-weight:bold;\"><u>Informations utiles</u></b></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px 0px 0px 0px;background-color:transparent;border-collapse:collapse;min-width: 100%\"><tbody><tr><td align=\"left\" style=\"padding:0px 0px 0px 0px;vertical-align:top;text-align:left;\"><div></div></td></tr></tbody></table><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px 0px 0px 0px;background-color:transparent;border-collapse:collapse;min-width: 100%\"><tbody><tr><td align=\"left\" style=\"padding:0px 0px 0px 0px;vertical-align:top;text-align:left;\"></td></tr></tbody></table><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px 0px 0px 0px;background-color:transparent;border-collapse:collapse;min-width: 100%\"><tbody><tr><td align=\"left\" style=\"padding:0px 0px 0px 0px;vertical-align:top;text-align:left;background-color: rgb(245, 242, 242)\"><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px;\"><strong style=\"font-weight:bold;\">S'inscrire à une permanence&nbsp;<br style=\"line-height: 19.5px\"></strong>Nouvelles tranches horaires : 10h45-12h45, 12h30-14h30 et 14h15-16h15<br style=\"line-height: 19.5px\"><a href=\"https://pads.domainepublic.net/p/AKBdTR8yHRlOwFVt\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\"><strong style=\"font-weight:bold;\">Cliquez ici pour vous inscrire aux permanences</strong></a></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px;\"><strong style=\"font-weight:bold;\">Liste des groupes de travail (page créée en août 2017)</strong><br style=\"line-height: 19.5px\"><strong style=\"font-weight:bold;\"><a href=\"http://quartierdurable.logisfloreal.be/?email_id=116&amp;user_id=1&amp;urlpassed=aHR0cDovL3F1YXJ0aWVyZHVyYWJsZS5sb2dpc2Zsb3JlYWwuYmUvZXBpY2VyaWUvZ3JvdXBlcy1kZS10cmF2YWlsLw&amp;controller=stats&amp;action=analyse&amp;wysija-page=1&amp;wysijap=subscriptions\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\">Cliquez ici pour consulter la liste des groupes de travail</a></strong></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px;\"><strong style=\"font-weight:bold;\">Participer à un groupe de fonctionnement (formulaire modifié en août 2017)</strong><br style=\"line-height: 19.5px\"><strong style=\"font-weight:bold;\"><a href=\"http://quartierdurable.logisfloreal.be/?email_id=116&amp;user_id=1&amp;urlpassed=aHR0cHM6Ly9nb28uZ2wvZm9ybXMvdXZrdlhvcjI4Y0JxenNBdzE&amp;controller=stats&amp;action=analyse&amp;wysija-page=1&amp;wysijap=subscriptions\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\">Cliquez ici pour vous inscrire à un groupe de fonctionnement</a></strong></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px;\"><strong style=\"font-weight:bold;\">Pour créer votre ardoise, effectuez un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\">avec la communication&nbsp;: Votre numéro d'épicier + votre nom + prénom + mention \"ardoise\"</p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px;\"><strong style=\"font-weight:bold;\">Contenants</strong><br style=\"line-height: 19.5px\">En venant vous ravitailler, prévoyez vos contenants pour les produits en vrac&nbsp;: sachets à pain, bouteilles, bocaux en verre...&nbsp;Pour faciliter la pesée, n'oubliez pas d'indiquer sur une étiquette le poids à vide de vos bocaux.<br></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px;\"><strong style=\"font-weight:bold;\">Contacter le groupe pilote :&nbsp;</strong><a href=\"mailto:pilote.epicerie@logisfloreal.be\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;color:rgb(51, 122, 183);background-color:transparent;\">pilote.epicerie@logisfloreal.be</a></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px;\"><strong style=\"font-weight:bold;\">Contacter le groupe Achats :</strong>&nbsp;<a href=\"mailto:achats.epicerie@logisfloreal.be\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;color:rgb(51, 122, 183);background-color:transparent;\">achats.epicerie@logisfloreal.be</a></p></td></tr></tbody></table></span><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:'Lucida Grande', Helvetica, Verdana, Arial, sans-serif;\"><br><br><br><span style=\"color: rgb(33, 33, 33); line-height: 19.5px;\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>"
 
 #. module: logisfloo_base
 #: model:mail.template,subject:logisfloo_base.email_send_ticket
@@ -30,11 +30,16 @@ msgstr "${object.pos_reference}"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
 msgid "<span class=\"o_stat_text\">\n"
-"							Slate Balance2\n"
+"							Slate Balance\n"
 "						</span>"
 msgstr "<span class=\"o_stat_text\">\n"
 "							Solde Ardoise\n"
 "						</span>"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "<span> Members of slate: </span>"
+msgstr "<span> Members of slate: </span>"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -63,7 +68,7 @@ msgstr "Ajouter à la Mailing List"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:112
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:115
 #, python-format
 msgid "Address"
 msgstr "Adresse"
@@ -85,7 +90,7 @@ msgstr "Ardoise"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:40
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:43
 #, python-format
 msgid "Balance:"
 msgstr "Solde:"
@@ -107,6 +112,11 @@ msgid "Date:"
 msgstr "Date:"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Description"
+msgstr "Description"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_supplierinfo_discount
 #: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_line_discount
 msgid "Discount"
@@ -121,6 +131,11 @@ msgstr "Remise (%)"
 #: selection:product.uom.categ,type:0
 msgid "Distance"
 msgstr "Distance"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Email"
+msgstr "Courriel"
 
 #. module: logisfloo_base
 #: code:addons/logisfloo_base/models/logisfloo_pos.py:12
@@ -191,8 +206,14 @@ msgid "Members"
 msgstr "Membres"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Mobile"
+msgstr "Portable"
+
+#. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:111
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:114
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 #, python-format
 msgid "Name"
 msgstr "Nom"
@@ -224,7 +245,7 @@ msgstr "Partenaire"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:62
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:65
 #, python-format
 msgid "Payment"
 msgstr "Paiement"
@@ -237,7 +258,8 @@ msgstr "Le pourcentage de la marge doit être > 0."
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:113
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:116
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 #, python-format
 msgid "Phone"
 msgstr "Téléphone"
@@ -247,6 +269,11 @@ msgstr "Téléphone"
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_form_view
 msgid "Point of Sale"
 msgstr "Point de vente"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Price"
+msgstr "Prix"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_template_producer
@@ -290,16 +317,21 @@ msgid "Purchase Order Lines"
 msgstr "Lignes d'ordre d'achat"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:57
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:70
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:60
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:73
 #, python-format
 msgid "Select a customer"
 msgstr "Selectionner un membre"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:13
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:15
 #, python-format
 msgid "Send Receipt By Mail"
 msgstr "Envoyer ticket par mail"
@@ -316,7 +348,7 @@ msgstr "Solde ardoise"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:110
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:113
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_number
 #: model:ir.ui.view,arch_db:logisfloo_base.Logisfloo_partner_search_view
 #, python-format
@@ -337,6 +369,11 @@ msgstr "Membres de l'ardoise"
 #: model:res.groups,name:logisfloo_base.group_logisfloo_stock
 msgid "Stock"
 msgstr "Inventaire"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Street"
+msgstr "Street"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_subscription_date
@@ -389,6 +426,11 @@ msgstr "Prix suggéré (avec marge)"
 #: selection:product.uom.categ,type:0
 msgid "Unit"
 msgstr "Pièce"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Unit Price"
+msgstr "Prix unitaire"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_form_view
