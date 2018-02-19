@@ -28,12 +28,15 @@ class LogisflooProduct(models.Model):
     @api.one
     @api.depends('seller_ids')
     def _compute_cost(self):
+        currency = self.currency_id
+        total_taxes=0
         suppliers = self._get_main_supplier_info()
         if(len(suppliers) > 0):
-#            self.suggested_price = (suppliers[0].price * (1-suppliers[0]/100) * self.uom_po_id.factor)* (1 + suppliers[0].product_tmpl_id.categ_id.profit_margin / 100)
             discounted_sell_unit_price = suppliers[0].price * self.uom_po_id.factor * (1-suppliers[0].discount/100)
             self.total_with_margin = discounted_sell_unit_price 
-            self.total_with_margin = self.total_with_margin + self.supplier_taxes_id._compute_amount(discounted_sell_unit_price, discounted_sell_unit_price) 
+            for taxes_id in self.supplier_taxes_id:
+                total_taxes += currency.round(taxes_id._compute_amount(discounted_sell_unit_price, discounted_sell_unit_price)) 
+            self.total_with_margin += total_taxes
             self.total_with_margin = self.total_with_margin * (1.05)
 
 class LogisflooProductCategory(models.Model):  
