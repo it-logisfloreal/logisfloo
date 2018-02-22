@@ -373,7 +373,7 @@ msgstr "Inventaire"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Street"
-msgstr "Street"
+msgstr "Rue"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_subscription_date
