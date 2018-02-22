@@ -39,7 +39,7 @@ msgstr "<span class=\"o_stat_text\">\n"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "<span> Members of slate: </span>"
-msgstr "<span> Members of slate: </span>"
+msgstr "<span> Membres de l'ardoise: </span>"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
