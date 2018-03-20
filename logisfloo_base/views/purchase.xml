@@ -62,7 +62,55 @@
 
         </field>
     </record>
+<!-- 	<record model="ir.ui.menu" id="logisfloo_purchase_menu">
+	        <menuitem id="base.menu_procurement_management_supplier_name" name="Vendors"
+            parent="menu_procurement_management"
+            action="base.action_partner_supplier_form" sequence="15"/>
+	
+	
+	
+	</record> -->
 
+<!-- Put mostly used items under a simplified menu option (creating the menu first) -->
 
+    <menuitem id="logisfloo_simplified_menu"
+                parent="base.menu_purchase_root"                
+                name="Simplified Menu"
+                sequence="2"  />
+
+	<menuitem id="logisfloo_menu_purchase_rfq"
+		action="purchase.purchase_rfq" 		
+		parent="logisfloo_simplified_menu"
+		sequence="0"/>
+
+    <menuitem id="logisfloo_menu_purchase_form_action" 
+    	action="purchase.purchase_form_action"     	
+    	parent="logisfloo_simplified_menu" 
+    	sequence="6"/>
+
+	<menuitem id="logisfloo_menu_procurement_partner_contact_form" 
+		name="Products" 		
+		action="purchase.product_normal_action_puchased"
+		parent="logisfloo_simplified_menu" 
+		sequence="20"/>
+
+<!-- move other menu item under an advanced option menu (creating the menu first) -->
+
+    <menuitem id="logisfloo_advanced_menu"
+                parent="base.menu_purchase_root"                
+                name="Advanced Menu"
+                sequence="3"  />
+
+	<record model="ir.ui.menu" id="purchase.menu_procurement_management">
+		<field name="parent_id" ref="logisfloo_advanced_menu"/>
+	</record>
+	
+	<record model="ir.ui.menu" id="purchase.menu_purchase_config">
+		<field name="parent_id" ref="logisfloo_advanced_menu"/>
+	</record>
+
+	<record model="ir.ui.menu" id="purchase.menu_purchase_control">
+		<field name="parent_id" ref="logisfloo_advanced_menu"/>
+	</record>
 
 </odoo>
