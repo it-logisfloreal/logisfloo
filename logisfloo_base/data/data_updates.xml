@@ -14,7 +14,7 @@ Create a sequence to assign the slate_number automatically.
 update A4 paper format to reduce top margin to same value as bottom margin
  -->
     <record model="report.paperformat" id="report.paperformat_euro">
-        <field name="margin_top">23</field>
+        <field name="margin_top">40</field>
     </record>
 <!-- 
 update pos receipt paper format to A4
