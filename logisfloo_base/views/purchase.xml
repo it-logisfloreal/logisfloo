@@ -62,14 +62,6 @@
 
         </field>
     </record>
-<!-- 	<record model="ir.ui.menu" id="logisfloo_purchase_menu">
-	        <menuitem id="base.menu_procurement_management_supplier_name" name="Vendors"
-            parent="menu_procurement_management"
-            action="base.action_partner_supplier_form" sequence="15"/>
-	
-	
-	
-	</record> -->
 
 <!-- Put mostly used items under a simplified menu option (creating the menu first) -->
 
@@ -99,7 +91,8 @@
     <menuitem id="logisfloo_advanced_menu"
                 parent="base.menu_purchase_root"                
                 name="Advanced Menu"
-                sequence="3"  />
+                sequence="3"  
+                groups="group_logisfloo_purchase_advanced" />
 
 	<record model="ir.ui.menu" id="purchase.menu_procurement_management">
 		<field name="parent_id" ref="logisfloo_advanced_menu"/>
