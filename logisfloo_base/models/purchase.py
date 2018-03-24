@@ -8,7 +8,7 @@ class LogisflooPurchaseOrderLine(models.Model):
     
     discount = fields.Float(string='Discount')
 
-    @api.depends('product_qty', 'price_unit', 'taxes_id')
+    @api.depends('product_qty', 'price_unit', 'taxes_id', 'discount')
     def _compute_amount(self):
         for line in self:
             taxes = line.taxes_id.compute_all(line.price_unit * (1-(line.discount or 0.0) / 100.0), line.order_id.currency_id, line.product_qty, product=line.product_id, partner=line.order_id.partner_id)
@@ -46,6 +46,22 @@ class LogisflooPurchaseOrderLine(models.Model):
         self.price_unit = price_unit
         self.discount = seller.discount
 
+    # Override the PO line create method to add the seller discount on the PO line
+    @api.model
+    def create(self, values):
+        record = super(LogisflooPurchaseOrderLine,self).create(values)
+        if not record.product_id:
+            return record
+        seller = record.product_id._select_seller(
+            record.product_id,
+            partner_id=record.partner_id,
+            quantity=record.product_qty,
+            date=record.order_id.date_order and record.order_id.date_order[:10],
+            uom_id=record.product_uom)
+        if not seller:
+            return record
+        record['discount'] = seller.discount
+        return record
 
     
 class LogisflooAccountInvoice(models.Model):
