@@ -44,6 +44,7 @@
         'views/logisfloo_pos.xml',
         'views/purchase.xml',
         'views/stock.xml',
+        'views/account.xml',
     ],
     'qweb': [
     'static/src/xml/pos_extensions.xml',

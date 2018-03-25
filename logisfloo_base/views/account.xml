@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Make Journal Items menu visible to accounting members without the need to switch to developer mode  -->
+	<record model="ir.ui.menu" id="account.menu_action_account_moves_all">
+		<field name="groups_id" eval="[
+        	(4, ref('group_logisfloo_accounting')),
+        	]"/>
+	</record>
+	
+</odoo>
