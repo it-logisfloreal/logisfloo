@@ -37,6 +37,7 @@ class LogisflooPurchaseOrderLine(models.Model):
         self.discount = self._get_seller_discount()
 
     # Override the PO line create method to add the seller discount on the PO line
+    @api.model
     def create(self, values):
         record = super(LogisflooPurchaseOrderLine,self).create(values)
         record['discount'] = record._get_seller_discount()
