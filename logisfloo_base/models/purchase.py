@@ -3,6 +3,31 @@ from openerp.tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.exceptions import UserError
 
+
+class LogisflooPurchaseOrder(models.Model):
+    _inherit = 'purchase.order'
+
+    #state = fields.Selection(selection_add=[('deposite', 'Deposite')])
+
+
+    state = fields.Selection([
+        ('draft', 'Draft PO'),
+        ('sent', 'RFQ Sent'),
+        ('to approve', 'To Approve'),
+        ('purchase', 'Purchase Order'),
+        ('deposite', 'Deposite'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled')
+        ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
+
+    @api.multi
+    def button_undo(self):
+        self.write({'state': 'purchase'})
+
+    @api.multi
+    def button_deposite(self):
+        self.write({'state': 'deposite'})
+
 class LogisflooPurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
     
