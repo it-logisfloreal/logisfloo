@@ -5,7 +5,13 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
         <field name="arch" type="xml">
-        	<filter name="not_invoiced" position = "before">
+        	<filter name="draft" position="attributes">
+        		<attribute name="invisible">1</attribute>
+        	</filter>
+        	<filter name="approved" position="attributes">
+        		<attribute name="invisible">1</attribute>
+        	</filter>
+        	<filter name="not_invoiced" position="before">
         		<filter name="deposite" string="Deposite" domain="[('state','=','deposite')]"/>
         	</filter>
         </field>
