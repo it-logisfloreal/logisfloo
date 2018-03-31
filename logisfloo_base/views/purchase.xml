@@ -40,7 +40,10 @@
         	<xpath expr="//field[@name='state']" position="attributes">
     			<attribute name="statusbar_visible">draft,purchase,done</attribute>
 			</xpath>
-        	<button name="button_done" position = "before">
+			<button name="button_done" position="attributes">
+				<attribute name="states">purchase,deposite</attribute>
+			</button>
+        	<button name="button_done" position="before">
         		<button name="button_deposite" type="object" string="Deposite" states="purchase" class="oe_highlight"
                         help="Purchase in deposite."/>
         		<button name="button_undo" type="object" string="Undo" states="deposite,done" class="oe_highlight"
