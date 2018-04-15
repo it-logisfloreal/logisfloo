@@ -119,6 +119,7 @@ msgstr "Date:"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_view_purchase_order_filter
+#: selection:purchase.order,state:0
 msgid "Deposite"
 msgstr "Dépôt"
 
