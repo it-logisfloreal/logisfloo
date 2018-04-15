@@ -146,7 +146,7 @@ msgstr "Distance"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Email"
-msgstr "Email"
+msgstr "Courriel"
 
 #. module: logisfloo_base
 #: code:addons/logisfloo_base/models/logisfloo_pos.py:12
@@ -360,7 +360,7 @@ msgstr "Quantité"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Reopen the purchase order."
-msgstr "Reopen the purchase order."
+msgstr "Réouvrir le bon de commande."
 
 #. module: logisfloo_base
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_menu_purchase_rfq
@@ -475,7 +475,7 @@ msgstr "Prix suggéré (avec marge)"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Undo"
-msgstr "Revenir"
+msgstr "Réouvrir"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_supplierinfo_tree_view
