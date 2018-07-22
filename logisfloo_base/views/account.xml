@@ -1,10 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+ 	<record model="ir.ui.view" id="logisfloo_cacladjust_wizard_form">
+        <field name="name">logisfloo.calcadjust.wizard.form</field>
+        <field name="model">logisfloo.calcadjust.wizard</field>
+        <field name="arch" type="xml">
+        	<form>
+                <p class="oe_grey">
+                    Enter the amount on the invoice and click update. 
+                </p>
+	        	<group>
+	        		<field name="InvoicedTotalAmount"/>
+	        	</group>        		
+        		<div class="oe_form_char_content">
+        			The total amount in Odoo is	
+        			<field name="ComputedTotalAmount" class="oe_inline"/>
+        			the calculated adjustement is 
+        			<field name="CalcRebateAmount" class="oe_inline"/>.
+        		</div>        	
+<!--         		<group class="oe_subtotal_footer oe_left">
+	        		<field name="ComputedTotalAmount"/>
+	        		<field name="InvoicedTotalAmount"/>
+	        		<field name="CalcRebateAmount" class="oe_subtotal_footer_separator"/>
+        		</group> -->
+        		<footer>
+        			<button type="object" name="calculate" string="Update" class="oe_highlight"/>
+        			<button special="cancel" string="Cancel"/>
+        		</footer>
+        	</form>
+        </field>
+    </record> 
+    
+ 	<act_window id="action_calcrebate_wizard" 
+ 		name="Calculate" 
+ 		res_model="logisfloo.calcadjust.wizard" 
+ 		src_model="account.invoice"
+ 		view_id="logisfloo_cacladjust_wizard_form"
+ 		view_mode="form" 
+ 		target="new" />
+ 		
+  	<record model="ir.ui.view" id="logisfloo_adjustinvoice_wizard_form">
+        <field name="name">logisfloo.adjustinvoice.wizard.form</field>
+        <field name="model">logisfloo.adjustinvoice.wizard</field>
+        <field name="arch" type="xml">
+        	<form>   
+                <p class="oe_grey">
+                    Enter the amount of the adjustment and click update. 
+                    Enter a negative number to reduce the total amount or a positive number to increase the amount.
+                </p>
+                <p class="oe_grey">
+                    Alternatively, click on the calculate button to caculate the value.
+                </p>	
+        		<div>
+        			<label for="AdjustmentAmount"/>	
+        			<field name="AdjustmentAmount" class="oe_inline"/>
+        			<button type="object" name="open_calculator" string="Calculate"/>
+        		</div>        			      		
+        		<footer>
+        			<button type="object" name="add_adjustment_line" string="Update" class="oe_highlight"/>
+        			<button special="cancel" string="Cancel"/>
+        		</footer>
+        	</form>
+        </field>
+    </record> 
+
+ 	<act_window id="action_rounding_wizard" 
+ 		name="Rounding" 
+ 		res_model="logisfloo.adjustinvoice.wizard" 
+ 		src_model="account.invoice"
+ 		view_id="logisfloo_adjustinvoice_wizard_form"
+ 		view_mode="form" 
+ 		target="new" />
+ 		
+  	<act_window id="action_rebate_wizard" 
+ 		name="Rebate" 
+ 		res_model="logisfloo.adjustinvoice.wizard" 
+ 		src_model="account.invoice"
+ 		view_id="logisfloo_adjustinvoice_wizard_form"
+ 		view_mode="form" 
+ 		target="new" />
+ 	
 	<!-- Make Journal Items menu visible to accounting members without the need to switch to developer mode  -->
 	<record model="ir.ui.menu" id="account.menu_action_account_moves_all">
 		<field name="groups_id" eval="[
         	(4, ref('group_logisfloo_accounting')),
         	]"/>
 	</record>
+	
+	<record model="ir.ui.view" id="logisfloo_invoice_supplier_form">
+        <field name="name">logisfloo.invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form" />
+        <field name="arch" type="xml"> 
+        	<xpath expr="//field[@name='invoice_line_ids']/tree" position="attributes">
+        		<attribute name="editable">bottom</attribute>  
+        		<!--  uncomment next line and comment previous line to use the form in place of inline editing -->
+        		<!-- <attribute name="editable"/> -->	
+        	</xpath>  
+        	<field name="invoice_line_ids" position="after">      	            
+				<button string="Rebate" 
+					type="action" 
+					name="%(action_rebate_wizard)d" 
+					context="{'amount_total': amount_total, 'Description' : 'Rebate'}"
+					help="Create invoice line for a rebate."/>
+				<button string="Rounding" 
+					type="action" 
+					name="%(action_rounding_wizard)d" 
+					context="{'amount_total': amount_total, 'Description' : 'Rounding'}"
+					help="Create invoice line for a rounding difference."/>
+			</field>
+		</field>        	  	
+    </record>
 	
 </odoo>

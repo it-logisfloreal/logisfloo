@@ -3,7 +3,7 @@
     'name': "Logis-Floréal Base Module",
 
     'summary': """
-		Module that customize the base module and contains some python tools
+		Module that customizes the base module and contains some python tools
 		Inspired from Beescoop - Cellule IT https://github.com/beescoop/Obeesdoo
      """,
 
@@ -14,7 +14,7 @@
     'website': "https://github.com/logisfloo",
 
     'category': 'Logisfloo',
-    'version': '1.3.1',
+    'version': '1.4.0',
 
     'depends': [
         'stock',

@@ -22,6 +22,14 @@ Work around:
 			<field name="value">account.account,(account id in URL)</field>
 			-->
 		</record>
+		<record model="ir.property" id="property_account_rebate">
+			<field name="name">property_account_rebate</field> 
+			<field name="fields_id" search="[('model','=','logisfloo.adjustinvoice.wizard'),('name','=','property_adjustinvoice_account')]"/>
+			<field name="value" eval="'account.account,'+str(ref('l10n_be.a604'))"/>
+			<!--
+			<field name="value">account.account,(account id in URL)</field>
+			-->
+		</record>
 		
 		<!-- add record for property to define the margin here -->
 		
