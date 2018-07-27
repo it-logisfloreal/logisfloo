@@ -91,6 +91,9 @@
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account.invoice_supplier_form" />
         <field name="arch" type="xml"> 
+        	<field name="partner_id" position="after"> 
+        		<field string="Pay to third party" name="tpty_partner_id"/>     		
+        	</field>
         	<xpath expr="//field[@name='invoice_line_ids']/tree" position="attributes">
         		<attribute name="editable">bottom</attribute>  
         		<!--  uncomment next line and comment previous line to use the form in place of inline editing -->
