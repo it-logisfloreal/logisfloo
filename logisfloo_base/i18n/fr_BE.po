@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c-20161108\n"
+"Project-Id-Version: Odoo Server 9.0c-20180614\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-15 09:28+0000\n"
-"PO-Revision-Date: 2018-04-15 09:28+0000\n"
+"POT-Creation-Date: 2018-07-28 15:44+0000\n"
+"PO-Revision-Date: 2018-07-28 15:44+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -74,6 +74,16 @@ msgid "Address"
 msgstr "Adresse"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_property_adjustinvoice_account
+msgid "Adjustment Account"
+msgstr "Compte pour les corrections"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_AdjustmentAmount
+msgid "Adjustment amount"
+msgstr "Montant de la remise"
+
+#. module: logisfloo_base
 #: model:res.groups,name:logisfloo_base.group_logisfloo_admin
 msgid "Administration"
 msgstr "Administration"
@@ -84,9 +94,26 @@ msgid "Advanced Menu"
 msgstr "Menu Avancé"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
+msgid "Alternatively, click on the calculate button to caculate the value."
+msgstr "Autrement, cliquer sur le bouton calculer pour calculer la valeur"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Amount"
 msgstr "Montant"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_ComputedTotalAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_ComputedTotalAmount
+msgid "Amount in Odoo"
+msgstr "Montant dans Odoo"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_InvoicedTotalAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_InvoicedTotalAmount
+msgid "Amount on invoice"
+msgstr "Montant indiqué sur la facture"
 
 #. module: logisfloo_base
 #: model:account.account,name:logisfloo_base.a446100
@@ -101,6 +128,18 @@ msgid "Balance:"
 msgstr "Solde:"
 
 #. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.action_calcrebate_wizard
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
+msgid "Calculate"
+msgstr "Calculer"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: logisfloo_base
 #: code:addons/logisfloo_base/models/logisfloo_pos.py:14
 #, python-format
 msgid "Cannot send the ticket, no email address found on the client"
@@ -112,6 +151,46 @@ msgid "Category type"
 msgstr "Type de categorie"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+msgid "Create invoice line for a rebate."
+msgstr "Créer une ligne de facture pour une remise."
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+msgid "Create invoice line for a rounding difference."
+msgstr "Créer une ligne de facture pour une différence d'arrondi"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_create_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_create_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_company_currency_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_company_currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:277
+#, python-format
+msgid "Customer Payment"
+msgstr "Customer Payment"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:279
+#, python-format
+msgid "Customer Refund"
+msgstr "Customer Refund"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Date:"
 msgstr "Date:"
@@ -119,7 +198,6 @@ msgstr "Date:"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_view_purchase_order_filter
-#: selection:purchase.order,state:0
 msgid "Deposite"
 msgstr "Dépôt"
 
@@ -140,6 +218,12 @@ msgid "Discount (%)"
 msgstr "Remise (%)"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_display_name
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: logisfloo_base
 #: selection:product.uom.categ,type:0
 msgid "Distance"
 msgstr "Distance"
@@ -148,6 +232,18 @@ msgstr "Distance"
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Email"
 msgstr "Courriel"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
+msgid "Enter the amount of the adjustment and click update. \n"
+"                    Enter a negative number to reduce the total amount or a positive number to increase the amount."
+msgstr "Entrer le montant de la remise et cliquer sur Mise à jour. \n"
+"                    Entrer un nombre négatif pour réduire le montant total ou un nombre positif pour l'augmenter."
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
+msgid "Enter the amount on the invoice and click update."
+msgstr "Entrer le montant indiqué sur la facture et cliquer sur Mise à jour."
 
 #. module: logisfloo_base
 #: code:addons/logisfloo_base/models/logisfloo_pos.py:12
@@ -169,7 +265,13 @@ msgstr "Floréal"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.Logisfloo_partner_search_view
 msgid "Group By"
-msgstr "Grouper par"
+msgstr "Regrouper par"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_id
+msgid "ID"
+msgstr "Identifiant"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_product_supplierinfo
@@ -202,10 +304,28 @@ msgid "Invoices and Incoming Shipments"
 msgstr "Factures et réceptions"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard___last_update
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_last_name
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
 msgid "Last Name"
 msgstr "Nom"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_write_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_write_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
 
 #. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
@@ -236,6 +356,18 @@ msgid "Notes"
 msgstr "Notes"
 
 #. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:218
+#, python-format
+msgid "Only one invoice with third party payer can be processed at a time."
+msgstr "Seulement une facture payée par un tiers peut être traitée à la fois."
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:213
+#, python-format
+msgid "Only one payment can be processed at a time. Trying to post %s payments"
+msgstr "Seulement un paiement peut être traité à la fois. Il y a %s paiements dans cette demande."
+
+#. module: logisfloo_base
 #: selection:product.uom.categ,type:0
 msgid "Other"
 msgstr "Autre"
@@ -251,9 +383,29 @@ msgid "Paid"
 msgstr "Payé"
 
 #. module: logisfloo_base
+#: model:account.journal,name:logisfloo_base.paid_by_3rd_pty_journal
+msgid "Paid by 3rd party"
+msgstr "Payé par un tiers"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_account_payment_property_journal_paid_by3rd_pty_id
+msgid "Paid by 3rd party Journal"
+msgstr "Journal payé par un tiers"
+
+#. module: logisfloo_base
+#: model:account.account,name:logisfloo_base.a440010
+msgid "Paiement par tiers"
+msgstr "Paiement par un tiers"
+
+#. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+msgid "Pay to third party"
+msgstr "Payable à"
 
 #. module: logisfloo_base
 #. openerp-web
@@ -261,6 +413,11 @@ msgstr "Partenaire"
 #, python-format
 msgid "Payment"
 msgstr "Paiement"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_account_payment
+msgid "Payments"
+msgstr "Paiements"
 
 #. module: logisfloo_base
 #: code:addons/logisfloo_base/models/product.py:51
@@ -359,6 +516,17 @@ msgid "Quantity"
 msgstr "Quantité"
 
 #. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.action_rebate_wizard
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+msgid "Rebate"
+msgstr "Remise"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_CalcRebateAmount
+msgid "Rebate amount"
+msgstr "Montant de la remise"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Reopen the purchase order."
 msgstr "Réouvrir le bon de commande."
@@ -367,6 +535,12 @@ msgstr "Réouvrir le bon de commande."
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_menu_purchase_rfq
 msgid "Requests for Quotation"
 msgstr "Demande de prix"
+
+#. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.action_rounding_wizard
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+msgid "Rounding"
+msgstr "Arrondi"
 
 #. module: logisfloo_base
 #. openerp-web
@@ -448,9 +622,35 @@ msgid "Tenant Logis/Floréal"
 msgstr "Locataire Logis/Floréal"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
+msgid "The total amount in Odoo is"
+msgstr "Le montant total dans Odoo est"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:284
+#, python-format
+msgid "Third Party Payment"
+msgstr "Paiement par tiers"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_account_invoice_tpty_partner_id
+msgid "ThirdParty Partner"
+msgstr "Partenaire tiers"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,help:logisfloo_base.field_res_partner_property_account_slate_id
 msgid "This account will be used as the pre-paid slate account for the current partner"
 msgstr "Ce compte sera utilisé pour l'ardoise de ce contact."
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_adjustinvoice_wizard_property_adjustinvoice_account
+msgid "This account will be used to record the invoice adjustment"
+msgstr "Ce compte sera utilisé pour les corrections de facture"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_account_payment_property_journal_paid_by3rd_pty_id
+msgid "This journal will be used to record the payment by third party"
+msgstr "Ce journal sera utilisé pour enregistrer les paiements par un tiers"
 
 #. module: logisfloo_base
 #: model:mail.template,report_name:logisfloo_base.email_send_ticket
@@ -476,7 +676,7 @@ msgstr "Prix suggéré (avec marge)"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Undo"
-msgstr "Réouvrir"
+msgstr "Rouvrir"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_supplierinfo_tree_view
@@ -488,6 +688,18 @@ msgstr "Pièce"
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Unit Price"
 msgstr "Prix unitaire"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
+msgid "Update"
+msgstr "Mise à jour"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:282
+#, python-format
+msgid "Vendor Refund"
+msgstr "Remboursement fournisseur"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_form_view
@@ -503,4 +715,19 @@ msgstr "Volume"
 #: selection:product.uom.categ,type:0
 msgid "Weight"
 msgstr "Poids"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_logisfloo_adjustinvoice_wizard
+msgid "logisfloo.adjustinvoice.wizard"
+msgstr "logisfloo.adjustinvoice.wizard"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_logisfloo_calcadjust_wizard
+msgid "logisfloo.calcadjust.wizard"
+msgstr "logisfloo.calcadjust.wizard"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
+msgid "the calculated adjustement is"
+msgstr "la correction calculée est"
 
