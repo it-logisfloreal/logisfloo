@@ -8,20 +8,17 @@
                 <p class="oe_grey">
                     Enter the amount on the invoice and click update. 
                 </p>
+        		<div class="oe_form_char_content">
+        			The total amount in Odoo is	
+        			<field name="ComputedTotalAmount" class="oe_inline"/>
+        		</div>        	
 	        	<group>
 	        		<field name="InvoicedTotalAmount"/>
 	        	</group>        		
         		<div class="oe_form_char_content">
-        			The total amount in Odoo is	
-        			<field name="ComputedTotalAmount" class="oe_inline"/>
-        			the calculated adjustement is 
+        			The calculated amount to add or deduct from the Odoo invoice is 
         			<field name="CalcRebateAmount" class="oe_inline"/>.
         		</div>        	
-<!--         		<group class="oe_subtotal_footer oe_left">
-	        		<field name="ComputedTotalAmount"/>
-	        		<field name="InvoicedTotalAmount"/>
-	        		<field name="CalcRebateAmount" class="oe_subtotal_footer_separator"/>
-        		</group> -->
         		<footer>
         			<button type="object" name="calculate" string="Update" class="oe_highlight"/>
         			<button special="cancel" string="Cancel"/>
@@ -44,11 +41,10 @@
         <field name="arch" type="xml">
         	<form>   
                 <p class="oe_grey">
-                    Enter the amount of the adjustment and click update. 
-                    Enter a negative number to reduce the total amount or a positive number to increase the amount.
+                    Enter the amount to add (+) or deduct (-) from the Odoo invoice and click update.
                 </p>
                 <p class="oe_grey">
-                    Alternatively, click on the calculate button to caculate the value.
+                    If you don't know the amount, click on the calculate button to caculate this amount from the invoice.
                 </p>	
         		<div>
         			<label for="AdjustmentAmount"/>	
@@ -101,14 +97,16 @@
         	</xpath>  
         	<field name="invoice_line_ids" position="after">      	            
 				<button string="Rebate" 
+					states="draft,proforma2"
 					type="action" 
 					name="%(action_rebate_wizard)d" 
-					context="{'amount_total': amount_total, 'Description' : 'Rebate'}"
+					context="{'amount_total': amount_total, 'Description' : 'Remise'}"
 					help="Create invoice line for a rebate."/>
 				<button string="Rounding" 
+					states="draft,proforma2"
 					type="action" 
 					name="%(action_rounding_wizard)d" 
-					context="{'amount_total': amount_total, 'Description' : 'Rounding'}"
+					context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
 					help="Create invoice line for a rounding difference."/>
 			</field>
 		</field>        	  	
