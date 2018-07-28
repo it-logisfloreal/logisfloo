@@ -11,8 +11,8 @@ Work around:
 		<record id="a446100" model="account.account">
 			<field name="name">Ardoise</field>
 			<field name="code">446100</field>
-			<field name="user_type_id" ref="account.data_account_type_payable"/>
-			<field name="reconcile" eval="True"/>
+			<field name="user_type_id" ref="account.data_account_type_prepayments"/>
+			<field name="reconcile" eval="False"/>
 		</record>
 	 	<record model="ir.property" id="property_account_slate_id">
 			<field name="name">property_account_slate_id</field> 
@@ -34,8 +34,8 @@ Work around:
 		<record id="a440010" model="account.account">
 			<field name="name">Paiement par tiers</field>
 			<field name="code">440010</field>
-			<field name="user_type_id" ref="account.data_account_type_payable"/>
-			<field name="reconcile" eval="True"/>
+			<field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+			<field name="reconcile" eval="False"/>
 		</record>
 		
         <record id="sequence_paid_by_3rd_pty" model="ir.sequence">
