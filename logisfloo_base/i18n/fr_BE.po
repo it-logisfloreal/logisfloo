@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20180614\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-28 15:44+0000\n"
-"PO-Revision-Date: 2018-07-28 15:44+0000\n"
+"POT-Creation-Date: 2018-07-28 18:39+0000\n"
+"PO-Revision-Date: 2018-07-28 18:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -81,7 +81,7 @@ msgstr "Compte pour les corrections"
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_AdjustmentAmount
 msgid "Adjustment amount"
-msgstr "Montant de la remise"
+msgstr "Montant"
 
 #. module: logisfloo_base
 #: model:res.groups,name:logisfloo_base.group_logisfloo_admin
@@ -92,11 +92,6 @@ msgstr "Administration"
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_advanced_menu
 msgid "Advanced Menu"
 msgstr "Menu Avancé"
-
-#. module: logisfloo_base
-#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
-msgid "Alternatively, click on the calculate button to caculate the value."
-msgstr "Autrement, cliquer sur le bouton calculer pour calculer la valeur"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -113,7 +108,7 @@ msgstr "Montant dans Odoo"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_InvoicedTotalAmount
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_InvoicedTotalAmount
 msgid "Amount on invoice"
-msgstr "Montant indiqué sur la facture"
+msgstr "Montant indiqué sur la facture du fournisseur"
 
 #. module: logisfloo_base
 #: model:account.account,name:logisfloo_base.a446100
@@ -234,16 +229,14 @@ msgid "Email"
 msgstr "Courriel"
 
 #. module: logisfloo_base
-#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
-msgid "Enter the amount of the adjustment and click update. \n"
-"                    Enter a negative number to reduce the total amount or a positive number to increase the amount."
-msgstr "Entrer le montant de la remise et cliquer sur Mise à jour. \n"
-"                    Entrer un nombre négatif pour réduire le montant total ou un nombre positif pour l'augmenter."
-
-#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
 msgid "Enter the amount on the invoice and click update."
-msgstr "Entrer le montant indiqué sur la facture et cliquer sur Mise à jour."
+msgstr "Entrer le montant indiqué sur la facture du fournisseur et cliquer sur Mise à jour."
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
+msgid "Enter the amount to add (+) or deduct (-) from the Odoo invoice and click update."
+msgstr "Entrer le montant à ajouter (+) ou à déduire (-) de la facture dans Odoo et cliquer sur Mise à jour."
 
 #. module: logisfloo_base
 #: code:addons/logisfloo_base/models/logisfloo_pos.py:12
@@ -271,7 +264,12 @@ msgstr "Regrouper par"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_id
 msgid "ID"
-msgstr "Identifiant"
+msgstr "ID"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
+msgid "If you don't know the amount, click on the calculate button to caculate this amount from the invoice."
+msgstr "Si vous ne connaisez pas ce montant, cliquer sur Calculer pour calculer ce montant à partir du montant de la facture du fournisseur."
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_product_supplierinfo
@@ -319,13 +317,13 @@ msgstr "Nom"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_write_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Mis à jour par"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_write_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Mis à jour le"
 
 #. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
@@ -623,6 +621,11 @@ msgstr "Locataire Logis/Floréal"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
+msgid "The calculated amount to add or deduct from the Odoo invoice is"
+msgstr "Le montant calculé à ajouter ou à déduire de la facture dans Odoo est"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
 msgid "The total amount in Odoo is"
 msgstr "Le montant total dans Odoo est"
 
@@ -725,9 +728,4 @@ msgstr "logisfloo.adjustinvoice.wizard"
 #: model:ir.model,name:logisfloo_base.model_logisfloo_calcadjust_wizard
 msgid "logisfloo.calcadjust.wizard"
 msgstr "logisfloo.calcadjust.wizard"
-
-#. module: logisfloo_base
-#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
-msgid "the calculated adjustement is"
-msgstr "la correction calculée est"
 
