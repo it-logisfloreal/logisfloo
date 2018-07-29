@@ -8,17 +8,17 @@
                 <p class="oe_grey">
                     Enter the amount on the invoice and click update. 
                 </p>
-        		<div class="oe_form_char_content">
+<!--         		<div class="oe_form_char_content">
         			The total amount in Odoo is	
         			<field name="ComputedTotalAmount" class="oe_inline"/>
-        		</div>        	
+        		</div> -->        	
 	        	<group>
 	        		<field name="InvoicedTotalAmount"/>
 	        	</group>        		
-        		<div class="oe_form_char_content">
+<!--         		<div class="oe_form_char_content">
         			The calculated amount to add or deduct from the Odoo invoice is 
         			<field name="CalcRebateAmount" class="oe_inline"/>.
-        		</div>        	
+        		</div>  -->       	
         		<footer>
         			<button type="object" name="calculate" string="Update" class="oe_highlight"/>
         			<button special="cancel" string="Cancel"/>
@@ -60,7 +60,7 @@
     </record> 
 
  	<act_window id="action_rounding_wizard" 
- 		name="Rounding" 
+ 		name="Add an invoice line to correct a rounding difference" 
  		res_model="logisfloo.adjustinvoice.wizard" 
  		src_model="account.invoice"
  		view_id="logisfloo_adjustinvoice_wizard_form"
@@ -68,7 +68,7 @@
  		target="new" />
  		
   	<act_window id="action_rebate_wizard" 
- 		name="Rebate" 
+ 		name="Add an invoice line for a rebate" 
  		res_model="logisfloo.adjustinvoice.wizard" 
  		src_model="account.invoice"
  		view_id="logisfloo_adjustinvoice_wizard_form"
