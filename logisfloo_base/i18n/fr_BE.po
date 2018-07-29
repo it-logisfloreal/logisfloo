@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20180614\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-28 18:39+0000\n"
-"PO-Revision-Date: 2018-07-28 18:39+0000\n"
+"POT-Creation-Date: 2018-07-29 09:47+0000\n"
+"PO-Revision-Date: 2018-07-29 09:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -60,6 +60,16 @@ msgstr "<strong>Total</strong>"
 #: model:res.groups,name:logisfloo_base.group_logisfloo_accounting
 msgid "Accounting"
 msgstr "Comptabilité"
+
+#. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.action_rebate_wizard
+msgid "Add an invoice line for a rebate"
+msgstr "Ajouter une ligne sur la facture pour indiquer une remise."
+
+#. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.action_rounding_wizard
+msgid "Add an invoice line to correct a rounding difference"
+msgstr "Ajouter une ligne sur la facture pour corriger une différence d'arrondi."
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_add_to_mailing_list
@@ -123,7 +133,6 @@ msgid "Balance:"
 msgstr "Solde:"
 
 #. module: logisfloo_base
-#: model:ir.actions.act_window,name:logisfloo_base.action_calcrebate_wizard
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
 msgid "Calculate"
 msgstr "Calculer"
@@ -146,14 +155,19 @@ msgid "Category type"
 msgstr "Type de categorie"
 
 #. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.action_calcadjust_wizard
+msgid "Compute the amount from the vendor's invoice."
+msgstr "Calculer le montant à partir de la facture du fournisseur."
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
 msgid "Create invoice line for a rebate."
-msgstr "Créer une ligne de facture pour une remise."
+msgstr "Créer une ligne de facture pour indiquer une remise."
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
 msgid "Create invoice line for a rounding difference."
-msgstr "Créer une ligne de facture pour une différence d'arrondi"
+msgstr "Créer une ligne de facture pour corriger une différence d'arrondi."
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_create_uid
@@ -174,16 +188,16 @@ msgid "Currency"
 msgstr "Devise"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:277
+#: code:addons/logisfloo_base/models/purchase.py:281
 #, python-format
 msgid "Customer Payment"
-msgstr "Customer Payment"
+msgstr "Paiement client"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:279
+#: code:addons/logisfloo_base/models/purchase.py:283
 #, python-format
 msgid "Customer Refund"
-msgstr "Customer Refund"
+msgstr "Remboursement client"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -323,7 +337,7 @@ msgstr "Mis à jour par"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_write_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_write_date
 msgid "Last Updated on"
-msgstr "Mis à jour le"
+msgstr "Dernière mis à jour le"
 
 #. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
@@ -354,13 +368,13 @@ msgid "Notes"
 msgstr "Notes"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:218
+#: code:addons/logisfloo_base/models/purchase.py:222
 #, python-format
 msgid "Only one invoice with third party payer can be processed at a time."
 msgstr "Seulement une facture payée par un tiers peut être traitée à la fois."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:213
+#: code:addons/logisfloo_base/models/purchase.py:217
 #, python-format
 msgid "Only one payment can be processed at a time. Trying to post %s payments"
 msgstr "Seulement un paiement peut être traité à la fois. Il y a %s paiements dans cette demande."
@@ -514,7 +528,6 @@ msgid "Quantity"
 msgstr "Quantité"
 
 #. module: logisfloo_base
-#: model:ir.actions.act_window,name:logisfloo_base.action_rebate_wizard
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
 msgid "Rebate"
 msgstr "Remise"
@@ -535,7 +548,6 @@ msgid "Requests for Quotation"
 msgstr "Demande de prix"
 
 #. module: logisfloo_base
-#: model:ir.actions.act_window,name:logisfloo_base.action_rounding_wizard
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
 msgid "Rounding"
 msgstr "Arrondi"
@@ -620,17 +632,7 @@ msgid "Tenant Logis/Floréal"
 msgstr "Locataire Logis/Floréal"
 
 #. module: logisfloo_base
-#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
-msgid "The calculated amount to add or deduct from the Odoo invoice is"
-msgstr "Le montant calculé à ajouter ou à déduire de la facture dans Odoo est"
-
-#. module: logisfloo_base
-#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
-msgid "The total amount in Odoo is"
-msgstr "Le montant total dans Odoo est"
-
-#. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:284
+#: code:addons/logisfloo_base/models/purchase.py:288
 #, python-format
 msgid "Third Party Payment"
 msgstr "Paiement par tiers"
@@ -699,7 +701,7 @@ msgid "Update"
 msgstr "Mise à jour"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:282
+#: code:addons/logisfloo_base/models/purchase.py:286
 #, python-format
 msgid "Vendor Refund"
 msgstr "Remboursement fournisseur"

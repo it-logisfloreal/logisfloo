@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from openerp import models, fields, api
 from openerp.tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -162,11 +163,14 @@ class LogisflooAdjustInvoiceWizard(models.TransientModel):
         InvoiceID = self.env.context.get('active_id')
         _logger.info('Description: %s', mydesc)
         _logger.info('InvoiceID: %s', InvoiceID)
+        #WizWindowTitle = "Compute the amount from the vendor's invoice."
+        # Set the wizard window name directly in french
+        # Translation of the action window name does not works when called from the code
+        WizWindowTitle = "Calculer le montant à partir de la facture du fournisseur."
         return {
-                'name': 'Calculate',
+                'name': WizWindowTitle,
                 'res_model': 'logisfloo.calcadjust.wizard',
                 'src_model': 'account.invoice',
-                #'view_id': "logisfloo_cacladjust_wizard_form",
                 'view_mode': 'form', 
                 'type': 'ir.actions.act_window',
                 'target': 'new',

@@ -27,8 +27,8 @@
         </field>
     </record> 
     
- 	<act_window id="action_calcrebate_wizard" 
- 		name="Calculate the amount from the vendor's invoice." 
+ 	<act_window id="action_calcadjust_wizard" 
+ 		name="Compute the amount from the vendor's invoice." 
  		res_model="logisfloo.calcadjust.wizard" 
  		src_model="account.invoice"
  		view_id="logisfloo_cacladjust_wizard_form"
