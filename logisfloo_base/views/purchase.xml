@@ -116,6 +116,26 @@
         </field>
     </record>
 
+    <record id="logisfloo_purchase_receipt_action" model="ir.actions.act_window">
+        <field name="name">Shop Receipt</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
+        <field name="context">{'search_default_todo':1, 'show_purchase': True}</field>
+        <field name="domain">[('state','not in',('draft','sent','bid', 'confirmed'))]</field>
+        <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a shop receipt that will be converted into a purchase order. 
+          </p><p>
+            Use this menu to search within your receipt by
+            references, vendor, products, etc. For each receipt,
+            you can track the related discussion with the vendor, control
+            the products received and control the vendor bills.
+          </p>
+        </field>
+    </record>
+
 <!-- Put mostly used items under a simplified menu option (creating the menu first) -->
 
     <menuitem id="logisfloo_simplified_menu"
@@ -126,12 +146,17 @@
 	<menuitem id="logisfloo_menu_purchase_rfq"
 		action="purchase.purchase_rfq" 		
 		parent="logisfloo_simplified_menu"
-		sequence="0"/>
+		sequence="3"/>
 
     <menuitem id="logisfloo_menu_purchase_form_action" 
     	action="purchase.purchase_form_action"     	
     	parent="logisfloo_simplified_menu" 
     	sequence="6"/>
+
+    <menuitem id="logisfloo_menu_receipt_form_action"
+    	action="logisfloo_purchase_receipt_action"  
+    	parent="logisfloo_simplified_menu" 
+    	sequence="1"/>
 
 	<menuitem id="logisfloo_menu_procurement_partner_contact_form" 
 		name="Products" 		
@@ -158,5 +183,6 @@
 	<record model="ir.ui.menu" id="purchase.menu_purchase_control">
 		<field name="parent_id" ref="logisfloo_advanced_menu"/>
 	</record>
+
 
 </odoo>
