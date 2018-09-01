@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+ 
     <record model="ir.ui.view" id="logisfloo_view_purchase_order_filter">
         <field name="name">logisfloo.view.purchase.order.filter</field>
         <field name="model">purchase.order</field>
@@ -116,14 +117,143 @@
         </field>
     </record>
 
+<!-- Receipt wizard -->
+ 	<record model="ir.ui.view" id="logisfloo_cacladjust_wizard_form">
+        <field name="name">logisfloo.calcadjust.wizard.form</field>
+        <field name="model">logisfloo.calcadjust.wizard</field>
+        <field name="arch" type="xml">
+        	<form>
+                <p class="oe_grey">
+                    Enter the amount on the invoice and click update. 
+                </p>
+	        	<group>
+	        		<field name="InvoicedTotalAmount"/>
+	        	</group>        		
+        		<footer>
+        			<button type="object" name="calculate" string="Update" class="oe_highlight"/>
+        			<button special="cancel" string="Cancel"/>
+        		</footer>
+        	</form>
+        </field>
+    </record> 
+    
+ 	<act_window id="action_calcadjust_wizard" 
+ 		name="Compute the amount from the vendor's invoice." 
+ 		res_model="logisfloo.calcadjust.wizard" 
+ 		src_model="purchase.order"
+ 		view_id="logisfloo_cacladjust_wizard_form"
+ 		view_mode="form" 
+ 		target="new" />
+ 		
+  	<record model="ir.ui.view" id="logisfloo_adjustinvoice_wizard_form">
+        <field name="name">logisfloo.adjustinvoice.wizard.form</field>
+        <field name="model">logisfloo.adjustinvoice.wizard</field>
+        <field name="arch" type="xml">
+        	<form>   
+                <p class="oe_grey">
+                    Enter the amount to add (+) or deduct (-) from the Odoo invoice and click update.
+                </p>
+                <p class="oe_grey">
+                    If you don't know the amount, click on the calculate button to caculate this amount from the invoice.
+                </p>	
+        		<div>
+        			<label for="AdjustmentAmount"/>	
+        			<field name="AdjustmentAmount" class="oe_inline"/>
+        			<button type="object" name="open_calculator" string="Calculate"/>
+        		</div>        			      		
+        		<footer>
+        			<button type="object" name="add_adjustment_line" string="Update" class="oe_highlight"/>
+        			<button special="cancel" string="Cancel"/>
+        		</footer>
+        	</form>
+        </field>
+    </record> 
+
+ 	<act_window id="action_rounding_wizard" 
+ 		name="Add an invoice line to correct a rounding difference" 
+ 		res_model="logisfloo.adjustinvoice.wizard" 
+ 		src_model="purchase.order"
+ 		view_id="logisfloo_adjustinvoice_wizard_form"
+ 		view_mode="form" 
+ 		target="new" />
+ 		
+  	<act_window id="action_rebate_wizard" 
+ 		name="Add an invoice line for a rebate" 
+ 		res_model="logisfloo.adjustinvoice.wizard" 
+ 		src_model="purchase.order"
+ 		view_id="logisfloo_adjustinvoice_wizard_form"
+ 		view_mode="form" 
+ 		target="new" />
+ 
+<!-- Receipt items -->
+
+    <record model="ir.ui.view" id="logisfloo_purchase_receipt_form">
+        <field name="name">logisfloo.purchase.receipt.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="logisfloo_purchase_order_form_view"/>
+        <field name="arch" type="xml">
+        	<field name="partner_id" position="after">
+        		<field name="tpty_partner_id"/>
+        	</field>   
+        	<field name="amount_untaxed" position="before">      	            
+				<button string="Rebate" 
+					states="draft,proforma2"
+					type="action" 
+					name="%(action_rebate_wizard)d" 
+					context="{'amount_total': amount_total, 'Description' : 'Remise'}"
+					help="Create invoice line for a rebate."/>
+				<button string="Rounding" 
+					states="draft,proforma2"
+					type="action" 
+					name="%(action_rounding_wizard)d" 
+					context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
+					help="Create invoice line for a rounding difference."/>
+			</field>        	   	
+        	<field name="amount_untaxed" position="before">
+        		<field name="RoundingAmount" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RoundingAmount', '=', 0)]}" />
+        		<field name="RebateAmount" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RebateAmount', '=', 0)]}"/>
+        	</field>
+        	
+
+        </field>       
+    </record>
+ 
+     <record model="ir.ui.view" id="logisfloo_purchase_receipt_tree">
+        <field name="name">logisfloo.purchase.receipt.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+        	<field name="company_id" position="after">
+        		<field name="tpty_partner_id"/>
+        	</field>
+            <field name="date_planned" position="attributes">
+            	<attribute name="invisible">1</attribute>
+           	</field>
+            <field name="origin" position="attributes">
+            	<attribute name="invisible">1</attribute>
+           	</field>
+        </field>       
+    </record>
+    
+    <record model="ir.ui.view" id="logisfloo_view_purchase_receipt_filter">
+        <field name="name">logisfloo.view.purchase.receipt.filter</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="logisfloo_view_purchase_order_filter" />
+        <field name="arch" type="xml">
+        	<filter name="deposite" position="attributes">
+        		<attribute name="invisible">1</attribute>
+        	</filter>
+        </field>
+  	</record>
+
     <record id="logisfloo_purchase_receipt_action" model="ir.actions.act_window">
         <field name="name">Shop Receipt</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">purchase.order</field>
-        <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
-        <field name="context">{'search_default_todo':1, 'show_purchase': True}</field>
-        <field name="domain">[('state','not in',('draft','sent','bid', 'confirmed'))]</field>
-        <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_todo':1, 'show_purchase': True, 'default_isShopReceipt': True}</field>
+        <field name="domain">[('isShopReceipt','=',True)]</field>
+        <field name="search_view_id" ref="logisfloo_view_purchase_receipt_filter"/>
         <field name="help" type="html">
           <p class="oe_view_nocontent_create">
             Click to create a shop receipt that will be converted into a purchase order. 
@@ -135,7 +265,7 @@
           </p>
         </field>
     </record>
-
+   
 <!-- Put mostly used items under a simplified menu option (creating the menu first) -->
 
     <menuitem id="logisfloo_simplified_menu"
@@ -183,6 +313,5 @@
 	<record model="ir.ui.menu" id="purchase.menu_purchase_control">
 		<field name="parent_id" ref="logisfloo_advanced_menu"/>
 	</record>
-
 
 </odoo>

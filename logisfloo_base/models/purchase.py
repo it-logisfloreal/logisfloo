@@ -4,6 +4,7 @@ from openerp.tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.exceptions import UserError
 from openerp import exceptions
+from datetime import datetime
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -14,7 +15,12 @@ class LogisflooPurchaseOrder(models.Model):
 
     #state = fields.Selection(selection_add=[('deposite', 'Deposite')])
 
-
+    tpty_partner_id = fields.Many2one('res.partner', string='ThirdParty Partner', change_default=True,
+        required=True, track_visibility='always') 
+    isShopReceipt = fields.Boolean(String='Is Shop Receipt', default=False)
+    RoundingAmount = fields.Monetary(string='Rounding amount')
+    RebateAmount = fields.Monetary(string='Rebate amount')
+    
     state = fields.Selection([
         ('draft', 'Draft PO'),
         ('sent', 'RFQ Sent'),
