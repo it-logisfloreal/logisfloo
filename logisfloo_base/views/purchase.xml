@@ -193,7 +193,8 @@
         <field name="inherit_id" ref="logisfloo_purchase_order_form_view"/>
         <field name="arch" type="xml">
         	<field name="partner_id" position="after">
-        		<field name="tpty_partner_id"/>
+        		<field name="isShopReceipt" invisible="1"/>
+        		<field name="tpty_partner_id" attrs="{'required': [('isShopReceipt','=', True)]}"/>
         	</field>   
         	<field name="amount_untaxed" position="before">      	            
 				<button string="Rebate" 

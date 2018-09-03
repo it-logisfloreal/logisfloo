@@ -16,7 +16,7 @@ class LogisflooPurchaseOrder(models.Model):
     #state = fields.Selection(selection_add=[('deposite', 'Deposite')])
 
     tpty_partner_id = fields.Many2one('res.partner', string='ThirdParty Partner', change_default=True,
-        required=True, track_visibility='always') 
+        required=False, track_visibility='always') 
     isShopReceipt = fields.Boolean(String='Is Shop Receipt', default=False)
     RoundingAmount = fields.Monetary(string='Rounding amount')
     RebateAmount = fields.Monetary(string='Rebate amount')
