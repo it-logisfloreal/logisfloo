@@ -39,6 +39,12 @@ class LogisflooPurchaseOrder(models.Model):
     def button_deposite(self):
         self.write({'state': 'deposite'})
 
+    @api.onchange('RoundingAmount', 'RebateAmount') 
+    def _update_adjusted_amounts(self):
+        self._amount_all()
+        self.amount_total = self.amount_untaxed + self.amount_tax + self.RebateAmount + self.RoundingAmount
+
+
 class LogisflooPurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
     
@@ -336,7 +342,7 @@ class LogisflooCalcAdjustPOWizard(models.TransientModel):
             # self.env.context.get('AccountID')
         else:
             purchase_order.RebateAmount = self.CalcRebateAmount
-
+        purchase_order._update_adjusted_amounts()
                 
     company_currency_id = fields.Many2one('res.currency', string='Currency')
     ComputedTotalAmount = fields.Monetary(string='Amount in Odoo', 
@@ -371,6 +377,7 @@ class LogisflooAdjustPOWizard(models.TransientModel):
             # self.env.context.get('AccountID')
         else:
             purchase_order.RebateAmount = self.AdjustmentAmount
+        purchase_order._update_adjusted_amounts()
     
     @api.multi
     def open_calculator(self):
