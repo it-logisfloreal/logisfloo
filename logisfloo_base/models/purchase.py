@@ -305,3 +305,109 @@ class LogisflooPayment(models.Model):
             'currency_id': self.currency_id != self.company_id.currency_id and self.currency_id.id or False,
             'payment_id': self.id,
         }
+        
+class LogisflooCalcAdjustPOWizard(models.TransientModel):
+    _name = 'logisfloo.calcadjustpo.wizard'
+        
+    @api.multi
+    def dont_close_form(self):
+        self.ensure_one()
+        return {"type": "set_scrollTop",}
+    
+    @api.multi
+    @api.onchange('InvoicedTotalAmount')
+    def compute_rebate_amount(self):
+        self.CalcRebateAmount = self.InvoicedTotalAmount - self.ComputedTotalAmount
+        
+    @api.multi
+    def _compute_default(self):
+        _logger.info('Start _compute_default')
+        Amount = self.env.context.get('ComputedTotalAmount')
+        return Amount
+        
+    @api.multi
+    def calculate(self):
+        _logger.info('Add calculated line for %s',self.env.context.get('Description', False))
+        _logger.info('Account id %s',self.env.context.get('AccountID'))
+        purchase_order=self.env['purchase.order'].browse(self.env.context.get('PurchaseOrderID'))
+        if self.env.context.get('Description', False) == "Arrondi":
+            purchase_order.RoundingAmount = self.CalcRebateAmount
+            # add account id for this one ?  
+            # self.env.context.get('AccountID')
+        else:
+            purchase_order.RebateAmount = self.CalcRebateAmount
+
+                
+    company_currency_id = fields.Many2one('res.currency', string='Currency')
+    ComputedTotalAmount = fields.Monetary(string='Amount in Odoo', 
+                                          currency_field='company_currency_id', 
+                                          default=_compute_default, 
+                                          readonly=True)
+    InvoicedTotalAmount = fields.Monetary(string='Amount on invoice', currency_field='company_currency_id')
+    CalcRebateAmount = fields.Monetary(string='Rebate amount', currency_field='company_currency_id', compute='compute_rebate_amount')
+    
+class LogisflooAdjustPOWizard(models.TransientModel):
+    _name = 'logisfloo.adjustpo.wizard'
+
+    @api.multi
+    def dont_close_form(self):
+        self.ensure_one()
+        return {"type": "set_scrollTop",}
+            
+    @api.multi
+    def _compute_default(self):
+        _logger.info('Start _compute_default')
+        purchase_order = self.env['purchase.order'].browse(self.env.context.get('active_id'))
+        return purchase_order.amount_total
+    
+    @api.multi
+    def add_adjustment_line(self):
+        _logger.info('Add adjust line for %s',self.env.context.get('Description', False))
+        _logger.info('Account id %s',self.property_adjustinvoice_account.id)
+        purchase_order=self.env['purchase.order'].browse(self.env.context.get('active_id'))
+        if self.env.context.get('Description', False) == "Arrondi":
+            purchase_order.RoundingAmount = self.AdjustmentAmount
+            # add account id for this one ?  
+            # self.env.context.get('AccountID')
+        else:
+            purchase_order.RebateAmount = self.AdjustmentAmount
+    
+    @api.multi
+    def open_calculator(self):
+        _logger.info('Start calculator')
+        mydesc = self.env.context.get('Description', False)
+        PurchaseOrderID = self.env.context.get('active_id')
+        _logger.info('Description: %s', mydesc)
+        _logger.info('PurchaseOrderID: %s', PurchaseOrderID)
+        #WizWindowTitle = "Compute the amount from the vendor's invoice."
+        # Set the wizard window name directly in french
+        # Translation of the action window name does not works when called from the code
+        WizWindowTitle = "Calculer le montant à partir du ticket de caisse."
+        return {
+                'name': WizWindowTitle,
+                'res_model': 'logisfloo.calcadjustpo.wizard',
+                'src_model': 'purchase.order',
+                'view_mode': 'form', 
+                'type': 'ir.actions.act_window',
+                'target': 'new',
+                'context': {'PurchaseOrderID': PurchaseOrderID, 
+                            'Description': mydesc,
+                            'ComputedTotalAmount': self.ComputedTotalAmount,
+                            'AccountID': self.property_adjustinvoice_account.id,
+                            }
+            }
+                
+    company_currency_id = fields.Many2one('res.currency', string='Currency')
+    property_adjustinvoice_account = fields.Many2one(
+        'account.account', 
+        company_dependent=True,
+        string="Adjustment Account", 
+        domain="[('deprecated', '=', False)]",
+        help="This account will be used to record the invoice adjustment",
+        required=True)
+    ComputedTotalAmount = fields.Monetary(string='Amount in Odoo', 
+                                          currency_field='company_currency_id', 
+                                          default=_compute_default, 
+                                          readonly=True)
+    InvoicedTotalAmount = fields.Monetary(string='Amount on invoice', currency_field='company_currency_id')
+    AdjustmentAmount = fields.Monetary(string='Adjustment amount', currency_field='company_currency_id')

@@ -118,13 +118,13 @@
     </record>
 
 <!-- Receipt wizard -->
- 	<record model="ir.ui.view" id="logisfloo_cacladjust_wizard_form">
-        <field name="name">logisfloo.calcadjust.wizard.form</field>
-        <field name="model">logisfloo.calcadjust.wizard</field>
+ 	<record model="ir.ui.view" id="logisfloo_calcadjustPO_wizard_form">
+        <field name="name">logisfloo.calcadjustPO.wizard.form</field>
+        <field name="model">logisfloo.calcadjustpo.wizard</field>
         <field name="arch" type="xml">
         	<form>
                 <p class="oe_grey">
-                    Enter the amount on the invoice and click update. 
+                    Enter the amount on the receipt and click update. 
                 </p>
 	        	<group>
 	        		<field name="InvoicedTotalAmount"/>
@@ -139,22 +139,22 @@
     
  	<act_window id="action_calcadjust_wizard" 
  		name="Compute the amount from the vendor's invoice." 
- 		res_model="logisfloo.calcadjust.wizard" 
+ 		res_model="logisfloo.calcadjustpo.wizard" 
  		src_model="purchase.order"
- 		view_id="logisfloo_cacladjust_wizard_form"
+ 		view_id="logisfloo_calcadjustPO_wizard_form"
  		view_mode="form" 
  		target="new" />
  		
-  	<record model="ir.ui.view" id="logisfloo_adjustinvoice_wizard_form">
-        <field name="name">logisfloo.adjustinvoice.wizard.form</field>
-        <field name="model">logisfloo.adjustinvoice.wizard</field>
+  	<record model="ir.ui.view" id="logisfloo_adjustPO_wizard_form">
+        <field name="name">logisfloo.adjustPO.wizard.form</field>
+        <field name="model">logisfloo.adjustpo.wizard</field>
         <field name="arch" type="xml">
         	<form>   
                 <p class="oe_grey">
-                    Enter the amount to add (+) or deduct (-) from the Odoo invoice and click update.
+                    Enter the amount to add (+) or deduct (-) from the Odoo purchase order and click update.
                 </p>
                 <p class="oe_grey">
-                    If you don't know the amount, click on the calculate button to caculate this amount from the invoice.
+                    If you don't know the amount, click on the calculate button to caculate this amount from the receipt.
                 </p>	
         		<div>
         			<label for="AdjustmentAmount"/>	
@@ -169,19 +169,19 @@
         </field>
     </record> 
 
- 	<act_window id="action_rounding_wizard" 
+ 	<act_window id="action_roundingpo_wizard" 
  		name="Add an invoice line to correct a rounding difference" 
- 		res_model="logisfloo.adjustinvoice.wizard" 
+ 		res_model="logisfloo.adjustpo.wizard" 
  		src_model="purchase.order"
- 		view_id="logisfloo_adjustinvoice_wizard_form"
+ 		view_id="logisfloo_adjustPO_wizard_form"
  		view_mode="form" 
  		target="new" />
  		
-  	<act_window id="action_rebate_wizard" 
+  	<act_window id="action_rebatepo_wizard" 
  		name="Add an invoice line for a rebate" 
- 		res_model="logisfloo.adjustinvoice.wizard" 
+ 		res_model="logisfloo.adjustpo.wizard" 
  		src_model="purchase.order"
- 		view_id="logisfloo_adjustinvoice_wizard_form"
+ 		view_id="logisfloo_adjustPO_wizard_form"
  		view_mode="form" 
  		target="new" />
  
@@ -199,13 +199,13 @@
 				<button string="Rebate" 
 					states="draft,proforma2"
 					type="action" 
-					name="%(action_rebate_wizard)d" 
+					name="%(action_rebatepo_wizard)d" 
 					context="{'amount_total': amount_total, 'Description' : 'Remise'}"
 					help="Create invoice line for a rebate."/>
 				<button string="Rounding" 
 					states="draft,proforma2"
 					type="action" 
-					name="%(action_rounding_wizard)d" 
+					name="%(action_roundingpo_wizard)d" 
 					context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
 					help="Create invoice line for a rounding difference."/>
 			</field>        	   	
