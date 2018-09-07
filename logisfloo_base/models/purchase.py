@@ -27,13 +27,19 @@ class LogisflooPurchaseOrder(models.Model):
         ('to approve', 'To Approve'),
         ('purchase', 'Purchase Order'),
         ('deposite', 'Deposite'),
+        ('receipt', 'Draft Receipt'),
         ('done', 'Done'),
         ('cancel', 'Cancelled')
         ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
     @api.multi
     def button_undo(self):
-        self.write({'state': 'purchase'})
+        if self.isShopReceipt:
+            # Should not be used since all the accounting and inventory lines are commited when the record reaches the done state.
+            # Undo button is hidden on the form for receipt in done state.
+            self.write({'state': 'receipt'})
+        else:
+            self.write({'state': 'purchase'})
 
     @api.multi
     def button_deposite(self):
@@ -43,7 +49,52 @@ class LogisflooPurchaseOrder(models.Model):
     def _update_adjusted_amounts(self):
         self._amount_all()
         self.amount_total = self.amount_untaxed + self.amount_tax + self.RebateAmount + self.RoundingAmount
-
+        
+    @api.multi
+    def button_receipt_completed(self):
+        # set default state to draft to make stock.picking happy
+        self = self.with_context(default_state='draft')
+        # set po state to draft to make button_confirm do some work
+        self.write({'state': 'draft'})
+        self.button_confirm()
+        for pick in self.picking_ids:
+            wiz_act = pick.do_new_transfer()
+            wiz = self.env[wiz_act['res_model']].browse(wiz_act['res_id'])
+            wiz.process()
+        # create and finalise invoice 
+        invoice = self.env['account.invoice'].with_context(
+            type='in_invoice').create({
+                'partner_id': self.partner_id.id,
+                'origin': self.name,
+                'purchase_id': self.id,
+                'reference': self.partner_ref,
+                'tpty_partner_id': self.tpty_partner_id.id,
+                'date_invoice': self.date_order,
+                'date_due': self.date_order,
+                'account_id': self.partner_id.property_account_payable_id.id,
+            })            
+        invoice.purchase_order_change()
+        property_adjustinvoice_account = self.env['ir.property'].search([('name', '=', 'property_account_rebate')], limit=1)
+        if self.RoundingAmount != 0:
+            invoice_line = self.env['account.invoice.line']
+            invoice_line.create({
+                'name' : 'Rounding amount',
+                'price_unit' : self.RoundingAmount,
+                'quantity' : 1.0,
+                'invoice_id' : invoice.id,
+                'account_id' : property_adjustinvoice_account.value_reference.split(',')[1],
+                })
+        if self.RebateAmount != 0:
+            invoice_line = self.env['account.invoice.line']
+            invoice_line.create({
+                'name' : 'Rebate amount',
+                'price_unit' : self.RebateAmount,
+                'quantity' : 1.0,
+                'invoice_id' : invoice.id,
+                'account_id' : property_adjustinvoice_account.value_reference.split(',')[1],
+                })
+        invoice.signal_workflow('invoice_open')
+        self.write({'state': 'done'})
 
 class LogisflooPurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
