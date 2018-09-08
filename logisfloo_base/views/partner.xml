@@ -12,7 +12,8 @@
                     attrs="{'invisible' : [('company_type', '=', 'company')]}" />
                 <field name="last_name" placeholder="Last Name"
                     class="oe_edit_only" default_focus="1" />
-				<field name="slate_number"/>
+                <field name="able_to_modify_slate_number" invisible="1" />
+				<field name="slate_number" attrs="{'readonly' : [('able_to_modify_slate_number','=',False)]}"/>
             </field>
 
             <button name="toggle_active" position="attributes">

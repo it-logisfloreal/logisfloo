@@ -32,6 +32,11 @@ class Partner(models.Model):
     _defaults = {
     'slate_number':lambda self, cr, uid, context:self.pool.get('ir.sequence').get(cr, uid, 'slate.id'),
     }
+    able_to_modify_slate_number = fields.Boolean(compute='set_access_for_slate_number', string='Is user able to modify the slate number?')
+
+    @api.one
+    def set_access_for_slate_number(self):
+        self.able_to_modify_slate_number = self.env['res.users'].has_group('logisfloo_base.group_logisfloo_admin')
     
     @api.onchange('first_name', 'last_name')
     def _on_change_name(self):
