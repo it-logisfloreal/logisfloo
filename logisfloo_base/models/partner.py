@@ -13,7 +13,7 @@ class Partner(models.Model):
     _inherit = 'res.partner'
 
     first_name = fields.Char('First Name')
-    last_name = fields.Char('Last Name', required=True, default="/")
+    last_name = fields.Char('Last Name', required=True)
     slate_number = fields.Integer('Slate Number')
     subscription_date = fields.Date('Subscription Date')
     subscription_event = fields.Char('Subscription Event', size=40)
