@@ -46,3 +46,71 @@
     left: 5px;
     top: 92px;
 }
+
+/*  e) the product */
+
+.pos .product {
+    position:relative;
+    vertical-align: top;
+    display: inline-block;
+    line-height: 100px;
+    font-size: 18px;
+    margin: 8px !important;
+    width: 159px;
+    height:150px;
+    background:#fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    border-bottom-width: 3px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.pos .product .product-img {
+    position: relative;
+    width: 157px;
+    height: 115px;
+    background: white;
+    text-align: center;
+}
+
+.pos .product .product-img img {
+    max-height: 115px;
+    max-width:  157px;
+    vertical-align: middle;
+}
+
+.pos .product .price-tag {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    vertical-align: top;
+    color: white;
+    line-height: 13px;
+    background: #7f82ac;
+    padding: 2px 5px;
+    border-radius: 2px;
+}
+
+.pos .product .product-name {
+    position: absolute;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+    bottom:0;
+    top:auto;
+    line-height: 18px;
+    width:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: -webkit-linear-gradient(-90deg,rgba(255,255,255,0),rgba(255,255,255,1), rgba(255,255,255,1));
+    background:    -moz-linear-gradient(-90deg,rgba(255,255,255,0),rgba(255,255,255,1), rgba(255,255,255,1));
+    background:     -ms-linear-gradient(-90deg,rgba(255,255,255,0),rgba(255,255,255,1), rgba(255,255,255,1));
+    /* troublesome in latest webkit
+    background:         linear-gradient(-90deg,rgba(255,255,255,0),rgba(255,255,255,1), rgba(255,255,255,1));
+    */
+    /*background:#FFF;*/
+    padding: 3px;
+    padding-top:15px;
+}
