@@ -9,8 +9,14 @@
             <xpath expr="//page[group[@name='inventory']]" position="replace"/>
             <xpath expr="//group[@name='pos']" position="replace"/>
             <field name="supplier_taxes_id" position="replace"/>
+            <div name="options" position="inside">
+                <div>
+                    <field name="available_in_pos"/>
+                    <label for="available_in_pos"/>
+                </div>
+            </div>
 
-        	<field name="list_price" position="after">
+         	<field name="list_price" position="after">
     	    	<field name="total_with_margin" widget='monetary' options="{'currency_field': 'currency_id'}"/>
     	    </field>
         	<field name="type" position="after">
@@ -24,7 +30,6 @@
                 <separator string="Vendors"/>
                 <field name="seller_ids" context="{'default_product_tmpl_id': context.get('product_tmpl_id', active_id)}"/>
                 <group name="pos" string="Point of Sale">
-                    <field name="available_in_pos"/>
                     <field name="pos_categ_id" attrs="{'invisible': [('available_in_pos', '=', False)]}"/>
                 </group>
             </xpath>
@@ -47,23 +52,6 @@
             <group name="sale_condition" position="attributes">
                 <attribute name="invisible">1</attribute>
             </group>
-<!--             <field name="route_ids" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field> -->
-
-<!--             <field name="property_account_creditor_price_difference"
-                position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field> -->
-<!--             <field name="to_weight" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field> -->
-<!--             <group name="group_lots_and_weight" position="attributes">
-            	<attribute name="invisible">1</attribute>
-            </group> -->
-<!--             <group name="stock_property" position="attributes">
-            	<attribute name="invisible">1</attribute>
-            </group> -->
 		</field>        	  	
     </record>
     
