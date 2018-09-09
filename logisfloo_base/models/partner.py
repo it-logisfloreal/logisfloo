@@ -6,7 +6,8 @@ from openerp import models, fields, api, _
 from openerp.exceptions import ValidationError
 from openerp.addons.logisfloo_base.tools import concat_names
 
-#_logger = logging.getLogger(__name__)
+import logging
+_logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
 
@@ -19,7 +20,7 @@ class Partner(models.Model):
     subscription_event = fields.Char('Subscription Event', size=40)
     floreal_logis_membership = fields.Selection([('logis', 'Logis'),('floreal','Floréal')], string="Tenant Logis/Floréal")
     add_to_mailing_list = fields.Boolean('Add to Mailing List')
-    slate_balance = fields.Monetary(string='Slate Balance', compute='get_slate_balance')  
+    slate_balance = fields.Monetary(string='Slate Balance', compute='get_slate_balance', search='search_by_slate_balance')  
     slate_partners = fields.One2many("res.partner", "slate_number", domain=[],compute='get_slate_partners')   
     property_account_slate_id = fields.Many2one(
         'account.account', 
@@ -34,6 +35,29 @@ class Partner(models.Model):
     }
     able_to_modify_slate_number = fields.Boolean(compute='set_access_for_slate_number', string='Is user able to modify the slate number?')
 
+
+    def search_by_slate_balance(self, operator, value):
+        _logger.info('Searching slate_balance with: %s and value %s', operator, value)
+        if operator not in ('=', '!=', '<', '<=', '>', '>='):
+            _logger.error(
+                'The field name is not searchable'
+                ' with the operator: {}',format(operator)
+            )    
+            return [('id', 'in', [])]
+        else:
+            if value is False:
+                value = 0
+            id_list = []
+            partners = self.env['res.partner'].search([])
+            for partner in partners:
+                if operator == '=' and partner.slate_balance == value: id_list.append(partner.id)
+                if operator == '!=' and partner.slate_balance != value: id_list.append(partner.id)
+                if operator == '<' and partner.slate_balance < value: id_list.append(partner.id)
+                if operator == '<=' and partner.slate_balance <= value: id_list.append(partner.id)
+                if operator == '>' and partner.slate_balance > value: id_list.append(partner.id)
+                if operator == '>=' and partner.slate_balance >= value: id_list.append(partner.id)
+            return [('id', 'in', id_list)]
+        
     @api.one
     def set_access_for_slate_number(self):
         self.able_to_modify_slate_number = self.env['res.users'].has_group('logisfloo_base.group_logisfloo_admin')
