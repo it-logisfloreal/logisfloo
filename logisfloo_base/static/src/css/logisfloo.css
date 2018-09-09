@@ -114,3 +114,17 @@
     padding: 3px;
     padding-top:15px;
 }
+
+.pos .category-simple-button{
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    padding: 5px 12px;
+    line-height: 32px;
+    flex-grow: 1;
+    -webkit-flex-grow: 1;
+    cursor: pointer;
+    background: #e2e2e2;
+}
