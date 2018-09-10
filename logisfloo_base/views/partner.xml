@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<!-- set slate_number wizard -->
+ 	<record model="ir.ui.view" id="logisfloo_setSlateNumber_wizard_form">
+        <field name="name">logisfloo.setSlateNumber.wizard.form</field>
+        <field name="model">logisfloo.setslatenumber.wizard</field>
+        <field name="arch" type="xml">
+        	<form>
+                <p class="oe_grey">
+                    Enter the first partner and click update. 
+                </p>
+	        	<group>
+	        		<field name="first_partner"/>
+	        	</group>        		
+        		<footer>
+        			<button type="object" name="set_slate_number" string="Update" class="oe_highlight"/>
+        			<button special="cancel" string="Cancel"/>
+        		</footer>
+        	</form>
+        </field>
+    </record> 
+    
+ 	<act_window id="action_setslatenumber_wizard" 
+ 		name="Compute the amount from the vendor's invoice." 
+ 		res_model="logisfloo.setslatenumber.wizard" 
+ 		src_model="res.partner"
+ 		view_id="logisfloo_setSlateNumber_wizard_form"
+ 		view_mode="form" 
+ 		target="new" />    
+ 
+<!-- forms and views -->		
 	<record model="ir.ui.view" id="logisfloo_partner_form_view">
 		<field name="name">logisfloo.partner.form.view</field>
 		<field name="model">res.partner</field>
@@ -13,7 +42,13 @@
                 <field name="last_name" placeholder="Last Name"
                     class="oe_edit_only" default_focus="1" />
                 <field name="able_to_modify_slate_number" invisible="1" />
-				<field name="slate_number" attrs="{'readonly' : [('able_to_modify_slate_number','=',False)]}"/>
+                <div>
+					<field name="slate_number" attrs="{'readonly' : [('able_to_modify_slate_number','=',False)]}"/>
+					<button string="Add to familly" 
+						type="action" 
+						name="%(action_setslatenumber_wizard)d" 
+						help="Add this partner to a familly."/>                
+                </div>
             </field>
 
             <button name="toggle_active" position="attributes">
@@ -79,5 +114,5 @@
         	
         </field>
     </record>
-    
+
 </odoo>

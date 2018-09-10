@@ -65,7 +65,7 @@ class Partner(models.Model):
     @api.onchange('first_name', 'last_name')
     def _on_change_name(self):
         self.name = concat_names(self.first_name, self.last_name)
-
+        
     @api.noguess
     def _auto_init(self, cr, context=None):
         res = super(Partner, self)._auto_init(cr, context=context)
@@ -116,3 +116,19 @@ class Partner(models.Model):
             'domain' : [['partner_id', 'in', self.slate_partners.ids]], 
             'context': ctx,
         }
+
+class LogisflooSetSlateNumberWizard(models.TransientModel):
+    _name = 'logisfloo.setslatenumber.wizard'
+
+    @api.multi
+    def dont_close_form(self):
+        self.ensure_one()
+        return {"type": "set_scrollTop",}
+                
+    @api.multi
+    def set_slate_number(self):
+        thispartner=self.env['res.partner'].browse(self.env.context.get('active_id'))
+        thispartner.slate_number = self.first_partner.slate_number
+                    
+    first_partner= fields.Many2one('res.partner', string='First Partner', change_default=True,
+        required=True, track_visibility='always')
