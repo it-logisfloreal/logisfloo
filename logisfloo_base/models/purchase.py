@@ -14,7 +14,7 @@ class LogisflooPurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
     #state = fields.Selection(selection_add=[('deposite', 'Deposite')])
-
+    
     tpty_partner_id = fields.Many2one('res.partner', string='ThirdParty Partner', change_default=True,
         required=False, track_visibility='always') 
     isShopReceipt = fields.Boolean(String='Is Shop Receipt', default=False)
@@ -32,6 +32,13 @@ class LogisflooPurchaseOrder(models.Model):
         ('cancel', 'Cancelled')
         ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
+    @api.onchange('isShopReceipt') 
+    def _set_tpty_partner(self):
+        _logger.info('Default tpty')
+        if self.isShopReceipt:
+            _logger.info('isShopReceipt computing')
+            self.tpty_partner_id = self.env['res.users'].browse(self.env.uid).partner_id
+                
     @api.multi
     def button_undo(self):
         if self.isShopReceipt:
