@@ -629,7 +629,7 @@ msgstr "Articles en dépôt."
 #. module: logisfloo_base
 #: model:res.groups,name:logisfloo_base.group_logisfloo_purchase_receipt
 msgid "Purchase receipt only"
-msgstr "Seulement un ticket"
+msgstr "Seulement un ticket de caisse"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -689,7 +689,7 @@ msgstr "Envoyer ticket par mail"
 #: model:ir.actions.act_window,name:logisfloo_base.logisfloo_purchase_receipt_action
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_menu_receipt_form_action
 msgid "Shop Receipt"
-msgstr "Ticket"
+msgstr "Ticket de caisse"
 
 #. module: logisfloo_base
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_simplified_menu
@@ -765,7 +765,7 @@ msgstr "Paiement par tiers"
 #: model:ir.model.fields,field_description:logisfloo_base.field_account_invoice_tpty_partner_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_tpty_partner_id
 msgid "ThirdParty Partner"
-msgstr "Partenaire tiers"
+msgstr "Payable à"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,help:logisfloo_base.field_res_partner_property_account_slate_id
