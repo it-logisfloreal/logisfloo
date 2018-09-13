@@ -1,23 +1,26 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* logisfloo_base
+# 	* logisfloo_base
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20180614\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-29 09:47+0000\n"
-"PO-Revision-Date: 2018-07-29 09:47+0000\n"
+"POT-Creation-Date: 2018-09-13 19:12+0000\n"
+"PO-Revision-Date: 2018-09-13 21:59+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"Language: fr_BE\n"
+"X-Generator: Poedit 2.0.9\n"
 
 #. module: logisfloo_base
 #: model:mail.template,body_html:logisfloo_base.email_send_ticket
-msgid "\n"
+msgid ""
+"\n"
 "Votre Ticket ${object.pos_reference}\n"
 "            "
 msgstr "<span id=\"docs-internal-guid-63c1efaf-78f8-6337-0ae2-c31679b138ab\"><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Bonjour,&nbsp;</span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Vous trouverez ci-joint votre ticket de caisse en version électronique.</span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><b style=\"font-weight:bold;\"><u>Informations utiles</u></b></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;\"></td></tr></tbody></table><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;background-color: rgb(245, 242, 242);\"><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">S'inscrire à une permanence&nbsp;<br style=\"line-height: 19.5px\"></strong>Nouvelles tranches horaires : 10h45-12h45, 12h30-14h30 et 14h15-16h15<br style=\"line-height: 19.5px\"><a href=\"https://pads.domainepublic.net/p/AKBdTR8yHRlOwFVt\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\"><strong style=\"font-weight:bold;\">Cliquez ici pour vous inscrire aux permanences</strong></a></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Liste des groupes de travail (page créée en août 2017)</strong><br style=\"line-height: 19.5px\"><strong style=\"font-weight:bold;\"><a href=\"http://quartierdurable.logisfloreal.be/?email_id=116&amp;user_id=1&amp;urlpassed=aHR0cDovL3F1YXJ0aWVyZHVyYWJsZS5sb2dpc2Zsb3JlYWwuYmUvZXBpY2VyaWUvZ3JvdXBlcy1kZS10cmF2YWlsLw&amp;controller=stats&amp;action=analyse&amp;wysija-page=1&amp;wysijap=subscriptions\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\">Cliquez ici pour consulter la liste des groupes de travail</a></strong></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Participer à un groupe de fonctionnement (formulaire modifié en août 2017)</strong><br style=\"line-height: 19.5px\"><strong style=\"font-weight:bold;\"><a href=\"http://quartierdurable.logisfloreal.be/?email_id=116&amp;user_id=1&amp;urlpassed=aHR0cHM6Ly9nb28uZ2wvZm9ybXMvdXZrdlhvcjI4Y0JxenNBdzE&amp;controller=stats&amp;action=analyse&amp;wysija-page=1&amp;wysijap=subscriptions\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\">Cliquez ici pour vous inscrire à un groupe de fonctionnement</a></strong></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Pour créer votre ardoise, effectuez un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\">avec la communication&nbsp;: Votre numéro d'épicier + votre nom + prénom + mention \"ardoise\"</p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contenants</strong><br style=\"line-height: 19.5px\">En venant vous ravitailler, prévoyez vos contenants pour les produits en vrac&nbsp;: sachets à pain, bouteilles, bocaux en verre...<br style=\"line-height: 19.5px\">Pour faciliter la pesée, n'oubliez pas d'indiquer sur une étiquette le poids à vide de vos bocaux.</p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contacter le groupe pilote :&nbsp;</strong><a href=\"mailto:pilote.epicerie@logisfloreal.be\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;color:rgb(51, 122, 183);background-color:transparent;\">pilote.epicerie@logisfloreal.be</a></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contacter le groupe Achats :</strong>&nbsp;<a href=\"mailto:achats.epicerie@logisfloreal.be\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;color:rgb(51, 122, 183);background-color:transparent;\">achats.epicerie@logisfloreal.be</a></p></td></tr></tbody></table><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><span style=\"color: rgb(33, 33, 33);line-height: 19.5px\">L'Epicerie Logis-Floreal.</span>&nbsp;</p></span>"
@@ -29,12 +32,14 @@ msgstr "${object.pos_reference}"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
-msgid "<span class=\"o_stat_text\">\n"
-"							Slate Balance\n"
-"						</span>"
-msgstr "<span class=\"o_stat_text\">\n"
-"							Solde Ardoise\n"
-"						</span>"
+msgid ""
+"<span class=\"o_stat_text\">\n"
+"\t\t\t\t\t\t\tSlate Balance\n"
+"\t\t\t\t\t\t</span>"
+msgstr ""
+"<span class=\"o_stat_text\">\n"
+"\t\t\t\t\t\t\tSolde Ardoise\n"
+"\t\t\t\t\t\t</span>"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -63,18 +68,30 @@ msgstr "Comptabilité"
 
 #. module: logisfloo_base
 #: model:ir.actions.act_window,name:logisfloo_base.action_rebate_wizard
+#: model:ir.actions.act_window,name:logisfloo_base.action_rebatepo_wizard
 msgid "Add an invoice line for a rebate"
 msgstr "Ajouter une ligne sur la facture pour indiquer une remise."
 
 #. module: logisfloo_base
 #: model:ir.actions.act_window,name:logisfloo_base.action_rounding_wizard
+#: model:ir.actions.act_window,name:logisfloo_base.action_roundingpo_wizard
 msgid "Add an invoice line to correct a rounding difference"
 msgstr "Ajouter une ligne sur la facture pour corriger une différence d'arrondi."
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
+msgid "Add this partner to a familly."
+msgstr "Ajouter un membre à une famille."
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_add_to_mailing_list
 msgid "Add to Mailing List"
 msgstr "Ajouter à la Mailing List"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
+msgid "Add to familly"
+msgstr "Ajouter à la famille"
 
 #. module: logisfloo_base
 #. openerp-web
@@ -85,11 +102,13 @@ msgstr "Adresse"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_property_adjustinvoice_account
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_property_adjustinvoice_account
 msgid "Adjustment Account"
 msgstr "Compte pour les corrections"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_AdjustmentAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_AdjustmentAmount
 msgid "Adjustment amount"
 msgstr "Montant"
 
@@ -110,13 +129,17 @@ msgstr "Montant"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_ComputedTotalAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_ComputedTotalAmount
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_ComputedTotalAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_ComputedTotalAmount
 msgid "Amount in Odoo"
 msgstr "Montant dans Odoo"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_InvoicedTotalAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_InvoicedTotalAmount
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_InvoicedTotalAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_InvoicedTotalAmount
 msgid "Amount on invoice"
 msgstr "Montant indiqué sur la facture du fournisseur"
 
@@ -133,13 +156,17 @@ msgid "Balance:"
 msgstr "Solde:"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustPO_wizard_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
 msgid "Calculate"
 msgstr "Calculer"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustPO_wizard_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_calcadjustPO_wizard_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_setSlateNumber_wizard_form
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -155,46 +182,72 @@ msgid "Category type"
 msgstr "Type de categorie"
 
 #. module: logisfloo_base
+#: model:ir.actions.act_window,help:logisfloo_base.logisfloo_purchase_receipt_action
+msgid "Click to create a shop receipt that will be converted into a purchase order."
+msgstr "Cliquer pour encoder un ticket de magasin."
+
+#. module: logisfloo_base
 #: model:ir.actions.act_window,name:logisfloo_base.action_calcadjust_wizard
+#: model:ir.actions.act_window,name:logisfloo_base.action_setslatenumber_wizard
 msgid "Compute the amount from the vendor's invoice."
 msgstr "Calculer le montant à partir de la facture du fournisseur."
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
+msgid "Confirm Receipt"
+msgstr "Confirmer le ticket"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
+msgid "Confirm shop receipt."
+msgstr "Confirmer le ticket."
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
 msgid "Create invoice line for a rebate."
 msgstr "Créer une ligne de facture pour indiquer une remise."
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
 msgid "Create invoice line for a rounding difference."
 msgstr "Créer une ligne de facture pour corriger une différence d'arrondi."
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_create_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_create_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_create_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_create_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_create_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_create_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_create_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_create_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_create_date
 msgid "Created on"
 msgstr "Créé le"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_company_currency_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_company_currency_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_company_currency_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_company_currency_id
 msgid "Currency"
 msgstr "Devise"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:281
+#: code:addons/logisfloo_base/models/purchase.py:351
 #, python-format
 msgid "Customer Payment"
 msgstr "Paiement client"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:283
+#: code:addons/logisfloo_base/models/purchase.py:353
 #, python-format
 msgid "Customer Refund"
 msgstr "Remboursement client"
@@ -228,7 +281,10 @@ msgstr "Remise (%)"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_display_name
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_display_name
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_display_name
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_display_name
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -248,21 +304,41 @@ msgid "Enter the amount on the invoice and click update."
 msgstr "Entrer le montant indiqué sur la facture du fournisseur et cliquer sur Mise à jour."
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_calcadjustPO_wizard_form
+msgid "Enter the amount on the receipt and click update."
+msgstr "Entrer le montant indiqué sur le ticket et cliquer sur Mise à jour."
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
 msgid "Enter the amount to add (+) or deduct (-) from the Odoo invoice and click update."
 msgstr "Entrer le montant à ajouter (+) ou à déduire (-) de la facture dans Odoo et cliquer sur Mise à jour."
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustPO_wizard_form
+msgid "Enter the amount to add (+) or deduct (-) from the Odoo purchase order and click update."
+msgstr "Entrer le montant à ajouter (+) ou à déduire (-) du ticket dans Odoo et cliquer sur Mise à jour."
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_setSlateNumber_wizard_form
+msgid "Enter the first partner and click update."
+msgstr "Selectionner un autre membre de la famille et cliquer sur Mise à jour."
+
+#. module: logisfloo_base
 #: code:addons/logisfloo_base/models/logisfloo_pos.py:12
 #, python-format
 msgid "Error: no order found"
-msgstr "Error: no order found"
+msgstr "Erreur: aucune commande trouvée."
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_first_name
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
 msgid "First Name"
 msgstr "Prénom"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_first_partner
+msgid "First Partner"
+msgstr "Autre membre de la famille"
 
 #. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
@@ -276,14 +352,22 @@ msgstr "Regrouper par"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_id
 msgid "ID"
-msgstr "ID"
+msgstr "Identifiant"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
 msgid "If you don't know the amount, click on the calculate button to caculate this amount from the invoice."
 msgstr "Si vous ne connaisez pas ce montant, cliquer sur Calculer pour calculer ce montant à partir du montant de la facture du fournisseur."
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustPO_wizard_form
+msgid "If you don't know the amount, click on the calculate button to caculate this amount from the receipt."
+msgstr "Si vous ne connaisez pas ce montant, cliquer sur Calculer pour calculer ce montant à partir du montant indiqué sur le ticket."
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_product_supplierinfo
@@ -316,8 +400,21 @@ msgid "Invoices and Incoming Shipments"
 msgstr "Factures et réceptions"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_able_to_modify_slate_number
+msgid "Is user able to modify the slate number?"
+msgstr "L'utilisateur a-t-il le droit de modifier l'Ardoise?"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_isShopReceipt
+msgid "Isshopreceipt"
+msgstr "Isshopreceipt"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard___last_update
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard___last_update
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard___last_update
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard___last_update
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
@@ -329,15 +426,21 @@ msgstr "Nom"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_write_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_write_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_write_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_write_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Mis à jour par"
+msgstr "Dernière mise à jour par"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_write_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustpo_wizard_write_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_write_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_write_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_write_date
 msgid "Last Updated on"
-msgstr "Dernière mis à jour le"
+msgstr "Dernière mise à jour le"
 
 #. module: logisfloo_base
 #: selection:res.partner,floreal_logis_membership:0
@@ -368,13 +471,13 @@ msgid "Notes"
 msgstr "Notes"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:222
+#: code:addons/logisfloo_base/models/purchase.py:292
 #, python-format
 msgid "Only one invoice with third party payer can be processed at a time."
 msgstr "Seulement une facture payée par un tiers peut être traitée à la fois."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:217
+#: code:addons/logisfloo_base/models/purchase.py:287
 #, python-format
 msgid "Only one payment can be processed at a time. Trying to post %s payments"
 msgstr "Seulement un paiement peut être traité à la fois. Il y a %s paiements dans cette demande."
@@ -432,7 +535,7 @@ msgid "Payments"
 msgstr "Paiements"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/product.py:51
+#: code:addons/logisfloo_base/models/product.py:62
 #, python-format
 msgid "Percentages for Profit Margin must > 0."
 msgstr "Le pourcentage de la marge doit être > 0."
@@ -497,6 +600,7 @@ msgid "Purchase Advanced"
 msgstr "Achat Avancé"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_logisfloo_purchase_receipt
 #: model:ir.model,name:logisfloo_base.model_purchase_order
 msgid "Purchase Order"
 msgstr "Commande fournisseur"
@@ -523,17 +627,25 @@ msgid "Purchase in deposite."
 msgstr "Articles en dépôt."
 
 #. module: logisfloo_base
+#: model:res.groups,name:logisfloo_base.group_logisfloo_purchase_receipt
+msgid "Purchase receipt only"
+msgstr "Seulement un ticket"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Quantity"
 msgstr "Quantité"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
 msgid "Rebate"
 msgstr "Remise"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_CalcRebateAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_CalcRebateAmount
+#: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_RebateAmount
 msgid "Rebate amount"
 msgstr "Montant de la remise"
 
@@ -549,7 +661,13 @@ msgstr "Demande de prix"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
 msgid "Rounding"
+msgstr "Arrondi"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_RoundingAmount
+msgid "Rounding amount"
 msgstr "Arrondi"
 
 #. module: logisfloo_base
@@ -566,6 +684,12 @@ msgstr "Selectionner un membre"
 #, python-format
 msgid "Send Receipt By Mail"
 msgstr "Envoyer ticket par mail"
+
+#. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.logisfloo_purchase_receipt_action
+#: model:ir.ui.menu,name:logisfloo_base.logisfloo_menu_receipt_form_action
+msgid "Shop Receipt"
+msgstr "Ticket"
 
 #. module: logisfloo_base
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_simplified_menu
@@ -632,13 +756,14 @@ msgid "Tenant Logis/Floréal"
 msgstr "Locataire Logis/Floréal"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:288
+#: code:addons/logisfloo_base/models/purchase.py:358
 #, python-format
 msgid "Third Party Payment"
 msgstr "Paiement par tiers"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_account_invoice_tpty_partner_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_tpty_partner_id
 msgid "ThirdParty Partner"
 msgstr "Partenaire tiers"
 
@@ -649,6 +774,7 @@ msgstr "Ce compte sera utilisé pour l'ardoise de ce contact."
 
 #. module: logisfloo_base
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_adjustinvoice_wizard_property_adjustinvoice_account
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_adjustpo_wizard_property_adjustinvoice_account
 msgid "This account will be used to record the invoice adjustment"
 msgstr "Ce compte sera utilisé pour les corrections de facture"
 
@@ -695,13 +821,29 @@ msgid "Unit Price"
 msgstr "Prix unitaire"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustPO_wizard_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_calcadjustPO_wizard_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_setSlateNumber_wizard_form
 msgid "Update"
 msgstr "Mise à jour"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:286
+#: model:ir.actions.act_window,help:logisfloo_base.logisfloo_purchase_receipt_action
+msgid ""
+"Use this menu to search within your receipt by\n"
+"            references, vendor, products, etc. For each receipt,\n"
+"            you can track the related discussion with the vendor, control\n"
+"            the products received and control the vendor bills."
+msgstr ""
+"Sélectionner ce menu pour chercher dans vos ticket selon\n"
+"            la référence, le fournissuer, le produit, etc. Pour chaque ticket,\n"
+"            vous pouvez suivre les discussions avec le fournissuer, contrôler\n"
+"            la réception des produits et contrôler la facture."
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:356
 #, python-format
 msgid "Vendor Refund"
 msgstr "Remboursement fournisseur"
@@ -727,7 +869,21 @@ msgid "logisfloo.adjustinvoice.wizard"
 msgstr "logisfloo.adjustinvoice.wizard"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_logisfloo_adjustpo_wizard
+msgid "logisfloo.adjustpo.wizard"
+msgstr "logisfloo.adjustpo.wizard"
+
+#. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_logisfloo_calcadjust_wizard
 msgid "logisfloo.calcadjust.wizard"
 msgstr "logisfloo.calcadjust.wizard"
 
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_logisfloo_calcadjustpo_wizard
+msgid "logisfloo.calcadjustpo.wizard"
+msgstr "logisfloo.calcadjustpo.wizard"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_logisfloo_setslatenumber_wizard
+msgid "logisfloo.setslatenumber.wizard"
+msgstr "logisfloo.setslatenumber.wizard"
