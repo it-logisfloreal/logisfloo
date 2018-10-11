@@ -61,12 +61,20 @@
 		                    Select a customer
 		                </t>	                
 		            </button>
-		            <button class='button pay'>
-		                <div class='pay-circle'>
-		                    <i class='fa fa-chevron-right' /> 
-		                </div>
-		                Payment
-		            </button>
+		            <t t-if="widget.pos.get_client().slate_balance &gt; 0">
+			            <button class='button pay'>
+			                <div class='pay-circle'>
+			                    <i class='fa fa-chevron-right' /> 
+			                </div>
+			                Payment
+			            </button>
+			         </t>
+		            <t t-if="widget.pos.get_client().slate_balance &lt;= 0">
+			            <button class='button noaction'>
+			                ARDOISE NEGATIVE<br/><br/>			                
+			                Hoy no se fia, mañana si
+			            </button>
+			         </t>
 	            </t>
 	            <t t-if="!widget.pos.get_client()">
 		            <button t-attf-class='button button-high set-customer  decentered' >
