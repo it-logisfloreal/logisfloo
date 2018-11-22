@@ -207,6 +207,12 @@
         		<field name="tpty_partner_id" attrs="{'required': [('isShopReceipt','=', True)]}"/>
         	</field>   
         	<field name="amount_untaxed" position="before">      	            
+				<button string="Calculate" 
+					states="draft,proforma2,receipt"
+					type="action" 
+					name="%(action_calcadjust_wizard)d" 
+					context="{'amount_total': amount_total, 'Description' : 'Correction', 'InvoiceID' : active_id}"
+					help="Create invoice line for an invoice adjustment."/>
 				<button string="Rebate" 
 					states="draft,proforma2,receipt"
 					type="action" 
@@ -219,6 +225,7 @@
 					name="%(action_roundingpo_wizard)d" 
 					context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
 					help="Create invoice line for a rounding difference."/>
+
 			</field>        	   	
         	<field name="amount_tax" position="after">
         		<field name="RoundingAmount" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RoundingAmount', '=', 0)]}" />

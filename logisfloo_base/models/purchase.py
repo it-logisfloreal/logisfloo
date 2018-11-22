@@ -178,6 +178,9 @@ class LogisflooCalcAdjustWizard(models.TransientModel):
     def calculate(self):
         _logger.info('Add calculated line for %s',self.env.context.get('Description', False))
         _logger.info('Account id %s',self.env.context.get('AccountID'))
+        _logger.info('Invoice id %s',self.env.context.get('InvoiceID'))
+        # call the implemter here ?
+        
         invoice_line = self.env['account.invoice.line']
         invoice_line.create({
             'name' : self.env.context.get('Description', False),
@@ -197,6 +200,9 @@ class LogisflooCalcAdjustWizard(models.TransientModel):
     
 class LogisflooAdjustInvoiceWizard(models.TransientModel):
     _name = 'logisfloo.adjustinvoice.wizard'
+    # This is the master with access to the company property
+    # use this one as a base to show the right form
+    # or do the opposite ... call this one as an implementer when the data is known
         
     @api.multi
     def dont_close_form(self):
@@ -232,6 +238,7 @@ class LogisflooAdjustInvoiceWizard(models.TransientModel):
         mydesc = self.env.context.get('Description', False)
         InvoiceID = self.env.context.get('active_id')
         _logger.info('Description: %s', mydesc)
+        _logger.info('Account id %s',self.property_adjustinvoice_account.id)
         _logger.info('InvoiceID: %s', InvoiceID)
         #WizWindowTitle = "Compute the amount from the vendor's invoice."
         # Set the wizard window name directly in french
