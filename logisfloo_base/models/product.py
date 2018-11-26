@@ -42,7 +42,7 @@ class LogisflooProduct(models.Model):
         total_taxes=0
         suppliers = self._get_main_supplier_info()
         if(len(suppliers) > 0):
-            discounted_sell_unit_price = suppliers[0].price * self.uom_po_id.factor * (1-suppliers[0].discount/100)
+            discounted_sell_unit_price = suppliers[0].price * (self.uom_po_id.factor/self.uom_id.factor) * (1-suppliers[0].discount/100)
             self.total_with_margin = discounted_sell_unit_price 
             for taxes_id in self.supplier_taxes_id:
                 total_taxes += currency.round(taxes_id._compute_amount(discounted_sell_unit_price, discounted_sell_unit_price)) 
