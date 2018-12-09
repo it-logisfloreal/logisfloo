@@ -386,8 +386,10 @@ class LogisflooCalcAdjustPOWizard(models.TransientModel):
     def calculate(self):
         _logger.info('Add calculated line for %s',self.env.context.get('Description', False))
         purchase_order = self.env['purchase.order'].browse(self.env.context.get('active_id'))
-        purchase_order.RoundingAmount = 0
-        purchase_order.RebateAmount = 0
+        if self.env.context.get('Description', False) == "Arrondi":
+            purchase_order.RoundingAmount = 0
+        if self.env.context.get('Description', False) == "Remise":
+            purchase_order.RebateAmount = 0
         purchase_order._update_adjusted_amounts()
         AdjustmentAmount = self.InvoicedTotalAmount - purchase_order.amount_total
         if self.env.context.get('Description', False) == "Arrondi":
