@@ -206,26 +206,21 @@
         		<field name="isShopReceipt" invisible="1"/>
         		<field name="tpty_partner_id" attrs="{'required': [('isShopReceipt','=', True)]}"/>
         	</field>   
-        	<field name="amount_untaxed" position="before">      	            
-				<!-- <button string="Rebate - Rounding" 
-					states="draft,proforma2,receipt"
-					type="action" 
-					name="%(action_calcadjustpo_wizard)d" 
-					context="{'amount_total': amount_total, 'Description' : 'Correction'}"
-					help="Create invoice line for an invoice adjustment."/> -->
-				<button string="Rebate - Rouding" 
-					states="draft,proforma2,receipt"
-					type="action" 
-					name="%(action_calcadjustpo_wizard)d" 
-					context="{'amount_total': amount_total, 'Description' : 'Remise'}"
-					help="Create invoice line for a rebate."/>
-<!-- 				<button string="Rounding" 
-					states="draft,proforma2,receipt"
-					type="action" 
-					name="%(action_calcadjustpo_wizard)d" 
-					context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
-					help="Create invoice line for a rounding difference."/> -->
-
+        	<field name="order_line" position="after"> 
+        		<group name="buttons_group" class="oe_subtotal_footer oe_right">
+					<button string="Rebate" 
+						states="draft,proforma2,receipt"
+						type="action" 
+						name="%(action_calcadjustpo_wizard)d" 
+						context="{'amount_total': amount_total, 'Description' : 'Remise'}"
+						help="Create invoice line for a rebate."/>
+					<button string="Rounding" 
+						states="draft,proforma2,receipt"
+						type="action" 
+						name="%(action_calcadjustpo_wizard)d" 
+						context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
+						help="Create invoice line for a rounding difference."/>
+				</group>
 			</field>        	   	
         	<field name="amount_tax" position="after">
         		<field name="RoundingAmount" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RoundingAmount', '=', 0)]}" />
