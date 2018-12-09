@@ -24,8 +24,9 @@ class LogisflooProduct(models.Model):
     @api.multi
     @api.onchange('categ_id')
     def _align_categories(self):
-        poscateg =self.env['pos.category'].search([('name', '=', self.categ_id.name)])[0]
-        self.pos_categ_id = poscateg.id
+        if self.categ_id.name:
+            poscateg =self.env['pos.category'].search([('name', '=', self.categ_id.name)])[0]
+            self.pos_categ_id = poscateg.id
 
     @api.one
     def _get_total_with_margin(self):
