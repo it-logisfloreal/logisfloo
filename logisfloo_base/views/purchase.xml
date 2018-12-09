@@ -55,6 +55,9 @@
 			<button name="button_done" position="attributes">
 				<attribute name="states">purchase,deposite</attribute>
 			</button>
+			<button name="button_cancel" position="attributes">
+				<attribute name="states">draft,to approve,sent,purchase,receipt</attribute>
+			</button>	
 			<button name="button_cancel" position="before">
                 <button name="button_receipt_completed" type="object" string="Confirm Receipt" class="oe_highlight"
                 		attrs="{'invisible':['|',('state','not in',['receipt']),('isShopReceipt','=',False)]}"
@@ -63,11 +66,12 @@
         	<button name="button_done" position="before">
         		<button name="button_deposite" type="object" string="Deposite" states="purchase"
                         help="Purchase in deposite."/>
-<!--         		<button name="button_undo" type="object" string="Undo" 
+        		<button name="button_undo" type="object" string="Undo" 
         				attrs="{'invisible':['|',('state','not in',['deposite','done']),('isShopReceipt','=',True)]}"
-                        help="Reopen the purchase order."/> -->
-                <button name="button_undo" type="object" string="Undo" 
                         help="Reopen the purchase order."/>
+               <!-- Do not allow Reopenning a receipt, to avoid double operations on reception and invoicing. -->
+               <!--  <button name="button_undo" type="object" string="Undo" 
+                        help="Reopen the purchase order."/> -->
         	</button>
         	<field name="order_line" position="replace">
                 <field name="order_line">
