@@ -79,7 +79,7 @@ class LogisflooPurchaseOrder(models.Model):
                 'account_id': self.partner_id.property_account_payable_id.id,
             })            
         invoice.purchase_order_change()
-        property_adjustinvoice_account = self.env['ir.property'].search([('name', '=', 'property_account_rebate')], limit=1)
+        property_adjustinvoice_account = self.env['ir.property'].search([('name', '=', 'property_adjustinvoice_account')], limit=1)
         if self.RoundingAmount != 0:
             invoice_line = self.env['account.invoice.line']
             invoice_line.create({
