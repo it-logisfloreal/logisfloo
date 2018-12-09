@@ -12,15 +12,13 @@ _logger = logging.getLogger(__name__)
 
 class LogisflooPurchaseOrder(models.Model):
     _inherit = 'purchase.order'
-
-    #state = fields.Selection(selection_add=[('deposite', 'Deposite')])
-    
+        
     tpty_partner_id = fields.Many2one('res.partner', string='ThirdParty Partner', change_default=True,
         required=False, track_visibility='always') 
     isShopReceipt = fields.Boolean(String='Is Shop Receipt', default=False)
     RoundingAmount = fields.Monetary(string='Rounding amount')
     RebateAmount = fields.Monetary(string='Rebate amount')
-    
+
     state = fields.Selection([
         ('draft', 'Draft PO'),
         ('sent', 'RFQ Sent'),
@@ -179,7 +177,6 @@ class LogisflooCalcAdjustWizard(models.TransientModel):
         _logger.info('Add calculated line for %s',self.env.context.get('Description', False))
         _logger.info('Account id %s',self.env.context.get('AccountID'))
         _logger.info('Invoice id %s',self.env.context.get('InvoiceID'))
-        # call the implemter here ?
         
         invoice_line = self.env['account.invoice.line']
         invoice_line.create({
@@ -386,36 +383,21 @@ class LogisflooCalcAdjustPOWizard(models.TransientModel):
         return {"type": "set_scrollTop",}
     
     @api.multi
-    @api.onchange('InvoicedTotalAmount')
-    def compute_rebate_amount(self):
-        self.CalcRebateAmount = self.InvoicedTotalAmount - self.ComputedTotalAmount
-        
-    @api.multi
-    def _compute_default(self):
-        _logger.info('Start _compute_default')
-        Amount = self.env.context.get('ComputedTotalAmount')
-        return Amount
-        
-    @api.multi
     def calculate(self):
         _logger.info('Add calculated line for %s',self.env.context.get('Description', False))
-        _logger.info('Account id %s',self.env.context.get('AccountID'))
-        purchase_order=self.env['purchase.order'].browse(self.env.context.get('PurchaseOrderID'))
+        purchase_order = self.env['purchase.order'].browse(self.env.context.get('active_id'))
+        purchase_order.RoundingAmount = 0
+        purchase_order.RebateAmount = 0
+        purchase_order._update_adjusted_amounts()
+        AdjustmentAmount = self.InvoicedTotalAmount - purchase_order.amount_total
         if self.env.context.get('Description', False) == "Arrondi":
-            purchase_order.RoundingAmount = self.CalcRebateAmount
-            # add account id for this one ?  
-            # self.env.context.get('AccountID')
+            purchase_order.RoundingAmount = AdjustmentAmount
         else:
-            purchase_order.RebateAmount = self.CalcRebateAmount
+            purchase_order.RebateAmount = AdjustmentAmount
         purchase_order._update_adjusted_amounts()
                 
     company_currency_id = fields.Many2one('res.currency', string='Currency')
-    ComputedTotalAmount = fields.Monetary(string='Amount in Odoo', 
-                                          currency_field='company_currency_id', 
-                                          default=_compute_default, 
-                                          readonly=True)
     InvoicedTotalAmount = fields.Monetary(string='Amount on invoice', currency_field='company_currency_id')
-    CalcRebateAmount = fields.Monetary(string='Rebate amount', currency_field='company_currency_id', compute='compute_rebate_amount')
     
 class LogisflooAdjustPOWizard(models.TransientModel):
     _name = 'logisfloo.adjustpo.wizard'
@@ -434,12 +416,9 @@ class LogisflooAdjustPOWizard(models.TransientModel):
     @api.multi
     def add_adjustment_line(self):
         _logger.info('Add adjust line for %s',self.env.context.get('Description', False))
-        _logger.info('Account id %s',self.property_adjustinvoice_account.id)
         purchase_order=self.env['purchase.order'].browse(self.env.context.get('active_id'))
         if self.env.context.get('Description', False) == "Arrondi":
             purchase_order.RoundingAmount = self.AdjustmentAmount
-            # add account id for this one ?  
-            # self.env.context.get('AccountID')
         else:
             purchase_order.RebateAmount = self.AdjustmentAmount
         purchase_order._update_adjusted_amounts()
@@ -465,18 +444,10 @@ class LogisflooAdjustPOWizard(models.TransientModel):
                 'context': {'PurchaseOrderID': PurchaseOrderID, 
                             'Description': mydesc,
                             'ComputedTotalAmount': self.ComputedTotalAmount,
-                            'AccountID': self.property_adjustinvoice_account.id,
                             }
             }
                 
     company_currency_id = fields.Many2one('res.currency', string='Currency')
-    property_adjustinvoice_account = fields.Many2one(
-        'account.account', 
-        company_dependent=True,
-        string="Adjustment Account", 
-        domain="[('deprecated', '=', False)]",
-        help="This account will be used to record the invoice adjustment",
-        required=True)
     ComputedTotalAmount = fields.Monetary(string='Amount in Odoo', 
                                           currency_field='company_currency_id', 
                                           default=_compute_default, 

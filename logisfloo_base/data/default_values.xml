@@ -30,7 +30,6 @@ Work around:
 			<field name="value">account.account,(account id in URL)</field>
 			-->
 		</record>
-		
 		<record id="a440010" model="account.account">
 			<field name="name">Paiement par tiers</field>
 			<field name="code">440010</field>
