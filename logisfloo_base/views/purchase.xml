@@ -155,46 +155,6 @@
  		view_mode="form" 
  		target="new" />
  		
-  	<record model="ir.ui.view" id="logisfloo_adjustPO_wizard_form">
-        <field name="name">logisfloo.adjustPO.wizard.form</field>
-        <field name="model">logisfloo.adjustpo.wizard</field>
-        <field name="arch" type="xml">
-        	<form>   
-                <p class="oe_grey">
-                    Enter the amount to add (+) or deduct (-) from the Odoo purchase order and click update.
-                </p>
-                <p class="oe_grey">
-                    If you don't know the amount, click on the calculate button to caculate this amount from the receipt.
-                </p>	
-        		<div>
-        			<label for="AdjustmentAmount"/>	
-        			<field name="AdjustmentAmount" class="oe_inline"/>
-        			<button type="object" name="open_calculator" string="Calculate"/>
-        		</div>        			      		
-        		<footer>
-        			<button type="object" name="add_adjustment_line" string="Update" class="oe_highlight"/>
-        			<button special="cancel" string="Cancel"/>
-        		</footer>
-        	</form>
-        </field>
-    </record> 
-
- 	<act_window id="action_roundingpo_wizard" 
- 		name="Add an invoice line to correct a rounding difference" 
- 		res_model="logisfloo.adjustpo.wizard" 
- 		src_model="purchase.order"
- 		view_id="logisfloo_adjustPO_wizard_form"
- 		view_mode="form" 
- 		target="new" />
- 		
-  	<act_window id="action_rebatepo_wizard" 
- 		name="Add an invoice line for a rebate" 
- 		res_model="logisfloo.adjustpo.wizard" 
- 		src_model="purchase.order"
- 		view_id="logisfloo_adjustPO_wizard_form"
- 		view_mode="form" 
- 		target="new" />
- 
 <!-- Receipt items -->
 
     <record model="ir.ui.view" id="logisfloo_purchase_receipt_form">
