@@ -127,6 +127,10 @@
                      </form>
                  </field>
 			</field>        	
+			<xpath expr="//field[@name='date_planned' and @required='1']" 
+				position="attributes">
+				<attribute name="required">0</attribute>
+			</xpath>
 
         </field>
     </record>
