@@ -34,9 +34,9 @@ class LogisflooPurchaseOrder(models.Model):
 
     @api.onchange('isShopReceipt') 
     def _set_tpty_partner(self):
-        _logger.info('Default tpty')
-        if self.isShopReceipt:
-            _logger.info('isShopReceipt computing')
+        _logger.info('ShopReceipt: checking default tpty')
+        if self.isShopReceipt and not self.tpty_partner_id:
+            _logger.info('ShopReceipt: Setting default tpty')
             self.tpty_partner_id = self.env['res.users'].browse(self.env.uid).partner_id
                 
     @api.multi

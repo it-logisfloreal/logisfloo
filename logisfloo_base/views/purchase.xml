@@ -69,6 +69,9 @@
                 <button name="button_undo" type="object" string="Undo" 
                         help="Reopen the purchase order."/>
         	</button>
+        	<field name="date_order" position="before">
+        		<field name="isShopReceipt" groups="logisfloo_base.group_logisfloo_admin"/>
+        	</field>
         	<field name="order_line" position="replace">
                 <field name="order_line">
                      <tree string="Purchase Order Lines" editable="bottom">
