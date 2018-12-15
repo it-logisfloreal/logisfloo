@@ -30,7 +30,12 @@ class LogisflooProduct(models.Model):
 
     @api.one
     def _get_total_with_margin(self):
-        margin_amount = self.standard_price * 0.05
+        _logger.info('Compute margin')
+        _logger.info('Compute margin %s %d',self.categ_id.name,self.categ_id.profit_margin)
+        if self.categ_id.name and self.categ_id.profit_margin > 0:
+            margin_amount = self.standard_price * self.categ_id.profit_margin/100
+        else:
+            margin_amount = self.standard_price * 0.05
         self.total_with_margin = self.standard_price + margin_amount
 
     def _get_main_supplier_info(self):
@@ -47,9 +52,11 @@ class LogisflooProduct(models.Model):
             self.total_with_margin = discounted_sell_unit_price 
             for taxes_id in self.supplier_taxes_id:
                 total_taxes += currency.round(taxes_id._compute_amount(discounted_sell_unit_price, discounted_sell_unit_price)) 
-            self.total_with_margin += total_taxes
-            self.total_with_margin = self.total_with_margin * (1.05)
-
+            self.total_with_margin += total_taxes            
+            if self.categ_id.name and self.categ_id.profit_margin > 0:
+                self.total_with_margin = self.total_with_margin * (1+self.categ_id.profit_margin/100)
+            else:
+                self.total_with_margin = self.total_with_margin * (1+0.05)
 
 class LogisflooProductCategory(models.Model):  
     _inherit = "product.category"
