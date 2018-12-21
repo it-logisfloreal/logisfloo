@@ -10,7 +10,7 @@
         	<form string="Purchase Order Expense">
 				<header>
 				    <button name="button_confirm" type="object" states="draft" string="Confirm Expense" class="oe_highlight"/>
-				    <button name="button_pay" type="object" states="open" string="Pay" class="oe_highlight"/>
+				    <button name="button_pay" type="object" states="open" string="Pay" groups="logisfloo_base.group_logisfloo_accounting" class="oe_highlight"/>
 				    <button name="button_draft" type="object" states="cancel" string="Set to Draft" class="oe_highlight"/>
 				    <button name="button_cancel" type="object" states="draft,open" string="Cancel"/>
 				    <field name="state" widget="statusbar" readonly="1" />
@@ -92,12 +92,19 @@
         </field>
     </record>
 
-    <menuitem id="logisfloo_menu_poexpense_form_action"
+    <menuitem id="logisfloo_purchase_menu_poexpense_action"
     	name="PO Expenses"
     	action="logisfloo_poexpense_action"  
     	parent="purchase.menu_purchase_control" 
-		groups="group_logisfloo_purchase_receipt"
+		groups="logisfloo_base.group_logisfloo_purchase_advanced"
     	sequence="30"/>
+    	
+    <menuitem id="logisfloo_accouting_menu_poexpense_action"
+    	name="PO Expenses"
+    	action="logisfloo_poexpense_action"  
+    	parent="account.menu_finance_payables" 
+		groups="logisfloo_base.group_logisfloo_accounting,logisfloo_base.group_logisfloo_purchase_base"
+    	sequence="200"/>
 
 <!-- Transport type items -->
 
@@ -116,7 +123,7 @@
         </field>       
     </record>
  
-     <record model="ir.ui.view" id="logisfloo_potransportcost_tree">
+    <record model="ir.ui.view" id="logisfloo_potransportcost_tree">
         <field name="name">logisfloo.potransportcost.tree</field>
         <field name="model">logisfloo.potransportcost</field>
         <field name="arch" type="xml">
@@ -160,7 +167,12 @@
     	name="Transport Cost"
     	action="logisfloo_potransportcost_action"  
     	parent="purchase.menu_purchase_config" 
-		groups="group_logisfloo_purchase_receipt"
+		groups="logisfloo_base.group_logisfloo_purchase_advanced"
     	sequence="40"/>
+<!--  
+Add external id/XML id for account 606000
+Add external ID for Journal note de frais ?
 
+Settings / Technical / Sequences and Identifiers / External Identifiers
+-->
 </odoo>
