@@ -184,6 +184,29 @@
         		<field name="isShopReceipt" invisible="1"/>
         		<field name="tpty_partner_id" attrs="{'required': [('isShopReceipt','=', True)]}"/>
         	</field>   
+	       	<xpath expr="//notebook" position="after">
+	       		<separator string="Transport cost"/>
+	       		<group>
+		       		<field name="needexpense"/>
+	       		</group>
+		       	<group attrs="{'invisible': [('needexpense','=', False)]}">
+		       		<group>
+		        		<field name="payee_partner_id" attrs="{'required': [('needexpense','=', True)]}"/>
+						<field name="transport_type_id" attrs="{'required': [('needexpense','=', True)]}"/>
+	        		</group>
+	        		<group>
+						<label for="distance" attrs="{'required': [('needexpense','=', True)]}"/>	
+		        		<div>
+							<field name="distance" class="oe_inline" attrs="{'required': [('needexpense','=', True)]}"/> km
+						</div>
+						<field name="expense_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+							<label for="cost_ratio"/>	
+          						<div>
+								<field name="cost_ratio" class="oe_inline">%</field> %
+							</div>						
+					</group>
+		       	</group>
+			</xpath>
         	<field name="order_line" position="after"> 
         		<group name="buttons_group" class="oe_subtotal_footer oe_right">
 					<button string="Rebate" 
