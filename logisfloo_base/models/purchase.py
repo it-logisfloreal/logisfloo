@@ -18,6 +18,8 @@ class LogisflooPurchaseOrder(models.Model):
     isShopReceipt = fields.Boolean(String='Is Shop Receipt', default=False)
     RoundingAmount = fields.Monetary(string='Rounding amount')
     RebateAmount = fields.Monetary(string='Rebate amount')
+    poexpense_ids = fields.One2many('logisfloo.poexpense', 'purchase_id', string='Expenses')
+    expenses_count = fields.Integer(compute="_count_expenses", string='# of Expenses', store=False)
 
     state = fields.Selection([
         ('draft', 'Draft PO'),
@@ -101,6 +103,31 @@ class LogisflooPurchaseOrder(models.Model):
         invoice.signal_workflow('invoice_open')
         self.write({'state': 'done'})
 
+    @api.multi
+    def action_view_expense(self):
+        '''
+        This function returns an action that display existing expensess of given purchase order ids.
+        When only one found, show the expense immediately.
+        '''
+        action = self.env.ref('logisfloo_base.logisfloo_poexpense_action')
+        result = action.read()[0]
+
+        #override the context to get rid of the default filtering
+        result['context'] = {'default_purchase_id': self.id}
+
+        #choose the view_mode accordingly
+        if len(self.poexpense_ids) != 1:
+            result['domain'] = "[('id', 'in', " + str(self.poexpense_ids.ids) + ")]"
+        elif len(self.poexpense_ids) == 1:
+            res = self.env.ref('logisfloo_base.logisfloo_poexpense_form', False)
+            result['views'] = [(res and res.id or False, 'form')]
+            result['res_id'] = self.poexpense_ids.id
+        return result
+
+    #@api.depends('purchase_id')
+    def _count_expenses(self):
+        self.expenses_count=len(self.poexpense_ids)
+        
 class LogisflooPurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
     

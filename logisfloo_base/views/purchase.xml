@@ -73,6 +73,13 @@
                <!--  <button name="button_undo" type="object" string="Undo" 
                         help="Reopen the purchase order."/> -->
         	</button>
+			<button name="action_view_invoice" position="before">
+                        <button type="object"  name="action_view_expense"
+                            class="oe_stat_button"
+                            icon="fa-ticket">
+                            <field name="expenses_count" widget="statinfo" string="Expenses"/>
+                        </button>
+			</button>
         	<field name="date_order" position="before">
         		<field name="isShopReceipt" groups="logisfloo_base.group_logisfloo_admin"/>
         	</field>
