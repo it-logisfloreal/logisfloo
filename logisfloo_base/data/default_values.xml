@@ -122,6 +122,12 @@ Work around:
 			<field name="value" eval="'account.journal,'+str(ref('logisfloo_base.expense_journal'))"/>
 		</record>
 
+	 	<record model="ir.property" id="property_ref_ratio">
+			<field name="name">property_ref_ratio</field> 
+			<field name="type">float</field>
+			<field name="fields_id" search="[('model','=','logisfloo.poexpense'),('name','=','property_ref_ratio')]"/>
+			<field name="value" eval="3.5"/>
+		</record>   
 <!--  
 Add external id/XML id for account 606000
 Add external ID for Journal note de frais ?

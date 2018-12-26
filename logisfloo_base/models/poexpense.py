@@ -30,7 +30,7 @@ class LogisflooPOExpense(models.Model):
             ('draft','Draft'),
             ('open', 'Open'),
             ('paid', 'Paid'),
-            ('cancel', 'Cancelled'),
+            ('reject', 'Rejected'),
         ], string='Status', index=True, readonly=True, default='draft', track_visibility='onchange', help="")
     currency_id = fields.Many2one('res.currency', string='Currency',
         required=True, readonly=True, states={'draft': [('readonly', False)]},
@@ -57,6 +57,11 @@ class LogisflooPOExpense(models.Model):
         domain="[('deprecated', '=', False)]",
         help="This journal will be used to record the expense payment.",
         required=True)
+    property_ref_ratio = fields.Float(
+        company_dependent=True,
+        string="Max ratio to pay expense", 
+        help="This is maximum expense/purchase amount allowed to pay an expense to preserve the sell margin.",
+        required=True)
     company_id = fields.Many2one('res.company', string='Company', change_default=True,
         required=True, readonly=True, states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get('logisfloo.poexpense'))
@@ -72,6 +77,13 @@ class LogisflooPOExpense(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('logisfloo.poexpense') or '/'
         return super(LogisflooPOExpense, self).create(vals)
 
+    @api.multi
+    def unlink(self):
+        if self.state in ['paid','reject']:
+            raise UserError(_('A paid or rejected expense cannot be deleted.'))
+        else:
+            super(LogisflooPOExpense, self).unlink()
+    
     @api.one
     @api.depends('distance', 'transport_type_id')
     def _compute_amount(self):
@@ -107,16 +119,30 @@ class LogisflooPOExpense(models.Model):
     def button_confirm(self):
         self.write({'state': 'open'})
         return {}
-    
+
+    @api.multi
+    def button_reject(self):
+        self.write({'state': 'reject'})
+        return {}
+        
     @api.multi
     def button_pay(self):
-        self.action_move_create()
+        if self.cost_ratio < self.property_ref_ratio:
+            self.do_pay()
+        else:
+            raise UserError(_('This expense amount is more than %2.2f %% of the purchase amount and cannot be paid.' 
+            ' Ask an administrator to process the payment or reject this expense.') % self.property_ref_ratio)
+        return {}
+    
+    @api.multi
+    def button_force_pay(self):
+        self.do_pay()
         return {}
 
     @api.multi
-    def button_cancel(self):
-        self.write({'state': 'cancel'})
-        return {}
+    def do_pay(self):
+        self.action_move_create()
+        return {}        
     
     @api.multi
     def button_draft(self):

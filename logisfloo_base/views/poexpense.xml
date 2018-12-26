@@ -11,8 +11,9 @@
 				<header>
 				    <button name="button_confirm" type="object" states="draft" string="Confirm Expense" class="oe_highlight"/>
 				    <button name="button_pay" type="object" states="open" string="Pay" groups="logisfloo_base.group_logisfloo_accounting" class="oe_highlight"/>
-				    <button name="button_draft" type="object" states="cancel" string="Set to Draft" class="oe_highlight"/>
-				    <button name="button_cancel" type="object" states="draft,open" string="Cancel"/>
+				    <button name="button_reject" type="object" states="open" string="Reject" groups="logisfloo_base.group_logisfloo_accounting"/>
+				    <button name="button_force_pay" type="object" states="open,reject" string="Force Pay" groups="logisfloo_base.group_logisfloo_admin"/>
+				    <button name="button_draft" type="object" states="open,reject" string="Set to Draft"/>
 				    <field name="state" widget="statusbar" readonly="1" />
 				</header>
 				<sheet>
