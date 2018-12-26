@@ -62,6 +62,10 @@ class LogisflooPOExpense(models.Model):
         default=lambda self: self.env['res.company']._company_default_get('logisfloo.poexpense'))
     payments_widget = fields.Text(compute='_get_payment_info_JSON')
 
+
+    def _needaction_domain_get(self, cr, uid, context=None):
+        return [('state', '=', 'open')] 
+    
     @api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
