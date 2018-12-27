@@ -24,7 +24,8 @@ class LogisflooPOExpense(models.Model):
     ref = fields.Char('PO Expense Reference', required=True, index=True, copy=False, compute='_compute_ref')    
     payee_partner_id = fields.Many2one('res.partner', string='Payee', required=True, track_visibility='onchange')
     transport_type_id = fields.Many2one('logisfloo.potransportcost', string='Transport Type', required=True, track_visibility='onchange')
-    distance = fields.Float(string='Distance',required=True, track_visibility='onchange', default=0.0)
+    transport_unit = fields.Char('Transport Unit',related='transport_type_id.unit')
+    quantity = fields.Float(string='Quantity',required=True, track_visibility='onchange', default=0.0)
     purchase_id = fields.Many2one('purchase.order', required=False, string='Purchase Order', track_visibility='onchange', help='')
     state = fields.Selection([
             ('draft','Draft'),
@@ -35,7 +36,7 @@ class LogisflooPOExpense(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency',
         required=True, readonly=True, states={'draft': [('readonly', False)]},
         default=_default_currency, track_visibility='always') 
-    expense_amount = fields.Monetary(string='Amount', currency_field='currency_id', compute='_compute_amount', readonly=True)
+    expense_amount = fields.Monetary(string='Amount', currency_field='currency_id', compute='_compute_amount', readonly=True, store=True)
     purchased_amount = fields.Monetary(string='Purchased Amount', currency_field='currency_id', compute='_compute_purchased_amount', readonly=True)
     cost_ratio = fields.Float(string='Cost ratio', compute='_compute_cost_ratio', readonly=True, digits=(3,0))
     trip_date = fields.Date(string='Trip Date', readonly=True, states={'draft': [('readonly', False)]}, default=datetime.now().date(),
@@ -85,10 +86,10 @@ class LogisflooPOExpense(models.Model):
             super(LogisflooPOExpense, self).unlink()
     
     @api.one
-    @api.depends('distance', 'transport_type_id')
+    @api.depends('quantity', 'transport_type_id')
     def _compute_amount(self):
-        if self.distance and self.transport_type_id:
-            amount = self.distance * self.transport_type_id.unit_cost
+        if self.quantity and self.transport_type_id:
+            amount = self.quantity * self.transport_type_id.unit_cost
         else:
             amount = 0.0
         self.expense_amount=amount
@@ -300,5 +301,6 @@ class LogisflooPOTransportCost(models.Model):
     _name = "logisfloo.potransportcost"
         
     currency_id = fields.Many2one('res.currency', string='Currency') 
-    unit_cost = fields.Monetary(string='Cost per km', currency_field='currency_id')
-    name=fields.Char('Name',required=True)
+    unit_cost = fields.Monetary(string='Cost per unit', currency_field='currency_id', track_visibility='onchange')
+    unit = fields.Char('Unit', required=True, default='km', track_visibility='onchange')
+    name=fields.Char('Name',required=True, track_visibility='onchange')

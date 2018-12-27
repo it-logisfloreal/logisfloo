@@ -27,24 +27,26 @@
 						<group>
 							<field name="payee_partner_id"/>
 							<field name="transport_type_id"/>
-							<label for="distance"/>	
+							<label for="quantity" string="Quantity"/>	
            					<div>
-								<field name="distance" class="oe_inline"/> km
+								<field name="quantity" class="oe_inline"/>
+								<field name="transport_unit" class="oe_inline" readonly="1"/>
 							</div>
 						</group>
 						<group>
-							<field name="purchase_id"/>
 							<field name="trip_date"/>
 							<field name="date_due"/>
 						</group>						
 					</group>
 					<group>
 						<group>
-								<field name="purchased_amount"/>
-								<label for="cost_ratio"/>	
-           						<div>
-									<field name="cost_ratio" class="oe_inline">%</field> %
-								</div>
+							<field name="purchase_id"/>
+							<field name="purchased_amount"/>
+							<label for="cost_ratio"/>	
+	         						<div>
+								<field name="cost_ratio" class="oe_inline"/> 
+								<label string="%" nolabel="1" class="oe_inline"/>
+							</div>
 						</group>
 						<group class="oe_subtotal_footer oe_left">
 						    <field name="expense_amount" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
@@ -70,7 +72,8 @@
 	            <field name="payee_partner_id"/>
 	            <field name="purchase_id"/>
 	            <field name="transport_type_id"/>
-	            <field name="distance"/>
+	            <field name="quantity"/>
+	            <field name="transport_unit"/>
 	            <field name="expense_amount" widget="monetary"/>
 	            <field name="state"/>
 	         </tree>
@@ -130,6 +133,7 @@
 				<sheet>
 					<group>
 						<field name="name"/>
+						<field name="unit"/>
 						<field name="unit_cost" widget="monetary"/>
 					</group>        						
 				</sheet>
@@ -143,6 +147,7 @@
         <field name="arch" type="xml">
 	        <tree>
 	       		<field name="name"/>
+	       		<field name="unit"/>
 	       		<field name="unit_cost" widget="monetary"/>
 	         </tree>
         </field>       
