@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 		
+<!-- Expense items -->
+
+    <record model="ir.ui.view" id="logisfloo_poexpense_form">
+        <field name="name">logisfloo.poexpense.form</field>
+        <field name="model">logisfloo.poexpense</field>
+        <field name="arch" type="xml">
+        	<form string="Purchase Order Expense">
+				<header>
+				    <button name="button_confirm" type="object" states="draft" string="Confirm Expense" class="oe_highlight"/>
+				    <button name="button_pay" type="object" states="open" string="Pay" groups="logisfloo_base.group_logisfloo_accounting" class="oe_highlight"/>
+				    <button name="button_reject" type="object" states="open" string="Reject" groups="logisfloo_base.group_logisfloo_accounting"/>
+				    <button name="button_force_pay" type="object" states="open,reject" string="Force Pay" groups="logisfloo_base.group_logisfloo_admin"/>
+				    <button name="button_draft" type="object" states="open,reject" string="Set to Draft"/>
+				    <field name="state" widget="statusbar" readonly="1" />
+				</header>
+				<sheet>
+					<div class="oe_title">
+					    <label string="Expense Request"/>
+					    <h1>
+					        <field name="name" readonly="1"/>
+					    </h1>
+					</div>
+					<group>
+						<group>
+							<field name="payee_partner_id"/>
+							<field name="transport_type_id"/>
+							<label for="quantity" string="Quantity"/>	
+           					<div>
+								<field name="quantity" class="oe_inline"/>
+								<field name="transport_unit" class="oe_inline" readonly="1"/>
+							</div>
+						</group>
+						<group>
+							<field name="trip_date"/>
+							<field name="date_due"/>
+						</group>						
+					</group>
+					<group>
+						<group>
+							<field name="purchase_id"/>
+							<field name="purchased_amount"/>
+							<label for="cost_ratio"/>	
+	         						<div>
+								<field name="cost_ratio" class="oe_inline"/> 
+								<label string="%" nolabel="1" class="oe_inline"/>
+							</div>
+						</group>
+						<group class="oe_subtotal_footer oe_left">
+						    <field name="expense_amount" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+						    <field name="payments_widget" colspan="2" nolabel="1" widget="payment"/>
+						</group>
+					</group>    
+					<div class="oe_clear"/>    						
+				</sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+        	</form> 
+        </field>       
+    </record>
+ 
+     <record model="ir.ui.view" id="logisfloo_poexpense_tree">
+        <field name="name">logisfloo.poexpense.tree</field>
+        <field name="model">logisfloo.poexpense</field>
+        <field name="arch" type="xml">
+	        <tree string="PO Expenses">
+	        	<field name="name"/>
+	            <field name="payee_partner_id"/>
+	            <field name="purchase_id"/>
+	            <field name="transport_type_id"/>
+	            <field name="quantity"/>
+	            <field name="transport_unit"/>
+	            <field name="expense_amount" widget="monetary"/>
+	            <field name="state"/>
+	         </tree>
+        </field>       
+    </record>
+    
+    <record model="ir.ui.view" id="logisfloo_poexpense_filter">
+        <field name="name">logisfloo.poexpense.filter</field>
+        <field name="model">logisfloo.poexpense</field>
+        <field name="arch" type="xml">
+	        <search string="Search PO Expense">
+	            <field name="payee_partner_id"/>
+	        </search>
+        </field>
+  	</record>
+ 
+    <record id="logisfloo_poexpense_action" model="ir.actions.act_window">
+        <field name="name">PO Expense</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">logisfloo.poexpense</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="logisfloo_poexpense_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create an expense. 
+          </p><p>
+            Use this menu to search within your expense by
+            references, vendor, products, etc. For each expense,
+            you can ...
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="logisfloo_purchase_menu_poexpense_action"
+    	name="PO Expenses"
+    	action="logisfloo_poexpense_action"  
+    	parent="purchase.menu_purchase_control" 
+		groups="logisfloo_base.group_logisfloo_purchase_advanced"
+    	sequence="30"/>
+    	
+    <menuitem id="logisfloo_accouting_menu_poexpense_action"
+    	name="PO Expenses"
+    	action="logisfloo_poexpense_action"  
+    	parent="account.menu_finance_payables" 
+		groups="logisfloo_base.group_logisfloo_accounting,logisfloo_base.group_logisfloo_purchase_base"
+    	sequence="200"/>
+
+<!-- Transport type items -->
+
+    <record model="ir.ui.view" id="logisfloo_potransportcost_form">
+        <field name="name">logisfloo.potransportcost.form</field>
+        <field name="model">logisfloo.potransportcost</field>
+        <field name="arch" type="xml">
+        	<form>
+				<sheet>
+					<group>
+						<field name="name"/>
+						<field name="unit"/>
+						<field name="unit_cost" widget="monetary"/>
+					</group>        						
+				</sheet>
+        	</form> 
+        </field>       
+    </record>
+ 
+    <record model="ir.ui.view" id="logisfloo_potransportcost_tree">
+        <field name="name">logisfloo.potransportcost.tree</field>
+        <field name="model">logisfloo.potransportcost</field>
+        <field name="arch" type="xml">
+	        <tree>
+	       		<field name="name"/>
+	       		<field name="unit"/>
+	       		<field name="unit_cost" widget="monetary"/>
+	         </tree>
+        </field>       
+    </record>
+    
+    <record model="ir.ui.view" id="logisfloo_potransportcost_filter">
+        <field name="name">logisfloo.potransportcost.filter</field>
+        <field name="model">logisfloo.potransportcost</field>
+        <field name="arch" type="xml">
+	        <search string="Search Transport Cost">
+	            <field name="name"/>
+	        </search>
+        </field>
+  	</record>
+ 
+    <record id="logisfloo_potransportcost_action" model="ir.actions.act_window">
+        <field name="name">Transport Cost</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">logisfloo.potransportcost</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="logisfloo_potransportcost_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to define a transport cost. 
+          </p><p>
+            Use this menu to search within your expense by
+            references, vendor, products, etc. For each expense,
+            you can ...
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="logisfloo_menu_potransportcost_form_action"
+    	name="Transport Cost"
+    	action="logisfloo_potransportcost_action"  
+    	parent="purchase.menu_purchase_config" 
+		groups="logisfloo_base.group_logisfloo_purchase_advanced"
+    	sequence="40"/>
+<!--  
+Add external id/XML id for account 606000
+Add external ID for Journal note de frais ?
+
+Settings / Technical / Sequences and Identifiers / External Identifiers
+-->
+</odoo>

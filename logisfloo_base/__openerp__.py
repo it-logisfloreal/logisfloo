@@ -45,6 +45,7 @@
         'views/purchase.xml',
         'views/stock.xml',
         'views/account.xml',
+        'views/poexpense.xml',
     ],
     'qweb': [
     'static/src/xml/pos_extensions.xml',

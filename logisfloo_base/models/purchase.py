@@ -18,6 +18,14 @@ class LogisflooPurchaseOrder(models.Model):
     isShopReceipt = fields.Boolean(String='Is Shop Receipt', default=False)
     RoundingAmount = fields.Monetary(string='Rounding amount')
     RebateAmount = fields.Monetary(string='Rebate amount')
+    poexpense_ids = fields.One2many('logisfloo.poexpense', 'purchase_id', string='Expenses')
+    expenses_count = fields.Integer(compute="_count_expenses", string='# of Expenses', store=False)
+    needexpense = fields.Boolean(String='Need expense', default=False)
+    payee_partner_id = fields.Many2one('res.partner', string='Payee', required=True, track_visibility='onchange')
+    transport_type_id = fields.Many2one('logisfloo.potransportcost', string='Transport Type', required=True, track_visibility='onchange')
+    distance = fields.Float(string='Distance',required=True, track_visibility='onchange', default=0.0)    
+    expense_amount = fields.Monetary(string='Expense Amount', currency_field='currency_id', compute='_compute_expense_amount', readonly=True)
+    cost_ratio = fields.Float(string='Cost ratio', compute='_compute_cost_ratio', readonly=True, digits=(3,0))
 
     state = fields.Selection([
         ('draft', 'Draft PO'),
@@ -30,11 +38,36 @@ class LogisflooPurchaseOrder(models.Model):
         ('cancel', 'Cancelled')
         ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
+    @api.one
+    @api.depends('distance', 'transport_type_id')
+    def _compute_expense_amount(self):
+        if self.distance and self.transport_type_id:
+            amount = self.distance * self.transport_type_id.unit_cost
+        else:
+            amount = 0.0
+        self.expense_amount=amount
+
+    @api.depends('amount_total', 'expense_amount')
+    def _compute_cost_ratio(self):
+        if self.amount_total != 0:
+            self.cost_ratio=self.expense_amount/self.amount_total*100
+        else:
+            self.cost_ratio=0.0
+
+    @api.onchange('needexpense') 
+    def _reset_expense_fields(self):
+        if not self.needexpense:
+            self.payee_partner_id=False
+            self.transport_type_id=False
+            self.distance=0.0
+            self.expense_amount=0.0
+            self.cost_ratio=0.0
+        if self.needexpense and not self.payee_partner_id:
+            self.payee_partner_id = self.env['res.users'].browse(self.env.uid).partner_id
+        
     @api.onchange('isShopReceipt') 
     def _set_tpty_partner(self):
-        _logger.info('ShopReceipt: checking default tpty')
         if self.isShopReceipt and not self.tpty_partner_id:
-            _logger.info('ShopReceipt: Setting default tpty')
             self.tpty_partner_id = self.env['res.users'].browse(self.env.uid).partner_id
                 
     @api.multi
@@ -99,8 +132,43 @@ class LogisflooPurchaseOrder(models.Model):
                 'account_id' : property_adjustinvoice_account.value_reference.split(',')[1],
                 })
         invoice.signal_workflow('invoice_open')
+        if self.needexpense:
+            # create and finalise invoice 
+            expense = self.env['logisfloo.poexpense'].create({
+                    'payee_partner_id': self.payee_partner_id.id,
+                    'transport_type_id': self.transport_type_id.id,
+                    'purchase_id': self.id,
+                    'distance': self.distance,
+                    'trip_date': self.date_order,
+                })            
+            expense.button_confirm()            
         self.write({'state': 'done'})
 
+    @api.multi
+    def action_view_expense(self):
+        '''
+        This function returns an action that display existing expensess of given purchase order ids.
+        When only one found, show the expense immediately.
+        '''
+        action = self.env.ref('logisfloo_base.logisfloo_poexpense_action')
+        result = action.read()[0]
+
+        #override the context to get rid of the default filtering
+        result['context'] = {'default_purchase_id': self.id}
+
+        #choose the view_mode accordingly
+        if len(self.poexpense_ids) != 1:
+            result['domain'] = "[('id', 'in', " + str(self.poexpense_ids.ids) + ")]"
+        elif len(self.poexpense_ids) == 1:
+            res = self.env.ref('logisfloo_base.logisfloo_poexpense_form', False)
+            result['views'] = [(res and res.id or False, 'form')]
+            result['res_id'] = self.poexpense_ids.id
+        return result
+
+    #@api.depends('purchase_id')
+    def _count_expenses(self):
+        self.expenses_count=len(self.poexpense_ids)
+        
 class LogisflooPurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
     
