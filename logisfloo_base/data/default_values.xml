@@ -87,7 +87,7 @@ Work around:
 			<field name="reconcile" eval="False"/>
 		</record>
 
-        <record id="seq_purchase_order" model="ir.sequence">
+        <record id="seq_poexpense" model="ir.sequence">
             <field name="name">Expense request sequence</field>
             <field name="code">logisfloo.poexpense</field>
             <field name="prefix">NDF</field>
@@ -96,7 +96,7 @@ Work around:
         </record>
         		
         <record id="sequence_expense" model="ir.sequence">
-            <field name="name">Expense sequence</field>
+            <field name="name">Notes de frais (Ardoise)</field>
             <field name="code">account.expense</field>
             <field name="prefix">NDF/%(range_year)s/</field>
             <field eval="1" name="number_next"/>
@@ -116,11 +116,11 @@ Work around:
             <field name="show_on_dashboard" eval="True"/>
         </record>     
 
-<!-- 	 	<record model="ir.property" id="property_expense_journal_id">
+	 	<record model="ir.property" id="property_expense_journal_id">
 			<field name="name">property_expense_journal_id</field> 
-			<field name="fields_id" search="[('model','=','logisfloo.expense'),('name','=','property_expense_journal_id')]"/>
+			<field name="fields_id" search="[('model','=','logisfloo.poexpense'),('name','=','property_expense_journal_id')]"/>
 			<field name="value" eval="'account.journal,'+str(ref('logisfloo_base.expense_journal'))"/>
-		</record> -->
+		</record>
 
 <!--  
 Add external id/XML id for account 606000

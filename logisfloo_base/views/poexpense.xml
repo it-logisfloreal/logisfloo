@@ -26,17 +26,30 @@
 						<group>
 							<field name="payee_partner_id"/>
 							<field name="transport_type_id"/>
-							<field name="distance"/>
+							<label for="distance"/>	
+           					<div>
+								<field name="distance" class="oe_inline"/> km
+							</div>
 						</group>
 						<group>
 							<field name="purchase_id"/>
 							<field name="trip_date"/>
 							<field name="date_due"/>
 						</group>						
-					</group>    
-					<group class="oe_subtotal_footer oe_left">
-					    <field name="expense_amount" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
 					</group>
+					<group>
+						<group>
+								<field name="purchased_amount"/>
+								<label for="cost_ratio"/>	
+           						<div>
+									<field name="cost_ratio" class="oe_inline">%</field> %
+								</div>
+						</group>
+						<group class="oe_subtotal_footer oe_left">
+						    <field name="expense_amount" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+						    <field name="payments_widget" colspan="2" nolabel="1" widget="payment"/>
+						</group>
+					</group>    
 					<div class="oe_clear"/>    						
 				</sheet>
                 <div class="oe_chatter">
