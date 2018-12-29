@@ -35,6 +35,25 @@ class Partner(models.Model):
     }
     able_to_modify_slate_number = fields.Boolean(compute='set_access_for_slate_number', string='Is user able to modify the slate number?')
 
+    def isduplicate(self, name):
+        partners = self.env['res.partner'].search([('name', '=',name)])
+        _logger.info('Checking for duplicate partner: %s and value %d', name, len(partners))
+        if len(partners)>0:
+            return True
+        else:
+            return False
+
+    @api.multi
+    def write(self, values):
+        if self.name != values.get('name') and self.isduplicate(values.get('name')):
+            raise ValidationError(_('%s already exists in the database') % values.get('name'))
+        return super(Partner, self).write(values)
+
+    @api.model
+    def create(self, values):
+        if self.isduplicate(values.get('name')):
+            raise ValidationError(_('%s already exists in the database') % values.get('name'))
+        return super(Partner, self).create(values)
 
     def search_by_slate_balance(self, operator, value):
         _logger.info('Searching slate_balance with: %s and value %s', operator, value)
