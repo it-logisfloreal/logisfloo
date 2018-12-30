@@ -224,8 +224,8 @@
 				</group>
 			</field>        	   	
         	<field name="amount_tax" position="after">
-        		<field name="RoundingAmount" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RoundingAmount', '=', 0)]}" />
-        		<field name="RebateAmount" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RebateAmount', '=', 0)]}"/>
+        		<field name="RoundingAmount" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RoundingAmount', '=', 0)]}" />
+        		<field name="RebateAmount" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RebateAmount', '=', 0)]}"/>
         	</field>
         </field>       
     </record>
