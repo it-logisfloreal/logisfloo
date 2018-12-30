@@ -434,6 +434,11 @@ class LogisflooCalcAdjustPOWizard(models.TransientModel):
     def dont_close_form(self):
         self.ensure_one()
         return {"type": "set_scrollTop",}
+
+    @api.multi
+    def _get_invoice_amount(self):
+        purchase_order = self.env['purchase.order'].browse(self.env.context.get('active_id'))
+        return purchase_order.amount_total - purchase_order.RebateAmount - purchase_order.RoundingAmount
     
     @api.multi
     def calculate(self):
@@ -452,5 +457,5 @@ class LogisflooCalcAdjustPOWizard(models.TransientModel):
         purchase_order._update_adjusted_amounts()
                 
     company_currency_id = fields.Many2one('res.currency', string='Currency')
-    InvoicedTotalAmount = fields.Monetary(string='Amount on invoice', currency_field='company_currency_id')
+    InvoicedTotalAmount = fields.Monetary(string='Amount on invoice', currency_field='company_currency_id', default=_get_invoice_amount)
     
