@@ -8,6 +8,17 @@ Work around:
 -->
 
 <odoo noupdate="1">
+		<!--
+		Create a sequence to assign the slate_number automatically.
+		-->
+		<record id="slate_number_id" model="ir.sequence">
+			<field name="name">Slate Number</field>
+			<field name="code">slate.id</field>
+	        <field name="implementation">standard</field>
+			<field name="number_next_actual">145</field>
+		</record>
+		<!-- Ardoise -->
+
 		<record id="a446100" model="account.account">
 			<field name="name">Ardoise</field>
 			<field name="code">446100</field>
@@ -18,18 +29,17 @@ Work around:
 			<field name="name">property_account_slate_id</field> 
 			<field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_slate_id')]"/>
 			<field name="value" eval="'account.account,'+str(ref('logisfloo_base.a446100'))"/>
-			<!--
-			<field name="value">account.account,(account id in URL)</field>
-			-->
 		</record>
-		<record model="ir.property" id="property_account_rebate">
-			<field name="name">property_account_rebate</field> 
+
+		<!-- Invoice adjustment -->
+		
+		<record model="ir.property" id="property_adjustinvoice_account">
+			<field name="name">property_adjustinvoice_account</field> 
 			<field name="fields_id" search="[('model','=','logisfloo.adjustinvoice.wizard'),('name','=','property_adjustinvoice_account')]"/>
 			<field name="value" eval="'account.account,'+str(ref('l10n_be.a604'))"/>
-			<!--
-			<field name="value">account.account,(account id in URL)</field>
-			-->
 		</record>
+
+		<!-- Third party payment -->		
 		
 		<record id="a440010" model="account.account">
 			<field name="name">Paiement par tiers</field>
@@ -75,8 +85,62 @@ Work around:
 			<field name="fields_id" search="[('model','=','account.payment'),('name','=','property_journal_paid_by3rd_pty_id')]"/>
 			<field name="value" eval="'account.journal,'+str(ref('logisfloo_base.paid_by_3rd_pty_journal'))"/>
 		</record>
+
+		<!-- Expenses -->
+
+		<record id="a606000" model="account.account">
+			<field name="name">Frais accessoires sur achats</field>
+			<field name="code">606000</field>
+			<field name="user_type_id" ref="account.data_account_type_expenses"/>
+			<field name="reconcile" eval="False"/>
+		</record>
+
+        <record id="seq_poexpense" model="ir.sequence">
+            <field name="name">Expense request sequence</field>
+            <field name="code">logisfloo.poexpense</field>
+            <field name="prefix">NDF</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        		
+        <record id="sequence_expense" model="ir.sequence">
+            <field name="name">Notes de frais (Ardoise)</field>
+            <field name="code">account.expense</field>
+            <field name="prefix">NDF/%(range_year)s/</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+            <field eval="False" name="company_id"/>
+            <field name="padding">4</field>
+        </record>
 		
-   		
-		<!-- add record for property to define the margin here -->
-		
+        <record id="expense_journal" model="account.journal">
+            <field name="name">Expense</field>
+            <field name="code">NDF</field>
+            <field name="type">cash</field>
+            <field name="sequence_id" ref="sequence_expense"/>
+            <field name="default_credit_account_id" ref="a446100"/>
+            <field name="default_debit_account_id" ref="a606000"/>
+            <field name="show_on_dashboard" eval="True"/>
+        </record>     
+
+	 	<record model="ir.property" id="property_expense_journal_id">
+			<field name="name">property_expense_journal_id</field> 
+			<field name="fields_id" search="[('model','=','logisfloo.poexpense'),('name','=','property_expense_journal_id')]"/>
+			<field name="value" eval="'account.journal,'+str(ref('logisfloo_base.expense_journal'))"/>
+		</record>
+
+	 	<record model="ir.property" id="property_ref_ratio">
+			<field name="name">property_ref_ratio</field> 
+			<field name="type">float</field>
+			<field name="fields_id" search="[('model','=','logisfloo.poexpense'),('name','=','property_ref_ratio')]"/>
+			<field name="value" eval="3.5"/>
+		</record>   
+<!--  
+Add external id/XML id for account 606000
+Add external ID for Journal note de frais ?
+
+Settings / Technical / Sequences and Identifiers / External Identifiers
+-->
+ 				
 </odoo>

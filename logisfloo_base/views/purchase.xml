@@ -55,6 +55,9 @@
 			<button name="button_done" position="attributes">
 				<attribute name="states">purchase,deposite</attribute>
 			</button>
+			<button name="button_cancel" position="attributes">
+				<attribute name="states">draft,to approve,sent,purchase,receipt</attribute>
+			</button>	
 			<button name="button_cancel" position="before">
                 <button name="button_receipt_completed" type="object" string="Confirm Receipt" class="oe_highlight"
                 		attrs="{'invisible':['|',('state','not in',['receipt']),('isShopReceipt','=',False)]}"
@@ -63,12 +66,20 @@
         	<button name="button_done" position="before">
         		<button name="button_deposite" type="object" string="Deposite" states="purchase"
                         help="Purchase in deposite."/>
-<!--         		<button name="button_undo" type="object" string="Undo" 
+        		<button name="button_undo" type="object" string="Undo" 
         				attrs="{'invisible':['|',('state','not in',['deposite','done']),('isShopReceipt','=',True)]}"
-                        help="Reopen the purchase order."/> -->
-                <button name="button_undo" type="object" string="Undo" 
                         help="Reopen the purchase order."/>
+               <!-- Do not allow Reopenning a receipt, to avoid double operations on reception and invoicing. -->
+               <!--  <button name="button_undo" type="object" string="Undo" 
+                        help="Reopen the purchase order."/> -->
         	</button>
+			<button name="action_view_invoice" position="before">
+                        <button type="object"  name="action_view_expense"
+                            class="oe_stat_button"
+                            icon="fa-ticket">
+                            <field name="expenses_count" widget="statinfo" string="Expenses"/>
+                        </button>
+			</button>
         	<field name="date_order" position="before">
         		<field name="isShopReceipt" groups="logisfloo_base.group_logisfloo_admin"/>
         	</field>
@@ -126,6 +137,10 @@
                      </form>
                  </field>
 			</field>        	
+			<xpath expr="//field[@name='date_planned' and @required='1']" 
+				position="attributes">
+				<attribute name="required">0</attribute>
+			</xpath>
 
         </field>
     </record>
@@ -150,7 +165,7 @@
         </field>
     </record> 
     
- 	<act_window id="action_calcadjust_wizard" 
+ 	<act_window id="action_calcadjustpo_wizard" 
  		name="Compute the amount from the vendor's invoice." 
  		res_model="logisfloo.calcadjustpo.wizard" 
  		src_model="purchase.order"
@@ -158,46 +173,6 @@
  		view_mode="form" 
  		target="new" />
  		
-  	<record model="ir.ui.view" id="logisfloo_adjustPO_wizard_form">
-        <field name="name">logisfloo.adjustPO.wizard.form</field>
-        <field name="model">logisfloo.adjustpo.wizard</field>
-        <field name="arch" type="xml">
-        	<form>   
-                <p class="oe_grey">
-                    Enter the amount to add (+) or deduct (-) from the Odoo purchase order and click update.
-                </p>
-                <p class="oe_grey">
-                    If you don't know the amount, click on the calculate button to caculate this amount from the receipt.
-                </p>	
-        		<div>
-        			<label for="AdjustmentAmount"/>	
-        			<field name="AdjustmentAmount" class="oe_inline"/>
-        			<button type="object" name="open_calculator" string="Calculate"/>
-        		</div>        			      		
-        		<footer>
-        			<button type="object" name="add_adjustment_line" string="Update" class="oe_highlight"/>
-        			<button special="cancel" string="Cancel"/>
-        		</footer>
-        	</form>
-        </field>
-    </record> 
-
- 	<act_window id="action_roundingpo_wizard" 
- 		name="Add an invoice line to correct a rounding difference" 
- 		res_model="logisfloo.adjustpo.wizard" 
- 		src_model="purchase.order"
- 		view_id="logisfloo_adjustPO_wizard_form"
- 		view_mode="form" 
- 		target="new" />
- 		
-  	<act_window id="action_rebatepo_wizard" 
- 		name="Add an invoice line for a rebate" 
- 		res_model="logisfloo.adjustpo.wizard" 
- 		src_model="purchase.order"
- 		view_id="logisfloo_adjustPO_wizard_form"
- 		view_mode="form" 
- 		target="new" />
- 
 <!-- Receipt items -->
 
     <record model="ir.ui.view" id="logisfloo_purchase_receipt_form">
@@ -209,26 +184,50 @@
         		<field name="isShopReceipt" invisible="1"/>
         		<field name="tpty_partner_id" attrs="{'required': [('isShopReceipt','=', True)]}"/>
         	</field>   
-        	<field name="amount_untaxed" position="before">      	            
-				<button string="Rebate" 
-					states="draft,proforma2,receipt"
-					type="action" 
-					name="%(action_rebatepo_wizard)d" 
-					context="{'amount_total': amount_total, 'Description' : 'Remise'}"
-					help="Create invoice line for a rebate."/>
-				<button string="Rounding" 
-					states="draft,proforma2,receipt"
-					type="action" 
-					name="%(action_roundingpo_wizard)d" 
-					context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
-					help="Create invoice line for a rounding difference."/>
+	       	<xpath expr="//notebook" position="before">
+	       		<separator string="Transport cost"/>
+	       		<group>
+		       		<field name="needexpense"/>
+	       		</group>
+		       	<group attrs="{'invisible': [('needexpense','=', False)]}">
+		       		<group>
+		        		<field name="payee_partner_id" attrs="{'required': [('needexpense','=', True)]}"/>
+						<field name="transport_type_id" attrs="{'required': [('needexpense','=', True)]}"/>
+	        		</group>
+	        		<group>
+						<label for="quantity" string="Quantity"/>	
+          					<div>
+							<field name="quantity" class="oe_inline" attrs="{'required': [('needexpense','=', True)]}"/>
+							<field name="transport_unit" class="oe_inline" readonly="1"/>
+						</div>	        		
+						<field name="expense_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+							<label for="cost_ratio"/>	
+          						<div>
+								<field name="cost_ratio" class="oe_inline">%</field> %
+							</div>						
+					</group>
+		       	</group>
+			</xpath>
+        	<field name="order_line" position="after"> 
+        		<group name="buttons_group" class="oe_subtotal_footer oe_right">
+					<button string="Rebate" 
+						states="draft,proforma2,receipt"
+						type="action" 
+						name="%(action_calcadjustpo_wizard)d" 
+						context="{'amount_total': amount_total, 'Description' : 'Remise'}"
+						help="Create invoice line for a rebate."/>
+					<button string="Rounding" 
+						states="draft,proforma2,receipt"
+						type="action" 
+						name="%(action_calcadjustpo_wizard)d" 
+						context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
+						help="Create invoice line for a rounding difference."/>
+				</group>
 			</field>        	   	
         	<field name="amount_tax" position="after">
-        		<field name="RoundingAmount" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RoundingAmount', '=', 0)]}" />
-        		<field name="RebateAmount" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RebateAmount', '=', 0)]}"/>
+        		<field name="RoundingAmount" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RoundingAmount', '=', 0)]}" />
+        		<field name="RebateAmount" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('RebateAmount', '=', 0)]}"/>
         	</field>
-        	
-
         </field>       
     </record>
  
