@@ -85,3 +85,15 @@ class product_supplierinfo(models.Model):
     _inherit = 'product.supplierinfo'
     
     discount = fields.Float(string='Discount')
+    
+
+class stock_change_product_qty(models.TransientModel):
+    _inherit = "stock.change.product.qty"
+    
+    def default_get(self, cr, uid, fields, context):
+        res = super(stock_change_product_qty, self).default_get(cr, uid, fields, context=context)
+        #location_ids = self.env['stock.location'].search(['&',('active','=',True),('usage', '=', 'internal')])
+        location_ids=self.pool.get('stock.location').search(cr, uid, ['&',('active','=',True),('usage', '=', 'internal')], context=context)
+            
+        res['location_id'] = location_ids[0]
+        return res
