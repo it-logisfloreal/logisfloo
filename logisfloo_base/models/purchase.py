@@ -23,7 +23,8 @@ class LogisflooPurchaseOrder(models.Model):
     needexpense = fields.Boolean(String='Need expense', default=False)
     payee_partner_id = fields.Many2one('res.partner', string='Payee', required=True, track_visibility='onchange')
     transport_type_id = fields.Many2one('logisfloo.potransportcost', string='Transport Type', required=True, track_visibility='onchange')
-    distance = fields.Float(string='Distance',required=True, track_visibility='onchange', default=0.0)    
+    transport_unit = fields.Char('Transport Unit',related='transport_type_id.unit')
+    quantity = fields.Float(string='Quantity',required=True, track_visibility='onchange', default=0.0)
     expense_amount = fields.Monetary(string='Expense Amount', currency_field='currency_id', compute='_compute_expense_amount', readonly=True)
     cost_ratio = fields.Float(string='Cost ratio', compute='_compute_cost_ratio', readonly=True, digits=(3,0))
 
@@ -39,10 +40,10 @@ class LogisflooPurchaseOrder(models.Model):
         ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
     @api.one
-    @api.depends('distance', 'transport_type_id')
+    @api.depends('quantity', 'transport_type_id')
     def _compute_expense_amount(self):
-        if self.distance and self.transport_type_id:
-            amount = self.distance * self.transport_type_id.unit_cost
+        if self.quantity and self.transport_type_id:
+            amount = self.quantity * self.transport_type_id.unit_cost
         else:
             amount = 0.0
         self.expense_amount=amount
@@ -59,7 +60,8 @@ class LogisflooPurchaseOrder(models.Model):
         if not self.needexpense:
             self.payee_partner_id=False
             self.transport_type_id=False
-            self.distance=0.0
+            self.transport_unit=False
+            self.quantity=0.0
             self.expense_amount=0.0
             self.cost_ratio=0.0
         if self.needexpense and not self.payee_partner_id:
@@ -138,7 +140,7 @@ class LogisflooPurchaseOrder(models.Model):
                     'payee_partner_id': self.payee_partner_id.id,
                     'transport_type_id': self.transport_type_id.id,
                     'purchase_id': self.id,
-                    'distance': self.distance,
+                    'quantity': self.quantity,
                     'trip_date': self.date_order,
                 })            
             expense.button_confirm()            

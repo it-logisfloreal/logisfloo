@@ -184,7 +184,7 @@
         		<field name="isShopReceipt" invisible="1"/>
         		<field name="tpty_partner_id" attrs="{'required': [('isShopReceipt','=', True)]}"/>
         	</field>   
-	       	<xpath expr="//notebook" position="after">
+	       	<xpath expr="//notebook" position="before">
 	       		<separator string="Transport cost"/>
 	       		<group>
 		       		<field name="needexpense"/>
@@ -195,10 +195,11 @@
 						<field name="transport_type_id" attrs="{'required': [('needexpense','=', True)]}"/>
 	        		</group>
 	        		<group>
-						<label for="distance" attrs="{'required': [('needexpense','=', True)]}"/>	
-		        		<div>
-							<field name="distance" class="oe_inline" attrs="{'required': [('needexpense','=', True)]}"/> km
-						</div>
+						<label for="quantity" string="Quantity"/>	
+          					<div>
+							<field name="quantity" class="oe_inline" attrs="{'required': [('needexpense','=', True)]}"/>
+							<field name="transport_unit" class="oe_inline" readonly="1"/>
+						</div>	        		
 						<field name="expense_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
 							<label for="cost_ratio"/>	
           						<div>
