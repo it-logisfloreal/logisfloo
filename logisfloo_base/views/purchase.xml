@@ -22,6 +22,8 @@
         <field name="name">logisfloo.purchase.order.form.view</field>
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="priority">10</field>
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
         	<xpath expr="//button[@name='action_rfq_send' and @states='draft']" position="attributes">
     			<attribute name="invisible">1</attribute>
@@ -179,6 +181,8 @@
         <field name="name">logisfloo.purchase.receipt.form</field>
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="logisfloo_purchase_order_form_view"/>
+        <field name="priority">14</field>
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
         	<field name="partner_id" position="after">
         		<field name="isShopReceipt" invisible="1"/>
@@ -263,8 +267,14 @@
         <field name="name">Shop Receipt</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">purchase.order</field>
-        <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_todo':1, 'show_purchase': True, 'default_isShopReceipt': True, 'default_state': 'receipt'}</field>
+        <field name="view_ids" 
+               eval="[(5, 0, 0),
+                      (0, 0, {'view_mode': 'tree'}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('logisfloo_purchase_receipt_form')}), 
+                      ]"/>
+<!--         <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="logisfloo_purchase_receipt_tree,logisfloo_purchase_receipt_form"/>
+ -->        <field name="context">{'search_default_todo':1, 'show_purchase': True, 'default_isShopReceipt': True, 'default_state': 'receipt'}</field>
         <field name="domain">[('isShopReceipt','=',True)]</field>
         <field name="search_view_id" ref="logisfloo_view_purchase_receipt_filter"/>
         <field name="help" type="html">
