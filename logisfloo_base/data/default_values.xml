@@ -142,5 +142,13 @@ Add external ID for Journal note de frais ?
 
 Settings / Technical / Sequences and Identifiers / External Identifiers
 -->
- 				
+ 			
+		<!-- Closing Slate Account -->
+
+		<record id="a660001" model="account.account">
+			<field name="name">Clôture Ardoise</field>
+			<field name="code">660001</field>
+			<field name="user_type_id" ref="account.data_account_type_expenses"/>
+			<field name="reconcile" eval="False"/>
+		</record>	
 </odoo>
