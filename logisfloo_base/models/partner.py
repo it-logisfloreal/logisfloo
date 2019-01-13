@@ -87,6 +87,10 @@ class Partner(models.Model):
     
     @api.onchange('first_name', 'last_name')
     def _on_change_name(self):
+        if self.first_name:
+            self.first_name=self.first_name.strip()
+        if self.last_name:
+            self.last_name=self.last_name.strip()
         self.name = concat_names(self.first_name, self.last_name)
         
     @api.noguess
