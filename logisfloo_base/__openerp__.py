@@ -14,7 +14,7 @@
     'website': "https://github.com/logisfloo",
 
     'category': 'Logisfloo',
-    'version': '1.5.0',
+    'version': '1.6.3', 
 
     'depends': [
         'stock',
@@ -45,6 +45,7 @@
         'views/purchase.xml',
         'views/stock.xml',
         'views/account.xml',
+        'views/poexpense.xml',
     ],
     'qweb': [
     'static/src/xml/pos_extensions.xml',
