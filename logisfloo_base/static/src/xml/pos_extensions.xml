@@ -61,7 +61,7 @@
 		                    Select a customer
 		                </t>	                
 		            </button>
-		            <t t-if="widget.pos.get_client().slate_balance &gt; 0">
+		            <t t-if="widget.pos.get_client().slate_balance &gt; -20">
 			            <button class='button pay'>
 			                <div class='pay-circle'>
 			                    <i class='fa fa-chevron-right' /> 
@@ -69,10 +69,10 @@
 			                Payment
 			            </button>
 			         </t>
-		            <t t-if="widget.pos.get_client().slate_balance &lt;= 0">
+		            <t t-if="widget.pos.get_client().slate_balance &lt;= -20">
 			            <button class='button noaction'>
-			                ARDOISE NEGATIVE<br/><br/>			                
-			                Hoy no se fia, mañana si
+			                Il faut d'abord renflouer l'ardoise.<br/><br/>
+			                Pas d'achat autorisé aujourd'hui.
 			            </button>
 			         </t>
 	            </t>
