@@ -106,7 +106,17 @@ class Partner(models.Model):
         credit = sum([m.credit for m in move_lines])
         debit = sum([m.debit for m in move_lines])
         self.slate_balance = round(credit - debit, 2) 
-    
+
+    @api.model
+    def _cron_negative_slate_warning(self):
+        _logger.info('negative slate warning')
+        partners = self.env['res.partner'] 
+        for partner in partners.search([('slate_balance', '<', 0), ('active', '=',True), ('customer', '=',True)]):
+            if partner.email:
+                _logger.info('Send warning to: %s slate balance is %.2f', partner.name, partner.slate_balance)
+            else:
+                _logger.info('Cannot Send warning to: %s slate balance is %.2f', partner.name, partner.slate_balance)
+        
     @api.one
     def get_slate_partners(self):
         # If slate number is 0, then this is not a slate and there is no partners
