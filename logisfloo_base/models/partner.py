@@ -106,7 +106,25 @@ class Partner(models.Model):
         credit = sum([m.credit for m in move_lines])
         debit = sum([m.debit for m in move_lines])
         self.slate_balance = round(credit - debit, 2) 
-    
+
+    @api.model
+    def _cron_negative_slate_warning(self):
+        _logger.info('negative slate warning')
+        partners = self.env['res.partner'] 
+        for partner in partners.search([('slate_balance', '<', 0), ('active', '=',True), ('customer', '=',True)]):
+            if partner.email:
+                template = self.env.ref('logisfloo_base.email_slate_warning')
+                self.env['mail.template'].browse(template.id).send_mail(partner.id)
+            else:
+                notifyteam=True
+                for sibling in partner.slate_partners:
+                    if sibling.email:
+                        notifyteam=False
+                if notifyteam:
+                    # Cannot contact any slate member by mail, send notification to team
+                    template = self.env.ref('logisfloo_base.email_slate_warning_nocontact')
+                    self.env['mail.template'].browse(template.id).send_mail(partner.id)
+                        
     @api.one
     def get_slate_partners(self):
         # If slate number is 0, then this is not a slate and there is no partners
