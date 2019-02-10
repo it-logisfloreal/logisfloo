@@ -113,10 +113,18 @@ class Partner(models.Model):
         partners = self.env['res.partner'] 
         for partner in partners.search([('slate_balance', '<', 0), ('active', '=',True), ('customer', '=',True)]):
             if partner.email:
-                _logger.info('Send warning to: %s slate balance is %.2f', partner.name, partner.slate_balance)
+                template = self.env.ref('logisfloo_base.email_slate_warning')
+                self.env['mail.template'].browse(template.id).send_mail(partner.id)
             else:
-                _logger.info('Cannot Send warning to: %s slate balance is %.2f', partner.name, partner.slate_balance)
-        
+                notifyteam=True
+                for sibling in partner.slate_partners:
+                    if sibling.email:
+                        notifyteam=False
+                if notifyteam:
+                    # Cannot contact any slate member by mail, send notification to team
+                    template = self.env.ref('logisfloo_base.email_slate_warning_nocontact')
+                    self.env['mail.template'].browse(template.id).send_mail(partner.id)
+                        
     @api.one
     def get_slate_partners(self):
         # If slate number is 0, then this is not a slate and there is no partners
