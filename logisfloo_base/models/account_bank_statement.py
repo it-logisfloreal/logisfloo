@@ -19,16 +19,18 @@ class AccountBankStatementLine(models.Model):
     _inherit = "account.bank.statement.line"
 
     def process_reconciliation(self, counterpart_aml_dicts=None, payment_aml_rec=None, new_aml_dicts=None):
-        _logger.info('Processing Reconciliation ************')
         property_account_slate_id = self.env['ir.property'].search([('name', '=', 'property_account_slate_id')], limit=1)
         slate_account_id = self.env['account.account'].search([('id', '=',property_account_slate_id.value_reference.split(',')[1])])
         counterpart_moves = super(AccountBankStatementLine,self).process_reconciliation(counterpart_aml_dicts,payment_aml_rec,new_aml_dicts)
         for move in counterpart_moves:
             for aline in move.line_ids:
-                _logger.info('Processing line for account %s',aline.account_id.name)
-                if aline.account_id == slate_account_id:
-                    _logger.info('Ardoise line ########')
-                    _logger.info(' for %s', aline.partner_id.name)
+                if aline.account_id != slate_account_id:
+                    local_context= self.env.context.copy()
+                    local_context.update({'label':aline.name})
+            for aline in move.line_ids:
+                if aline.account_id == slate_account_id and aline.partner_id.email:
+                    template = self.env.ref('logisfloo_base.email_slate_payment_notification')
+                    self.env['mail.template'].with_context(local_context).browse(template.id).send_mail(move.id)
 
     @api.multi
     def temp_get_move_lines_for_reconciliation_widget(self, excluded_ids=None, strparam=False, offset=0, limit=None):
