@@ -33,6 +33,11 @@
     height: 108px;
 }
 
+.pos .actionpad .button.noaction {
+    height: 108px;
+}
+
+
 .customer-balance {
     font-weight: bold;
     font-size: 22px;
