@@ -136,12 +136,6 @@ Work around:
 			<field name="fields_id" search="[('model','=','logisfloo.poexpense'),('name','=','property_ref_ratio')]"/>
 			<field name="value" eval="3.5"/>
 		</record>   
-<!--  
-Add external id/XML id for account 606000
-Add external ID for Journal note de frais ?
-
-Settings / Technical / Sequences and Identifiers / External Identifiers
--->
  			
 		<!-- Closing Slate Account -->
 
@@ -151,4 +145,45 @@ Settings / Technical / Sequences and Identifiers / External Identifiers
 			<field name="user_type_id" ref="account.data_account_type_expenses"/>
 			<field name="reconcile" eval="False"/>
 		</record>	
+		
+		<!-- Membership fee Account -->
+
+		<record id="a705010" model="account.account">
+			<field name="name">Cotisations</field>
+			<field name="code">705010</field>
+			<field name="user_type_id" ref="account.data_account_type_revenue"/>
+			<field name="reconcile" eval="False"/>
+			<field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+		</record>	
+		
+		<!-- Tea room Accounts -->
+
+		<record id="a601010" model="account.account">
+			<field name="name">Achat fournitures salon de thé</field>
+			<field name="code">601010</field>
+			<field name="user_type_id" ref="account.data_account_type_expenses"/>
+			<field name="reconcile" eval="False"/>
+			<field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+		</record>	
+
+		<record id="a700010" model="account.account">
+			<field name="name">Vente salon de thé</field>
+			<field name="code">700010</field>
+			<field name="user_type_id" ref="account.data_account_type_revenue"/>
+			<field name="reconcile" eval="False"/>
+			<field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+		</record>	
+
+		<!-- Automated action for negative slate warning -->
+
+        <record id="ir_cron_neg_slate_warning" model="ir.cron">
+            <field name="name">Negative slate warning</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">weeks</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'res.partner'" name="model"/>
+            <field eval="'_cron_negative_slate_warning'" name="function"/>
+        </record>
 </odoo>
