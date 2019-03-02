@@ -23,14 +23,18 @@ class AccountBankStatementLine(models.Model):
         slate_account_id = self.env['account.account'].search([('id', '=',property_account_slate_id.value_reference.split(',')[1])])
         counterpart_moves = super(AccountBankStatementLine,self).process_reconciliation(counterpart_aml_dicts,payment_aml_rec,new_aml_dicts)
         for move in counterpart_moves:
-            for aline in move.line_ids:
-                if aline.account_id != slate_account_id:
-                    local_context= self.env.context.copy()
-                    local_context.update({'label':aline.name})
-            for aline in move.line_ids:
-                if aline.account_id == slate_account_id and aline.partner_id.email:
-                    template = self.env.ref('logisfloo_base.email_slate_payment_notification')
-                    self.env['mail.template'].with_context(local_context).browse(template.id).send_mail(move.id)
+            # The Bank Statement reconciliation is also used when posting POS items !!!!?????, grrr
+            # Before sending the slate payment notification email, we must make sure we are processing such a payment. 
+            # Check journal is a bank journal (POS items are in cash journal)
+            if move.journal_id.type == "bank":
+                for aline in move.line_ids:
+                    if aline.account_id != slate_account_id:
+                        local_context= self.env.context.copy()
+                        local_context.update({'label':aline.name})
+                for aline in move.line_ids:
+                    if aline.account_id == slate_account_id and aline.partner_id.email:
+                        template = self.env.ref('logisfloo_base.email_slate_payment_notification')
+                        self.env['mail.template'].with_context(local_context).browse(template.id).send_mail(move.id)
 
     @api.multi
     def temp_get_move_lines_for_reconciliation_widget(self, excluded_ids=None, strparam=False, offset=0, limit=None):
