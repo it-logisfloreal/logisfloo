@@ -21,7 +21,7 @@ Votre Ticket ${object.pos_reference}
         <record id="email_slate_warning" model="mail.template">
             <field name="name">Notification Ardoise Négative</field>
             <field name="email_from">odoo.epicerie@logisfloreal.be</field>
-            <field name="reply_to">odoo.epicerie@logisfloreal.be</field>
+            <field name="reply_to">banque.epicerie@logisfloreal.be</field>
             <field name="subject">Votre ardoise a un solde négatif</field>
             <field name="partner_to">${object.id}</field>
             <field name="model_id" ref="base.model_res_partner" />
@@ -49,7 +49,7 @@ Votre Ticket ${object.pos_reference}
         <record id="email_slate_payment_notification" model="mail.template">
             <field name="name">Notification versement sur ardoise.</field>
             <field name="email_from">odoo.epicerie@logisfloreal.be</field>
-            <field name="reply_to">odoo.epicerie@logisfloreal.be</field>
+            <field name="reply_to">banque.epicerie@logisfloreal.be</field>
             <field name="subject">Votre versement a été enregistré sur votre ardoise.</field>
             <field name="partner_to">${object.partner_id.id}</field>
             <field name="model_id" ref="account.model_account_move" />
@@ -58,6 +58,21 @@ Votre Ticket ${object.pos_reference}
             <field name="body_html"><![CDATA[
 <p dir="ltr" style="line-height: 1.38;"><span style="color: rgb(33, 33, 33); background-color: transparent;">Bonjour ${object.partner_id.first_name}</span><span style="color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;">,&nbsp;</span><br></p><p dir="ltr" style="line-height: 1.38;">Nous avons bien reçu ton versement de&nbsp;<span style="caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;"><b>${object.amount} €</b> avec la communication:&nbsp;</span><b>${ctx.get('label')}</b></p><p dir="ltr" style="line-height: 1.38;">Le solde de ton ardoise est maintenant de&nbsp;<span style="caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;"><b>${object.partner_id.slate_balance} €</b>.</span></p><p><span style="caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);">L'Epicerie Logis-Floreal.</span></p>
 			]]></field>
-        </record>        
+        </record>  
+        
+        <record id="email_expense_paid_notification" model="mail.template">
+            <field name="name">Notification payment note de frais.</field>
+            <field name="email_from">odoo.epicerie@logisfloreal.be</field>
+            <field name="reply_to">banque.epicerie@logisfloreal.be</field>
+            <field name="subject">Votre note de frais a été payée sur votre ardoise.</field>
+            <field name="partner_to">${object.payee_partner_id.id}</field>
+            <field name="model_id" ref="logisfloo_base.model_logisfloo_poexpense" />
+            <field name="auto_delete" eval="False" />
+            <field name="lang">${object.payee_partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+<p dir="ltr" style="line-height: 1.38;"><span style="color: rgb(33, 33, 33); background-color: transparent;">Bonjour ${object.payee_partner_id.first_name}</span><span style="color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;">,&nbsp;</span><br></p><p dir="ltr" style="line-height: 1.38;">La note de frais pour la commande&nbsp;<span style="caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;"><b>${object.purchase_id.partner_id.name} </b>a été payée sur ton ardoise.</span><br></p><p dir="ltr" style="line-height: 1.38;">Date du trajet:&nbsp;<b style="font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);">${object.trip_date}</b></p><p dir="ltr" style="line-height: 1.38;"><span style="color: initial; font-family: inherit; font-style: initial; font-variant-caps: initial;">Montant:&nbsp;</span><b style="font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);">${object.expense_amount}</b><b style="font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);">&nbsp;€</b><span style="font-family: inherit; color: initial; font-style: initial; font-variant-caps: initial;">&nbsp;(</span><span style="font-family: inherit; color: initial; font-style: initial; font-variant-caps: initial;">${object.transport_type_id.name} ${object.quantity} ${object.transport_unit})</span></p><p dir="ltr" style="line-height: 1.38;">Le solde de ton ardoise est maintenant de&nbsp;<span style="caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;"><b>${object.payee_partner_id.slate_balance} €</b>.</span></p><p><span style="caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);">L'Epicerie Logis-Floreal.</span></p>
+			]]></field>
+        </record>  
+                      
     </data>
 </odoo>
