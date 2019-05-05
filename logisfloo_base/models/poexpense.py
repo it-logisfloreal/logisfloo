@@ -12,6 +12,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class LogisflooPOExpense(models.Model):
+    _description = 'PO Expense'
     _name = "logisfloo.poexpense"
     _inherit = ['mail.thread', 'ir.needaction_mixin']
     _order = 'name desc'
@@ -130,6 +131,8 @@ class LogisflooPOExpense(models.Model):
     def button_pay(self):
         if self.cost_ratio < self.property_ref_ratio:
             self.do_pay()
+            template = self.env.ref('logisfloo_base.email_expense_paid_notification')
+            self.env['mail.template'].browse(template.id).send_mail(self.id)
         else:
             raise UserError(_('This expense amount is more than %2.2f %% of the purchase amount and cannot be paid.' 
             ' Ask an administrator to process the payment or reject this expense.') % self.property_ref_ratio)
