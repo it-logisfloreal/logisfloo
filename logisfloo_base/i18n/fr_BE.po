@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c-20161108\n"
+"Project-Id-Version: Odoo Server 9.0c-20181230\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-30 16:37+0000\n"
-"PO-Revision-Date: 2018-12-30 16:37+0000\n"
+"POT-Creation-Date: 2019-05-12 19:52+0000\n"
+"PO-Revision-Date: 2019-05-12 19:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,47 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: logisfloo_base
+#: model:mail.template,body_html:logisfloo_base.email_slate_warning
+msgid "\n"
+"<p dir=\"ltr\" style=\"line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Bonjour ${object.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span></p><p dir=\"ltr\" style=\"line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Le solde de ton ardoise est de ${object.slate_balance} €.</span><br><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">Merci de faire un versement avant ta prochaine visite à l'épicerie.&nbsp;</span><br></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"min-width: 100%;\"><tbody><tr><td align=\"left\"></td></tr></tbody></table><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"background-color: rgb(245, 242, 242);\"><p style=\"line-height: 19.5px\"><strong>Pour alimenter ton ardoise, effectue un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\">avec la communication&nbsp;:&nbsp;<b> <font style=\"color: rgb(0, 0, 0);\">\"Ardoise&nbsp;</font></b><span style=\"color: rgb(0, 0, 0); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.slate_number}</b>\"</span></p></td></tr></tbody></table><p><span style=\"color: rgb(33, 33, 33);line-height: 19.5px\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>\n"
+"            "
+msgstr "\n"
+"<p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Bonjour ${object.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Le solde de ton ardoise est de ${object.slate_balance} €.</span><br><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">Merci de faire un versement avant ta prochaine visite à l'épicerie.&nbsp;</span><br></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;\"></td></tr></tbody></table><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;background-color: rgb(245, 242, 242);\"><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Pour alimenter ton ardoise, effectue un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\">avec la communication&nbsp;:&nbsp;<b style=\"font-weight:bold;\"> <font style=\"color: rgb(0, 0, 0);\">\"Ardoise&nbsp;</font></b><span style=\"color: rgb(0, 0, 0); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.slate_number}</b>\"</span></p></td></tr></tbody></table><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><span style=\"color: rgb(33, 33, 33);line-height: 19.5px\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>\n"
+"            "
+
+#. module: logisfloo_base
+#: model:mail.template,body_html:logisfloo_base.email_slate_warning_nocontact
+msgid "\n"
+"<p dir=\"ltr\" style=\"line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Le solde de l'ardoise&nbsp;</span><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\">${object.slate_number}&nbsp;</span><span style=\"font-style: initial; font-variant-caps: initial; color: rgb(33, 33, 33); background-color: transparent;\">de&nbsp;</span><span style=\"font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.name}&nbsp;</span><span style=\"font-style: initial; font-variant-caps: initial; color: rgb(33, 33, 33); background-color: transparent;\">est de ${object.slate_balance} €.</span></p><p dir=\"ltr\" style=\"line-height: 1.38\">Aucun membre de cette ardoise n'a donné d'adresse email.</p><p dir=\"ltr\" style=\"line-height: 1.38\">Voici les autre données de contact:<br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">Téléphone: ${object.phone}</span><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">Mobile: ${object.mobile}</span><br><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.street}</span><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.zip}&nbsp;</span><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\">${object.city}</span><br></p><p dir=\"ltr\" style=\"line-height: 1.38\"><br></p>\n"
+"            "
+msgstr "\n"
+"<p dir=\"ltr\" style=\"line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Le solde de l'ardoise&nbsp;</span><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\">${object.slate_number}&nbsp;</span><span style=\"font-style: initial; font-variant-caps: initial; color: rgb(33, 33, 33); background-color: transparent;\">de&nbsp;</span><span style=\"font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.name}&nbsp;</span><span style=\"font-style: initial; font-variant-caps: initial; color: rgb(33, 33, 33); background-color: transparent;\">est de ${object.slate_balance} €.</span></p><p dir=\"ltr\" style=\"line-height: 1.38\">Aucun membre de cette ardoise n'a donné d'adresse email.</p><p dir=\"ltr\" style=\"line-height: 1.38\">Voici les autre données de contact:<br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">Téléphone: ${object.phone}</span><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">Mobile: ${object.mobile}</span><br><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.street}</span><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.zip}&nbsp;</span><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\">${object.city}</span><br></p><p dir=\"ltr\" style=\"line-height: 1.38\"><br></p>\n"
+"            "
+
+#. module: logisfloo_base
+#: model:mail.template,body_html:logisfloo_base.email_slate_payment_notification
+msgid "\n"
+"<p dir=\"ltr\" style=\"line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour ${object.partner_id.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span><br></p><p dir=\"ltr\" style=\"line-height: 1.38;\">Nous avons bien reçu ton versement de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.amount} €</b> avec la communication:&nbsp;</span><b>${ctx.get('label')}</b></p><p dir=\"ltr\" style=\"line-height: 1.38;\">Le solde de ton ardoise est maintenant de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.partner_id.slate_balance} €</b>.</span></p><p><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">L'Epicerie Logis-Floreal.</span></p>\n"
+"			"
+msgstr "\n"
+"<p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour ${object.partner_id.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span><br></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\">Nous avons bien reçu ton versement de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.amount} €</b> avec la communication:&nbsp;</span><b style=\"font-weight:bold;\">${ctx.get('label')}</b></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\">Le solde de ton ardoise est maintenant de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.partner_id.slate_balance} €</b>.</span></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">L'Epicerie Logis-Floreal.</span></p>\n"
+"			"
+
+#. module: logisfloo_base
+#: model:mail.template,body_html:logisfloo_base.email_expense_paid_notification
+msgid "\n"
+"<p dir=\"ltr\" style=\"line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour ${object.payee_partner_id.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span><br></p><p dir=\"ltr\" style=\"line-height: 1.38;\">La note de frais pour la commande&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.purchase_id.partner_id.name} </b>a été payée sur ton ardoise.</span><br></p><p dir=\"ltr\" style=\"line-height: 1.38;\">Date du trajet:&nbsp;<b style=\"font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.trip_date}</b></p><p dir=\"ltr\" style=\"line-height: 1.38;\"><span style=\"color: initial; font-family: inherit; font-style: initial; font-variant-caps: initial;\">Montant:&nbsp;</span><b style=\"font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.expense_amount}</b><b style=\"font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">&nbsp;€</b><span style=\"font-family: inherit; color: initial; font-style: initial; font-variant-caps: initial;\">&nbsp;(</span><span style=\"font-family: inherit; color: initial; font-style: initial; font-variant-caps: initial;\">${object.transport_type_id.name} ${object.quantity} ${object.transport_unit})</span></p><p dir=\"ltr\" style=\"line-height: 1.38;\">Le solde de ton ardoise est maintenant de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.payee_partner_id.slate_balance} €</b>.</span></p><p><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">L'Epicerie Logis-Floreal.</span></p>\n"
+"			"
+msgstr "\n"
+"<p dir=\"ltr\" style=\"line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour ${object.payee_partner_id.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span><br></p><p dir=\"ltr\" style=\"line-height: 1.38;\">La note de frais pour la commande&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.purchase_id.partner_id.name} </b>a été payée sur ton ardoise.</span><br></p><p dir=\"ltr\" style=\"line-height: 1.38;\">Date du trajet:&nbsp;<b style=\"font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.trip_date}</b></p><p dir=\"ltr\" style=\"line-height: 1.38;\"><span style=\"color: initial; font-family: inherit; font-style: initial; font-variant-caps: initial;\">Montant:&nbsp;</span><b style=\"font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">${object.expense_amount}</b><b style=\"font-family: inherit; font-style: initial; font-variant-caps: initial; caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">&nbsp;€</b><span style=\"font-family: inherit; color: initial; font-style: initial; font-variant-caps: initial;\">&nbsp;(</span><span style=\"font-family: inherit; color: initial; font-style: initial; font-variant-caps: initial;\">${object.transport_type_id.name} ${object.quantity} ${object.transport_unit})</span></p><p dir=\"ltr\" style=\"line-height: 1.38;\">Le solde de ton ardoise est maintenant de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.payee_partner_id.slate_balance} €</b>.</span></p><p><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">L'Epicerie Logis-Floreal.</span></p>\n"
+"			"
+
+#. module: logisfloo_base
 #: model:mail.template,body_html:logisfloo_base.email_send_ticket
 msgid "\n"
 "Votre Ticket ${object.pos_reference}\n"
 "            "
-msgstr "<span id=\"docs-internal-guid-63c1efaf-78f8-6337-0ae2-c31679b138ab\"><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Bonjour,&nbsp;</span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Vous trouverez ci-joint votre ticket de caisse en version électronique.</span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><b style=\"font-weight:bold;\"><u>Informations utiles</u></b></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;\"></td></tr></tbody></table><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;background-color: rgb(245, 242, 242);\"><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">S'inscrire à une permanence&nbsp;<br style=\"line-height: 19.5px\"></strong>Nouvelles tranches horaires : 10h45-12h45, 12h30-14h30 et 14h15-16h15<br style=\"line-height: 19.5px\"><a href=\"https://pads.domainepublic.net/p/AKBdTR8yHRlOwFVt\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\"><strong style=\"font-weight:bold;\">Cliquez ici pour vous inscrire aux permanences</strong></a></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Liste des groupes de travail (page créée en août 2017)</strong><br style=\"line-height: 19.5px\"><strong style=\"font-weight:bold;\"><a href=\"http://quartierdurable.logisfloreal.be/?email_id=116&amp;user_id=1&amp;urlpassed=aHR0cDovL3F1YXJ0aWVyZHVyYWJsZS5sb2dpc2Zsb3JlYWwuYmUvZXBpY2VyaWUvZ3JvdXBlcy1kZS10cmF2YWlsLw&amp;controller=stats&amp;action=analyse&amp;wysija-page=1&amp;wysijap=subscriptions\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\">Cliquez ici pour consulter la liste des groupes de travail</a></strong></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Participer à un groupe de fonctionnement (formulaire modifié en août 2017)</strong><br style=\"line-height: 19.5px\"><strong style=\"font-weight:bold;\"><a href=\"http://quartierdurable.logisfloreal.be/?email_id=116&amp;user_id=1&amp;urlpassed=aHR0cHM6Ly9nb28uZ2wvZm9ybXMvdXZrdlhvcjI4Y0JxenNBdzE&amp;controller=stats&amp;action=analyse&amp;wysija-page=1&amp;wysijap=subscriptions\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\">Cliquez ici pour vous inscrire à un groupe de fonctionnement</a></strong></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Pour créer votre ardoise, effectuez un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\">avec la communication&nbsp;: Votre numéro d'épicier + votre nom + prénom + mention \"ardoise\"</p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contenants</strong><br style=\"line-height: 19.5px\">En venant vous ravitailler, prévoyez vos contenants pour les produits en vrac&nbsp;: sachets à pain, bouteilles, bocaux en verre...<br style=\"line-height: 19.5px\">Pour faciliter la pesée, n'oubliez pas d'indiquer sur une étiquette le poids à vide de vos bocaux.</p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contacter le groupe pilote :&nbsp;</strong><a href=\"mailto:pilote.epicerie@logisfloreal.be\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;color:rgb(51, 122, 183);background-color:transparent;\">pilote.epicerie@logisfloreal.be</a></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contacter le groupe Achats :</strong>&nbsp;<a href=\"mailto:achats.epicerie@logisfloreal.be\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;color:rgb(51, 122, 183);background-color:transparent;\">achats.epicerie@logisfloreal.be</a></p></td></tr></tbody></table><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><span style=\"color: rgb(33, 33, 33);line-height: 19.5px\">L'Epicerie Logis-Floreal.</span>&nbsp;</p></span>"
+msgstr "<span id=\"docs-internal-guid-63c1efaf-78f8-6337-0ae2-c31679b138ab\"><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Bonjour,&nbsp;</span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Vous trouverez ci-joint votre ticket de caisse en version électronique.</span></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38\"><b style=\"font-weight:bold;\"><u>Informations utiles</u></b></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;\"></td></tr></tbody></table><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;background-color: rgb(245, 242, 242);\"><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">S'inscrire à une permanence&nbsp;<br style=\"line-height: 19.5px\"></strong>Nouvelles tranches horaires : 10h45-12h45, 12h30-14h30 et 14h15-16h15<br style=\"line-height: 19.5px\"><a href=\"https://pads.domainepublic.net/p/AKBdTR8yHRlOwFVt\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\"><strong style=\"font-weight:bold;\">Cliquez ici pour vous inscrire aux permanences</strong></a></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Liste des groupes de travail (page créée en août 2017)</strong><br style=\"line-height: 19.5px\"><strong style=\"font-weight:bold;\"><a href=\"http://quartierdurable.logisfloreal.be/?email_id=116&amp;user_id=1&amp;urlpassed=aHR0cDovL3F1YXJ0aWVyZHVyYWJsZS5sb2dpc2Zsb3JlYWwuYmUvZXBpY2VyaWUvZ3JvdXBlcy1kZS10cmF2YWlsLw&amp;controller=stats&amp;action=analyse&amp;wysija-page=1&amp;wysijap=subscriptions\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\">Cliquez ici pour consulter la liste des groupes de travail</a></strong></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Participer à un groupe de fonctionnement (formulaire modifié en août 2017)</strong><br style=\"line-height: 19.5px\"><strong style=\"font-weight:bold;\"><a href=\"http://quartierdurable.logisfloreal.be/?email_id=116&amp;user_id=1&amp;urlpassed=aHR0cHM6Ly9nb28uZ2wvZm9ybXMvdXZrdlhvcjI4Y0JxenNBdzE&amp;controller=stats&amp;action=analyse&amp;wysija-page=1&amp;wysijap=subscriptions\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;background-color: rgb(245, 242, 242);color: rgb(74, 145, 176) !important\">Cliquez ici pour vous inscrire à un groupe de fonctionnement</a></strong></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Pour créer votre ardoise, effectuez un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\"><span style=\"color: initial; font-family: inherit; font-style: initial; font-variant-caps: initial;\">avec la communication&nbsp;:&nbsp;</span><b style=\"font-weight:bold;color: initial; font-family: inherit; font-style: initial; font-variant-caps: initial;\">&nbsp;\"ardoise\" + numéro d'ardoise</b></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contenants</strong><br style=\"line-height: 19.5px\">En venant vous ravitailler, prévoyez vos contenants pour les produits en vrac&nbsp;: sachets à pain, bouteilles, bocaux en verre...<br style=\"line-height: 19.5px\">Pour faciliter la pesée, n'oubliez pas d'indiquer sur une étiquette le poids à vide de vos bocaux.</p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contacter le groupe pilote :&nbsp;</strong><a href=\"mailto:pilote.epicerie@logisfloreal.be\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;color:rgb(51, 122, 183);background-color:transparent;\">pilote.epicerie@logisfloreal.be</a></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Contacter le groupe Achats :</strong>&nbsp;<a href=\"mailto:achats.epicerie@logisfloreal.be\" target=\"_blank\" style=\"cursor:pointer;text-decoration:none;color:rgb(51, 122, 183);background-color:transparent;\">achats.epicerie@logisfloreal.be</a></p></td></tr></tbody></table><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><span style=\"color: rgb(33, 33, 33);line-height: 19.5px\">L'Epicerie Logis-Floreal.</span>&nbsp;</p></span>"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_expenses_count
@@ -76,7 +112,7 @@ msgid "<strong>Total</strong>"
 msgstr "<strong>Total</strong>"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/poexpense.py:84
+#: code:addons/logisfloo_base/models/poexpense.py:85
 #, python-format
 msgid "A paid or rejected expense cannot be deleted."
 msgstr "Une note de frais payée ou rejetée ne peut pas être effacée."
@@ -85,6 +121,11 @@ msgstr "Une note de frais payée ou rejetée ne peut pas être effacée."
 #: model:res.groups,name:logisfloo_base.group_logisfloo_accounting
 msgid "Accounting"
 msgstr "Comptabilité"
+
+#. module: logisfloo_base
+#: model:account.account,name:logisfloo_base.a601010
+msgid "Achat fournitures salon de thé"
+msgstr "Achat fournitures événements"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_needaction
@@ -118,7 +159,7 @@ msgstr "Ajouter à la famille"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:115
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:123
 #, python-format
 msgid "Address"
 msgstr "Adresse"
@@ -175,6 +216,11 @@ msgid "Balance:"
 msgstr "Solde:"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Ligne de relevé bancaire"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
 msgid "Calculate"
 msgstr "Calculer"
@@ -184,6 +230,7 @@ msgstr "Calculer"
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_calcadjustPO_wizard_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_setSlateNumber_wizard_form
+#: model:ir.ui.view,arch_db:logisfloo_base.payment_cancel_form_inherit
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -199,6 +246,11 @@ msgid "Category type"
 msgstr "Type de categorie"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_stock_change_product_qty
+msgid "Change Product Quantity"
+msgstr "Changer la quantité d'articles"
+
+#. module: logisfloo_base
 #: model:ir.actions.act_window,help:logisfloo_base.logisfloo_purchase_receipt_action
 msgid "Click to create a shop receipt that will be converted into a purchase order."
 msgstr "Cliquer pour encoder un ticket de magasin."
@@ -212,6 +264,11 @@ msgstr "Cliquer pour créer une note de frais."
 #: model:ir.actions.act_window,help:logisfloo_base.logisfloo_potransportcost_action
 msgid "Click to define a transport cost."
 msgstr "Cliquer pour définir un coût de transport."
+
+#. module: logisfloo_base
+#: model:account.account,name:logisfloo_base.a660001
+msgid "Clôture Ardoise"
+msgstr "Clôture Ardoise"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_company_id
@@ -250,6 +307,11 @@ msgstr "Coût unitaire"
 #: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_cost_ratio
 msgid "Cost ratio"
 msgstr "Rapport de coût"
+
+#. module: logisfloo_base
+#: model:account.account,name:logisfloo_base.a705010
+msgid "Cotisations"
+msgstr "Cotisations"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
@@ -293,13 +355,13 @@ msgid "Currency"
 msgstr "Devise"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:408
+#: code:addons/logisfloo_base/models/purchase.py:424
 #, python-format
 msgid "Customer Payment"
 msgstr "Paiement client"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:410
+#: code:addons/logisfloo_base/models/purchase.py:426
 #, python-format
 msgid "Customer Refund"
 msgstr "Remboursement client"
@@ -347,7 +409,6 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: logisfloo_base
-#: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_distance
 #: selection:product.uom.categ,type:0
 msgid "Distance"
 msgstr "Distance"
@@ -420,7 +481,7 @@ msgid "Expenses"
 msgstr "Dépenses"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/poexpense.py:232
+#: code:addons/logisfloo_base/models/poexpense.py:235
 #, python-format
 msgid "Expenses must have an expense journal specified to generate accounting entries."
 msgstr "Une note de frais doit être associée à un journal des frais pour pouvoir générer les écritures comptables."
@@ -489,12 +550,24 @@ msgstr "Si coché, de nouveaux messages demandent votre attention."
 #. module: logisfloo_base
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "Si elle est cochée, de nouveaux messages requièrent votre attention."
+msgstr "si elle est cochée, de nouveaux messages requièrent votre attention."
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_adjustinvoice_wizard_form
 msgid "If you don't know the amount, click on the calculate button to caculate this amount from the invoice."
 msgstr "Si vous ne connaisez pas ce montant, cliquer sur Calculer pour calculer ce montant à partir du montant de la facture du fournisseur."
+
+#. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:73
+#, python-format
+msgid "Il faut d'abord renflouer l'ardoise."
+msgstr "Il faut d'abord renflouer l'ardoise."
+
+#. module: logisfloo_base
+#: model:mail.template,subject:logisfloo_base.email_slate_warning_nocontact
+msgid "Impossible de contacter un membre avec une ardoise négative"
+msgstr "Impossible de contacter un membre avec une ardoise négative"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_product_supplierinfo
@@ -595,7 +668,7 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/poexpense.py:284
+#: code:addons/logisfloo_base/models/poexpense.py:287
 #, python-format
 msgid "Less Payment"
 msgstr "Less Payment"
@@ -632,7 +705,7 @@ msgstr "Portable"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:114
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:122
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_name
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 #, python-format
@@ -670,13 +743,13 @@ msgid "Number of unread messages"
 msgstr "Nombre de messages non lus"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:349
+#: code:addons/logisfloo_base/models/purchase.py:362
 #, python-format
 msgid "Only one invoice with third party payer can be processed at a time."
 msgstr "Seulement une facture payée par un tiers peut être traitée à la fois."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:344
+#: code:addons/logisfloo_base/models/purchase.py:357
 #, python-format
 msgid "Only one payment can be processed at a time. Trying to post %s payments"
 msgstr "Seulement un paiement peut être traité à la fois. Il y a %s paiements dans cette demande."
@@ -745,6 +818,13 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:74
+#, python-format
+msgid "Pas d'achat autorisé aujourd'hui."
+msgstr "Pas d'achat autorisé aujourd'hui."
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_poexpense_form
 msgid "Pay"
 msgstr "Payer"
@@ -762,7 +842,7 @@ msgstr "Bénéficiaire"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:65
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:66
 #, python-format
 msgid "Payment"
 msgstr "Paiement"
@@ -785,7 +865,7 @@ msgstr "Le pourcentage de la marge doit être > 0."
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:116
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:124
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 #, python-format
 msgid "Phone"
@@ -891,7 +971,9 @@ msgstr "Montant d'achat"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_quantity
+#: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_quantity
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_poexpense_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Quantity"
 msgstr "Quantité"
@@ -907,6 +989,11 @@ msgstr "Remise"
 #: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_RebateAmount
 msgid "Rebate amount"
 msgstr "Montant de la remise"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.payment_set_reconciled
+msgid "Reconcile"
+msgstr "Lettrer"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_poexpense_form
@@ -952,7 +1039,7 @@ msgstr "Rechercher coût de transport"
 #. module: logisfloo_base
 #. openerp-web
 #: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:60
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:73
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:81
 #, python-format
 msgid "Select a customer"
 msgstr "Selectionner un membre"
@@ -992,7 +1079,7 @@ msgstr "Solde ardoise"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:113
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:121
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_number
 #: model:ir.ui.view,arch_db:logisfloo_base.Logisfloo_partner_search_view
 #, python-format
@@ -1050,7 +1137,7 @@ msgid "Tenant Logis/Floréal"
 msgstr "Locataire Logis/Floréal"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:415
+#: code:addons/logisfloo_base/models/purchase.py:431
 #, python-format
 msgid "Third Party Payment"
 msgstr "Paiement par tiers"
@@ -1072,7 +1159,7 @@ msgid "This account will be used to record the invoice adjustment"
 msgstr "Ce compte sera utilisé pour les corrections de facture"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/poexpense.py:134
+#: code:addons/logisfloo_base/models/poexpense.py:137
 #, python-format
 msgid "This expense amount is more than %2.2f %% of the purchase amount and cannot be paid. Ask an administrator to process the payment or reject this expense."
 msgstr "Cette note de frais dépasse la limite de %2.2f %% du prix d'achat et ne peut pas être payée. Rejetez cette note de frais ou demandez à un administrateur d'autoriser le paiement."
@@ -1127,6 +1214,7 @@ msgstr "Type de transport"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_transport_unit
+#: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_transport_unit
 msgid "Transport Unit"
 msgstr "Unité"
 
@@ -1197,7 +1285,7 @@ msgstr "Sélectionner ce menu pour chercher dans vos ticket selon\n"
 "            la réception des produits et contrôler la facture."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:413
+#: code:addons/logisfloo_base/models/purchase.py:429
 #, python-format
 msgid "Vendor Refund"
 msgstr "Remboursement fournisseur"
@@ -1208,9 +1296,29 @@ msgid "Vendors"
 msgstr "Fournisseurs"
 
 #. module: logisfloo_base
+#: model:account.account,name:logisfloo_base.a700010
+msgid "Vente salon de thé"
+msgstr "Vente salon de thé"
+
+#. module: logisfloo_base
 #: selection:product.uom.categ,type:0
 msgid "Volume"
 msgstr "Volume"
+
+#. module: logisfloo_base
+#: model:mail.template,subject:logisfloo_base.email_slate_warning
+msgid "Votre ardoise a un solde négatif"
+msgstr "Votre ardoise a un solde négatif"
+
+#. module: logisfloo_base
+#: model:mail.template,subject:logisfloo_base.email_expense_paid_notification
+msgid "Votre note de frais a été payée sur votre ardoise."
+msgstr "Votre note de frais a été payée sur votre ardoise."
+
+#. module: logisfloo_base
+#: model:mail.template,subject:logisfloo_base.email_slate_payment_notification
+msgid "Votre versement a été enregistré sur votre ardoise."
+msgstr "Votre versement a été enregistré sur votre ardoise."
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_website_message_ids
@@ -1228,15 +1336,10 @@ msgid "Weight"
 msgstr "Poids"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/poexpense.py:229
+#: code:addons/logisfloo_base/models/poexpense.py:232
 #, python-format
 msgid "You can only generate accounting entry for approved expense(s)."
 msgstr "Vous ne pouvez créer les écritures comptables que pour des note de frais confirmées."
-
-#. module: logisfloo_base
-#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
-msgid "km"
-msgstr "km"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_logisfloo_adjustinvoice_wizard
