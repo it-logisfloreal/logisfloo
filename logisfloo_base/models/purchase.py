@@ -335,10 +335,16 @@ class LogisflooPayment(models.Model):
         domain="[('deprecated', '=', False)]",
         help="This journal will be used to record the payment by third party",
         required=True)
+
+    @api.model
+    def _reconcile_slate_payments(self):
+        payments = self.env['account.payment'] 
+        for payment in payments.search([('journal_id.type', '=', 'cash'), ('state', '=','posted'), ('payment_type', '=','outbound')]):
+            _logger.info('Set payment to reconciled %s - %s', payment.journal_id.name, payment.name)
+            payment.state = 'reconciled'
             
     @api.multi
     def post(self):
-        _logger.info('Going through LogisflooPayment *************')
         # if there is a third party payment, then we only process one invoice at a time (I've no time to do more)    
         # if there is no third party payment, then we let it through the standard code       
         
@@ -370,6 +376,9 @@ class LogisflooPayment(models.Model):
             self.name=old_name
         else:
             super(LogisflooPayment,self).post()
+            
+        if self.journal_id.type == 'cash':
+            self.state = 'reconciled'
             
     def _create_tpty_payment_entry(self, amount):
         """ Create a journal entry corresponding to a payment, if the payment references invoice(s) they are reconciled.
