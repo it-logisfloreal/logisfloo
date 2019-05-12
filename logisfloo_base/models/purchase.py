@@ -336,6 +336,11 @@ class LogisflooPayment(models.Model):
         help="This journal will be used to record the payment by third party",
         required=True)
 
+    @api.multi
+    def set_reconciled(self):
+        if self.state == 'posted':
+            self.write({'state': 'reconciled'})
+    
     @api.model
     def _reconcile_slate_payments(self):
         payments = self.env['account.payment'] 
