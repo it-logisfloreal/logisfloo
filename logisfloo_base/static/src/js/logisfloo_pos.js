@@ -59,6 +59,7 @@ odoo.define('logisfloo_pos.pos_extension', function (require) {
             this._super();
             var self = this;
             this.$('.message-send').empty();
+            this.click_next();
         },
     })
 

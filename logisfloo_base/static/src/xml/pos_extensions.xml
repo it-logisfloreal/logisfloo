@@ -94,7 +94,15 @@
 				TODO : Add new box as a replacement to the payment-buttons using this new js code.
 		-->
 	
-		<t t-jquery=".payment-numpad" t-operation="replace"/>
+		<t t-jquery=".payment-numpad" t-operation="replace">
+			<div class='message'>
+				<h2>
+                    L'envoi du ticket se fait maintenant automatiquement en validant le paiement.
+                    <br/> <br/>
+					Après avoir valider le paiement, vous pouvez directement selectionner un autre client dans la même fenêtre.
+            	</h2>
+        	</div>
+		</t>
 		<t t-jquery=".payment-buttons" t-operation="replace"/>
 		<t t-jquery=".paymentmethods-container" t-operation="inner">
 			<t t-jquery="t[t-if='widget.pos.get_client()']" t-operation="replace"/>
