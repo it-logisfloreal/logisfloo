@@ -136,6 +136,15 @@ class Partner(models.Model):
     def get_slate_partner_ids(self):
         return str([partner.id for partner in self.slate_partners if partner.email]).replace('[', '').replace(']', '') 
 
+    def get_unrec_paid_pos_order_amount(self):
+        _logger.info('Calculate unreconciled pos order payment amount')
+        paid_amount=0
+        pos_orders= self.env['pos.order'].search([('partner_id', 'in', self.slate_partners.ids),('state','=','paid')])
+        for pos_order in pos_orders:
+            paid_amount=paid_amount+pos_order.amount_total
+        _logger.info('Found %d pos orders',len(pos_orders))
+        return paid_amount
+
     @api.one
     def get_balance_and_eater(self):
         self.ensure_one()
