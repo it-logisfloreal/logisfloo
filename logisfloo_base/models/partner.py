@@ -6,6 +6,7 @@ from openerp import models, fields, api, _
 from openerp.exceptions import ValidationError
 from openerp.addons.logisfloo_base.tools import concat_names
 
+import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -137,13 +138,29 @@ class Partner(models.Model):
         return str([partner.id for partner in self.slate_partners if partner.email]).replace('[', '').replace(']', '') 
 
     def get_unrec_paid_pos_order_amount(self):
-        _logger.info('Calculate unreconciled pos order payment amount')
         paid_amount=0
         pos_orders= self.env['pos.order'].search([('partner_id', 'in', self.slate_partners.ids),('state','=','paid')])
         for pos_order in pos_orders:
             paid_amount=paid_amount+pos_order.amount_total
-        _logger.info('Found %d pos orders',len(pos_orders))
         return paid_amount
+
+    def get_last_subscription_payment(self):
+        result={'date':"Aucun", 'credit':0}  
+        subscription_account_id = self.env.ref('logisfloo_base.a705010').id
+        subscription_product_id = self.env['product.product'].search([('name_template', '=', 'Cotisation Mensuelle'),('active','=',True)]).id
+        move_line=self.env['account.move.line'].search([('partner_id', 'in', self.slate_partners.ids),('account_id','=',subscription_account_id),('credit','>',0)],order='date desc', limit=1)
+        if move_line.id:
+            result={'date':move_line.date, 'credit':move_line.credit}
+        # We also need to check if there is one or more in the unreconciled purchases.
+        # We could have looked only at the pos_orders, but scanning through all the lines is ineficient.
+        # This is particularly the case when no subscription has been paid yet has all the lines of all teh orders would have to be scanned.
+        pos_orders= self.env['pos.order'].search([('partner_id', 'in', self.slate_partners.ids),('state','=','paid')],order='date_order asc')
+        for pos_order in pos_orders:
+            for line in pos_order.lines:
+                if line.product_id.id==subscription_product_id:
+                    date=datetime.datetime.strptime(pos_order.date_order,'%Y-%m-%d %H:%M:%S').date()
+                    result={'date':date, 'credit':line.price_subtotal_incl}   
+        return [result['date'], result['credit']]
 
     @api.one
     def get_balance_and_eater(self):

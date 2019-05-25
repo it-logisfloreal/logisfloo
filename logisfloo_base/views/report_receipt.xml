@@ -63,6 +63,24 @@ post their account.lines inreal time.
 	        </table>
 
 	        <table class="table table-condensed">
+				<thead>
+				    <tr>
+				        <th>Last subscription payment</th>
+				        <th class="text-right">Amount</th>
+				    </tr>
+				</thead>
+				<tbody>
+					<t t-set="last_subscription_payment" t-value="o.partner_id.get_last_subscription_payment()"/>
+					<t t-set="date" t-value="last_subscription_payment[0]"/>
+  					<t t-set="credit" t-value="last_subscription_payment[1]"/>
+					<td><span t-esc="date"/></td>
+					<td class="text-right">
+						<strong><span t-esc="formatLang(credit, currency_obj=res_company.currency_id)"/></strong>
+					</td>
+                </tbody>
+            </table>
+
+	        <table class="table table-condensed">
 	        	<strong>
 	        		<span> Members of slate: </span>
 	        		<span t-field="o.partner_id.slate_number"/>
