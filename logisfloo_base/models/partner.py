@@ -20,6 +20,7 @@ class Partner(models.Model):
     subscription_date = fields.Date('Subscription Date')
     subscription_event = fields.Char('Subscription Event', size=40)
     floreal_logis_membership = fields.Selection([('logis', 'Logis'),('floreal','Floréal')], string="Tenant Logis/Floréal")
+    logisfloreal_tenant = fields.Boolean('Tenant Logis-Floréal')
     add_to_mailing_list = fields.Boolean('Add to Mailing List')
     slate_balance = fields.Monetary(string='Slate Balance', compute='get_slate_balance', search='search_by_slate_balance')  
     slate_partners = fields.One2many("res.partner", "slate_number", domain=[],compute='get_slate_partners')   
