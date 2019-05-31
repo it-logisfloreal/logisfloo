@@ -73,7 +73,6 @@
 				<field name="subscription_event"/>
 				<field name="add_to_mailing_list"/>
 				<field name="logisfloreal_tenant"/>
-				<field name="floreal_logis_membership"/>
 			</field>
 			
 			<field name="property_account_payable_id" position="after">
