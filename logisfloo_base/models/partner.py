@@ -170,7 +170,7 @@ class Partner(models.Model):
         move_lines = self.env['account.move.line'].search([('account_id', '=', account_id), ('partner_id', 'in', self.slate_partners.ids)])
         credit = sum([m.credit for m in move_lines])
         debit = sum([m.debit for m in move_lines])
-        return str(round(credit - debit, 2))   
+        return str(credit - debit - self.get_unrec_paid_pos_order_amount())
     
     @api.multi
     def show_slate_move_lines(self):
