@@ -27,22 +27,26 @@ post their account.lines inreal time.
 				    </tr>
 				</thead>
 				<tbody>
+				    <t t-set="total_paid_amount" t-value="0.00"/>
+				    <t t-foreach="get_journal_amt(o)" t-as="d">
+			        	<t t-set="total_paid_amount" t-value="total_paid_amount + d['amt']"/>
+				    </t>
+				    <t t-set="unrec_paid_amount" t-value="o.partner_id.get_unrec_paid_pos_order_amount()"/>
+				    <t t-set="Opening_Balance" t-value="o.partner_id.slate_balance - unrec_paid_amount + total_paid_amount"/>
 				    <tr>
 				        <td>
 				            <strong>Opening Balance</strong>
 				        </td>
 				        <td class="text-right">
-				        	<strong><span t-field="o.partner_id.slate_balance"/></strong>
+				        	<strong><span t-esc="formatLang(Opening_Balance, currency_obj=res_company.currency_id)"/></strong>
 				        </td>
 				    </tr>
-				    <t t-set="total_paid_amount" t-value="0.00"/>
 				    <tr t-foreach="get_journal_amt(o)" t-as="d">
 				        <td>
 				            Paid
 				        </td>
 				        <td class="text-right">
 				        	<t t-set="paid_amount" t-value="- d['amt']"/>
-				        	<t t-set="total_paid_amount" t-value="total_paid_amount + d['amt']"/>
 				            <span t-esc="formatLang(paid_amount, currency_obj=res_company.currency_id)"/>
 				        </td>
 				    </tr>
@@ -51,12 +55,30 @@ post their account.lines inreal time.
 				            <strong>Closing Balance</strong>
 				        </td>
 				        <td class="text-right">
-				        	<t t-set="Final_Balance" t-value="o.partner_id.slate_balance - total_paid_amount"/>
+				        	<t t-set="Final_Balance" t-value="Opening_Balance - total_paid_amount"/>
 				        	<strong><span t-esc="formatLang(Final_Balance, currency_obj=res_company.currency_id)"/></strong>
 				        </td>
 				    </tr>		
 				</tbody>
 	        </table>
+
+	        <table class="table table-condensed">
+				<thead>
+				    <tr>
+				        <th>Last subscription payment</th>
+				        <th class="text-right">Amount</th>
+				    </tr>
+				</thead>
+				<tbody>
+					<t t-set="last_subscription_payment" t-value="o.partner_id.get_last_subscription_payment()"/>
+					<t t-set="date" t-value="last_subscription_payment[0]"/>
+  					<t t-set="credit" t-value="last_subscription_payment[1]"/>
+					<td><span t-esc="date"/></td>
+					<td class="text-right">
+						<strong><span t-esc="formatLang(credit, currency_obj=res_company.currency_id)"/></strong>
+					</td>
+                </tbody>
+            </table>
 
 	        <table class="table table-condensed">
 	        	<strong>

@@ -213,7 +213,13 @@
 		       	</group>
 			</xpath>
         	<field name="order_line" position="after"> 
-        		<group name="buttons_group" class="oe_subtotal_footer oe_right">
+        		<group name="buttons_group" class="oe_subtotal_footer oe_right" col="4">
+					<button string="-10%" 
+						states="draft,proforma2,receipt"
+						type="object" 
+						name="rebate10pct" 
+						context="{'amount_total': amount_total, 'Description' : 'Remise'}"
+						help="Compute 10% rebate on total."/>
 					<button string="Rebate" 
 						states="draft,proforma2,receipt"
 						type="action" 
@@ -226,6 +232,12 @@
 						name="%(action_calcadjustpo_wizard)d" 
 						context="{'amount_total': amount_total, 'Description' : 'Arrondi'}"
 						help="Create invoice line for a rounding difference."/>
+					<button string="Reset" 
+						states="draft,proforma2,receipt"
+						type="object" 
+						name="reset_rebate_rounding" 
+						context="{'amount_total': amount_total, 'Description' : 'Remise'}"
+						help="Reset rounding and rebate calculation."/>
 				</group>
 			</field>        	   	
         	<field name="amount_tax" position="after">

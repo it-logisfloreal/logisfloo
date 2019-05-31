@@ -6,6 +6,7 @@ from openerp import models, fields, api, _
 from openerp.exceptions import ValidationError
 from openerp.addons.logisfloo_base.tools import concat_names
 
+import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -19,6 +20,7 @@ class Partner(models.Model):
     subscription_date = fields.Date('Subscription Date')
     subscription_event = fields.Char('Subscription Event', size=40)
     floreal_logis_membership = fields.Selection([('logis', 'Logis'),('floreal','Floréal')], string="Tenant Logis/Floréal")
+    logisfloreal_tenant = fields.Boolean('Tenant Logis-Floréal')
     add_to_mailing_list = fields.Boolean('Add to Mailing List')
     slate_balance = fields.Monetary(string='Slate Balance', compute='get_slate_balance', search='search_by_slate_balance')  
     slate_partners = fields.One2many("res.partner", "slate_number", domain=[],compute='get_slate_partners')   
@@ -135,6 +137,31 @@ class Partner(models.Model):
 
     def get_slate_partner_ids(self):
         return str([partner.id for partner in self.slate_partners if partner.email]).replace('[', '').replace(']', '') 
+
+    def get_unrec_paid_pos_order_amount(self):
+        paid_amount=0
+        pos_orders= self.env['pos.order'].search([('partner_id', 'in', self.slate_partners.ids),('state','=','paid')])
+        for pos_order in pos_orders:
+            paid_amount=paid_amount+pos_order.amount_total
+        return paid_amount
+
+    def get_last_subscription_payment(self):
+        result={'date':"Aucun", 'credit':0}  
+        subscription_account_id = self.env.ref('logisfloo_base.a705010').id
+        subscription_product_id = self.env['product.product'].search([('name_template', '=', 'Cotisation Mensuelle'),('active','=',True)]).id
+        move_line=self.env['account.move.line'].search([('partner_id', 'in', self.slate_partners.ids),('account_id','=',subscription_account_id),('credit','>',0)],order='date desc', limit=1)
+        if move_line.id:
+            result={'date':move_line.date, 'credit':move_line.credit}
+        # We also need to check if there is one or more in the unreconciled purchases.
+        # We could have looked only at the pos_orders, but scanning through all the lines is ineficient.
+        # This is particularly the case when no subscription has been paid yet has all the lines of all teh orders would have to be scanned.
+        pos_orders= self.env['pos.order'].search([('partner_id', 'in', self.slate_partners.ids),('state','=','paid')],order='date_order asc')
+        for pos_order in pos_orders:
+            for line in pos_order.lines:
+                if line.product_id.id==subscription_product_id:
+                    date=datetime.datetime.strptime(pos_order.date_order,'%Y-%m-%d %H:%M:%S').date()
+                    result={'date':date, 'credit':line.price_subtotal_incl}   
+        return [result['date'], result['credit']]
 
     @api.one
     def get_balance_and_eater(self):

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c-20181230\n"
+"Project-Id-Version: Odoo Server 9.0c-20190120\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-12 19:52+0000\n"
-"PO-Revision-Date: 2019-05-12 19:52+0000\n"
+"POT-Creation-Date: 2019-05-31 08:22+0000\n"
+"PO-Revision-Date: 2019-05-31 08:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -69,18 +69,23 @@ msgid "${object.pos_reference}"
 msgstr "${object.pos_reference}"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/partner.py:51
-#: code:addons/logisfloo_base/models/partner.py:59
+#: code:addons/logisfloo_base/models/partner.py:53
+#: code:addons/logisfloo_base/models/partner.py:61
 #, python-format
 msgid "%s already exists in the database, but it is archived. Search the Archived records and unarchive it."
 msgstr "Une fiche pour %s existe déjà dans la base de données, mais est archivée. Recherchez la dans les archives et reactivez la."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/partner.py:49
-#: code:addons/logisfloo_base/models/partner.py:57
+#: code:addons/logisfloo_base/models/partner.py:51
+#: code:addons/logisfloo_base/models/partner.py:59
 #, python-format
 msgid "%s already exists in the database."
 msgstr "Une fiche pour %s existe déjà dans la base de données."
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
+msgid "-10%"
+msgstr "-10%"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
@@ -159,7 +164,7 @@ msgstr "Ajouter à la famille"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:123
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:131
 #, python-format
 msgid "Address"
 msgstr "Adresse"
@@ -204,6 +209,13 @@ msgid "Amount on invoice"
 msgstr "Montant indiqué sur la facture du fournisseur"
 
 #. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:101
+#, python-format
+msgid "Après avoir valider le paiement, vous pouvez directement selectionner un autre client dans la même fenêtre."
+msgstr "Après avoir valider le paiement, vous pouvez directement selectionner un autre client dans la même fenêtre."
+
+#. module: logisfloo_base
 #: model:account.account,name:logisfloo_base.a446100
 msgid "Ardoise"
 msgstr "Ardoise"
@@ -214,6 +226,11 @@ msgstr "Ardoise"
 #, python-format
 msgid "Balance:"
 msgstr "Solde:"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Relevé bancaire"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_account_bank_statement_line
@@ -235,7 +252,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/logisfloo_pos.py:14
+#: code:addons/logisfloo_base/models/logisfloo_pos.py:18
 #, python-format
 msgid "Cannot send the ticket, no email address found on the client"
 msgstr "Le ticket n'est pas envoyé, le client n'a pas d'adresse couriel configurée"
@@ -274,6 +291,11 @@ msgstr "Clôture Ardoise"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_company_id
 msgid "Company"
 msgstr "Société"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
+msgid "Compute 10% rebate on total."
+msgstr "Calculer 10% de remise sur le total."
 
 #. module: logisfloo_base
 #: model:ir.actions.act_window,name:logisfloo_base.action_calcadjust_wizard
@@ -355,13 +377,13 @@ msgid "Currency"
 msgstr "Devise"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:424
+#: code:addons/logisfloo_base/models/purchase.py:436
 #, python-format
 msgid "Customer Payment"
 msgstr "Paiement client"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:426
+#: code:addons/logisfloo_base/models/purchase.py:438
 #, python-format
 msgid "Customer Refund"
 msgstr "Remboursement client"
@@ -454,7 +476,7 @@ msgid "Enter the first partner and click update."
 msgstr "Selectionner un autre membre de la famille et cliquer sur Mise à jour."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/logisfloo_pos.py:12
+#: code:addons/logisfloo_base/models/logisfloo_pos.py:16
 #, python-format
 msgid "Error: no order found"
 msgstr "Error: aucun achat trouvé"
@@ -627,6 +649,13 @@ msgid "Keep empty to use the current date"
 msgstr "Laissez vide pour utiliser la date courante"
 
 #. module: logisfloo_base
+#. openerp-web
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:99
+#, python-format
+msgid "L'envoi du ticket se fait maintenant automatiquement en validant le paiement."
+msgstr "L'envoi du ticket se fait maintenant automatiquement en validant le paiement."
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_last_post
 msgid "Last Message Date"
 msgstr "Date du dernier message"
@@ -668,6 +697,11 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
+msgid "Last subscription payment"
+msgstr "Dernière cotisation payée"
+
+#. module: logisfloo_base
 #: code:addons/logisfloo_base/models/poexpense.py:287
 #, python-format
 msgid "Less Payment"
@@ -705,7 +739,7 @@ msgstr "Portable"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:122
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:130
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_name
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 #, python-format
@@ -743,13 +777,13 @@ msgid "Number of unread messages"
 msgstr "Nombre de messages non lus"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:362
+#: code:addons/logisfloo_base/models/purchase.py:374
 #, python-format
 msgid "Only one invoice with third party payer can be processed at a time."
 msgstr "Seulement une facture payée par un tiers peut être traitée à la fois."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:357
+#: code:addons/logisfloo_base/models/purchase.py:369
 #, python-format
 msgid "Only one payment can be processed at a time. Trying to post %s payments"
 msgstr "Seulement un paiement peut être traité à la fois. Il y a %s paiements dans cette demande."
@@ -865,7 +899,7 @@ msgstr "Le pourcentage de la marge doit être > 0."
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:124
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:132
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 #, python-format
 msgid "Phone"
@@ -1008,12 +1042,22 @@ msgstr "Rejeté"
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Reopen the purchase order."
-msgstr "Rouvrir le bon de commande."
+msgstr "Réouvrir le bon de commande."
 
 #. module: logisfloo_base
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_menu_purchase_rfq
 msgid "Requests for Quotation"
-msgstr "Brouillons"
+msgstr "Demande de prix"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
+msgid "Reset"
+msgstr "Mise à 0"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
+msgid "Reset rounding and rebate calculation."
+msgstr "Mise à 0 de la remise et de l'arroni."
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
@@ -1079,7 +1123,7 @@ msgstr "Solde ardoise"
 
 #. module: logisfloo_base
 #. openerp-web
-#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:121
+#: code:addons/logisfloo_base/static/src/xml/pos_extensions.xml:129
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_slate_number
 #: model:ir.ui.view,arch_db:logisfloo_base.Logisfloo_partner_search_view
 #, python-format
@@ -1132,12 +1176,17 @@ msgid "Technical field holding the number given to the expense, automatically se
 msgstr "Technical field holding the number given to the expense, automatically set when the expense is validated then stored to set the same number again if the invoice is cancelled, set to draft and re-validated."
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_logisfloreal_tenant
+msgid "Tenant Logis-Floréal"
+msgstr "Locataire Logis-Floréal"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_floreal_logis_membership
 msgid "Tenant Logis/Floréal"
 msgstr "Locataire Logis/Floréal"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:431
+#: code:addons/logisfloo_base/models/purchase.py:443
 #, python-format
 msgid "Third Party Payment"
 msgstr "Paiement par tiers"
@@ -1185,7 +1234,7 @@ msgid "Ticket ${object.pos_reference}"
 msgstr "Ticket ${object.pos_reference}"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/logisfloo_pos.py:17
+#: code:addons/logisfloo_base/models/logisfloo_pos.py:21
 #, python-format
 msgid "Ticket sent"
 msgstr "Ticket envoyé"
@@ -1285,7 +1334,7 @@ msgstr "Sélectionner ce menu pour chercher dans vos ticket selon\n"
 "            la réception des produits et contrôler la facture."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:429
+#: code:addons/logisfloo_base/models/purchase.py:441
 #, python-format
 msgid "Vendor Refund"
 msgstr "Remboursement fournisseur"

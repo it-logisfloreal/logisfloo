@@ -170,7 +170,19 @@ class LogisflooPurchaseOrder(models.Model):
     #@api.depends('purchase_id')
     def _count_expenses(self):
         self.expenses_count=len(self.poexpense_ids)
-        
+
+
+    @api.multi
+    def rebate10pct(self):
+        self.RebateAmount = (self.amount_untaxed + self.amount_tax)*-0.1
+        self._update_adjusted_amounts()
+
+    @api.multi
+    def reset_rebate_rounding(self):
+        self.RebateAmount = 0
+        self.RoundingAmount = 0
+        self._update_adjusted_amounts()
+                
 class LogisflooPurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
     
