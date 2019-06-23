@@ -11,7 +11,6 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
-
     _inherit = 'res.partner'
 
     first_name = fields.Char('First Name')
@@ -203,3 +202,17 @@ class LogisflooSetSlateNumberWizard(models.TransientModel):
                     
     first_partner= fields.Many2one('res.partner', string='First Partner', change_default=True,
         required=True, track_visibility='always')
+    
+class ResPartnerBank(models.Model):
+    _inherit = 'res.partner.bank'
+
+    @api.model
+    def set_account_holder(self):
+        AnonymousBankAccount=self.env['res.partner.bank'].search([('partner_id', '=', False)])
+        for account in AnonymousBankAccount:
+            stmntline=self.env['account.bank.statement.line'].search([('bank_account_id','=',account.id)],order='date desc', limit=1)
+            if stmntline.partner_id:
+                account.partner_id=stmntline.partner_id
+
+
+    
