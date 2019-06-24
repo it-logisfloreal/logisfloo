@@ -27,6 +27,27 @@
  		view_id="logisfloo_setSlateNumber_wizard_form"
  		view_mode="form" 
  		target="new" />    
+
+ 	<record model="ir.ui.view" id="logisfloo_email_wizard_form">
+        <field name="name">logisfloo.email.wizard.form</field>
+        <field name="model">logisfloo.email.wizard</field>
+        <field name="arch" type="xml">
+        	<form>    		
+        		<footer>
+        			<button type="object" name="no" string="do not send" class="oe_highlight"/>
+        			<button type="object" name="yes" string="yes send it" class="oe_right oe_highlight"/>
+        		</footer>
+        	</form>
+        </field>
+    </record> 
+    
+ 	<act_window id="action_confirmsendemail_wizard" 
+ 		name="Do you really want to send this email ?" 
+ 		res_model="logisfloo.email.wizard" 
+ 		src_model="res.partner"
+ 		view_id="logisfloo_email_wizard_form"
+ 		view_mode="form" 
+ 		target="new" />
  
 <!-- forms and views -->		
 	<record model="ir.ui.view" id="logisfloo_partner_form_view">
@@ -66,6 +87,11 @@
 						</span>
 					</div>
 				</button>
+                <button class="oe_stat_button" type="action" icon="fa-envelope-o" name="%(action_confirmsendemail_wizard)d" 
+                	attrs="{'invisible':[('customer', '!=', True)]}" >
+                    <field name="welcome_email" widget="boolean_button" 
+                    	options='{"terminology": "send"}'/>
+                </button>
 			</xpath>
 			
 			<field name="website" position="after">
