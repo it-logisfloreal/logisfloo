@@ -87,11 +87,13 @@
 						</span>
 					</div>
 				</button>
+<!-- 	This is not ready yet			
+				
                 <button class="oe_stat_button" type="action" icon="fa-envelope-o" name="%(action_confirmsendemail_wizard)d" 
                 	attrs="{'invisible':[('customer', '!=', True)]}" >
                     <field name="welcome_email" widget="boolean_button" 
                     	options='{"terminology": "send"}'/>
-                </button>
+                </button> -->
 			</xpath>
 			
 			<field name="website" position="after">
