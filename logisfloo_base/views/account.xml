@@ -144,5 +144,32 @@
             </xpath>
         </field>
     </record>
+
+ 	<record model="ir.ui.view" id="logisfloo_changeaccount_wizard_form">
+        <field name="name">logisfloo.changeaccount.wizard.form</field>
+        <field name="model">logisfloo.changeaccount.wizard</field>
+        <field name="arch" type="xml">
+        	<form>   	
+	        	<group>
+	        		<field name="journal_id" style="width:50%"/>
+	        		<field name="destination_account" style="width:50%"/>
+	        	</group>
+	        	<field name="narration" colspan="4" placeholder="Add an internal note..." nolabel="1" height="50"/>        			
+        		<footer>
+        			<button type="object" name="update" string="Update" class="oe_highlight"/>
+        			<button special="cancel" string="Cancel"/>
+        		</footer>
+        	</form>
+        </field>
+    </record> 
+    
+ 	<act_window id="action_changeaccount_wizard" 
+ 		name="Change account" 
+ 		res_model="logisfloo.changeaccount.wizard" 
+ 		src_model="account.move.line"
+ 		view_id="logisfloo_changeaccount_wizard_form"
+ 		view_mode="form" 
+ 		multi="True"
+ 		target="new" />
     	
 </odoo>

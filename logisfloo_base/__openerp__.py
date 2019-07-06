@@ -14,7 +14,7 @@
     'website': "https://github.com/logisfloo",
 
     'category': 'Logisfloo',
-    'version': '1.6.8', 
+    'version': '1.6.9', 
 
     'depends': [
         'stock',
@@ -38,6 +38,7 @@
         'data/default_values.xml',
         'data/email.xml',
         'data/data_updates.xml',
+        'views/assets.xml',
         'views/partner.xml',
         'views/product.xml',
         'views/report_receipt.xml',

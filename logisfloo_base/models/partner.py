@@ -11,7 +11,6 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
-
     _inherit = 'res.partner'
 
     first_name = fields.Char('First Name')
@@ -19,9 +18,9 @@ class Partner(models.Model):
     slate_number = fields.Integer('Slate Number')
     subscription_date = fields.Date('Subscription Date')
     subscription_event = fields.Char('Subscription Event', size=40)
-    floreal_logis_membership = fields.Selection([('logis', 'Logis'),('floreal','Floréal')], string="Tenant Logis/Floréal")
     logisfloreal_tenant = fields.Boolean('Tenant Logis-Floréal')
     add_to_mailing_list = fields.Boolean('Add to Mailing List')
+    welcome_email = fields.Boolean('Email de bienvenue envoyé', default=False)
     slate_balance = fields.Monetary(string='Slate Balance', compute='get_slate_balance', search='search_by_slate_balance')  
     slate_partners = fields.One2many("res.partner", "slate_number", domain=[],compute='get_slate_partners')   
     property_account_slate_id = fields.Many2one(
@@ -126,6 +125,18 @@ class Partner(models.Model):
                     # Cannot contact any slate member by mail, send notification to team
                     template = self.env.ref('logisfloo_base.email_slate_warning_nocontact')
                     self.env['mail.template'].browse(template.id).send_mail(partner.id)
+
+    @api.one
+    def send_welcome_email(self):
+        _logger.info('Send welcome email')
+        template = self.env.ref('logisfloo_base.welcome_email')
+        self.env['mail.template'].browse(template.id).send_mail(self.id)
+        self.welcome_email=True
+
+    # Send update email -> should be an option on the form when updating
+    
+    # Send contact details vérification email to all clients in one go -> to be used as automated action
+    # pas nécéssaire car les données sont sur le ticket de caisse !!!!
                         
     @api.one
     def get_slate_partners(self):
@@ -171,7 +182,7 @@ class Partner(models.Model):
         move_lines = self.env['account.move.line'].search([('account_id', '=', account_id), ('partner_id', 'in', self.slate_partners.ids)])
         credit = sum([m.credit for m in move_lines])
         debit = sum([m.debit for m in move_lines])
-        return str(round(credit - debit, 2))   
+        return str(credit - debit - self.get_unrec_paid_pos_order_amount())
     
     @api.multi
     def show_slate_move_lines(self):
@@ -204,3 +215,28 @@ class LogisflooSetSlateNumberWizard(models.TransientModel):
                     
     first_partner= fields.Many2one('res.partner', string='First Partner', change_default=True,
         required=True, track_visibility='always')
+    
+class ResPartnerBank(models.Model):
+    _inherit = 'res.partner.bank'
+
+    @api.model
+    def set_account_holder(self):
+        AnonymousBankAccount=self.env['res.partner.bank'].search([('partner_id', '=', False)])
+        for account in AnonymousBankAccount:
+            stmntline=self.env['account.bank.statement.line'].search([('bank_account_id','=',account.id)],order='date desc', limit=1)
+            if stmntline.partner_id:
+                account.partner_id=stmntline.partner_id
+
+class LogisflooEmailWizard(models.TransientModel):
+    _name = 'logisfloo.email.wizard'
+
+    yes_no = fields.Char(default='Do you want to proceed?')
+
+    @api.multi
+    def yes(self):
+        self.env['res.partner'].browse(self.env.context.get('active_id')).send_welcome_email()
+
+    @api.multi
+    def no(self):
+        pass # don't do anything stupid
+    
