@@ -171,5 +171,16 @@
  		view_mode="form" 
  		multi="True"
  		target="new" />
+
+	<record model="ir.ui.view" id="logisfloo_view_bank_statement_form">
+        <field name="name">logisfloo.account.bank.statement.form</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form" />
+        <field name="arch" type="xml"> 
+        	<field name="state" position="before"> 
+        		<button name="reopen" string="Reopen" type="object" class="oe_highlight" attrs="{'invisible':[('state', '==', 'open')]}" groups="logisfloo_base.group_logisfloo_admin"/>
+        	</field>
+		</field>        	  	
+    </record>
     	
 </odoo>

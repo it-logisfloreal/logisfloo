@@ -61,7 +61,6 @@ class AccountBankStatementLine(models.Model):
         mystring=str(excluded_ids).strip('[]')
         _logger.info('Excluded ids %s',mystring)
         return super(AccountBankStatementLine,self).get_move_lines_for_reconciliation_widget(excluded_ids, strparam, offset, limit)
-    
 
 class AccountBankStatement(models.Model):
     _inherit = "account.bank.statement"
@@ -73,5 +72,9 @@ class AccountBankStatement(models.Model):
         sorted_st_lines=self.env['account.bank.statement.line'].search([('id', 'in', st_lines_ids)],order='amount desc')
         result['st_lines_ids']=sorted_st_lines.ids
         return result
+
+    @api.multi
+    def reopen(self):    
+        self.write({'state': 'open'})
             
     
