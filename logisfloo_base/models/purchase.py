@@ -5,6 +5,7 @@ from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.exceptions import UserError
 from openerp import exceptions
 from datetime import datetime
+from openerp.exceptions import ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -39,6 +40,26 @@ class LogisflooPurchaseOrder(models.Model):
         ('cancel', 'Cancelled')
         ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
+    def isrefduplicate(self, ref):
+        purchase_orders = self.env['purchase.order'].search([('partner_ref', '=',ref)])
+        _logger.info('Checking for duplicate purchase_order ref: %s and value %d', ref, len(purchase_orders))
+        if len(purchase_orders)>0:
+            return True
+        else:
+            return False
+ 
+    @api.multi
+    def write(self, values):
+        if self.partner_ref != values.get('partner_ref') and self.isrefduplicate(values.get('partner_ref')):
+            raise ValidationError(_('The ticket number %s already exists in the database.') % values.get('partner_ref'))
+        return super(LogisflooPurchaseOrder, self).write(values)
+
+    @api.model
+    def create(self, values):
+        if self.isrefduplicate(values.get('partner_ref')):
+            raise ValidationError(_('The ticket number %s already exists in the database.') % values.get('partner_ref'))
+        return super(LogisflooPurchaseOrder, self).create(values)
+  
     @api.one
     @api.depends('quantity', 'transport_type_id')
     def _compute_expense_amount(self):
