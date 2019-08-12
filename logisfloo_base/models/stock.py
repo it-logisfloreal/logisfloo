@@ -1,5 +1,5 @@
  # -*- coding: utf-8 -*-
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from dateutil import relativedelta
 import json
 import time
@@ -168,11 +168,19 @@ class LogisflooStockMove(models.Model):
             picking_obj.write(cr, uid, done_picking, {'date_done': time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)}, context=context)
         return True
 
-class LogisflooStockInventory(osv.osv):
+class LogisflooStockInventory(models.Model):
     _inherit = "stock.inventory"
 
-    _columns = {
-        'date': fields.datetime('Inventory Date', required=True, readonly=False, help="The date that will be used for the stock level check of the products and the validation of the stock move related to this inventory."),
-    }
+    @api.multi
+    def force_to_accounting_date(self):
+        # Forces all dates in records related to this inventory to the accounting date
+        # Set the time to 23h 59min 59sec CET time -> 21h for UTC in summer time (time is stored in DB in UTC)
+        new_datetime = datetime.strptime(self.accounting_date, DEFAULT_SERVER_DATE_FORMAT) + timedelta(hours=21, minutes=59, seconds=59)
+        moves=self.env['stock.move'].search([('inventory_id','=',self.id)])
+        for move in moves:
+            move.date = new_datetime
+            move.date_expected = new_datetime
+        self.date = new_datetime
+
  
  

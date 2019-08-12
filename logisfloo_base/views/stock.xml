@@ -11,4 +11,21 @@
         
         </field>
      </record>
+
+    <record model="ir.ui.view" id="logisfloo_view_inventory_form">
+        <field name="name">logisfloo.view.inventory.form</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="arch" type="xml">
+            <button name="action_done" position="before">
+                <button name="force_to_accounting_date" type="object" string="Force date" 
+        				attrs="{'invisible':[('state','not in',['done'])]}"
+                        help="Force move date to accounting date."/>
+            </button>
+            <field name="date" position="attributes">
+                <attribute name="attrs">{'readonly': [('state','in',['confirmed','done'])]}</attribute>
+            </field>       
+        </field>
+     </record>
+
 </odoo>
