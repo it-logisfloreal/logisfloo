@@ -62,8 +62,11 @@
         <field name="arch" type="xml">
         	<field name="standard_price" position="replace">
         		<field name="internal_ref"/>
+                <field name="number_of_suppliers"/>
         		<field name="list_price"/>
         		<field name="total_with_margin"/>
+                <field name="standard_price"/>
+                <field name="actual_margin"/>                
         	</field>
         	<field name="uom_id" position="attributes">
         		<attribute name="invisible">0</attribute>
