@@ -40,23 +40,32 @@ class LogisflooPurchaseOrder(models.Model):
         ('cancel', 'Cancelled')
         ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
-    def isrefduplicate(self, ref):
-        purchase_orders = self.env['purchase.order'].search([('partner_ref', '=',ref)])
-        _logger.info('Checking for duplicate purchase_order ref: %s and value %d', ref, len(purchase_orders))
-        if len(purchase_orders)>0:
+    def ispartnerrefduplicate(self, values):
+        partner_id = values.get('partner_id') or self.partner_id.id
+        company_id = values.get('company_id') or self.company_id.id
+        isShopReceipt = values.get('isShopReceipt') or self.isShopReceipt
+        search_domain = [
+            ('isShopReceipt', '=', True),
+            ('id', '!=', self.id),
+            ('partner_ref', '=', values.get('partner_ref')), 
+            ('partner_id', '=', partner_id), 
+            ('company_id', '=', company_id)
+            ]
+        search_results = self.env['purchase.order'].search(search_domain)
+        if isShopReceipt and len(search_results) > 0:
             return True
         else:
             return False
  
     @api.multi
     def write(self, values):
-        if self.partner_ref != values.get('partner_ref') and self.isrefduplicate(values.get('partner_ref')):
+        if self.partner_ref != values.get('partner_ref') and self.ispartnerrefduplicate(values):
             raise ValidationError(_('The ticket number %s already exists in the database.') % values.get('partner_ref'))
         return super(LogisflooPurchaseOrder, self).write(values)
 
     @api.model
     def create(self, values):
-        if self.isrefduplicate(values.get('partner_ref')):
+        if self.ispartnerrefduplicate(values):
             raise ValidationError(_('The ticket number %s already exists in the database.') % values.get('partner_ref'))
         return super(LogisflooPurchaseOrder, self).create(values)
   
