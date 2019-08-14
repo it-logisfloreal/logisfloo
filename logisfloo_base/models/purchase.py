@@ -265,6 +265,30 @@ class LogisflooAccountInvoice(models.Model):
         data['discount'] = line.discount or 0.0
         return data
  
+    @api.multi
+    def invoice_validate(self):
+        # Override to update product standard price present in the invoices
+        data=super(LogisflooAccountInvoice,self).invoice_validate()
+        vendor_invoices=[x for x in self if x.type == 'in_invoice']
+        for invoice in vendor_invoices:
+            for line in self.env['account.invoice.line'].search([('invoice_id','=',invoice.id),('quantity', '>',0.0)]):
+                product=self.env['product.product'].search([('id','=',line.product_id.id)])            
+                template=self.env['product.template'].search([('id','=',product.product_tmpl_id.id)])
+                currency = template.currency_id
+                tax_ratio = 0
+                suppliers = template._get_main_supplier_info()
+                if(len(suppliers) > 0):
+                    for taxes_id in template.supplier_taxes_id:
+                        tax_ratio += currency.round(taxes_id._compute_amount(1.0, 1.0)) 
+                    tax_ratio += 1
+                else:
+                    tax_ratio = 1
+                tax_unit_ratio = (template.uom_po_id.factor/template.uom_id.factor)*tax_ratio
+                invoice_unit_price=line.price_subtotal/line.quantity * tax_unit_ratio
+                if invoice_unit_price != product.standard_price:
+                    product.standard_price=invoice_unit_price        
+        return data
+ 
 class LogisflooCalcAdjustWizard(models.TransientModel):
     _name = 'logisfloo.calcadjust.wizard'
         
