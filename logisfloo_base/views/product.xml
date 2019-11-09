@@ -159,5 +159,31 @@
         	</field>
         </field>
     </record>
-    
+
+<!-- Customer price history -->
+
+    <record model="ir.ui.view" id="logisfloo_customerpricehistory_tree">
+        <field name="name">logisfloo.customerpricehistory.tree</field>
+        <field name="model">product.customer.price.history</field>
+        <field name="arch" type="xml">
+	        <tree default_order="datetime desc">
+	       		<field name="datetime" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+                <field name="price"/>
+	         </tree>
+        </field>       
+    </record>
+
+<!-- Standard price history -->
+
+    <record model="ir.ui.view" id="logisfloo_productpricehistory_tree">
+        <field name="name">logisfloo.productpricehistory.tree</field>
+        <field name="model">product.price.history</field>
+        <field name="arch" type="xml">
+	        <tree default_order="datetime desc">
+	       		<field name="datetime" widget="datetime" options="{'format': 'dd/MM/yyyy'}"/>
+                <field name="cost"/>
+	         </tree>
+        </field>       
+    </record>
+
 </odoo>

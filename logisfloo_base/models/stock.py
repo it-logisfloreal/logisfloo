@@ -1,19 +1,15 @@
  # -*- coding: utf-8 -*-
+import logging
+import math
+import time
+import openerp.addons.decimal_precision as dp
+
 from datetime import date, datetime, timedelta
 from dateutil import relativedelta
-import json
-import time
-import sets
-
-import openerp
-from openerp.osv import fields, osv
+from openerp import SUPERUSER_ID, models, fields, api
 from openerp.tools.float_utils import float_compare, float_round
 from openerp.tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
-from openerp import SUPERUSER_ID, api, models
-import openerp.addons.decimal_precision as dp
-from openerp.addons.procurement import procurement
-import logging
 from openerp.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -174,13 +170,351 @@ class LogisflooStockInventory(models.Model):
     @api.multi
     def force_to_accounting_date(self):
         # Forces all dates in records related to this inventory to the accounting date
-        # Set the time to 23h 59min 59sec CET time -> 21h for UTC in summer time (time is stored in DB in UTC)
-        new_datetime = datetime.strptime(self.accounting_date, DEFAULT_SERVER_DATE_FORMAT) + timedelta(hours=21, minutes=59, seconds=59)
+        # Set the time to 23h 59min 55sec CET time -> 21h for UTC in summer time (time is stored in DB in UTC)
+        new_datetime = datetime.strptime(self.accounting_date, DEFAULT_SERVER_DATE_FORMAT) + timedelta(hours=21, minutes=59, seconds=55)
         moves=self.env['stock.move'].search([('inventory_id','=',self.id)])
         for move in moves:
             move.date = new_datetime
             move.date_expected = new_datetime
         self.date = new_datetime
 
+class LogisflooInventoryPeriod(models.Model):
+    _description = 'Inventory Period'
+    _name = "logisfloo.inventory.period"
+    _inherit = ['mail.thread', 'ir.needaction_mixin']
+    _order = 'name asc'
+
+    name = fields.Char('Period name', required=True, index=True, copy=False, default='New')
+    datefrom = fields.Datetime(string='Start', readonly=True, states={'open': [('readonly', False)]}, 
+                           default=datetime.now(),
+                           index=True, track_visibility='onchange', help="Keep empty to use the current date")
+    dateto = fields.Datetime(string='End', readonly=True, states={'open': [('readonly', False)]}, 
+                           default=datetime.now(),
+                           index=True, track_visibility='onchange', help="Keep empty to use the current date")
+    previous_period = fields.Many2one('logisfloo.inventory.period', string='Previous period', track_visibility='onchange')
+    state = fields.Selection([
+            ('open', 'Open'),
+            ('closed', 'Closed'),
+        ], string='Status', index=True, readonly=True, default='open', track_visibility='onchange', help="")
+
+    @api.multi
+    def button_close(self):
+        self.write({'state': 'closed'})
+        return {}
+
+    @api.multi
+    def button_repoen(self):
+        self.write({'state': 'open'})
+        return {}
+
+    @api.multi
+    def show_period_report(self):
+        ctx={}
+        return { 
+            'res_model': 'logisfloo.inventory.reportline',
+            'src_model': 'logisfloo.inventory.period',
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'domain' : [['inventory_period_id', '=', self.id]], 
+            'context': ctx,
+        }
+
+    @api.model
+    def rebuild_all_inventory_reports(self):
+        periods = self.env['logisfloo.inventory.period'].search([('state', '=', 'open')])
+        for period in periods:
+            period.rebuild_inventory_report()
+
+    @api.multi
+    def rebuild_inventory_report(self):
+        def get_product_cost_at_date(product_id, date):
+            return (self.env['product.price.history'].search([('product_id', '=', product_id),('datetime', '>=', date)],limit=1,order='datetime asc').cost 
+                    or self.env['product.price.history'].search([('product_id', '=', product_id),('datetime', '<', date)],limit=1,order='datetime desc').cost 
+                    or 0.0)
+        
+        def init_product_data(product_id):
+            return {
+                    'product_id': product_id,
+                    'movecount': 0.0,
+                    'startqty': 0.0,
+                    'endqty': 0.0,
+                    'soldqty': 0.0,
+                    'boughtqty': 0.0,
+                    'lossqty': 0.0,
+                    'extraqty': 0.0,
+                    'unknownqty': 0.0,
+                    'bought_value': 0.0,
+                    'invoiced_value': 0.0,
+                    'sold_value': 0.0,
+                    'sold_purchase_value': 0.0,
+                    'sold_iqty': 0.0,
+                    'bought_iqty': 0.0,
+                }
+
+        _logger.info('Rebuild inventory report for period %s', self.name)
+        loc_loss = self.env['stock.location'].search([('id', '=', 5)]).id
+        loc_vendor = self.env['stock.location'].search([('id', '=', 8)]).id
+        loc_customer = self.env['stock.location'].search([('id', '=', 9)]).id
+        loc_stock = self.env['stock.location'].search([('id', '=', 19)]).id
+        move_recs = self.env['stock.move'].search([('state', '=', 'done'),('date', '>=', self.datefrom), ('date', '<=', self.dateto)]
+                                ,order='product_id asc, date asc')
+        reportline = self.env['logisfloo.inventory.reportline']
+        reportline.search([('inventory_period_id', '=', self.id)]).unlink()
+        data_items = []
+        product_data = {}
+        current_product_id = 0
+
+        for move in move_recs:
+            if move.product_id != current_product_id:
+                if current_product_id != 0:
+                    data_items.append(product_data)
+                current_product_id = move.product_id
+                product_data = init_product_data(current_product_id.id)
+
+            product_data['movecount'] += 1   # count the number of moves used to build this, so we can do some checks ...
+            if move.location_id.id == loc_loss and move.location_dest_id.id == loc_stock:
+                # loss to stock -> extraqty -= qty
+                product_data['extraqty'] += move.product_qty
+            elif move.location_id.id == loc_vendor and move.location_dest_id.id == loc_stock:
+                # bought -> boughtqty += qty
+                product_data['boughtqty'] += move.product_qty
+                product_data['bought_value'] += move.product_qty * get_product_cost_at_date(move.product_id.id, move.date)
+            elif move.location_id.id == loc_customer and move.location_dest_id.id == loc_stock:
+                # returned / tare -> soldqty -= qty
+                product_data['soldqty'] -= move.product_qty
+            elif move.location_id.id == loc_stock and move.location_dest_id.id == loc_loss:
+                # loss -> lossqty += qty
+                product_data['lossqty'] += move.product_qty
+            elif move.location_id.id == loc_stock and move.location_dest_id.id == loc_vendor:
+                # returned to vendor -> boughtqty -= qty
+                product_data['boughtqty'] -= move.product_qty
+                product_data['bought_value'] -= move.product_qty * get_product_cost_at_date(move.product_id.id, move.date)
+            elif move.location_id.id == loc_stock and move.location_dest_id.id == loc_customer:
+                # sold -> soldqty += qty
+                product_data['soldqty'] += move.product_qty
+            else:
+                # unknown
+                product_data['unknownqty'] += move.product_qty
+        
+        data_items.append(product_data)
+
+        # Add products for which there has been no move, but for which we have a stock (previous period end qty != 0)
+        prev_period_product_ids = self.env['logisfloo.inventory.reportline'].search([
+                                    ('inventory_period_id', '=', self.previous_period.id), 
+                                    ('endqty','!=',0.0)
+                                    ])
+        prev_period_product_ids = [x.product_id.id for x in prev_period_product_ids]
+        this_period_product_ids = [x['product_id'] for x in data_items]
+        missing_product_ids = [x for x in prev_period_product_ids if x not in this_period_product_ids]
+        for product_id in missing_product_ids:
+            data_items.append(init_product_data(product_id))
+        
+        for item in data_items:
+            product = self.env['product.product'].with_context(active_test=False).search([('id', '=', item['product_id'])])
+            template = self.env['product.template'].with_context(active_test=False).search([('id', '=', product.product_tmpl_id.id)])
+
+            # Skip any item that is not a product (e.g. service)
+            if template.type != 'product':
+                continue
+
+            # Compute sold_value as sum of pos.order sales
+            pos_order_lines = self.env['pos.order.line'].search([('product_id', '=', product.id),
+                                                                ('create_date', '>=', self.datefrom), 
+                                                                ('create_date', '<=', self.dateto)])
+            if len(pos_order_lines) > 0:
+                product_sales = [(x.qty, x.qty * x.price_unit) for i, x in enumerate(pos_order_lines)]
+            else:
+                product_sales = [(0.0,0.0)]
+            product_sales = [sum(i) for i in zip(*product_sales)]
+            item['sold_iqty'] += product_sales[0]
+            item['sold_value'] += product_sales[1]
+
+            # Add sales outside pos (invoiced)
+            invoice_lines = self.env['account.invoice.line'].search([
+                                        ('product_id', '=', product.id),
+                                        ('account_id', '=', 153),
+                                        ('create_date', '>=', self.datefrom), 
+                                        ('create_date', '<=', self.dateto)])
+            if len(invoice_lines) > 0:
+                product_sales = [(x.quantity, x.price_subtotal) for i, x in enumerate(invoice_lines)]
+            else:
+                product_sales = [(0.0,0.0)]
+            product_sales = [sum(i) for i in zip(*product_sales)]
+            item['sold_iqty'] += product_sales[0]
+            item['sold_value'] += product_sales[1]
+
+            # Compute bought value as sum of purchase orders invoice line (including taxes)
+            # also track the invoiced qty
+            invoice_lines = self.env['account.invoice.line'].search([
+                                        ('product_id', '=', product.id),
+                                        ('account_id', '=', 128),
+                                        ('create_date', '>=', self.datefrom), 
+                                        ('create_date', '<=', self.dateto)])
+
+            if len(invoice_lines) > 0:
+                product_sales = [(math.copysign(x.quantity, x.price_subtotal_signed), math.copysign(x.quantity, x.price_subtotal_signed) * get_product_cost_at_date(product.id, x.create_date)) 
+                                    for i, x in enumerate(invoice_lines)]
+            else:
+                product_sales = [(0.0,0.0)]
+
+            product_sales = [sum(i) for i in zip(*product_sales)]
+            item['bought_iqty'] = product_sales[0] * (template.uom_id.factor/template.uom_po_id.factor)
+            item['invoiced_value'] = product_sales[1] * (template.uom_id.factor/template.uom_po_id.factor)
+            product_price_start = self.env['product.price.history'].search([('product_id', '=', product.id),('datetime', '<=', self.previous_period.dateto)]
+                                    ,limit=1,order='datetime desc').cost or 0.0
+            product_price_end = self.env['product.price.history'].search([('product_id', '=', product.id),('datetime', '<=', self.dateto)]
+                                    ,limit=1,order='datetime desc').cost or 0.0
+            item['startqty'] = self.env['logisfloo.inventory.reportline'].search([
+                                        ('inventory_period_id', '=', self.previous_period.id), 
+                                        ('product_id', '=', item['product_id'])
+                                        ]).endqty
+            endqty = item['startqty'] + item['boughtqty'] + item['extraqty'] - item['soldqty'] - item['lossqty']
+            sold_purchase_value =  (item['startqty'] * product_price_start
+                                    + item['bought_value'] 
+                                    - endqty * product_price_end)
+            margin = item['sold_value']/sold_purchase_value if sold_purchase_value != 0 else -1.0
+            reportline.create({
+                'product_id': item['product_id'],
+                'movecount': item['movecount'],
+                'startqty': item['startqty'],
+                'endqty': endqty,
+                'soldqty': item['soldqty'],
+                'boughtqty': item['boughtqty'],
+                'lossqty': item['lossqty'],
+                'extraqty': item['extraqty'],
+                'unknownqty': item['unknownqty'],
+                'inventory_period_id': self.id,
+                'start_value': item['startqty'] * product_price_start,
+                'end_value': endqty * product_price_end,
+                'bought_value': item['bought_value'],
+                'invoiced_value': item['invoiced_value'],
+                'sold_value': item['sold_value'],
+                'sold_purchase_value': sold_purchase_value,
+                'bought_iqty': item['bought_iqty'],
+                'sold_iqty': item['sold_iqty'],                
+                'margin': margin,
+                })
+        _logger.info('Rebuild inventory report for period %s - done', self.name)
  
- 
+class LogisflooInventoryReportLine(models.Model):
+    _description = 'Inventory Report Line'
+    _name = "logisfloo.inventory.reportline"
+    _order = 'product_id asc, inventory_period_id asc'
+    _rec_name = "rec_name"
+
+    @api.model
+    def _default_currency(self):
+        return self.company_id.currency_id or self.env.user.company_id.currency_id
+
+    company_id = fields.Many2one('res.company', string='Company', change_default=True,
+        required=True, readonly=True, states={'draft': [('readonly', False)]},
+        default=lambda self: self.env['res.company']._company_default_get('logisfloo.inventory.reportline'))
+
+    inventory_period_id = fields.Many2one('logisfloo.inventory.period', string='Period', required=True, track_visibility='onchange')
+    rec_name = fields.Char('_rec_name', compute='_get_rec_name', readonly=True)
+    product_id = fields.Many2one('product.product', string='Product', required=True, track_visibility='onchange')
+    product_category = fields.Char('Category', compute='_get_product_category', readonly=True, store=True)
+    product_supplier = fields.Char('Supplier', compute='_get_product_supplier_name', readonly=True, store=True)
+    product_actual_margin = fields.Float('Price margin', digits=(3,2), compute='_get_product_actual_margin', readonly=True)
+    product_active = fields.Char('Active', compute='_get_product_active', readonly=True)
+    movecount = fields.Float(string='Number of moves for this product',required=True, track_visibility='onchange', default=0.0, help="Number of stock moves during this period") 
+
+    startqty = fields.Float(string='Start Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity at start of this period")
+    endqty = fields.Float(string='End Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity at end of this period")
+    soldqty = fields.Float(string='Sold Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity sold during this period")
+    boughtqty = fields.Float(string='Purchased Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity bought during this period")
+    lossqty = fields.Float(string='Lost Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity lost during this period")
+    extraqty = fields.Float(string='Extra Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity extra during this period")
+    unknownqty = fields.Float(string='Unassigned Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity unassigned during this period")
+    sold_iqty = fields.Float(string='Customer Invoiced Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity sold (as per customer pos orders/invoices) during this period") 
+    bought_iqty = fields.Float(string='Vendor Invoiced Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity bought (as per vendor invoices) during this period") 
+
+    currency_id = fields.Many2one('res.currency', string='Currency',
+        required=True, readonly=True, states={'draft': [('readonly', False)]},
+        default=_default_currency, track_visibility='always') 
+    start_value = fields.Monetary(string='Start value', currency_field='currency_id', readonly=True, store=True, help="Starting stock value")
+    bought_value = fields.Monetary(string='Purchased value', currency_field='currency_id', readonly=True, store=True, help="Quantity bought value")
+    invoiced_value = fields.Monetary(string='Invoiced value', currency_field='currency_id', readonly=True, store=True, help="Invoiced value")
+    sold_value = fields.Monetary(string='Sold value', currency_field='currency_id', readonly=True, store=True, help="Stock sold value")
+    sold_purchase_value = fields.Monetary(string='Cost of sold', currency_field='currency_id', readonly=True, store=True, help="Stock sold purchase value")
+    end_value = fields.Monetary(string='End value', currency_field='currency_id', readonly=True, store=True, help="Ending stock value")
+    margin = fields.Float(string='Margin',required=True, track_visibility='onchange', default=0.0, help="Actual margin") 
+
+    price_history_ids = fields.One2many("product.customer.price.history", "product_id", domain=[],compute='get_price_history', help="History of selling price")  
+    cost_history_ids = fields.One2many("product.price.history", "product_id", domain=[],compute='get_cost_history', help="History of purchase cost")  
+
+    @api.one
+    @api.depends('product_id.product_tmpl_id.seller_ids')
+    def _get_product_supplier_name(self):
+        if len(self.product_id.product_tmpl_id._get_main_supplier_info()) > 0:
+            #vendor = self.env['res.partner'].search([('id','=',self.product_id.product_tmpl_id._get_main_supplier_info()[0].name)])
+            self.product_supplier = self.product_id.product_tmpl_id._get_main_supplier_info()[0].name.name
+        else:
+            self.product_supplier = "Pas de fournisseur défini"
+
+    @api.one
+    @api.depends('product_id.product_tmpl_id.seller_ids')
+    def _get_rec_name(self):
+        self.rec_name = self.product_id.name + " Period: " + self.inventory_period_id.name
+
+    @api.one
+    @api.depends('product_id.product_tmpl_id.categ_id')
+    def _get_product_category(self):
+        self.product_category = self.product_id.product_tmpl_id.categ_id.name
+
+    @api.one
+    @api.depends('product_id.product_tmpl_id.actual_margin')
+    def _get_product_actual_margin(self):
+        self.product_actual_margin = round(self.product_id.product_tmpl_id.actual_margin,2)
+
+    @api.one
+    @api.depends('product_id.product_tmpl_id.active')
+    def _get_product_active(self):
+        self.product_active = self.product_id.product_tmpl_id.active
+
+    # Extend read group to compute the margin on a Group By selection
+    def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None, orderby=False, lazy=True):
+        res = super(LogisflooInventoryReportLine, self).read_group(cr, uid, domain, fields, groupby, offset, limit=limit, context=context, orderby=orderby, lazy=lazy)
+        if 'margin' in fields:
+            for line in res:
+                line['margin'] = round(line['sold_value']/line['sold_purchase_value'],2) if line['sold_purchase_value'] != 0 else -1.0
+        return res
+
+    @api.multi
+    def show_customer_price_history(self):
+        ctx={}
+        return { 
+            'res_model': 'product.customer.price.history',
+            'src_model': 'logisfloo.inventory.reportline',
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'domain' : [['product_id', '=', self.product_id.id]], 
+            'context': ctx,
+        }
+
+    @api.multi
+    def show_product_cost_history(self):
+        ctx={}
+        return { 
+            'res_model': 'product.price.history',
+            'src_model': 'logisfloo.inventory.reportline',
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'domain' : [['product_id', '=', self.product_id.id]], 
+            'context': ctx,
+        }
+
+    @api.one
+    def get_price_history(self):
+        price_history = self.env['product.customer.price.history']
+        domain=[('product_id', '=',self.product_id.id)]
+        self.price_history_ids = price_history.search(domain)
+
+    @api.one
+    def get_cost_history(self):
+        cost_history = self.env['product.price.history']
+        domain=[('product_id', '=',self.product_id.id)]
+        self.cost_history_ids = cost_history.search(domain)

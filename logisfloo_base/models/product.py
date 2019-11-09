@@ -94,12 +94,22 @@ class LogisflooProduct(models.Model):
 
     @api.multi
     def rebuild_product_price_history(self):
+
+        def _compute_price(line):
+            currency = line.invoice_id and line.invoice_id.currency_id or None
+            price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            taxes = 0.0
+            if line.invoice_line_tax_ids:
+                taxes = line.invoice_line_tax_ids.compute_all(price, currency, 1.0)['total_included']
+            return taxes
+
         for template in self:
             product_product_recs=self.env['product.product'].with_context(active_test=False).search([('product_tmpl_id','=',template.id)])
             price_history=self.env['product.price.history']
             currency = template.currency_id
             tax_ratio = 1
             suppliers = template._get_main_supplier_info()
+            template._compute_actual_margin()
             for taxes_id in template.supplier_taxes_id:
                 tax_ratio += currency.round(taxes_id._compute_amount(1.0, 1.0)) 
             tax_unit_ratio = (template.uom_po_id.factor/template.uom_id.factor)*tax_ratio
@@ -108,7 +118,7 @@ class LogisflooProduct(models.Model):
                 price_history.search([('product_id', '=', product.id)]).unlink()
                 invoice_lines = self.env['account.invoice.line'].search([('product_id', '=', product.id), ('purchase_line_id', '!=', False)], 
                                     order='create_date asc')
-                data_items=[(x.create_date,x.price_subtotal/x.quantity * tax_unit_ratio) for x in invoice_lines if x.quantity > 0]
+                data_items=[(x.create_date,_compute_price(x) * (template.uom_po_id.factor/template.uom_id.factor)) for x in invoice_lines if x.quantity > 0]
                 # create a price history for the product creation date, so we have a cost for the full product life
                 if len(data_items) == 0:
                     # There was no invoice line, use the supplier price or the list price to guess a cost
@@ -143,6 +153,7 @@ class LogisflooProduct(models.Model):
             product_product_recs = self.env['product.product'].with_context(active_test=False).search([('product_tmpl_id','=',template.id)])
             customer_price_history = self.env['product.customer.price.history']
             currency = template.currency_id
+            suppliers = template._get_main_supplier_info()
             _logger.info('Rebuild [%s] customer price history for %d product instances.', template.name, len(product_product_recs))
             for product in product_product_recs:
                 customer_price_history.search([('product_id', '=', product.id)]).unlink()
