@@ -38,6 +38,7 @@
         'data/default_values.xml',
         'data/email.xml',
         'data/data_updates.xml',
+        'data/automated_actions.xml',
         'views/assets.xml',
         'views/partner.xml',
         'views/product.xml',
