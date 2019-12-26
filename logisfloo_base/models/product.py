@@ -109,7 +109,6 @@ class LogisflooProduct(models.Model):
             currency = template.currency_id
             tax_ratio = 1
             suppliers = template._get_main_supplier_info()
-            template._compute_actual_margin()
             for taxes_id in template.supplier_taxes_id:
                 tax_ratio += currency.round(taxes_id._compute_amount(1.0, 1.0)) 
             tax_unit_ratio = (template.uom_po_id.factor/template.uom_id.factor)*tax_ratio
@@ -140,7 +139,8 @@ class LogisflooProduct(models.Model):
                 # update standard_price to match the latest invoice line
                 product.standard_price = data_items[len(data_items)-1][1]
                 _logger.info('-> created %d records', len(data_items)+1)
-
+            template._compute_actual_margin()
+            
     @api.model
     def rebuild_full_customer_price_history(self):    
         # Call this from an automated action
