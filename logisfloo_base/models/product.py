@@ -54,7 +54,7 @@ class LogisflooProduct(models.Model):
     @api.depends('list_price','standard_price')
     def _compute_actual_margin(self):
         if self.standard_price != 0:
-            self.actual_margin = self.list_price/self.standard_price
+            self.actual_margin = (self.list_price/self.standard_price) * 100 - 100
         else:
             self.actual_margin = 0
 
@@ -140,7 +140,7 @@ class LogisflooProduct(models.Model):
                 product.standard_price = data_items[len(data_items)-1][1]
                 _logger.info('-> created %d records', len(data_items)+1)
             template._compute_actual_margin()
-            
+
     @api.model
     def rebuild_full_customer_price_history(self):    
         # Call this from an automated action
