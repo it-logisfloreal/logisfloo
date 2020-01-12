@@ -11,4 +11,270 @@
         
         </field>
      </record>
+
+    <record model="ir.ui.view" id="logisfloo_view_inventory_form">
+        <field name="name">logisfloo.view.inventory.form</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="arch" type="xml">
+            <button name="action_done" position="before">
+                <button name="force_to_accounting_date" type="object" string="Force date" 
+        				attrs="{'invisible':[('state','not in',['done'])]}"
+                        help="Force move date to accounting date."/>
+            </button>
+            <field name="date" position="attributes">
+                <attribute name="attrs">{'readonly': [('state','in',['confirmed','done'])]}</attribute>
+            </field>       
+        </field>
+     </record>
+
+<!-- Inventory report -->
+
+     <record model="ir.ui.view" id="logisfloo_inventoryreport_tree">
+        <field name="name">logisfloo.inventoryreport.tree</field>
+        <field name="model">logisfloo.inventory.reportline</field>
+        <field name="arch" type="xml">
+	        <tree string="Inventory Report" 
+                    decoration-danger="product_active!=False and margin &lt; 1.00 and margin != 0.0"
+                    decoration-info="product_active!=False and margin == 0.0"
+                    decoration-muted="product_active==False"
+                    >
+                <field name="product_active" invisible="1"/>
+	        	<field name="inventory_period_id"/>
+                <field name="product_id"/>
+	            <field name="startqty"/>
+	            <field name="boughtqty"/>
+	            <field name="soldqty"/>
+                <field name="corrqty"/>
+                <field name="endqty"/>
+                <field name="start_value" widget="monetary"/>
+                <field name="bought_value" widget="monetary"/>
+                <field name="sold_value" widget="monetary"/>
+                <field name="corr_value" widget="monetary"/>
+                <field name="end_value" widget="monetary"/>
+                <field name="sold_purchase_value" widget="monetary"/>
+                <field name="product_actual_margin" digits="[3, 2]"/>    
+                <field name="margin" digits="[3, 2]"/>
+                <field name="margin_corr" digits="[3, 2]"/>
+	         </tree>
+        </field>       
+    </record>
+
+    <record model="ir.ui.view" id="logisfloo_inventoryreport_form">
+        <field name="name">logisfloo.inventoryreport.form</field>
+        <field name="model">logisfloo.inventory.reportline</field>
+        <field name="arch" type="xml">
+        	<form string="Inventory Report Line">
+				<header>
+				</header>    
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="product_id" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="inventory_period_id" readonly="1"/>
+                            <field name="movecount" readonly="1"/>
+							<label for="margin" string="Actual/Corr Margin (Configured)"/>	
+           					<div>
+								<field name="margin" class="oe_inline"/>
+                                <label string="/" nolabel="1" class="oe_inline"/>
+                                <field name="margin_corr" class="oe_inline"/>
+                                <label string=" (" nolabel="1" class="oe_inline"/>
+								<field name="product_actual_margin" class="oe_inline" readonly="1"/>
+                                <label string=")" nolabel="1" class="oe_inline"/>
+							</div>
+                        </group>
+                        <group>
+                            <field name="startqty" readonly="1"/>
+                            <field name="boughtqty" readonly="1"/>
+                            <field name="soldqty" readonly="1"/>
+                            <field name="lossqty" readonly="1"/>
+                            <field name="extraqty" readonly="1"/>
+                            <field name="endqty" readonly="1"/>
+                            <field name="corrqty" readonly="1"/>
+                            <field name="unknownqty" readonly="1"/>
+                            <field name="bought_iqty" widget="monetary" readonly="1"/>
+                            <field name="sold_iqty" widget="monetary" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="start_value" widget="monetary" readonly="1"/>
+                            <field name="bought_value" widget="monetary" readonly="1"/>
+                            <field name="sold_value" widget="monetary" readonly="1"/>
+                            <field name="invoiced_value" widget="monetary" readonly="1"/>
+                            <field name="corr_value" widget="monetary" readonly="1"/>
+                            <field name="end_value" widget="monetary" readonly="1"/>
+                        </group>
+                    </group>
+                     <group>
+                        <group>
+                            <separator string="Price"/>
+                        </group>
+                        <group>
+                            <separator string="Cost"/>
+                        </group>
+                    </group>                   <group>
+                        <group>
+                            <field name="price_history_ids" readonly="1" nolabel="1"/>
+                        </group>
+                        <group>
+                            <field name="cost_history_ids" readonly="1" nolabel="1"/>
+                        </group>
+                    </group>
+                </sheet>
+	         </form>
+        </field>       
+    </record>
+
+    <record model="ir.ui.view" id="logisfloo_inventoryreport_filter">
+        <field name="name">logisfloo.inventoryreport.filter</field>
+        <field name="model">logisfloo.inventory.reportline</field>
+        <field name="arch" type="xml">
+	        <search string="Search Inventory report">
+	            <field name="product_id"/>
+                <field string="Vendor" name="product_id" filter_domain="[('product_id.product_tmpl_id.seller_ids', 'ilike', self)]" />
+                <field string="Category" name="product_id" filter_domain="[('product_id.product_tmpl_id.categ_id', 'ilike', self)]" />
+                <field string="Period" name="inventory_period_id" filter_domain="[('inventory_period_id.name', '=like', self+'%')]" />
+                <filter string="Open period" name="open" domain="[('inventory_period_id.state','=','open')]"/>
+                <separator/>
+                <filter string="Active product" name="active" domain="[('product_id.active','=',True)]"/>
+                <separator/>
+                <filter string="Weight" name="weight" domain="[('product_id.uom_id.category_id.name','ilike','Poids')]"/>
+                <filter string="Volume" name="volume" domain="[('product_id.uom_id.category_id.name','ilike','Volume')]"/>
+                <filter string="Unit" name="unit" domain="[('product_id.uom_id.category_id.name','ilike','Unit')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Period" context="{'group_by':'inventory_period_id'}"/>
+                    <filter string="Vendor" context="{'group_by':'product_supplier'}"/>
+                    <filter string="Category" context="{'group_by':'product_category'}"/>
+                    <filter string="Product" context="{'group_by':'product_id'}"/>
+                    <filter string="Unit" context="{'group_by':'product_id.uom_id.name'}"/>
+                </group>
+	        </search>
+        </field>
+  	</record>
+ 
+    <record id="logisfloo_inventoryreport_action" model="ir.actions.act_window">
+        <field name="name">Inventory report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">logisfloo.inventory.reportline</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_open': True}</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="logisfloo_inventoryreport_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a report line. 
+          </p><p>
+            Use this menu to search within your inventory report ...
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="logisfloo_purchase_menu_inventoryreport_action"
+    	name="Inventory report"
+    	action="logisfloo_inventoryreport_action"  
+    	parent="logisfloo_simplified_menu" 
+		groups="group_logisfloo_purchase_receipt"
+    	sequence="50"/>
+    	
+    <menuitem id="logisfloo_accouting_menu_inventoryreport_action"
+    	name="Inventory report"
+    	action="logisfloo_inventoryreport_action"  
+    	parent="account.menu_finance_payables" 
+		groups="logisfloo_base.group_logisfloo_accounting"
+    	sequence="220"/>
+
+<!-- Inventory period -->
+
+    <record model="ir.ui.view" id="logisfloo_inventoryperiod_form">
+        <field name="name">logisfloo.inventoryperiod.form</field>
+        <field name="model">logisfloo.inventory.period</field>
+        <field name="arch" type="xml">
+        	<form string="Inventory period">
+				<header>
+				    <button name="button_close" type="object" states="open" string="Close period" class="oe_highlight"/>
+				    <button name="button_reopen" type="object" states="closed" string="Reopen"/>
+                    <button name="rebuild_inventory_report" type="object" string="Rebuild report" groups="logisfloo_base.group_logisfloo_admin"/>
+				    <field name="state" widget="statusbar" readonly="1" />
+				</header>
+				<sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-credit-card" name="show_period_report">  
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">
+                                    Period report
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+					<div class="oe_title">
+					    <label string="Inventory period"/>
+					    <h1>
+					        <field name="name"/>
+					    </h1>
+					</div>
+					<group>
+                        <field name="datefrom"/>
+                        <field name="dateto"/>
+                        <field name="previous_period"/>
+					</group>
+				</sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+        	</form> 
+        </field>       
+    </record>
+ 
+    <record model="ir.ui.view" id="logisfloo_inventoryperiod_tree">
+        <field name="name">logisfloo.inventoryperiod.tree</field>
+        <field name="model">logisfloo.inventory.period</field>
+        <field name="arch" type="xml">
+	        <tree>
+	       		<field name="name"/>
+                <field name="previous_period"/>
+	       		<field name="datefrom" widget="date"/>
+	       		<field name="dateto" widget="date"/>
+                <field name="state"/>
+	         </tree>
+        </field>       
+    </record>
+    
+    <record model="ir.ui.view" id="logisfloo_inventoryperiod_filter">
+        <field name="name">logisfloo.inventoryperiod.filter</field>
+        <field name="model">logisfloo.inventory.period</field>
+        <field name="arch" type="xml">
+	        <search string="Search inventory period">
+	            <field name="name"/>
+	        </search>
+        </field>
+  	</record>
+ 
+    <record id="logisfloo_inventoryperiod_action" model="ir.actions.act_window">
+        <field name="name">Inventory period</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">logisfloo.inventory.period</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="logisfloo_inventoryperiod_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to define an inventory period. 
+          </p><p>
+            Use this menu to search within your inventory periods ...
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="logisfloo_menu_inventoryperiod_form_action"
+    	name="Inventory period"
+    	action="logisfloo_inventoryperiod_action"  
+    	parent="purchase.menu_purchase_config" 
+		groups="logisfloo_base.group_logisfloo_purchase_advanced"
+    	sequence="40"/>
+
 </odoo>

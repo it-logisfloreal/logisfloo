@@ -31,3 +31,9 @@ class LogisflooPosOrder(models.Model):
                 mail_template.send_mail(order_item.id)
         return order_ids
 
+    @api.model
+    def _process_order(self, order):
+        lines = order['lines']
+        order['lines'] = [l for l in lines if l[2]['qty'] !=0]
+                
+        return super(LogisflooPosOrder, self)._process_order(order)

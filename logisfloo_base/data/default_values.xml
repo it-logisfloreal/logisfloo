@@ -174,16 +174,33 @@ Work around:
 			<field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
 		</record>	
 
-		<!-- Automated action for negative slate warning -->
+		<!-- Create initial inventory periods -->
 
-        <record id="ir_cron_neg_slate_warning" model="ir.cron">
-            <field name="name">Negative slate warning</field>
-            <field name="user_id" ref="base.user_root"/>
-            <field name="interval_number">1</field>
-            <field name="interval_type">weeks</field>
-            <field name="numbercall">-1</field>
-            <field eval="False" name="doall"/>
-            <field eval="'res.partner'" name="model"/>
-            <field eval="'_cron_negative_slate_warning'" name="function"/>
-        </record>
+		<record id="0-Depart" model="logisfloo.inventory.period">
+			<field name="name">0-Départ</field>
+			<field name="datefrom" eval="datetime.strptime('02-11-2017 23:00:00', '%d-%m-%Y %H:%M:%S')"/>
+			<field name="dateto" eval="datetime.strptime('24-11-2017 22:59:59', '%d-%m-%Y %H:%M:%S')"/>
+			<field name="previous_period" ref=""/>
+		</record>	
+
+		<record id="17-18" model="logisfloo.inventory.period">
+			<field name="name">17-18</field>
+			<field name="datefrom" eval="datetime.strptime('24-11-2017 23:00:00', '%d-%m-%Y %H:%M:%S')"/>
+			<field name="dateto" eval="datetime.strptime('31-07-2018 21:59:59', '%d-%m-%Y %H:%M:%S')"/>
+			<field name="previous_period" ref="0-Depart"/>
+		</record>	
+
+		<record id="18-19" model="logisfloo.inventory.period">
+			<field name="name">18-19</field>
+			<field name="datefrom" eval="datetime.strptime('31-07-2018 22:00:00', '%d-%m-%Y %H:%M:%S')"/>
+			<field name="dateto" eval="datetime.strptime('31-07-2019 21:59:59', '%d-%m-%Y %H:%M:%S')"/>
+			<field name="previous_period" ref="17-18"/>
+		</record>	
+
+		<record id="19-20" model="logisfloo.inventory.period">
+			<field name="name">19-20</field>
+			<field name="datefrom" eval="datetime.strptime('31-07-2019 22:00:00', '%d-%m-%Y %H:%M:%S')"/>
+			<field name="dateto" eval="datetime.strptime('31-07-2020 21:59:59', '%d-%m-%Y %H:%M:%S')"/>
+			<field name="previous_period" ref="18-19"/>
+		</record>	
 </odoo>
