@@ -203,7 +203,7 @@ class LogisflooInventoryPeriod(models.Model):
         return {}
 
     @api.multi
-    def button_repoen(self):
+    def button_reopen(self):
         self.write({'state': 'open'})
         return {}
 
@@ -243,10 +243,12 @@ class LogisflooInventoryPeriod(models.Model):
                     'boughtqty': 0.0,
                     'lossqty': 0.0,
                     'extraqty': 0.0,
+                    'corrqty': 0.0,
                     'unknownqty': 0.0,
                     'bought_value': 0.0,
                     'invoiced_value': 0.0,
                     'sold_value': 0.0,
+                    'corr_value': 0.0,
                     'sold_purchase_value': 0.0,
                     'sold_iqty': 0.0,
                     'bought_iqty': 0.0,
@@ -370,10 +372,30 @@ class LogisflooInventoryPeriod(models.Model):
                                         ('product_id', '=', item['product_id'])
                                         ]).endqty
             endqty = item['startqty'] + item['boughtqty'] + item['extraqty'] - item['soldqty'] - item['lossqty']
-            sold_purchase_value =  (item['startqty'] * product_price_start
+            item['corrqty'] = item['extraqty']-item['lossqty']
+            item['corr_value'] = item['corrqty'] * product_price_end
+            sold_purchase_value =  round((item['startqty'] * product_price_start
                                     + item['bought_value'] 
-                                    - endqty * product_price_end)
-            margin = item['sold_value']/sold_purchase_value if sold_purchase_value != 0 else -1.0
+                                    - endqty * product_price_end),2) if item['sold_value'] != 0 else 0.0                                 
+            sold_ref_value = sold_purchase_value + item['corr_value'] 
+            margin = round(item['sold_value']/sold_purchase_value * 100 - 100,2) if sold_purchase_value != 0 and item['sold_value'] != 0 else 0.0   
+            margin_corr = round(item['sold_value']/sold_ref_value * 100 - 100,2) if sold_ref_value != 0 and item['sold_value'] != 0 else 0.0
+            item['start_value'] = item['startqty'] * product_price_start
+            item['end_value'] = endqty * product_price_end
+            if not self.previous_period:
+                # The initial period represent the starting point of the inventory and accounting data:
+                # - must only contain data for the end qty and end value
+                # - start qty and values are set to the same values as the end values
+                # - other values are zeroed as they are rolled up in the end values 
+                item['corrqty'] = 0.0
+                item['corr_value'] = 0.0
+                item['boughtqty'] = 0.0
+                item['bought_value'] = 0.0
+                item['soldqty'] = 0.0
+                item['sold_value'] = 0.0
+                item['startqty'] = endqty
+                item['start_value'] = item['end_value']
+
             reportline.create({
                 'product_id': item['product_id'],
                 'movecount': item['movecount'],
@@ -383,17 +405,20 @@ class LogisflooInventoryPeriod(models.Model):
                 'boughtqty': item['boughtqty'],
                 'lossqty': item['lossqty'],
                 'extraqty': item['extraqty'],
+                'corrqty': item['corrqty'],
                 'unknownqty': item['unknownqty'],
                 'inventory_period_id': self.id,
-                'start_value': item['startqty'] * product_price_start,
-                'end_value': endqty * product_price_end,
+                'start_value': item['start_value'],
+                'end_value': item['end_value'],
                 'bought_value': item['bought_value'],
+                'corr_value': item['corr_value'],
                 'invoiced_value': item['invoiced_value'],
                 'sold_value': item['sold_value'],
                 'sold_purchase_value': sold_purchase_value,
                 'bought_iqty': item['bought_iqty'],
                 'sold_iqty': item['sold_iqty'],                
                 'margin': margin,
+                'margin_corr': margin_corr,
                 })
         _logger.info('Rebuild inventory report for period %s - done', self.name)
  
@@ -423,9 +448,10 @@ class LogisflooInventoryReportLine(models.Model):
     startqty = fields.Float(string='Start Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity at start of this period")
     endqty = fields.Float(string='End Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity at end of this period")
     soldqty = fields.Float(string='Sold Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity sold during this period")
-    boughtqty = fields.Float(string='Purchased Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity bought during this period")
+    boughtqty = fields.Float(string='Purch Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity bought during this period")
     lossqty = fields.Float(string='Lost Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity lost during this period")
     extraqty = fields.Float(string='Extra Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity extra during this period")
+    corrqty = fields.Float(string='Corr Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity corrected during this period")
     unknownqty = fields.Float(string='Unassigned Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity unassigned during this period")
     sold_iqty = fields.Float(string='Customer Invoiced Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity sold (as per customer pos orders/invoices) during this period") 
     bought_iqty = fields.Float(string='Vendor Invoiced Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity bought (as per vendor invoices) during this period") 
@@ -434,12 +460,14 @@ class LogisflooInventoryReportLine(models.Model):
         required=True, readonly=True, states={'draft': [('readonly', False)]},
         default=_default_currency, track_visibility='always') 
     start_value = fields.Monetary(string='Start value', currency_field='currency_id', readonly=True, store=True, help="Starting stock value")
-    bought_value = fields.Monetary(string='Purchased value', currency_field='currency_id', readonly=True, store=True, help="Quantity bought value")
+    bought_value = fields.Monetary(string='Purch value', currency_field='currency_id', readonly=True, store=True, help="Quantity bought value")
     invoiced_value = fields.Monetary(string='Invoiced value', currency_field='currency_id', readonly=True, store=True, help="Invoiced value")
     sold_value = fields.Monetary(string='Sold value', currency_field='currency_id', readonly=True, store=True, help="Stock sold value")
+    corr_value = fields.Monetary(string='Corr value', currency_field='currency_id', readonly=True, store=True, help="Stock correction value")
     sold_purchase_value = fields.Monetary(string='Cost of sold', currency_field='currency_id', readonly=True, store=True, help="Stock sold purchase value")
     end_value = fields.Monetary(string='End value', currency_field='currency_id', readonly=True, store=True, help="Ending stock value")
     margin = fields.Float(string='Margin',required=True, track_visibility='onchange', default=0.0, help="Actual margin") 
+    margin_corr = fields.Float(string='Margin Corr',required=True, track_visibility='onchange', default=0.0, help="Margin corrected")
 
     price_history_ids = fields.One2many("product.customer.price.history", "product_id", domain=[],compute='get_price_history', help="History of selling price")  
     cost_history_ids = fields.One2many("product.price.history", "product_id", domain=[],compute='get_cost_history', help="History of purchase cost")  
@@ -476,9 +504,22 @@ class LogisflooInventoryReportLine(models.Model):
     # Extend read group to compute the margin on a Group By selection
     def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None, orderby=False, lazy=True):
         res = super(LogisflooInventoryReportLine, self).read_group(cr, uid, domain, fields, groupby, offset, limit=limit, context=context, orderby=orderby, lazy=lazy)
-        if 'margin' in fields:
-            for line in res:
-                line['margin'] = round(line['sold_value']/line['sold_purchase_value'],2) if line['sold_purchase_value'] != 0 else -1.0
+        for line in res:
+            resperiods = super(LogisflooInventoryReportLine, self).read_group(cr, uid, line['__domain'], fields, [u'inventory_period_id'], offset, limit=limit, context=context, orderby=orderby, lazy=lazy)            
+            del line['sold_purchase_value']
+            line['startqty'] = resperiods[0]['startqty']
+            line['endqty'] = resperiods[-1]['endqty']
+            line['start_value'] = resperiods[0]['start_value']
+            line['end_value'] = resperiods[-1]['end_value']
+            sold_ref_value = line['start_value'] + line['bought_value'] - line['end_value']
+            line['margin'] = round((line['sold_value']/sold_ref_value) * 100 - 100,2) if sold_ref_value != 0 and line['sold_value'] != 0 else 0.0
+            line['margin_corr'] = round((line['sold_value']/(sold_ref_value + line['corr_value'])) * 100 - 100,2) if sold_ref_value != 0 and line['sold_value'] != 0 else 0.0
+            if groupby[0] != u'product_id':
+                del line['startqty']
+                del line['boughtqty']
+                del line['soldqty']
+                del line['corrqty']
+                del line['endqty']
         return res
 
     @api.multi

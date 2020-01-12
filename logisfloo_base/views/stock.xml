@@ -35,8 +35,8 @@
         <field name="model">logisfloo.inventory.reportline</field>
         <field name="arch" type="xml">
 	        <tree string="Inventory Report" 
-                    decoration-danger="product_active!=False and margin &lt; 1.00 and margin != -1.0"
-                    decoration-info="product_active!=False and margin == -1.0"
+                    decoration-danger="product_active!=False and margin &lt; 1.00 and margin != 0.0"
+                    decoration-info="product_active!=False and margin == 0.0"
                     decoration-muted="product_active==False"
                     >
                 <field name="product_active" invisible="1"/>
@@ -45,16 +45,17 @@
 	            <field name="startqty"/>
 	            <field name="boughtqty"/>
 	            <field name="soldqty"/>
-	            <field name="lossqty"/>
-                <field name="extraqty"/>
+                <field name="corrqty"/>
                 <field name="endqty"/>
                 <field name="start_value" widget="monetary"/>
                 <field name="bought_value" widget="monetary"/>
-                <field name="end_value" widget="monetary"/>
                 <field name="sold_value" widget="monetary"/>
+                <field name="corr_value" widget="monetary"/>
+                <field name="end_value" widget="monetary"/>
                 <field name="sold_purchase_value" widget="monetary"/>
                 <field name="product_actual_margin" digits="[3, 2]"/>    
                 <field name="margin" digits="[3, 2]"/>
+                <field name="margin_corr" digits="[3, 2]"/>
 	         </tree>
         </field>       
     </record>
@@ -76,9 +77,11 @@
                         <group>
                             <field name="inventory_period_id" readonly="1"/>
                             <field name="movecount" readonly="1"/>
-							<label for="margin" string="Margin (Configured)"/>	
+							<label for="margin" string="Actual/Corr Margin (Configured)"/>	
            					<div>
 								<field name="margin" class="oe_inline"/>
+                                <label string="/" nolabel="1" class="oe_inline"/>
+                                <field name="margin_corr" class="oe_inline"/>
                                 <label string=" (" nolabel="1" class="oe_inline"/>
 								<field name="product_actual_margin" class="oe_inline" readonly="1"/>
                                 <label string=")" nolabel="1" class="oe_inline"/>
@@ -91,6 +94,7 @@
                             <field name="lossqty" readonly="1"/>
                             <field name="extraqty" readonly="1"/>
                             <field name="endqty" readonly="1"/>
+                            <field name="corrqty" readonly="1"/>
                             <field name="unknownqty" readonly="1"/>
                             <field name="bought_iqty" widget="monetary" readonly="1"/>
                             <field name="sold_iqty" widget="monetary" readonly="1"/>
@@ -100,6 +104,7 @@
                             <field name="bought_value" widget="monetary" readonly="1"/>
                             <field name="sold_value" widget="monetary" readonly="1"/>
                             <field name="invoiced_value" widget="monetary" readonly="1"/>
+                            <field name="corr_value" widget="monetary" readonly="1"/>
                             <field name="end_value" widget="monetary" readonly="1"/>
                         </group>
                     </group>
@@ -135,11 +140,16 @@
                 <filter string="Open period" name="open" domain="[('inventory_period_id.state','=','open')]"/>
                 <separator/>
                 <filter string="Active product" name="active" domain="[('product_id.active','=',True)]"/>
+                <separator/>
+                <filter string="Weight" name="weight" domain="[('product_id.uom_id.category_id.name','ilike','Poids')]"/>
+                <filter string="Volume" name="volume" domain="[('product_id.uom_id.category_id.name','ilike','Volume')]"/>
+                <filter string="Unit" name="unit" domain="[('product_id.uom_id.category_id.name','ilike','Unit')]"/>
                 <group expand="1" string="Group By">
                     <filter string="Period" context="{'group_by':'inventory_period_id'}"/>
                     <filter string="Vendor" context="{'group_by':'product_supplier'}"/>
                     <filter string="Category" context="{'group_by':'product_category'}"/>
                     <filter string="Product" context="{'group_by':'product_id'}"/>
+                    <filter string="Unit" context="{'group_by':'product_id.uom_id.name'}"/>
                 </group>
 	        </search>
         </field>
