@@ -14,7 +14,7 @@
     'website': "https://github.com/logisfloo",
 
     'category': 'Logisfloo',
-    'version': '1.6.10', 
+    'version': '1.7.0', 
 
     'depends': [
         'stock',
