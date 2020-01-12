@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20181230\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-06 15:54+0000\n"
-"PO-Revision-Date: 2019-07-06 15:54+0000\n"
+"POT-Creation-Date: 2020-01-12 20:06+0000\n"
+"PO-Revision-Date: 2020-01-12 20:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -98,6 +98,15 @@ msgstr "<span class=\"o_stat_text\">\n"
 "						</span>"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryperiod_form
+msgid "<span class=\"o_stat_text\">\n"
+"                                    Period report\n"
+"                                </span>"
+msgstr "<span class=\"o_stat_text\">\n"
+"                                    Rapport\n"
+"                                </span>"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "<span> Members of slate: </span>"
 msgstr "<span> Membres de l'ardoise: </span>"
@@ -134,9 +143,35 @@ msgid "Achat fournitures salon de thé"
 msgstr "Achat fournitures événements"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_needaction
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_needaction
 msgid "Action Needed"
 msgstr "A besoin d'une action"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_product_active
+msgid "Active"
+msgstr "Actif"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
+msgid "Active product"
+msgstr "Produit actif"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_template_actual_margin
+msgid "Actual Margin"
+msgstr "Marge réelle"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_margin
+msgid "Actual margin"
+msgstr "Marge réelle"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_form
+msgid "Actual/Corr Margin (Configured)"
+msgstr "Marge Réelle/Corr (Configuré)"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_changeaccount_wizard_form
@@ -275,6 +310,12 @@ msgid "Cannot send the ticket, no email address found on the client"
 msgstr "Le ticket n'est pas envoyé, le client n'a pas d'adresse couriel configurée"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_product_category
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_uom_categ_type
 msgid "Category type"
 msgstr "Type de categorie"
@@ -288,6 +329,11 @@ msgstr "Changer la quantité d'articles"
 #: model:ir.actions.act_window,name:logisfloo_base.action_changeaccount_wizard
 msgid "Change account"
 msgstr "Changer le compte"
+
+#. module: logisfloo_base
+#: model:ir.actions.act_window,help:logisfloo_base.logisfloo_inventoryreport_action
+msgid "Click to create a report line."
+msgstr "Cliquer pour créer une ligne."
 
 #. module: logisfloo_base
 #: model:ir.actions.act_window,help:logisfloo_base.logisfloo_purchase_receipt_action
@@ -305,14 +351,35 @@ msgid "Click to define a transport cost."
 msgstr "Cliquer pour définir un coût de transport."
 
 #. module: logisfloo_base
+#: model:ir.actions.act_window,help:logisfloo_base.logisfloo_inventoryperiod_action
+msgid "Click to define an inventory period."
+msgstr "Cliquer pour définir une période d'inventaire."
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryperiod_form
+msgid "Close period"
+msgstr "Période fermée"
+
+#. module: logisfloo_base
+#: selection:logisfloo.inventory.period,state:0
+msgid "Closed"
+msgstr "Fermé"
+
+#. module: logisfloo_base
 #: model:account.account,name:logisfloo_base.a660001
 msgid "Clôture Ardoise"
 msgstr "Clôture Ardoise"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_company_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_company_id
 msgid "Company"
 msgstr "Société"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_company_id
+msgid "Company id"
+msgstr "Entreprise no"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
@@ -340,6 +407,31 @@ msgstr "Confirmer le ticket"
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Confirm shop receipt."
 msgstr "Confirmer le ticket."
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_corrqty
+msgid "Corr Qty"
+msgstr "Qté corr"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_corr_value
+msgid "Corr value"
+msgstr "Valeur corr"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_form
+msgid "Cost"
+msgstr "Coût"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_cost_history_ids
+msgid "Cost history ids"
+msgstr "Historique coût"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_sold_purchase_value
+msgid "Cost of sold"
+msgstr "Coût des vendus"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_unit_cost
@@ -375,9 +467,12 @@ msgstr "Créer une ligne de facture pour corriger une différence d'arrondi."
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_create_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_changeaccount_wizard_create_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_email_wizard_create_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_create_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_create_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_create_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_create_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_create_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
@@ -387,9 +482,12 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_create_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_changeaccount_wizard_create_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_email_wizard_create_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_create_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_create_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_create_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_create_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_create_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_create_date
 msgid "Created on"
 msgstr "Créé le"
 
@@ -397,24 +495,36 @@ msgstr "Créé le"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_company_currency_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjust_wizard_company_currency_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_company_currency_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_currency_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_currency_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_currency_id
 msgid "Currency"
 msgstr "Devise"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:436
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_sold_iqty
+msgid "Customer Invoiced Qty"
+msgstr "Qté facturée au client"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:490
 #, python-format
 msgid "Customer Payment"
 msgstr "Paiement client"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:438
+#: code:addons/logisfloo_base/models/purchase.py:492
 #, python-format
 msgid "Customer Refund"
 msgstr "Remboursement client"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_datetime
+msgid "Date"
+msgstr "Date"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_period_message_last_post
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_message_last_post
 msgid "Date of the last message posted on the record."
 msgstr "Date du dernier message publié sur cet enregistrement"
@@ -457,9 +567,12 @@ msgstr "Remise (%)"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_display_name
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_changeaccount_wizard_display_name
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_email_wizard_display_name
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_display_name
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_display_name
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_display_name
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_display_name
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_display_name
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -497,6 +610,26 @@ msgstr "Discussion par courriel"
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_welcome_email
 msgid "Email de bienvenue envoyé"
 msgstr "Email de bienvenue envoyé"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_dateto
+msgid "End"
+msgstr "Fin"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_endqty
+msgid "End Qty"
+msgstr "Qté fin"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_end_value
+msgid "End value"
+msgstr "Valeur fin"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_end_value
+msgid "Ending stock value"
+msgstr "Valeur stock fin"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_cacladjust_wizard_form
@@ -552,6 +685,11 @@ msgid "Expenses must have an expense journal specified to generate accounting en
 msgstr "Une note de frais doit être associée à un journal des frais pour pouvoir générer les écritures comptables."
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_extraqty
+msgid "Extra Qty"
+msgstr "Qté extra"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_res_partner_first_name
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_partner_form_view
 msgid "First Name"
@@ -563,16 +701,19 @@ msgid "First Partner"
 msgstr "Autre membre de la famille"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_follower_ids
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_follower_ids
 msgid "Followers"
 msgstr "Abonnés"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_channel_ids
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_channel_ids
 msgid "Followers (Channels)"
 msgstr "Abonnés (Canaux)"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_partner_ids
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Abonnés (Partenaires)"
@@ -583,14 +724,35 @@ msgid "Force Pay"
 msgstr "Autoriser le paiement"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_view_inventory_form
+msgid "Force date"
+msgstr "Forcer la date"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_view_inventory_form
+msgid "Force move date to accounting date."
+msgstr "Forcer la date d'inventaire à la date comptable."
+
+#. module: logisfloo_base
 #: model:account.account,name:logisfloo_base.a606000
 msgid "Frais accessoires sur achats"
 msgstr "Frais accessoires sur achats"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.Logisfloo_partner_search_view
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
 msgid "Group By"
 msgstr "Regrouper par"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_cost_history_ids
+msgid "History of purchase cost"
+msgstr "Historique du coût d'achat"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_price_history_ids
+msgid "History of selling price"
+msgstr "Historique prix de vente"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_adjustinvoice_wizard_id
@@ -598,18 +760,23 @@ msgstr "Regrouper par"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_changeaccount_wizard_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_email_wizard_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_id
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_id
 msgid "ID"
 msgstr "Identifiant"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_period_message_unread
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_message_unread
 msgid "If checked new messages require your attention."
 msgstr "Si coché, de nouveaux messages demandent votre attention."
 
 #. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_period_message_needaction
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_message_needaction
 msgid "If checked, new messages require your attention."
 msgstr "si elle est cochée, de nouveaux messages requièrent votre attention."
@@ -652,6 +819,41 @@ msgid "Internal Reference"
 msgstr "Référence interne"
 
 #. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_logisfloo_inventory_period
+msgid "Inventory Period"
+msgstr "Période d'inventaire"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_tree
+msgid "Inventory Report"
+msgstr "Rapport d'inventaire"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_logisfloo_inventory_reportline
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_form
+msgid "Inventory Report Line"
+msgstr "Ligne du rapport d'inventaire"
+
+#. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.logisfloo_inventoryperiod_action
+#: model:ir.ui.menu,name:logisfloo_base.logisfloo_menu_inventoryperiod_form_action
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryperiod_form
+msgid "Inventory period"
+msgstr "Période d'inventaire"
+
+#. module: logisfloo_base
+#: model:ir.actions.act_window,name:logisfloo_base.logisfloo_inventoryreport_action
+#: model:ir.ui.menu,name:logisfloo_base.logisfloo_accouting_menu_inventoryreport_action
+#: model:ir.ui.menu,name:logisfloo_base.logisfloo_purchase_menu_inventoryreport_action
+msgid "Inventory report"
+msgstr "Rapport d'inventaire"
+
+#. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_account_invoice
 msgid "Invoice"
 msgstr "Facture"
@@ -662,11 +864,18 @@ msgid "Invoice Price"
 msgstr "Prix de référence"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_invoiced_value
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_invoiced_value
+msgid "Invoiced value"
+msgstr "Valeur facturée"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Invoices and Incoming Shipments"
 msgstr "Factures et réceptions"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_is_follower
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_is_follower
 msgid "Is Follower"
 msgstr "Est un abonné"
@@ -693,6 +902,8 @@ msgid "Journal Entry"
 msgstr "Pièce comptable"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_period_datefrom
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_period_dateto
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_date_due
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_trip_date
 msgid "Keep empty to use the current date"
@@ -706,6 +917,7 @@ msgid "L'envoi du ticket se fait maintenant automatiquement en validant le paiem
 msgstr "L'envoi du ticket se fait maintenant automatiquement en validant le paiement."
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_last_post
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_last_post
 msgid "Last Message Date"
 msgstr "Date du dernier message"
@@ -716,9 +928,12 @@ msgstr "Date du dernier message"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard___last_update
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_changeaccount_wizard___last_update
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_email_wizard___last_update
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period___last_update
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline___last_update
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense___last_update
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost___last_update
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard___last_update
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
@@ -734,9 +949,12 @@ msgstr "Nom"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_write_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_changeaccount_wizard_write_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_email_wizard_write_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_write_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_write_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_write_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_write_uid
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_write_uid
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
@@ -746,9 +964,12 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_calcadjustpo_wizard_write_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_changeaccount_wizard_write_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_email_wizard_write_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_write_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_write_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_write_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_write_date
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_setslatenumber_wizard_write_date
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
@@ -769,6 +990,26 @@ msgid "Link to the automatically generated Journal Items."
 msgstr "Lier automatiquement à la ligne d'écriture générée"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_lossqty
+msgid "Lost Qty"
+msgstr "Qté perdue"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_margin
+msgid "Margin"
+msgstr "Marge"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_margin_corr
+msgid "Margin Corr"
+msgstr "Marge corrigée"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_margin_corr
+msgid "Margin corrected"
+msgstr "Marge corrigée"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_property_ref_ratio
 msgid "Max ratio to pay expense"
 msgstr "Rapport maximal pour payer les frais"
@@ -779,6 +1020,7 @@ msgid "Members"
 msgstr "Membres"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_ids
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_ids
 msgid "Messages"
 msgstr "Messages"
@@ -813,36 +1055,60 @@ msgid "Notes de frais (Ardoise)"
 msgstr "Notes de frais (Ardoise)"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_needaction_counter
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_needaction_counter
 msgid "Number of Actions"
 msgstr "Nombre d'Actions"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_period_message_needaction_counter
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_message_needaction_counter
 msgid "Number of messages which requires an action"
 msgstr "Nombre de messages demandant une action"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_movecount
+msgid "Number of moves for this product"
+msgstr "Nombre de mouvements pour ce produit"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_movecount
+msgid "Number of stock moves during this period"
+msgstr "Nombre de mouvements durant la période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_template_number_of_suppliers
+msgid "Number of suppliers"
+msgstr "Nombre de fournisseurs"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_period_message_unread_counter
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_message_unread_counter
 msgid "Number of unread messages"
 msgstr "Nombre de messages non lus"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:374
+#: code:addons/logisfloo_base/models/purchase.py:428
 #, python-format
 msgid "Only one invoice with third party payer can be processed at a time."
 msgstr "Seulement une facture payée par un tiers peut être traitée à la fois."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:369
+#: code:addons/logisfloo_base/models/purchase.py:423
 #, python-format
 msgid "Only one payment can be processed at a time. Trying to post %s payments"
 msgstr "Seulement un paiement peut être traité à la fois. Il y a %s paiements dans cette demande."
 
 #. module: logisfloo_base
+#: selection:logisfloo.inventory.period,state:0
 #: selection:logisfloo.poexpense,state:0
 msgid "Open"
 msgstr "Ouvert"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
+msgid "Open period"
+msgstr "Période ouverte"
 
 #. module: logisfloo_base
 #: selection:product.uom.categ,type:0
@@ -943,10 +1209,21 @@ msgid "Payments widget"
 msgstr "Widget des paiements"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/product.py:70
+#: code:addons/logisfloo_base/models/product.py:193
 #, python-format
 msgid "Percentages for Profit Margin must > 0."
 msgstr "Le pourcentage de la marge doit être > 0."
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_inventory_period_id
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
+msgid "Period"
+msgstr "Période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_name
+msgid "Period name"
+msgstr "Nom de la période"
 
 #. module: logisfloo_base
 #. openerp-web
@@ -963,14 +1240,38 @@ msgid "Point of Sale"
 msgstr "Point de vente"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_previous_period
+msgid "Previous period"
+msgstr "Période précédante"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_price
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Price"
 msgstr "Prix"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_price_history_ids
+msgid "Price history ids"
+msgstr "Historique des prix"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_product_actual_margin
+msgid "Price margin"
+msgstr "Marge prix"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_product_template_producer
 msgid "Producer"
 msgstr "Producteur"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_product_id
+#: model:ir.model.fields,field_description:logisfloo_base.field_product_customer_price_history_product_id
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
+msgid "Product"
+msgstr "Article"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_product_category
@@ -996,6 +1297,16 @@ msgstr "Catégorie d'UdM d'article"
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_menu_procurement_partner_contact_form
 msgid "Products"
 msgstr "Articles"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_boughtqty
+msgid "Purch Qty"
+msgstr "Qté achetée"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_bought_value
+msgid "Purch value"
+msgstr "Valeur achetée"
 
 #. module: logisfloo_base
 #: model:res.groups,name:logisfloo_base.group_logisfloo_purchase
@@ -1064,6 +1375,61 @@ msgid "Quantity"
 msgstr "Quantité"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_endqty
+msgid "Quantity at end of this period"
+msgstr "Quantité à la fin de cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_startqty
+msgid "Quantity at start of this period"
+msgstr "Quantité au début de cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_bought_iqty
+msgid "Quantity bought (as per vendor invoices) during this period"
+msgstr "Quantité achetée (factures fournisseurs) durant cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_boughtqty
+msgid "Quantity bought during this period"
+msgstr "Quantité achetée durant cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_bought_value
+msgid "Quantity bought value"
+msgstr "Valeur achetée (quantité)"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_corrqty
+msgid "Quantity corrected during this period"
+msgstr "Quantité corrigée durant cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_extraqty
+msgid "Quantity extra during this period"
+msgstr "Quantité extra durant cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_lossqty
+msgid "Quantity lost during this period"
+msgstr "Quantité perdue durant cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_sold_iqty
+msgid "Quantity sold (as per customer pos orders/invoices) during this period"
+msgstr "Quantité vendue (commandes pdv et factures client) durant cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_soldqty
+msgid "Quantity sold during this period"
+msgstr "Quantité vendue durant cette période"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_unknownqty
+msgid "Quantity unassigned during this period"
+msgstr "Quantité non défine durant cette période"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_invoice_supplier_form
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
 msgid "Rebate"
@@ -1074,6 +1440,11 @@ msgstr "Remise"
 #: model:ir.model.fields,field_description:logisfloo_base.field_purchase_order_RebateAmount
 msgid "Rebate amount"
 msgstr "Montant de la remise"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryperiod_form
+msgid "Rebuild report"
+msgstr "Refaire le rapport"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.payment_set_reconciled
@@ -1091,9 +1462,15 @@ msgid "Rejected"
 msgstr "Rejeté"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryperiod_form
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_view_bank_statement_form
+msgid "Reopen"
+msgstr "Rouvrir"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Reopen the purchase order."
-msgstr "Réouvrir le bon de commande."
+msgstr "Rouvrir le bon de commande."
 
 #. module: logisfloo_base
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_menu_purchase_rfq
@@ -1122,6 +1499,11 @@ msgid "Rounding amount"
 msgstr "Arrondi"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
+msgid "Search Inventory report"
+msgstr "Chercher rapport d'inventaire"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_poexpense_filter
 msgid "Search PO Expense"
 msgstr "Rechercher note de frais"
@@ -1130,6 +1512,11 @@ msgstr "Rechercher note de frais"
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_potransportcost_filter
 msgid "Search Transport Cost"
 msgstr "Rechercher coût de transport"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryperiod_filter
+msgid "Search inventory period"
+msgstr "Chercher période d'inventaire"
 
 #. module: logisfloo_base
 #. openerp-web
@@ -1207,6 +1594,37 @@ msgid "Slate partners"
 msgstr "Membres de l'ardoise"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_soldqty
+msgid "Sold Qty"
+msgstr "Qté vendue"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_sold_value
+msgid "Sold value"
+msgstr "Valeur vente"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_datefrom
+msgid "Start"
+msgstr "Début"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_startqty
+msgid "Start Qty"
+msgstr "Qté début"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_start_value
+msgid "Start value"
+msgstr "Valuer début"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_start_value
+msgid "Starting stock value"
+msgstr "Valeur de départ du stock"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_state
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_state
 msgid "Status"
 msgstr "État"
@@ -1215,6 +1633,26 @@ msgstr "État"
 #: model:res.groups,name:logisfloo_base.group_logisfloo_stock
 msgid "Stock"
 msgstr "Inventaire"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_corr_value
+msgid "Stock correction value"
+msgstr "Valeur de correction de stock"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_sold_purchase_value
+msgid "Stock sold purchase value"
+msgstr "Valeur d'achat du stock vendu"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_sold_value
+msgid "Stock sold value"
+msgstr "Valeur stock vendu"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
@@ -1232,6 +1670,11 @@ msgid "Subscription Event"
 msgstr "Inscrit à "
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_product_supplier
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: logisfloo_base
 #: selection:product.uom.categ,type:0
 msgid "Surface"
 msgstr "Surface"
@@ -1247,7 +1690,20 @@ msgid "Tenant Logis-Floréal"
 msgstr "Locataire Logis-Floréal"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:443
+#: code:addons/logisfloo_base/models/stock.py:116
+#, python-format
+msgid "The roundings of your Unit of Measures %s on the move vs. %s on the product don't allow to do these operations or you are not transferring the picking at once. Product %s, qty %f"
+msgstr "L'arrondi de votre Unité de mesure %s du mouvement vs. %s du produit ne permet pas ces opérations ou vous ne trasnférez pas le picking en une fois. Product %s, qty %f"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:63
+#: code:addons/logisfloo_base/models/purchase.py:69
+#, python-format
+msgid "The ticket number %s already exists in the database."
+msgstr "Le numéro de ticket %s existe déjà dans la base de données."
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:497
 #, python-format
 msgid "Third Party Payment"
 msgstr "Paiement par tiers"
@@ -1298,6 +1754,11 @@ msgstr "Ce journal sera utilisé pour enregistrer les paiements par un tiers"
 #: model:mail.template,report_name:logisfloo_base.email_send_ticket
 msgid "Ticket ${object.pos_reference}"
 msgstr "Ticket ${object.pos_reference}"
+
+#. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_receipt_form
+msgid "Ticket number"
+msgstr "Numéro de ticket"
 
 #. module: logisfloo_base
 #: code:addons/logisfloo_base/models/logisfloo_pos.py:21
@@ -1351,12 +1812,18 @@ msgid "Trip Date"
 msgstr "Date du trajet"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_unknownqty
+msgid "Unassigned Qty"
+msgstr "Qté non définie"
+
+#. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
 msgid "Undo"
 msgstr "Rouvrir"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_potransportcost_unit
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_product_supplierinfo_tree_view
 #: selection:product.uom.categ,type:0
 msgid "Unit"
@@ -1368,11 +1835,13 @@ msgid "Unit Price"
 msgstr "Prix unitaire"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_unread
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_unread
 msgid "Unread Messages"
 msgstr "Messages non lus"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_message_unread_counter
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_message_unread_counter
 msgid "Unread Messages Counter"
 msgstr "Compteur de messages non lus"
@@ -1397,6 +1866,16 @@ msgstr "Use this menu to search within your expense by\n"
 "            you can ..."
 
 #. module: logisfloo_base
+#: model:ir.actions.act_window,help:logisfloo_base.logisfloo_inventoryperiod_action
+msgid "Use this menu to search within your inventory periods ..."
+msgstr "Utiliser ce menu pour chercher dans vos période d'inventaire ..."
+
+#. module: logisfloo_base
+#: model:ir.actions.act_window,help:logisfloo_base.logisfloo_inventoryreport_action
+msgid "Use this menu to search within your inventory report ..."
+msgstr "Utiliser ce menu pour chercher dans vos rapport d'inventaire ..."
+
+#. module: logisfloo_base
 #: model:ir.actions.act_window,help:logisfloo_base.logisfloo_purchase_receipt_action
 msgid "Use this menu to search within your receipt by\n"
 "            references, vendor, products, etc. For each receipt,\n"
@@ -1408,7 +1887,17 @@ msgstr "Sélectionner ce menu pour chercher dans vos ticket selon\n"
 "            la réception des produits et contrôler la facture."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:441
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
+msgid "Vendor"
+msgstr "Fournisseur"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_bought_iqty
+msgid "Vendor Invoiced Qty"
+msgstr "Qté facturée par le fournisseur"
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/purchase.py:495
 #, python-format
 msgid "Vendor Refund"
 msgstr "Remboursement fournisseur"
@@ -1424,6 +1913,7 @@ msgid "Vente salon de thé"
 msgstr "Vente salon de thé"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
 #: selection:product.uom.categ,type:0
 msgid "Volume"
 msgstr "Volume"
@@ -1444,16 +1934,19 @@ msgid "Votre versement a été enregistré sur votre ardoise."
 msgstr "Votre versement a été enregistré sur votre ardoise."
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_website_message_ids
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_poexpense_website_message_ids
 msgid "Website Messages"
 msgstr "Messages du site web"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_period_website_message_ids
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_poexpense_website_message_ids
 msgid "Website communication history"
 msgstr "Historique de communication du site web"
 
 #. module: logisfloo_base
+#: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_filter
 #: selection:product.uom.categ,type:0
 msgid "Weight"
 msgstr "Poids"
@@ -1468,6 +1961,17 @@ msgstr "Oui Non"
 #, python-format
 msgid "You can only generate accounting entry for approved expense(s)."
 msgstr "Vous ne pouvez créer les écritures comptables que pour des note de frais confirmées."
+
+#. module: logisfloo_base
+#: code:addons/logisfloo_base/models/stock.py:66
+#, python-format
+msgid "You have a difference between the quantity on the operation and the quantities specified for the lots. "
+msgstr "Vous avez une différence entre la quantité de l'opération et les quantitées des lots. "
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_rec_name
+msgid "_rec_name"
+msgstr "_rec_name"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_email_wizard_form
@@ -1513,6 +2017,11 @@ msgstr "logisfloo.potransportcost"
 #: model:ir.model,name:logisfloo_base.model_logisfloo_setslatenumber_wizard
 msgid "logisfloo.setslatenumber.wizard"
 msgstr "logisfloo.setslatenumber.wizard"
+
+#. module: logisfloo_base
+#: model:ir.model,name:logisfloo_base.model_product_customer_price_history
+msgid "product.customer.price.history"
+msgstr "product.customer.price.history"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_email_wizard_form
