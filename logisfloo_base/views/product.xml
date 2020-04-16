@@ -18,6 +18,11 @@
 
          	<field name="list_price" position="after">
     	    	<field name="total_with_margin" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                <field name="standard_price" widget='monetary'/>
+            	<label for="actual_margin"/>	
+            	<div>
+ 	            	<field name="actual_margin" class="oe_inline"></field> %
+            	</div>                
     	    </field>
         	<field name="type" position="after">
     	    	<field name="producer"/>
@@ -62,8 +67,11 @@
         <field name="arch" type="xml">
         	<field name="standard_price" position="replace">
         		<field name="internal_ref"/>
+                <field name="number_of_suppliers"/>
         		<field name="list_price"/>
         		<field name="total_with_margin"/>
+                <field name="standard_price"/>
+                <field name="actual_margin"/>                
         	</field>
         	<field name="uom_id" position="attributes">
         		<attribute name="invisible">0</attribute>
@@ -156,5 +164,31 @@
         	</field>
         </field>
     </record>
-    
+
+<!-- Customer price history -->
+
+    <record model="ir.ui.view" id="logisfloo_customerpricehistory_tree">
+        <field name="name">logisfloo.customerpricehistory.tree</field>
+        <field name="model">product.customer.price.history</field>
+        <field name="arch" type="xml">
+	        <tree default_order="datetime desc">
+	       		<field name="datetime" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+                <field name="price"/>
+	         </tree>
+        </field>       
+    </record>
+
+<!-- Standard price history -->
+
+    <record model="ir.ui.view" id="logisfloo_productpricehistory_tree">
+        <field name="name">logisfloo.productpricehistory.tree</field>
+        <field name="model">product.price.history</field>
+        <field name="arch" type="xml">
+	        <tree default_order="datetime desc">
+	       		<field name="datetime" widget="datetime" options="{'format': 'dd/MM/yyyy'}"/>
+                <field name="cost"/>
+	         </tree>
+        </field>       
+    </record>
+
 </odoo>

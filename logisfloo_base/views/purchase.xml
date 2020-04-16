@@ -188,6 +188,9 @@
         		<field name="isShopReceipt" invisible="1"/>
         		<field name="tpty_partner_id" attrs="{'required': [('isShopReceipt','=', True)]}"/>
         	</field>   
+			<field name="partner_ref" position="attributes">
+				<attribute name="string">Ticket number</attribute>
+			</field>
 	       	<xpath expr="//notebook" position="before">
 	       		<separator string="Transport cost"/>
 	       		<group>

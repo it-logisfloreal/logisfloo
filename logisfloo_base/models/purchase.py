@@ -5,6 +5,7 @@ from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.exceptions import UserError
 from openerp import exceptions
 from datetime import datetime
+from openerp.exceptions import ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -39,6 +40,35 @@ class LogisflooPurchaseOrder(models.Model):
         ('cancel', 'Cancelled')
         ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
+    def ispartnerrefduplicate(self, values):
+        partner_id = values.get('partner_id') or self.partner_id.id
+        company_id = values.get('company_id') or self.company_id.id
+        isShopReceipt = values.get('isShopReceipt') or self.isShopReceipt
+        search_domain = [
+            ('isShopReceipt', '=', True),
+            ('id', '!=', self.id),
+            ('partner_ref', '=', values.get('partner_ref')), 
+            ('partner_id', '=', partner_id), 
+            ('company_id', '=', company_id)
+            ]
+        search_results = self.env['purchase.order'].search(search_domain)
+        if isShopReceipt and len(search_results) > 0:
+            return True
+        else:
+            return False
+ 
+    @api.multi
+    def write(self, values):
+        if self.partner_ref != values.get('partner_ref') and self.ispartnerrefduplicate(values):
+            raise ValidationError(_('The ticket number %s already exists in the database.') % values.get('partner_ref'))
+        return super(LogisflooPurchaseOrder, self).write(values)
+
+    @api.model
+    def create(self, values):
+        if self.ispartnerrefduplicate(values):
+            raise ValidationError(_('The ticket number %s already exists in the database.') % values.get('partner_ref'))
+        return super(LogisflooPurchaseOrder, self).create(values)
+  
     @api.one
     @api.depends('quantity', 'transport_type_id')
     def _compute_expense_amount(self):
@@ -233,6 +263,30 @@ class LogisflooAccountInvoice(models.Model):
     def _prepare_invoice_line_from_po_line(self, line):
         data=super(LogisflooAccountInvoice,self)._prepare_invoice_line_from_po_line(line)
         data['discount'] = line.discount or 0.0
+        return data
+ 
+    @api.multi
+    def invoice_validate(self):
+        # Override to update product standard price present in the invoices
+        data=super(LogisflooAccountInvoice,self).invoice_validate()
+        vendor_invoices=[x for x in self if x.type == 'in_invoice']
+        for invoice in vendor_invoices:
+            for line in self.env['account.invoice.line'].search([('invoice_id','=',invoice.id),('quantity', '>',0.0)]):
+                product=self.env['product.product'].search([('id','=',line.product_id.id)])            
+                template=self.env['product.template'].search([('id','=',product.product_tmpl_id.id)])
+                currency = template.currency_id
+                tax_ratio = 0
+                suppliers = template._get_main_supplier_info()
+                if(len(suppliers) > 0):
+                    for taxes_id in template.supplier_taxes_id:
+                        tax_ratio += currency.round(taxes_id._compute_amount(1.0, 1.0)) 
+                    tax_ratio += 1
+                else:
+                    tax_ratio = 1
+                tax_unit_ratio = (template.uom_po_id.factor/template.uom_id.factor)*tax_ratio
+                invoice_unit_price=line.price_subtotal/line.quantity * tax_unit_ratio
+                if invoice_unit_price != product.standard_price:
+                    product.standard_price=invoice_unit_price        
         return data
  
 class LogisflooCalcAdjustWizard(models.TransientModel):
