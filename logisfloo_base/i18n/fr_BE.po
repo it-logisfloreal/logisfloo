@@ -1616,7 +1616,7 @@ msgstr "Qté début"
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_start_value
 msgid "Start value"
-msgstr "Valuer début"
+msgstr "Valeur début"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_start_value
