@@ -59,7 +59,7 @@ class LogisflooPurchaseOrder(models.Model):
  
     @api.multi
     def write(self, values):
-        if self.partner_ref != values.get('partner_ref') and self.ispartnerrefduplicate(values):
+        if 'partner_ref' in values and self.partner_ref != values.get('partner_ref') and self.ispartnerrefduplicate(values):
             raise ValidationError(_('The ticket number %s already exists in the database.') % values.get('partner_ref'))
         return super(LogisflooPurchaseOrder, self).write(values)
 
