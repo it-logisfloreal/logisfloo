@@ -47,11 +47,14 @@
 	            <field name="soldqty"/>
                 <field name="corrqty"/>
                 <field name="endqty"/>
+                <field name="invqty"/>
+                <field name="diffqty"/>
                 <field name="start_value" widget="monetary"/>
                 <field name="bought_value" widget="monetary"/>
                 <field name="sold_value" widget="monetary"/>
                 <field name="corr_value" widget="monetary"/>
                 <field name="end_value" widget="monetary"/>
+                <field name="inv_value" widget="monetary"/>
                 <field name="sold_purchase_value" widget="monetary"/>
                 <field name="product_actual_margin" digits="[3, 2]"/>    
                 <field name="margin" digits="[3, 2]"/>
@@ -94,6 +97,8 @@
                             <field name="lossqty" readonly="1"/>
                             <field name="extraqty" readonly="1"/>
                             <field name="endqty" readonly="1"/>
+                            <field name="invqty" readonly="1"/>
+                            <field name="diffqty" readonly="1"/>
                             <field name="corrqty" readonly="1"/>
                             <field name="unknownqty" readonly="1"/>
                             <field name="bought_iqty" widget="monetary" readonly="1"/>
@@ -106,6 +111,7 @@
                             <field name="invoiced_value" widget="monetary" readonly="1"/>
                             <field name="corr_value" widget="monetary" readonly="1"/>
                             <field name="end_value" widget="monetary" readonly="1"/>
+                            <field name="inv_value" widget="monetary" readonly="1"/>
                         </group>
                     </group>
                      <group>
@@ -220,6 +226,9 @@
                         <field name="dateto"/>
                         <field name="previous_period"/>
 					</group>
+                    <group>
+                        <field name="inventory_adj_ids" options="{'no_create': True}"/>
+                    </group>                    
 				</sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>

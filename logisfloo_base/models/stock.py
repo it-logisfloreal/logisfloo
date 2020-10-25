@@ -192,6 +192,7 @@ class LogisflooInventoryPeriod(models.Model):
                            default=datetime.now(),
                            index=True, track_visibility='onchange', help="Keep empty to use the current date")
     previous_period = fields.Many2one('logisfloo.inventory.period', string='Previous period', track_visibility='onchange')
+    inventory_adj_ids = fields.Many2many('stock.inventory', 'id', string='Inventory Adjustments', track_visibility='onchange')
     state = fields.Selection([
             ('open', 'Open'),
             ('closed', 'Closed'),
@@ -252,6 +253,9 @@ class LogisflooInventoryPeriod(models.Model):
                     'sold_purchase_value': 0.0,
                     'sold_iqty': 0.0,
                     'bought_iqty': 0.0,
+                    'invqty': 0.0,
+                    'diffqty': 0.0,
+                    'inv_value': 0.0,
                 }
 
         _logger.info('Rebuild inventory report for period %s', self.name)
@@ -261,6 +265,7 @@ class LogisflooInventoryPeriod(models.Model):
         loc_stock = self.env['stock.location'].search([('id', '=', 19)]).id
         move_recs = self.env['stock.move'].search([('state', '=', 'done'),('date', '>=', self.datefrom), ('date', '<=', self.dateto)]
                                 ,order='product_id asc, date asc')
+        inventory_lines = self.env['stock.inventory.line']
         reportline = self.env['logisfloo.inventory.reportline']
         reportline.search([('inventory_period_id', '=', self.id)]).unlink()
         data_items = []
@@ -319,6 +324,11 @@ class LogisflooInventoryPeriod(models.Model):
             # Skip any item that is not a product (e.g. service)
             if template.type != 'product':
                 continue
+
+            # Add Quantity found during inventory
+            inv_ids = [x.id for x in self.inventory_adj_ids]
+            item['invqty'] = inventory_lines.search([('inventory_id', 'in', inv_ids),('product_id', '=', item['product_id'])]
+                                    ,order='product_id asc, write_date desc', limit = 1).product_qty
 
             # Compute sold_value as sum of pos.order sales
             pos_order_lines = self.env['pos.order.line'].search([('product_id', '=', product.id),
@@ -382,6 +392,8 @@ class LogisflooInventoryPeriod(models.Model):
             margin_corr = round(item['sold_value']/sold_ref_value * 100 - 100,2) if sold_ref_value != 0 and item['sold_value'] != 0 else 0.0
             item['start_value'] = item['startqty'] * product_price_start
             item['end_value'] = endqty * product_price_end
+            item['diffqty'] = round(item['invqty'] - endqty,3)
+            item['inv_value'] = item['invqty'] * product_price_end
             if not self.previous_period:
                 # The initial period represent the starting point of the inventory and accounting data:
                 # - must only contain data for the end qty and end value
@@ -419,6 +431,9 @@ class LogisflooInventoryPeriod(models.Model):
                 'sold_iqty': item['sold_iqty'],                
                 'margin': margin,
                 'margin_corr': margin_corr,
+                'invqty': item['invqty'],
+                'diffqty': item['diffqty'],
+                'inv_value': item['inv_value'],
                 })
         _logger.info('Rebuild inventory report for period %s - done', self.name)
  
@@ -447,6 +462,8 @@ class LogisflooInventoryReportLine(models.Model):
 
     startqty = fields.Float(string='Start Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity at start of this period")
     endqty = fields.Float(string='End Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity at end of this period")
+    invqty = fields.Float(string='Inventory Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity at inventory of this period")
+    diffqty = fields.Float(string='Inventory-End Qty',required=True, track_visibility='onchange', default=0.0, help="Delta Quantity at inventory and at end of this period")
     soldqty = fields.Float(string='Sold Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity sold during this period")
     boughtqty = fields.Float(string='Purch Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity bought during this period")
     lossqty = fields.Float(string='Lost Qty',required=True, track_visibility='onchange', default=0.0, help="Quantity lost during this period")
@@ -466,6 +483,7 @@ class LogisflooInventoryReportLine(models.Model):
     corr_value = fields.Monetary(string='Corr value', currency_field='currency_id', readonly=True, store=True, help="Stock correction value")
     sold_purchase_value = fields.Monetary(string='Cost of sold', currency_field='currency_id', readonly=True, store=True, help="Stock sold purchase value")
     end_value = fields.Monetary(string='End value', currency_field='currency_id', readonly=True, store=True, help="Ending stock value")
+    inv_value = fields.Monetary(string='Inv value', currency_field='currency_id', readonly=True, store=True, help="Stock inventory value")
     margin = fields.Float(string='Margin',required=True, track_visibility='onchange', default=0.0, help="Actual margin") 
     margin_corr = fields.Float(string='Margin Corr',required=True, track_visibility='onchange', default=0.0, help="Margin corrected")
 
