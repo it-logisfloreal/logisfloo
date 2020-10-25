@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c-20181230\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-12 20:06+0000\n"
-"PO-Revision-Date: 2020-01-12 20:06+0000\n"
+"POT-Creation-Date: 2020-10-25 19:48+0000\n"
+"PO-Revision-Date: 2020-10-25 19:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "\n"
 "<p dir=\"ltr\" style=\"line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Bonjour ${object.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span></p><p dir=\"ltr\" style=\"line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Le solde de ton ardoise est de ${object.slate_balance} €.</span><br><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">Merci de faire un versement avant ta prochaine visite à l'épicerie.&nbsp;</span><br></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"min-width: 100%;\"><tbody><tr><td align=\"left\"></td></tr></tbody></table><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"background-color: rgb(245, 242, 242);\"><p style=\"line-height: 19.5px\"><strong>Pour alimenter ton ardoise, effectue un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\">avec la communication&nbsp;:&nbsp;<b> <font style=\"color: rgb(0, 0, 0);\">\"Ardoise&nbsp;</font></b><span style=\"color: rgb(0, 0, 0); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.slate_number}</b>\"</span></p></td></tr></tbody></table><p><span style=\"color: rgb(33, 33, 33);line-height: 19.5px\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>\n"
 "            "
 msgstr "\n"
-"<p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Bonjour ${object.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span></p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\"><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\">Le solde de ton ardoise est de ${object.slate_balance} €</span><br></p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\">Les ardoises sont mises à jour le vendredi soir avec les derniers&nbsp;relevés de compte bancaire. Pour estimer le délai de traitement, il faut également tenir compte du temps de traitement des virements par les banques (jusque 2 ou 3 jours) ainsi que des jours fériés.&nbsp;</p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\"><span style=\"color: initial; font-style: initial; font-variant-caps: initial;\">Lorsque ton versement sera traité, un mail automatique te sera envoyé avec le nouveau&nbsp;</span>solde de ton ardoise<span style=\"color: initial; font-style: initial; font-variant-caps: initial;\">.</span></p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\">Ceci est un mail automatique. &nbsp;Afin de limiter la surcharge de nos boîtes mail, merci de ne&nbsp;répondre à ce mail qu'en cas de problème avec un versement effectué il y a plus d'une semaine.&nbsp;<br></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;background-color: rgb(245, 242, 242);\"><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Pour alimenter ton ardoise, effectue un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\">avec la communication&nbsp;:&nbsp;<b style=\"font-weight:bold;\"> <font style=\"color: rgb(0, 0, 0);\">\"Ardoise&nbsp;</font></b><span style=\"color: rgb(0, 0, 0); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.slate_number}</b>\"</span></p></td></tr></tbody></table><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;\"><span style=\"color: rgb(33, 33, 33);line-height: 19.5px\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>\n"
+"<p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\"><span style=\"color: rgb(33, 33, 33);background-color: transparent\">Bonjour ${object.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span></p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\"><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\">Le solde de ton ardoise est de ${object.slate_balance} €</span><br></p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\">Les ardoises sont mises à jour le vendredi soir avec les derniers&nbsp;relevés de compte bancaire. Pour estimer le délai de traitement, il faut également tenir compte du temps de traitement des virements par les banques (jusque 2 ou 3 jours) ainsi que des jours fériés.&nbsp;</p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\"><span style=\"color: initial; font-style: initial; font-variant-caps: initial;\">Lorsque ton versement sera traité, un mail automatique te sera envoyé avec le nouveau&nbsp;</span>solde de ton ardoise<span style=\"color: initial; font-style: initial; font-variant-caps: initial;\">.</span></p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38\">Ceci est un mail automatique. &nbsp;Afin de limiter la surcharge de nos boîtes mail, merci de ne&nbsp;répondre à ce mail qu'en cas de problème avec un versement effectué il y a plus d'une semaine.&nbsp;<br></p><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"left\" style=\"padding:0px;background-color:transparent;border-collapse:collapse;min-width: 100%;\"><tbody><tr><td align=\"left\" style=\"padding:0px;vertical-align:top;text-align:left;background-color: rgb(245, 242, 242);\"><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 19.5px\"><strong style=\"font-weight:bold;\">Pour alimenter ton ardoise, effectue un versement<br style=\"line-height: 19.5px\"></strong>au compte BE40 5230 8076 1063 - Epicerie du Logis Floréal<br style=\"line-height: 19.5px\">avec la communication&nbsp;:&nbsp;<b style=\"font-weight:bold;\"> <font style=\"color: rgb(0, 0, 0);\">\"</font></b><b style=\"font-weight:bold;color: initial; font-family: inherit; font-style: initial; font-variant-caps: initial;\">${object.name} -&nbsp;</b><b style=\"font-weight:bold;color: initial; font-style: initial; font-variant-caps: initial;\">Ardoise&nbsp;</b><span style=\"font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.slate_number}</b></span><span style=\"font-family: inherit; color: initial; font-style: initial; font-variant-caps: initial;\">\"</span></p></td></tr></tbody></table><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;\"><span style=\"color: rgb(33, 33, 33);line-height: 19.5px\">L'Epicerie Logis-Floreal.</span>&nbsp;</p>\n"
 "            "
 
 #. module: logisfloo_base
@@ -40,7 +40,7 @@ msgid "\n"
 "<p dir=\"ltr\" style=\"line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour ${object.partner_id.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span><br></p><p dir=\"ltr\" style=\"line-height: 1.38;\">Nous avons bien reçu ton versement de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.amount} €</b> avec la communication:&nbsp;</span><b>${ctx.get('label')}</b></p><p dir=\"ltr\" style=\"line-height: 1.38;\">Le solde de ton ardoise est maintenant de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b>${object.partner_id.slate_balance} €</b>.</span></p><p><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">L'Epicerie Logis-Floreal.</span></p>\n"
 "			"
 msgstr "\n"
-"<p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour ${object.partner_id.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span><br></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\">Nous avons bien reçu ton versement de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.amount} €</b> avec la communication:&nbsp;</span><b style=\"font-weight:bold;\">${ctx.get('label')}</b></p><p dir=\"ltr\" style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;line-height: 1.38;\">Le solde de ton ardoise est maintenant de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.partner_id.slate_balance} €</b>.</span></p><p style=\"margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;\"><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">L'Epicerie Logis-Floreal.</span></p>\n"
+"<p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38;\"><span style=\"color: rgb(33, 33, 33); background-color: transparent;\">Bonjour ${object.partner_id.first_name}</span><span style=\"color: rgb(33, 33, 33); font-style: initial; font-variant-caps: initial; background-color: transparent;\">,&nbsp;</span><br></p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38;\">Nous avons bien reçu ton versement de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.amount} €</b> avec la communication:&nbsp;</span><b style=\"font-weight:bold;\">${ctx.get('label')}</b></p><p dir=\"ltr\" style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;line-height: 1.38;\">Le solde de ton ardoise est maintenant de&nbsp;<span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33); font-family: inherit; font-style: initial; font-variant-caps: initial;\"><b style=\"font-weight:bold;\">${object.partner_id.slate_balance} €</b>.</span></p><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;\">NB: le système ne permet pas de traiter les cotisations par virement. Le paiement des cotisations se fait exclusivement au point de vente. Les montants versés sur le compte de l'épicerie sont reversés sur les ardoises.</p><p style=\"font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;margin-inline-end:0px;margin-inline-start:0px;margin-block-end:1em;margin-block-start:0px;margin:0px 0px 10px 0px;\"><br><span style=\"caret-color: rgb(33, 33, 33); color: rgb(33, 33, 33);\">L'Epicerie Logis-Floreal.</span></p>\n"
 "			"
 
 #. module: logisfloo_base
@@ -507,13 +507,13 @@ msgid "Customer Invoiced Qty"
 msgstr "Qté facturée au client"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:490
+#: code:addons/logisfloo_base/models/purchase.py:492
 #, python-format
 msgid "Customer Payment"
 msgstr "Paiement client"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:492
+#: code:addons/logisfloo_base/models/purchase.py:494
 #, python-format
 msgid "Customer Refund"
 msgstr "Remboursement client"
@@ -533,6 +533,11 @@ msgstr "Date du dernier message publié sur cet enregistrement"
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_report_receipt
 msgid "Date:"
 msgstr "Date:"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_diffqty
+msgid "Delta Quantity at inventory and at end of this period"
+msgstr "Différence de quantité entre l'inventaire et la fin de la période"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_purchase_order_form_view
@@ -819,14 +824,29 @@ msgid "Internal Reference"
 msgstr "Référence interne"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_inv_value
+msgid "Inv value"
+msgstr "Val Inv"
+
+#. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_stock_inventory
 msgid "Inventory"
 msgstr "Inventaire"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_inventory_adj_ids
+msgid "Inventory Adjustments"
+msgstr "Ajustement d'inventaire"
+
+#. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_logisfloo_inventory_period
 msgid "Inventory Period"
 msgstr "Période d'inventaire"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_invqty
+msgid "Inventory Qty"
+msgstr "Qté Inventaire"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_tree
@@ -852,6 +872,11 @@ msgstr "Période d'inventaire"
 #: model:ir.ui.menu,name:logisfloo_base.logisfloo_purchase_menu_inventoryreport_action
 msgid "Inventory report"
 msgstr "Rapport d'inventaire"
+
+#. module: logisfloo_base
+#: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_diffqty
+msgid "Inventory-End Qty"
+msgstr "Qté Inventaire-Fin"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_account_invoice
@@ -1088,13 +1113,13 @@ msgid "Number of unread messages"
 msgstr "Nombre de messages non lus"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:428
+#: code:addons/logisfloo_base/models/purchase.py:430
 #, python-format
 msgid "Only one invoice with third party payer can be processed at a time."
 msgstr "Seulement une facture payée par un tiers peut être traitée à la fois."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:423
+#: code:addons/logisfloo_base/models/purchase.py:425
 #, python-format
 msgid "Only one payment can be processed at a time. Trying to post %s payments"
 msgstr "Seulement un paiement peut être traité à la fois. Il y a %s paiements dans cette demande."
@@ -1380,6 +1405,11 @@ msgid "Quantity at end of this period"
 msgstr "Quantité à la fin de cette période"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_invqty
+msgid "Quantity at inventory of this period"
+msgstr "Quantité à l'inventaire de cette période"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_startqty
 msgid "Quantity at start of this period"
 msgstr "Quantité au début de cette période"
@@ -1645,6 +1675,11 @@ msgid "Stock correction value"
 msgstr "Valeur de correction de stock"
 
 #. module: logisfloo_base
+#: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_inv_value
+msgid "Stock inventory value"
+msgstr "Valeur stock"
+
+#. module: logisfloo_base
 #: model:ir.model.fields,help:logisfloo_base.field_logisfloo_inventory_reportline_sold_purchase_value
 msgid "Stock sold purchase value"
 msgstr "Valeur d'achat du stock vendu"
@@ -1703,7 +1738,7 @@ msgid "The ticket number %s already exists in the database."
 msgstr "Le numéro de ticket %s existe déjà dans la base de données."
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:497
+#: code:addons/logisfloo_base/models/purchase.py:499
 #, python-format
 msgid "Third Party Payment"
 msgstr "Paiement par tiers"
@@ -1897,7 +1932,7 @@ msgid "Vendor Invoiced Qty"
 msgstr "Qté facturée par le fournisseur"
 
 #. module: logisfloo_base
-#: code:addons/logisfloo_base/models/purchase.py:495
+#: code:addons/logisfloo_base/models/purchase.py:497
 #, python-format
 msgid "Vendor Refund"
 msgstr "Remboursement fournisseur"
