@@ -380,7 +380,7 @@ class LogisflooInventoryPeriod(models.Model):
             item['startqty'] = self.env['logisfloo.inventory.reportline'].search([
                                         ('inventory_period_id', '=', self.previous_period.id), 
                                         ('product_id', '=', item['product_id'])
-                                        ]).endqty
+                                        ]).invqty
             endqty = item['startqty'] + item['boughtqty'] + item['extraqty'] - item['soldqty'] - item['lossqty']
             item['corrqty'] = item['extraqty']-item['lossqty']
             item['corr_value'] = item['corrqty'] * product_price_end
@@ -538,6 +538,8 @@ class LogisflooInventoryReportLine(models.Model):
                 del line['soldqty']
                 del line['corrqty']
                 del line['endqty']
+                del line['invqty']
+                del line['diffqty']
         return res
 
     @api.multi
