@@ -411,12 +411,12 @@ msgstr "Confirmer le ticket."
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_corrqty
 msgid "Corr Qty"
-msgstr "Qté corr"
+msgstr "Qté corrigée"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_corr_value
 msgid "Corr value"
-msgstr "Valeur corr"
+msgstr "Valeur corrigée"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_form
@@ -826,7 +826,7 @@ msgstr "Référence interne"
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_inv_value
 msgid "Inv value"
-msgstr "Val Inv"
+msgstr "Valeur inventaire"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_stock_inventory
@@ -846,7 +846,7 @@ msgstr "Période d'inventaire"
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_invqty
 msgid "Inventory Qty"
-msgstr "Qté Inventaire"
+msgstr "Qté inventaire"
 
 #. module: logisfloo_base
 #: model:ir.ui.view,arch_db:logisfloo_base.logisfloo_inventoryreport_tree
@@ -876,7 +876,7 @@ msgstr "Rapport d'inventaire"
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_diffqty
 msgid "Inventory-End Qty"
-msgstr "Qté Inventaire-Fin"
+msgstr "Qté inventaire-fin"
 
 #. module: logisfloo_base
 #: model:ir.model,name:logisfloo_base.model_account_invoice
@@ -1631,7 +1631,7 @@ msgstr "Qté vendue"
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_reportline_sold_value
 msgid "Sold value"
-msgstr "Valeur vente"
+msgstr "Valeur vendue"
 
 #. module: logisfloo_base
 #: model:ir.model.fields,field_description:logisfloo_base.field_logisfloo_inventory_period_datefrom
