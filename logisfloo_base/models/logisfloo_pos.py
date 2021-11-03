@@ -37,3 +37,17 @@ class LogisflooPosOrder(models.Model):
         order['lines'] = [l for l in lines if l[2]['qty'] !=0]
                 
         return super(LogisflooPosOrder, self)._process_order(order)
+
+class LogisflooPosSession(models.Model):
+
+    _inherit = 'pos.session'
+
+    def _confirm_orders(self, cr, uid, ids, context=None):
+        for session in self.browse(cr, uid, ids, context=context):
+            for order in session.order_ids:
+                # FIX POS cannot be closed bacause of unpaid orders
+                # Delete unpaid orders with no actual purchase - this is a side effect of people checking their slate amount on a separate POS tab
+                if order.state not in ('paid', 'invoiced') and len(order.lines) == 0:
+                    order.unlink()
+
+        return super(LogisflooPosSession, self)._confirm_orders(cr, uid, ids, context=None)
