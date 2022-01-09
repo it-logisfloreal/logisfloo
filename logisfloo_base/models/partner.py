@@ -25,6 +25,7 @@ class Partner(models.Model):
     slate_partners = fields.One2many("res.partner", "slate_number", domain=[],compute='get_slate_partners')   
     slate_last_fund_date = fields.Date("Last fund date", domain=[],compute='get_slate_last_fund_date', search='search_by_last_fund_date')
     slate_last_pay_date = fields.Date("Last payment date", domain=[],compute='get_slate_last_pay_date', search='search_by_last_pay_date')
+    last_msg_date = fields.Date("Last message date", domain=[],compute='get_last_msg_date', search='search_by_last_msg_date')
     property_account_slate_id = fields.Many2one(
         'account.account', 
         company_dependent=True,
@@ -128,6 +129,28 @@ class Partner(models.Model):
                 if operator == '>=' and partner.slate_last_pay_date >= value: id_list.append(partner.id)
             return [('id', 'in', id_list)]
 
+    def search_by_last_msg_date(self, operator, value):
+        _logger.info('Searching slate message date with: %s and value %s', operator, value)
+        if operator not in ('=', '!=', '<', '<=', '>', '>='):
+            _logger.error(
+                'The field name is not searchable'
+                ' with the operator: {}',format(operator)
+            )    
+            return [('id', 'in', [])]
+        else:
+            if value is False:
+                value = 0
+            id_list = []
+            partners = self.env['res.partner'].search([])
+            for partner in partners:
+                if operator == '=' and partner.last_msg_date == value: id_list.append(partner.id)
+                if operator == '!=' and partner.last_msg_date != value: id_list.append(partner.id)
+                if operator == '<' and partner.last_msg_date < value: id_list.append(partner.id)
+                if operator == '<=' and partner.last_msg_date <= value: id_list.append(partner.id)
+                if operator == '>' and partner.last_msg_date > value: id_list.append(partner.id)
+                if operator == '>=' and partner.last_msg_date >= value: id_list.append(partner.id)
+            return [('id', 'in', id_list)]
+
     @api.one
     def set_access_for_slate_number(self):
         self.able_to_modify_slate_number = self.env['res.users'].has_group('logisfloo_base.group_logisfloo_admin')
@@ -165,6 +188,11 @@ class Partner(models.Model):
         account_id = self.property_account_slate_id.id
         move_line = self.env['account.move.line'].search([('account_id', '=', account_id), ('partner_id', 'in', self.slate_partners.ids),('debit','>',0)],order='date desc', limit=1)
         self.slate_last_pay_date = move_line.date 
+
+    @api.one
+    def get_last_msg_date(self):
+        last_mail_message = self.env['mail.message'].search([('model', '=', 'res.partner'), ('res_id', '=', self.id), ('author_id', '=', self.id)],order='date desc', limit=1)
+        self.last_msg_date = last_mail_message.date 
 
     @api.model
     def _cron_negative_slate_warning(self):
