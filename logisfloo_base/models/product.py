@@ -53,8 +53,8 @@ class LogisflooProduct(models.Model):
     @api.one
     @api.depends('list_price','standard_price')
     def _compute_actual_margin(self):
-        if self.standard_price != 0:
-            self.actual_margin = (self.list_price/self.standard_price) * 100 - 100
+        if self._get_cost() != 0:
+            self.actual_margin = (self.list_price/self._get_cost()) * 100 - 100
         else:
             self.actual_margin = 0
 
