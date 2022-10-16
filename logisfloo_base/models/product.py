@@ -11,6 +11,7 @@ class LogisflooProduct(models.Model):
     _inherit = 'product.template'
     
     total_with_margin = fields.Float(compute='_compute_recommended_price', store=False, string="Total Sales Price with Margin")
+    total_cost = fields.Float(compute='_get_cost', store=False, string="Total Cost without transport")
     actual_margin = fields.Float(compute='_compute_actual_margin', store=True, string="Actual Margin")
     number_of_suppliers = fields.Integer(compute='_compute_suppliers', store=True, string="Number of suppliers")
     # if only one provider show price computed price (incl tax and rebate)
