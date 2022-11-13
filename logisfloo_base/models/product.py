@@ -11,7 +11,7 @@ class LogisflooProduct(models.Model):
     _inherit = 'product.template'
     
     total_with_margin = fields.Float(compute='_compute_recommended_price', store=False, string="Total Sales Price with Margin")
-    total_cost = fields.Float(compute='_get_cost', store=False, string="Total Cost without transport")
+    total_cost = fields.Float(compute='_get_cost', store=False, string="Coût total sans transport")
     actual_margin = fields.Float(compute='_compute_actual_margin', store=True, string="Actual Margin")
     number_of_suppliers = fields.Integer(compute='_compute_suppliers', store=True, string="Number of suppliers")
     # if only one provider show price computed price (incl tax and rebate)
@@ -26,7 +26,7 @@ class LogisflooProduct(models.Model):
         'type' : 'product',
     }
 
-    @api.multi
+    @api.one
     @api.onchange('categ_id')
     def _align_categories(self):
         if self.categ_id.name:
@@ -54,8 +54,8 @@ class LogisflooProduct(models.Model):
     @api.one
     @api.depends('list_price','standard_price')
     def _compute_actual_margin(self):
-        if self._get_cost() != 0:
-            self.actual_margin = (self.list_price/self._get_cost()) * 100 - 100
+        if self.total_cost != 0:
+            self.actual_margin = (self.list_price/self.total_cost) * 100 - 100
         else:
             self.actual_margin = 0
 
@@ -64,8 +64,9 @@ class LogisflooProduct(models.Model):
             operator = 'illkie'
         return [('name', operator, value)]
 
-    @api.multi
+    @api.one
     def _get_cost(self):
+        self.ensure_one()
         result = 0.0
         currency = self.currency_id
         total_taxes = 0
@@ -76,12 +77,12 @@ class LogisflooProduct(models.Model):
             for taxes_id in self.supplier_taxes_id:
                 total_taxes += currency.round(taxes_id._compute_amount(discounted_sell_unit_price, discounted_sell_unit_price)) 
             result += total_taxes
-        return result          
+        self.total_cost = result                
 
     @api.one
     @api.depends('seller_ids')
     def _compute_recommended_price(self):
-        self.total_with_margin = self._get_cost()            
+        self.total_with_margin = self.total_cost            
         if self.categ_id.name and self.categ_id.profit_margin > 0:
             self.total_with_margin = self.total_with_margin * (1+self.categ_id.profit_margin/100)
         else:
