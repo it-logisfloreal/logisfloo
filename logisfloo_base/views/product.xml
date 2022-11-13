@@ -22,7 +22,8 @@
             	<label for="actual_margin"/>	
             	<div>
  	            	<field name="actual_margin" class="oe_inline"></field> %
-            	</div>                
+            	</div>  
+                <field name="last_period_revenue" widget='monetary'/>               
     	    </field>
         	<field name="type" position="after">
     	    	<field name="producer"/>
@@ -71,7 +72,8 @@
                 <field name="total_cost"/>
         		<field name="total_with_margin"/>
         		<field name="list_price"/>
-                <field name="actual_margin"/>                
+                <field name="actual_margin"/> 
+                <field name="last_period_revenue"/>                
         	</field>
         	<field name="uom_id" position="attributes">
         		<attribute name="invisible">0</attribute>
