@@ -13,7 +13,7 @@ class LogisflooProduct(models.Model):
     total_with_margin = fields.Float(compute='_compute_recommended_price', store=False, string="Total Sales Price with Margin")
     total_cost = fields.Float(compute='_get_cost', store=False, string="Coût total sans transport")
     actual_margin = fields.Float(compute='_compute_actual_margin', store=True, string="Actual Margin")
-    last_period_revenue = fields.Float(compute='_compute_revenue', store=True, string="Last Period Revenue")
+    last_period_revenue = fields.Float(compute='_compute_revenue', store=True, string="Recette période précédente")
     number_of_suppliers = fields.Integer(compute='_compute_suppliers', store=True, string="Number of suppliers")
     # if only one provider show price computed price (incl tax and rebate)
     reference_price = fields.Float(string='Invoice Price')
