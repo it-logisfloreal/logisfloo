@@ -13,6 +13,7 @@ class LogisflooProduct(models.Model):
     total_with_margin = fields.Float(compute='_compute_recommended_price', store=False, string="Total Sales Price with Margin")
     total_cost = fields.Float(compute='_get_cost', store=False, string="Coût total sans transport")
     actual_margin = fields.Float(compute='_compute_actual_margin', store=True, string="Actual Margin")
+    last_period_revenue = fields.Float(compute='_compute_revenue', store=True, string="Last Period Revenue")
     number_of_suppliers = fields.Integer(compute='_compute_suppliers', store=True, string="Number of suppliers")
     # if only one provider show price computed price (incl tax and rebate)
     reference_price = fields.Float(string='Invoice Price')
@@ -58,11 +59,21 @@ class LogisflooProduct(models.Model):
             self.actual_margin = (self.list_price/self.total_cost) * 100 - 100
         else:
             self.actual_margin = 0
+        self._compute_revenue()
 
     def _search_actual_margin(self, operator, value):
         if operator == 'like':
             operator = 'illkie'
         return [('name', operator, value)]
+
+    @api.one
+    def _compute_revenue(self):
+        self.last_period_revenue = 0
+        product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
+        last_closed_period = self.env['logisfloo.inventory.period'].search([('state', '=', 'closed')],order='dateto desc', limit = 1)
+        report_line = self.env['logisfloo.inventory.reportline'].search([('inventory_period_id', '=', last_closed_period.id), ('product_id', '=', product.id)])
+        _logger.info('Compute revenue for period %s (%d) for product id %d => revenue %f',last_closed_period.name,last_closed_period.id,product.id,report_line.sold_value)
+        self.last_period_revenue = report_line.sold_value
 
     @api.one
     def _get_cost(self):
@@ -124,24 +135,30 @@ class LogisflooProduct(models.Model):
                 if len(data_items) == 0:
                     # There was no invoice line, use the supplier price or the list price to guess a cost
                     if len(suppliers) > 0:
-                        data_items.append((product.create_date, template._get_cost()))
+                        data_items.append((product.create_date, template.total_cost))
+                        _logger.info('Cost from suppliers: %s', data_items)
                     else:
                         data_items.append((product.create_date, template.list_price*0.95))
+                        _logger.info('Cost from list price: %s', data_items)
                 else:
                     # use the first invoice price
                     first_price = data_items[0][1]
                     data_items.insert(0, (product.create_date, first_price))
+                _logger.info('Processing data_items: %s', data_items)
                 for item in data_items:
-                    price_history.create({
-                        'company_id': self.env.user.company_id.id,
-                        'product_id': product.id,
-                        'datetime': item[0],
-                        'cost': item[1],
-                        })
+                    _logger.info('-> creating Date:%s Cost: %s', str(item[0]), str(item[1]))
+                    if item[1] >= 0 :
+                        price_history.create({
+                            'company_id': self.env.user.company_id.id,
+                            'product_id': product.id,
+                            'datetime': item[0],
+                            'cost': item[1],
+                            })
                 # update standard_price to match the latest invoice line
                 product.standard_price = data_items[len(data_items)-1][1]
                 _logger.info('-> created %d records', len(data_items)+1)
             template._compute_actual_margin()
+            template._compute_revenue()
 
     @api.model
     def rebuild_full_customer_price_history(self):    
