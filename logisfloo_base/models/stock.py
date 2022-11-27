@@ -394,24 +394,21 @@ class LogisflooInventoryPeriod(models.Model):
             endqty = item['startqty'] + item['boughtqty'] + item['extraqty'] - item['soldqty'] - item['lossqty']
             item['corrqty'] = item['extraqty']-item['lossqty']
             item['corr_value'] = item['corrqty'] * product_price_end
-            sold_purchase_value =  round((item['startqty'] * product_price_start
-                                    + item['bought_value'] 
-                                    - endqty * product_price_end),2) if item['sold_value'] != 0 else 0.0                                 
-            sold_ref_value = sold_purchase_value + item['corr_value'] 
-            margin = round(item['sold_value']/sold_purchase_value * 100 - 100,2) if sold_purchase_value != 0 and item['sold_value'] != 0 else 0.0   
-            margin_corr = round(item['sold_value']/sold_ref_value * 100 - 100,2) if sold_ref_value != 0 and item['sold_value'] != 0 else 0.0
             item['start_value'] = item['startqty'] * product_price_start
             item['end_value'] = endqty * product_price_end
             item['diffqty'] = round(item['invqty'] - endqty,3)
             item['inv_value'] = item['invqty'] * product_price_end
-            #item['sold_value_current'] = item['sold_iqty'] * ((product_selling_price_latest - product_price_latest) - (product_selling_price_period - product_price_end))
-            #item['sold_value_current'] = item['sold_iqty'] * (product_selling_price_latest - product_price_latest) - (item['sold_value'] - sold_purchase_value)
-            #item['sold_value_current'] = item['sold_value'] - item['sold_iqty'] * (product_price_end + product_price_start)/2
-            #item['sold_value_current'] = item['sold_value'] - (item['start_value']-item['end_value']+item['bought_value']+item['corr_value'])
             item['sold_value_period'] = item['sold_iqty'] * product_selling_price_period
             item['sold_cost_period'] = item['sold_iqty'] * product_price_end
             item['sold_value_latest'] = item['sold_iqty'] * template.list_price
             item['sold_cost_latest'] = item['sold_iqty'] * product_price_latest
+            sold_purchase_value =  round((item['start_value']
+                                    + item['bought_value'] 
+                                    - item['end_value']),2) if item['sold_value'] != 0 else 0.0 
+            sold_margin = item['sold_value'] - sold_purchase_value - item['corr_value']                                 
+            sold_ref_value = sold_purchase_value + item['corr_value'] 
+            margin = round(item['sold_value']/sold_purchase_value * 100 - 100,2) if sold_purchase_value != 0 and item['sold_value'] != 0 else 0.0   
+            margin_corr = round(item['sold_value']/sold_ref_value * 100 - 100,2) if sold_ref_value != 0 and item['sold_value'] != 0 else 0.0
             margin_period = round(item['sold_value_period']/item['sold_cost_period'] * 100 - 100,2) if item['sold_cost_period'] != 0 else 0.0
             margin_latest = round(item['sold_value_latest']/item['sold_cost_latest'] * 100 - 100,2) if item['sold_cost_latest'] != 0 else 0.0
             if not self.previous_period:
@@ -462,6 +459,7 @@ class LogisflooInventoryPeriod(models.Model):
                 'margin_corr': margin_corr,
                 'margin_period': margin_period,
                 'margin_latest': margin_latest,
+                'margin_sold': sold_margin,
                 'invqty': item['invqty'],
                 'diffqty': item['diffqty'],
                 'inv_value': item['inv_value'],
@@ -513,17 +511,19 @@ class LogisflooInventoryReportLine(models.Model):
     invoiced_value = fields.Monetary(string='Invoiced value', currency_field='currency_id', readonly=True, store=True, help="Invoiced value")
     sold_value = fields.Monetary(string='Sold value', currency_field='currency_id', readonly=True, store=True, help="Stock sold value")
     sold_value_period = fields.Monetary(string='Sold value at last period price', currency_field='currency_id', readonly=True, store=True, help="Stock sold value at last period price")
-    sold_cost_period = fields.Monetary(string='Sold value at last period price', currency_field='currency_id', readonly=True, store=True, help="Stock sold value at last period price")
+    sold_cost_period = fields.Monetary(string='Cost of sold at last period price', currency_field='currency_id', readonly=True, store=True, help="Stock cost value at last period price")
     sold_value_latest = fields.Monetary(string='Sold value at current price', currency_field='currency_id', readonly=True, store=True, help="Stock sold value at current price")
-    sold_cost_latest = fields.Monetary(string='Sold value at current price', currency_field='currency_id', readonly=True, store=True, help="Stock sold value at current price")
+    sold_cost_latest = fields.Monetary(string='Cost of sold at current price', currency_field='currency_id', readonly=True, store=True, help="Stock cost value at current price")
     corr_value = fields.Monetary(string='Corr value', currency_field='currency_id', readonly=True, store=True, help="Stock correction value")
     sold_purchase_value = fields.Monetary(string='Cost of sold', currency_field='currency_id', readonly=True, store=True, help="Stock sold purchase value")
     end_value = fields.Monetary(string='End value', currency_field='currency_id', readonly=True, store=True, help="Ending stock value")
     inv_value = fields.Monetary(string='Inv value', currency_field='currency_id', readonly=True, store=True, help="Stock inventory value")
-    margin = fields.Float(string='Margin',required=True, track_visibility='onchange', default=0.0, help="Actual margin") 
-    margin_corr = fields.Float(string='Margin Corr',required=True, track_visibility='onchange', default=0.0, help="Margin corrected")
-    margin_period = fields.Float(string='Margin Period',required=True, track_visibility='onchange', default=0.0, help="Margin with price and cost at end of period") 
-    margin_latest = fields.Float(string='Margin Latest',required=True, track_visibility='onchange', default=0.0, help="Margin with current price and cost")
+    margin = fields.Float(string='Margin %',required=True, track_visibility='onchange', default=0.0, help="Actual margin") 
+    margin_corr = fields.Float(string='Margin Corr %',required=True, track_visibility='onchange', default=0.0, help="Margin corrected")
+    margin_period = fields.Float(string='Margin Period %',required=True, track_visibility='onchange', default=0.0, help="Margin with price and cost at end of period") 
+    margin_latest = fields.Float(string='Margin Latest %',required=True, track_visibility='onchange', default=0.0, help="Margin with current price and cost")
+    margin_sold = fields.Float(string='Margin Sold',required=True, track_visibility='onchange', default=0.0, help="Margin with current price and cost")
+
 
     price_history_ids = fields.One2many("product.customer.price.history", "product_id", domain=[],compute='get_price_history', help="History of selling price")  
     cost_history_ids = fields.One2many("product.price.history", "product_id", domain=[],compute='get_cost_history', help="History of purchase cost")  
@@ -562,16 +562,17 @@ class LogisflooInventoryReportLine(models.Model):
         res = super(LogisflooInventoryReportLine, self).read_group(cr, uid, domain, fields, groupby, offset, limit=limit, context=context, orderby=orderby, lazy=lazy)
         for line in res:
             resperiods = super(LogisflooInventoryReportLine, self).read_group(cr, uid, line['__domain'], fields, [u'inventory_period_id'], offset, limit=limit, context=context, orderby=orderby, lazy=lazy)            
-            del line['sold_purchase_value']
+#            del line['sold_purchase_value']
             line['startqty'] = resperiods[0]['startqty']
             line['endqty'] = resperiods[-1]['endqty']
             line['start_value'] = resperiods[0]['start_value']
             line['end_value'] = resperiods[-1]['end_value']
             sold_ref_value = line['start_value'] + line['bought_value'] - line['end_value']
-            line['margin'] = round((line['sold_value']/sold_ref_value) * 100 - 100,2) if sold_ref_value != 0 and line['sold_value'] != 0 else 0.0
+#            line['margin'] = round((line['sold_value']/sold_ref_value) * 100 - 100,2) if sold_ref_value != 0 and line['sold_value'] != 0 else 0.0
             line['margin_corr'] = round((line['sold_value']/(sold_ref_value + line['corr_value'])) * 100 - 100,2) if sold_ref_value != 0 and line['sold_value'] != 0 else 0.0
             line['margin_period'] = round((line['sold_value_period']/line['sold_cost_period']) * 100 - 100,2) if line['sold_cost_period'] != 0 else 0.0
             line['margin_latest'] = round((line['sold_value_latest']/line['sold_cost_latest']) * 100 - 100,2) if line['sold_cost_latest'] else 0.0
+            line['margin_sold'] = round((line['sold_value_latest']/line['sold_cost_latest']) * 100 - 100,2) if line['sold_cost_latest'] else 0.0
             if groupby[0] != u'product_id':
                 del line['startqty']
                 del line['boughtqty']

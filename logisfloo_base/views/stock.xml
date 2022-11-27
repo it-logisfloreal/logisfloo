@@ -35,8 +35,8 @@
         <field name="model">logisfloo.inventory.reportline</field>
         <field name="arch" type="xml">
 	        <tree string="Inventory Report" 
-                    decoration-danger="product_active!=False and margin &lt; 1.00 and margin != 0.0"
-                    decoration-info="product_active!=False and margin == 0.0"
+                    decoration-danger="product_active!=False and margin_corr &lt; 1.00 and margin_corr != 0.0"
+                    decoration-info="product_active!=False and margin_corr == 0.0"
                     decoration-muted="product_active==False"
                     >
                 <field name="product_active" invisible="1"/>
@@ -55,16 +55,14 @@
                 <field name="corr_value" widget="monetary"/>
                 <field name="end_value" widget="monetary"/>
                 <field name="inv_value" widget="monetary"/>
-                <field name="sold_purchase_value" widget="monetary"/>
+                <field name="margin_sold" widget="monetary"/>
+                <field name="margin_corr" digits="[3, 2]"/>
+                <field name="margin_period" digits="[3, 2]"/>
+                <field name="margin_latest" digits="[3, 2]"/>
                 <field name="sold_value_period" widget="monetary"/>
                 <field name="sold_cost_period" widget="monetary"/>
                 <field name="sold_value_latest" widget="monetary"/>
                 <field name="sold_cost_latest" widget="monetary"/>
-                <field name="margin_period" digits="[3, 2]"/>
-                <field name="margin_latest" digits="[3, 2]"/>
-                <field name="product_actual_margin" digits="[3, 2]"/>    
-                <field name="margin" digits="[3, 2]"/>
-                <field name="margin_corr" digits="[3, 2]"/>
 	         </tree>
         </field>       
     </record>
