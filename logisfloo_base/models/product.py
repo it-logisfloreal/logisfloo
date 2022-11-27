@@ -180,24 +180,23 @@ class LogisflooProduct(models.Model):
                 data_items = [(x.create_date, x.price_unit) for x in pos_order_lines if x.qty > 0]
                 # create a customer price history for the product creation date, so we have a price for the full product life
                 if len(data_items) == 0:
-                    # There was no invoice line, use the supplier price or the list price to guess a cost
-                    if len(suppliers) > 0:
-                        data_items.append((product.create_date, template._get_cost()))
-                    else:
-                        data_items.append((product.create_date, template.list_price*0.95))
+                    # There was no pos order line, default to 0
+                    data_items.append((product.create_date, 0.0))
                 else:
-                    # use the first invoice price
+                    # use the first pos order price
                     first_price = data_items[0][1]
                     data_items.insert(0, (product.create_date, first_price))
                 # Filter records so we only keep changing prices
                 data_items = [v for i, v in enumerate(data_items) if i == 0 or v[1] != data_items[i-1][1]]
                 for item in data_items:
-                    customer_price_history.create({
-                        'company_id': self.env.user.company_id.id,
-                        'product_id': product.id,
-                        'datetime': item[0],
-                        'price': item[1],
-                        })
+                    _logger.info('-> creating Date:%s Price: %s', str(item[0]), str(item[1]))
+                    if item[1] >= 0 :
+                        customer_price_history.create({
+                            'company_id': self.env.user.company_id.id,
+                            'product_id': product.id,
+                            'datetime': item[0],
+                            'price': item[1],
+                            })
                 _logger.info('-> created %d records', len(data_items)+1)
 
 class LogisflooProductCategory(models.Model):  
