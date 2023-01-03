@@ -121,6 +121,7 @@
         	<field name="display_name" position="after">
         		<field name="slate_number"/>
         		<field name="slate_balance"/>
+				<field name="slate_fees_PTD" groups="logisfloo_base.group_logisfloo_admin"/>
 				<field name="slate_last_fund_date"/>
 				<field name="slate_last_pay_date"/>
 				<field name="subscription_date"/>
@@ -128,7 +129,7 @@
         	</field>
         </field>
     </record>
-	
+
 	<record model="ir.ui.view" id="Logisfloo_partner_search_view">
         <field name="name">logisfloo.partner.search.view</field>
         <field name="model">res.partner</field>
