@@ -65,17 +65,14 @@ post their account.lines inreal time.
 	        <table class="table table-condensed">
 				<thead>
 				    <tr>
-				        <th>Last subscription payment</th>
+				        <th>Total des cotisations payées depuis le 1er août</th>
 				        <th class="text-right">Amount</th>
 				    </tr>
 				</thead>
 				<tbody>
-					<t t-set="last_subscription_payment" t-value="o.partner_id.get_last_subscription_payment()"/>
-					<t t-set="date" t-value="last_subscription_payment[0]"/>
-  					<t t-set="credit" t-value="last_subscription_payment[1]"/>
-					<td><span t-esc="date"/></td>
+  					<t t-set="fees" t-value="o.partner_id.compute_fees_PTD()"/>
 					<td class="text-right">
-						<strong><span t-esc="formatLang(credit, currency_obj=res_company.currency_id)"/></strong>
+						<strong><span t-esc="formatLang(fees, currency_obj=res_company.currency_id)"/></strong>
 					</td>
                 </tbody>
             </table>

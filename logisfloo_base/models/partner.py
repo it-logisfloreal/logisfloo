@@ -25,6 +25,7 @@ class Partner(models.Model):
     slate_partners = fields.One2many("res.partner", "slate_number", domain=[],compute='get_slate_partners')   
     slate_last_fund_date = fields.Date("Last fund date", domain=[],compute='get_slate_last_fund_date', search='search_by_last_fund_date')
     slate_last_pay_date = fields.Date("Last payment date", domain=[],compute='get_slate_last_pay_date', search='search_by_last_pay_date')
+    slate_fees_PTD = fields.Monetary("Cotisation payée", compute='get_fees_PTD', search='search_by_fees')
     last_msg_date = fields.Date("Last message date", domain=[],compute='get_last_msg_date', search='search_by_last_msg_date')
     property_account_slate_id = fields.Many2one(
         'account.account', 
@@ -84,6 +85,29 @@ class Partner(models.Model):
                 if operator == '>' and partner.slate_balance > value: id_list.append(partner.id)
                 if operator == '>=' and partner.slate_balance >= value: id_list.append(partner.id)
             return [('id', 'in', id_list)]
+
+    def search_by_fees(self, operator, value):
+        _logger.info('Searching fees with: %s and value %s', operator, value)
+        if operator not in ('=', '!=', '<', '<=', '>', '>='):
+            _logger.error(
+                'The field name is not searchable'
+                ' with the operator: {}',format(operator)
+            )    
+            return [('id', 'in', [])]
+        else:
+            if value is False:
+                value = 0
+            id_list = []
+            partners = self.env['res.partner'].search([])
+            for partner in partners:
+                if operator == '=' and partner.slate_fees_PTD == value: id_list.append(partner.id)
+                if operator == '!=' and partner.slate_fees_PTD != value: id_list.append(partner.id)
+                if operator == '<' and partner.slate_fees_PTD < value: id_list.append(partner.id)
+                if operator == '<=' and partner.slate_fees_PTD <= value: id_list.append(partner.id)
+                if operator == '>' and partner.slate_fees_PTD > value: id_list.append(partner.id)
+                if operator == '>=' and partner.slate_fees_PTD >= value: id_list.append(partner.id)
+            return [('id', 'in', id_list)]
+
 
     def search_by_last_fund_date(self, operator, value):
         _logger.info('Searching slate fund date with: %s and value %s', operator, value)
@@ -176,6 +200,44 @@ class Partner(models.Model):
         credit = sum([m.credit for m in move_lines])
         debit = sum([m.debit for m in move_lines])
         self.slate_balance = round(credit - debit, 2) 
+
+    #@api.one
+    def compute_fees_PTD(self):
+        total = 0.0
+        subscription_account_id = self.env.ref('logisfloo_base.a705010').id
+        subscription_products = self.env['product.product'].search([('name_template', 'like', 'Cotisation'),('active','=',True)])
+        subscription_product_ids = [x.id for x in subscription_products] 
+        period = self.env['logisfloo.inventory.period'].search([('state', '=', 'open')],order='datefrom desc', limit=1)
+
+        move_lines=self.env['account.move.line'].search([('partner_id', 'in', self.slate_partners.ids),
+                                                        ('account_id','=',subscription_account_id),
+                                                        ('date','>=',period.datefrom),
+                                                        ('date','<=',period.dateto),
+                                                        ('credit','>',0)])
+        for move_line in move_lines:
+            total += move_line.credit
+
+        # We also need to check if there is one or more in the unreconciled purchases.
+        pos_orders = self.env['pos.order'].search([('partner_id', 'in', self.slate_partners.ids),('state','=','paid'),
+                                                        ('date_order','>=',period.datefrom),
+                                                        ('date_order','<=',period.dateto),])
+        pos_orders_ids = [x.id for x in pos_orders]
+        pos_order_lines = self.env['pos.order.line'].search([('order_id', 'in', pos_orders_ids),('product_id','in', subscription_product_ids),])
+
+#        for pos_order in pos_orders:
+#            for line in pos_order.lines:
+#                if line.product_id.id in subscription_product_ids:
+#                    total += line.price_subtotal_incl
+
+        for line in pos_order_lines:
+            total += line.price_subtotal_incl
+
+
+        return total
+
+    @api.one
+    def get_fees_PTD(self):   
+        self.slate_fees_PTD = self.compute_fees_PTD()
 
     @api.one
     def get_slate_last_fund_date(self):
