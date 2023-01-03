@@ -218,15 +218,21 @@ class Partner(models.Model):
             total += move_line.credit
 
         # We also need to check if there is one or more in the unreconciled purchases.
-        pos_orders= self.env['pos.order'].search([('partner_id', 'in', self.slate_partners.ids),('state','=','paid'),
+        pos_orders = self.env['pos.order'].search([('partner_id', 'in', self.slate_partners.ids),('state','=','paid'),
                                                         ('date_order','>=',period.datefrom),
                                                         ('date_order','<=',period.dateto),])
-        
-        for pos_order in pos_orders:
-            for line in pos_order.lines:
-                if line.product_id.id in subscription_product_ids:
-                    total += line.price_subtotal_incl
-        
+        pos_orders_ids = [x.id for x in pos_orders]
+        pos_order_lines = self.env['pos.order.line'].search([('order_id', 'in', pos_orders_ids),('product_id','in', subscription_product_ids),])
+
+#        for pos_order in pos_orders:
+#            for line in pos_order.lines:
+#                if line.product_id.id in subscription_product_ids:
+#                    total += line.price_subtotal_incl
+
+        for line in pos_order_lines:
+            total += line.price_subtotal_incl
+
+
         return total
 
     @api.one
