@@ -25,7 +25,7 @@ class Partner(models.Model):
     slate_partners = fields.One2many("res.partner", "slate_number", domain=[],compute='get_slate_partners')   
     slate_last_fund_date = fields.Date("Last fund date", domain=[],compute='get_slate_last_fund_date', search='search_by_last_fund_date')
     slate_last_pay_date = fields.Date("Last payment date", domain=[],compute='get_slate_last_pay_date', search='search_by_last_pay_date')
-    slate_fees_PTD = fields.Monetary("Fees paid this period", compute='get_fees_PTD', search='search_by_fees')
+    slate_fees_PTD = fields.Monetary("Cotisation payée", compute='get_fees_PTD', search='search_by_fees')
     last_msg_date = fields.Date("Last message date", domain=[],compute='get_last_msg_date', search='search_by_last_msg_date')
     property_account_slate_id = fields.Many2one(
         'account.account', 
