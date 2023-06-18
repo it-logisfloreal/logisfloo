@@ -91,7 +91,7 @@ odoo.define('logisfloo_pos.pos_extension', function (require) {
                 return
             }
             var customer_id = this.pos.get_client().id;
-            var res = new Model('res.partner').call('get_balance_and_eater', [ customer_id ], undefined, { shadow: true, timeout: 1000});
+            var res = new Model('res.partner').call('get_balance_and_eater', [ customer_id ], undefined, { shadow: true, timeout: 10000});
             res.then(function(result) {
                 set_customer_info.call(self, '.customer-name', self.pos.get_client().name);
                 set_customer_info.call(self, '.customer-balance', result[0]);
