@@ -65,7 +65,7 @@ post their account.lines inreal time.
 	        <table class="table table-condensed">
 				<thead>
 				    <tr>
-				        <th>Total des cotisations payées depuis le 1er août</th>
+				        <th>Total des cotisations payées depuis le 1er janvier</th>
 				        <th class="text-right">Amount</th>
 				    </tr>
 				</thead>
